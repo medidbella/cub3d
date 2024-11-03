@@ -1,41 +1,16 @@
-#include "minilibx/mlx.h"
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/03 09:22:27 by alaktari          #+#    #+#             */
+/*   Updated: 2024/11/03 09:59:07 by alaktari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define SIZE 30
-//arrows
-#define UP 65362
-#define DOWN 65364
-#define LEFT 65361
-#define RIGHT 65363
-//keys
-#define W 119
-#define A 97
-#define S 115
-#define D 100
-
-
-typedef struct s_player
-{
-	void	*player_img;
-	void	*erase_img;
-	int		player_x;
-	int		player_y;
-	int		size_x;
-	int		size_y;
-	int		mov_speed;
-} t_player;
-
-typedef struct s_data
-{
-	int			w_size_x;
-	int			w_size_y;
-	void		*wall;
-	void		*ptr;
-	void		*win;
-	t_player	*player;
-} t_data;
+#include "cub3d.h"
 
 void render_map(char **map, t_data *mlx)
 {
@@ -52,25 +27,7 @@ void render_map(char **map, t_data *mlx)
 			if (map[i][j] == '1')
 			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->wall,
 				j * SIZE, i * SIZE);	
-			j++;
-		}
-		i++;
-	}
-}
-
-void put_player(char **map, t_data *mlx)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'P')
+			else if (map[i][j] == 'P')
 			{
 				mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->player->player_img,
 					j * SIZE + 10, i * SIZE + 10);
@@ -138,8 +95,6 @@ int main()
 	mlx.wall = mlx_xpm_file_to_image(mlx.ptr, "textures/wall.xpm",
 		&mlx.w_size_x, &mlx.w_size_y);
 	render_map(tab, &mlx);
-	put_player(tab, &mlx);
 	mlx_key_hook(mlx.win, keyboard_handler, &mlx);
-	mlx_do_key_autorepeaton(mlx.ptr);
 	mlx_loop(mlx.ptr);
 }
