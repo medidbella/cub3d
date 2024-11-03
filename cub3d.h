@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 09:21:18 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/03 09:27:29 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/03 11:03:38 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define SIZE 30
 //arrows
@@ -29,6 +30,8 @@
 #define A 97
 #define S 115
 #define D 100
+#define KeyPressMask 1L<<0
+#define KeyPress 2
 
 
 typedef struct s_player
@@ -49,6 +52,7 @@ typedef struct s_data
 	void		*wall;
 	void		*ptr;
 	void		*win;
+	char		**map;
 	t_player	*player;
 } t_data;
 
