@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "libft/libft.h"
 #include <math.h>
 
 #define ROWS 11
