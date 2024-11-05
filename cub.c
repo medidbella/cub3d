@@ -1,7 +1,14 @@
 #include "cub.h"
 
-int main() {
-	char *map[] = {
+int main(int ac, char **av)
+{
+	if (ac != 2)
+		return (write(2, "usage: ./cub3d map_in_format_*.cub", 34), 1);
+	
+	//void *paring_data;
+	//char **map = parser(parsing_data); this
+	//function will pars and set the data stored in the .cub file (av[1])
+	char *test_map[] = {
 		"111111111111111",
 		"100000000000001",
 		"101000111100001",
@@ -15,5 +22,5 @@ int main() {
 		"111111111111111",
 		NULL
 	};
-	get_start(map);
+	get_start(test_map);
 }
