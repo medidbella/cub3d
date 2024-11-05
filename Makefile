@@ -1,8 +1,8 @@
-NAME = cub3d
-SRC = main.c
+NAME = cub
+SRC = cub.c get_start.c hooks.c
 OBJ = $(SRC:.c=.o)
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -fsanitize=address -g3#-Wall -Wextra -Werror 
 MLX1 = -Lmlx_linux -lmlx_Linux -L minilibx -Imlx_linux -lXext -lX11 -lm -lz
 MLX2 = -Imlx_linux
 
