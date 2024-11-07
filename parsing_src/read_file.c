@@ -6,11 +6,11 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:53:05 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/06 14:53:06 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:34:05 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub.h"
+#include "parsing.h"
 
 static	char *append_char(char *str, char c)
 {
@@ -22,7 +22,7 @@ static	char *append_char(char *str, char c)
 	len = ft_strlen(str);
 	res = malloc(sizeof(char) * (len + 2));
 	if (!res)
-		error_handl("insufficient memory\n");
+		error_handler("insufficient memory\n", NULL, str);
 	while (i < len)
 	{
 		res[i] = str[i];
