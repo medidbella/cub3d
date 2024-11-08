@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "parsing.h"
-//"123\n"
+
 void	data_init(t_config *data)
 {
 	data->NO_texture_path = NULL;
@@ -26,13 +26,6 @@ void	data_init(t_config *data)
 	data->tab[3] = data->EA_texture_path;
 	data->floor_color = -1;
 	data->ceiling_color = -1;
-}
-
-char *ft__strdup(char *str)
-{
-	char *res = ft_strdup(str);
-	if (res[ft_strlen(str) - 1] == '\n')
-		res[ft_strlen(str) - 1] = '\0';
 }
 
 int strings_len(char **words)

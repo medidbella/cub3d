@@ -26,8 +26,6 @@ int format_check(char *str)
 		else if (str[i] != ' ' && str[i] != '\n')
 			return (1);
 	}
-	// printf("atoi = %d\nlen = %d\n", ft_atoi(str), len);
-	i == 0;
 	if (len > 3)
 		return (1);
 	if (ft_atoi(str) > 255)
@@ -82,22 +80,24 @@ void	get_textures(char **words, t_config *scene_data, char *line)
 	{
 		if (scene_data->tab[i])
 			error_handler("duplicate type element", words, line);
-		return (scene_data->tab[i] = ft__strdup(words[1]), free(NULL));
+		return (scene_data->tab[i] = ft_strtrim(words[1], "\n"), free(NULL));
 	}
 	if (!ft_strncmp(words[0], "F", 2) || !ft_strncmp(words[0], "C", 2))
-		return (color_parser(scene_data, line, (words[0][0] == 'F')),
-			strings_free(words));
+		return (color_parser(scene_data, line, (words[0][0] == 'F')));
 	error_handler("unknown element\n", words, line);
 }
 
-int	line_parser(char *line, t_config *scene_data, int *map_flag)
+void	line_parser(char *line, t_config *scene_data, int *map_flag)
 {
 	char	**words;
 
 	if (line[0] == '\n')
-		return (0);
+		return ;
 	if (is_map_line(line) == 1)
-		return (*map_flag = 1, 0);
+	{
+		*map_flag = 1;
+		return ;
+	}
 	words = ft_split(line, ' ');
 	if (!words)
 		error_handler("insufficient memory\n", NULL, line);
@@ -105,10 +105,10 @@ int	line_parser(char *line, t_config *scene_data, int *map_flag)
 		error_handler("scene file syntax error\n each type element \
 must be followed by one information\n", words, line);
 	get_textures(words, scene_data, line);
-	// strings_free(words);
+	strings_free(words);
 }
 
-int file_parser(t_config *scene_data, char *scene_descrption_file)
+void	file_parser(t_config *scene_data, char *scene_descrption_file)
 {
 	int		map_flag;
 	int		fd;
@@ -161,7 +161,6 @@ void	print_config(t_config *data)
 int main()
 {
 	t_config data;
-	int fd;
 	file_parser(&data, "file");
 	print_config(&data);
 }

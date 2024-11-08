@@ -40,7 +40,7 @@ typedef struct s_config
 } t_config;
 
 char		*read_line(int fd);
-int			file_parser(t_config *scene, char *scene_descrption);
+void		file_parser(t_config *scene, char *scene_descrption);
 void		data_init(t_config *data);
 int			strings_len(char **words);
 void		error_handler(char *err, char **free_me, char *me_too);
