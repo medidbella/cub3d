@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/07 18:37:08 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/08 21:53:02 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ void	color_parser(t_config *scene_data ,char *line, int type)
 	if (type == CEILING)
 		color = (char *)&scene_data->ceiling_color;
 	if (*color != -1)
-		error_handler("duplicate type element", NULL, line);
+		error_handler("duplicate type element", NULL, line, scene_data);
 	rgb = ft_split(line + 1, ',');
 	if (strings_len(rgb) != 3)
 		error_handler("floor and ceiling color must be in format R,G,B \n",
-			NULL, line);
+			NULL, line, scene_data);
 	while (i < 3)
 	{
 		if (format_check(rgb[i]))
-			error_handler("R,G,B colors must be in range [0,255]\n", rgb, NULL);
+			error_handler("R,G,B colors must be in range [0,255]\n", rgb, NULL, scene_data);
 		color[i] = ft_atoi(rgb[i]);
 		i++;
 	}
@@ -79,12 +79,12 @@ void	get_textures(char **words, t_config *scene_data, char *line)
 	if (i < 4)
 	{
 		if (scene_data->tab[i])
-			error_handler("duplicate type element", words, line);
+			error_handler("duplicate type element", words, line, scene_data);
 		return (scene_data->tab[i] = ft_strtrim(words[1], "\n"), free(NULL));
 	}
 	if (!ft_strncmp(words[0], "F", 2) || !ft_strncmp(words[0], "C", 2))
 		return (color_parser(scene_data, line, (words[0][0] == 'F')));
-	error_handler("unknown element\n", words, line);
+	error_handler("unknown element\n", words, line, scene_data);
 }
 
 void	line_parser(char *line, t_config *scene_data, int *map_flag)
@@ -100,10 +100,10 @@ void	line_parser(char *line, t_config *scene_data, int *map_flag)
 	}
 	words = ft_split(line, ' ');
 	if (!words)
-		error_handler("insufficient memory\n", NULL, line);
+		error_handler("insufficient memory\n", NULL, line, scene_data);
 	if (strings_len(words) != 2)
 		error_handler("scene file syntax error\n each type element \
-must be followed by one information\n", words, line);
+must be followed by one information\n", words, line, scene_data);
 	get_textures(words, scene_data, line);
 	strings_free(words);
 }
@@ -118,7 +118,7 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 	data_init(scene_data);
 	fd = open(scene_descrption_file, O_RDONLY);
 	if (!fd)
-		error_handler(strerror(errno), NULL, NULL);
+		error_handler("can't open the file", NULL, NULL, NULL);
 	while (1)
 	{
 		line = read_line(fd);
@@ -129,9 +129,12 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 			break;
 		free(line);
 	}
-	if (map_flag)
-		printf("map found\n");
-	free(line);
+	if (!map_flag)
+		error_handler("there is no map in the file\n", NULL, line, scene_data);
+	if (check_prev_members(scene_data))
+		error_handler("incomplete elements\n", NULL, line, scene_data);
+	scene_data->map = map_alloc(line, fd, scene_data);
+	map_parser(scene_data->map, scene_data);
 }
 
 void	print_config(t_config *data)
@@ -151,11 +154,13 @@ void	print_config(t_config *data)
 		i++;
 	}
 	i = 0;
-	// while (i <= 3)
-	// {
-	// 	free(data->tab[i]);
-	// 	i++;
-	// }
+	while (i <= 3)
+	{
+		free(data->tab[i]);
+		i++;
+	}
+	for (i = 0; data->map[i]; i++)
+		printf("%s\n", data->map[i]);
 }
 
 int main()
