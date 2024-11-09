@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/07 18:25:05 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:39:17 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 
 #define FLOOR 1
 #define CEILING 0
+#define E_ANGLE 0
+#define N_ANGLE 90
+#define W_ANGLE 180
+#define S_ANGLE 270
 
 typedef struct s_config
 {
@@ -34,18 +38,26 @@ typedef struct s_config
 	char			*EA_texture_path;
 	char			*tab[4];
 	char			**map;
-	unsigned int	floor_color;
-	unsigned int	ceiling_color;
+	int				floor_color;
+	int				ceiling_color;
 	int				player_start_angle;
 } t_config;
 
 char		*read_line(int fd);
-int			file_parser(t_config *scene, char *scene_descrption);
+void		file_parser(t_config *scene, char *scene_descrption);
 void		data_init(t_config *data);
 int			strings_len(char **words);
-void		error_handler(char *err, char **free_me, char *me_too);
+void		error_handler(char *err, char **free_me, char *me_too,
+				t_config *data);
 int			is_map_line(char *str);
 char		*ft__strdup(char *str);
 void		strings_free(char **strings);
+char		**map_alloc(char *line, int fd, t_config *scene_data);
+void		free_parsed_data(t_config *data);
+int			top_bottom_check(char *str);
+void		map_parser(char **map, t_config *scene_data);
+int			check_prev_members(t_config *scene_data);
+void		print_config(t_config *data);//temp
+int			open_cub_file(char *file);
 
 #endif

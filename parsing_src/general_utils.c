@@ -6,19 +6,29 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:22 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/07 18:24:36 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/08 21:54:37 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-//"123\n"
+
+void	free_parsed_data(t_config *data)
+{
+	free(data->EA_texture_path);
+	free(data->NO_texture_path);
+	free(data->SO_texture_path);
+	free(data->WE_texture_path);
+	if (data->map)
+		strings_free(data->map);
+}
+
 void	data_init(t_config *data)
 {
 	data->NO_texture_path = NULL;
 	data->SO_texture_path = NULL;
 	data->WE_texture_path = NULL;
 	data->EA_texture_path = NULL;
-	data->player_start_angle = 0;
+	data->player_start_angle = -1;
 	data->map = NULL;
 	data->tab[0] = data->NO_texture_path;
 	data->tab[1] = data->SO_texture_path;
@@ -26,13 +36,6 @@ void	data_init(t_config *data)
 	data->tab[3] = data->EA_texture_path;
 	data->floor_color = -1;
 	data->ceiling_color = -1;
-}
-
-char *ft__strdup(char *str)
-{
-	char *res = ft_strdup(str);
-	if (res[ft_strlen(str) - 1] == '\n')
-		res[ft_strlen(str) - 1] = '\0';
 }
 
 int strings_len(char **words)
@@ -57,9 +60,12 @@ void	strings_free(char **strings)
 	free(strings);
 }
 
-void error_handler(char *err, char **free_me, char *me_too)
+void error_handler(char *err, char **free_me, char *me_too, t_config *data)
 {
-	strings_free(free_me);
+	if (data)
+		free_parsed_data(data);
+	if (free_me)
+		strings_free(free_me);
 	free(me_too);
 	write(2, "Error\n", 6);
 	if (err)

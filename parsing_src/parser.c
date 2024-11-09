@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/07 18:37:08 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:54:38 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int format_check(char *str)
 		else if (str[i] != ' ' && str[i] != '\n')
 			return (1);
 	}
-	// printf("atoi = %d\nlen = %d\n", ft_atoi(str), len);
-	i == 0;
 	if (len > 3)
 		return (1);
 	if (ft_atoi(str) > 255)
@@ -46,19 +44,20 @@ void	color_parser(t_config *scene_data ,char *line, int type)
 	if (type == CEILING)
 		color = (char *)&scene_data->ceiling_color;
 	if (*color != -1)
-		error_handler("duplicate type element", NULL, line);
+		error_handler("duplicate type element", NULL, line, scene_data);
 	rgb = ft_split(line + 1, ',');
 	if (strings_len(rgb) != 3)
 		error_handler("floor and ceiling color must be in format R,G,B \n",
-			NULL, line);
+			rgb, line, scene_data);
 	while (i < 3)
 	{
 		if (format_check(rgb[i]))
-			error_handler("R,G,B colors must be in range [0,255]\n", rgb, NULL);
+			error_handler("R,G,B colors must be in range [0,255]\n", rgb, NULL, scene_data);
 		color[i] = ft_atoi(rgb[i]);
 		i++;
 	}
 	color[3] = 0;
+	strings_free(rgb);
 }
 
 void	get_textures(char **words, t_config *scene_data, char *line)
@@ -81,58 +80,35 @@ void	get_textures(char **words, t_config *scene_data, char *line)
 	if (i < 4)
 	{
 		if (scene_data->tab[i])
-			error_handler("duplicate type element", words, line);
-		return (scene_data->tab[i] = ft__strdup(words[1]), free(NULL));
+			error_handler("duplicate type element", words, line, scene_data);
+		return (scene_data->tab[i] = ft_strtrim(words[1], "\n"), free(NULL));
 	}
 	if (!ft_strncmp(words[0], "F", 2) || !ft_strncmp(words[0], "C", 2))
-		return (color_parser(scene_data, line, (words[0][0] == 'F')),
-			strings_free(words));
-	error_handler("unknown element\n", words, line);
+		return (color_parser(scene_data, line, (words[0][0] == 'F')));
+	error_handler("unknown element\n", words, line, scene_data);
 }
 
-int	line_parser(char *line, t_config *scene_data, int *map_flag)
+void	line_parser(char *line, t_config *scene_data, int *map_flag)
 {
 	char	**words;
 
 	if (line[0] == '\n')
-		return (0);
-	if (is_map_line(line) == 1)
-		return (*map_flag = 1, 0);
+		return ;
+	if (is_map_line(line))
+	{
+		*map_flag = 1;
+		return ;
+	}
 	words = ft_split(line, ' ');
 	if (!words)
-		error_handler("insufficient memory\n", NULL, line);
+		error_handler("insufficient memory\n", NULL, line, scene_data);
 	if (strings_len(words) != 2)
 		error_handler("scene file syntax error\n each type element \
-must be followed by one information\n", words, line);
+must be followed by one information\n", words, line, scene_data);
 	get_textures(words, scene_data, line);
-	// strings_free(words);
+	strings_free(words);
 }
 
-int file_parser(t_config *scene_data, char *scene_descrption_file)
-{
-	int		map_flag;
-	int		fd;
-	char	*line;
-
-	map_flag = 0;
-	data_init(scene_data);
-	fd = open(scene_descrption_file, O_RDONLY);
-	if (!fd)
-		error_handler(strerror(errno), NULL, NULL);
-	while (1)
-	{
-		line = read_line(fd);
-		if (!line)
-			break ;
-		line_parser(line, scene_data, &map_flag);
-		if (map_flag)
-			break;
-		free(line);
-	}
-	if (map_flag)
-		printf("map found\n");
-	free(line);
-}
 
 void	print_config(t_config *data)
 {
@@ -144,6 +120,7 @@ void	print_config(t_config *data)
 	tab[3] = "EA";
 	printf("C = %d\n", data->floor_color);
 	printf("F = %d\n", data->ceiling_color);
+	printf("player angle = %d\n", data->player_start_angle);
 	int i = 0;
 	while (i <= 3 && data->tab[i])
 	{
@@ -151,17 +128,40 @@ void	print_config(t_config *data)
 		i++;
 	}
 	i = 0;
-	// while (i <= 3)
-	// {
-	// 	free(data->tab[i]);
-	// 	i++;
-	// }
+	while (i <= 3)
+	{
+		free(data->tab[i]);
+		i++;
+	}
+	if (data->map)
+		for (i = 0; data->map[i]; i++)
+			printf("%s\n", data->map[i]);
+	strings_free(data->map);
 }
 
-int main()
+void	file_parser(t_config *scene_data, char *scene_descrption_file)
 {
-	t_config data;
-	int fd;
-	file_parser(&data, "file");
-	print_config(&data);
+	int		map_flag;
+	int		fd;
+	char	*line;
+
+	map_flag = 0;
+	data_init(scene_data);
+	fd = open_cub_file(scene_descrption_file);
+	while (1)
+	{
+		line = read_line(fd);
+		if (!line)
+			break ;
+		line_parser(line, scene_data, &map_flag);
+		if (map_flag)
+			break;
+		free(line);
+	}
+	if (!map_flag)
+		error_handler("there is no map in the file\n", NULL, line, scene_data);
+	if (check_prev_members(scene_data))
+		error_handler("incomplete elements\n", NULL, line, scene_data);
+	scene_data->map = map_alloc(line, fd, scene_data);
+	map_parser(scene_data->map, scene_data);
 }
