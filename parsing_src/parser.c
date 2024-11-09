@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/08 21:53:02 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:54:38 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	color_parser(t_config *scene_data ,char *line, int type)
 	rgb = ft_split(line + 1, ',');
 	if (strings_len(rgb) != 3)
 		error_handler("floor and ceiling color must be in format R,G,B \n",
-			NULL, line, scene_data);
+			rgb, line, scene_data);
 	while (i < 3)
 	{
 		if (format_check(rgb[i]))
@@ -57,6 +57,7 @@ void	color_parser(t_config *scene_data ,char *line, int type)
 		i++;
 	}
 	color[3] = 0;
+	strings_free(rgb);
 }
 
 void	get_textures(char **words, t_config *scene_data, char *line)
@@ -93,7 +94,7 @@ void	line_parser(char *line, t_config *scene_data, int *map_flag)
 
 	if (line[0] == '\n')
 		return ;
-	if (is_map_line(line) == 1)
+	if (is_map_line(line))
 	{
 		*map_flag = 1;
 		return ;
@@ -108,6 +109,36 @@ must be followed by one information\n", words, line, scene_data);
 	strings_free(words);
 }
 
+
+void	print_config(t_config *data)
+{
+	char	*tab[4];
+
+	tab[0] = "NO";
+	tab[1] = "SO";
+	tab[2] = "WE";
+	tab[3] = "EA";
+	printf("C = %d\n", data->floor_color);
+	printf("F = %d\n", data->ceiling_color);
+	printf("player angle = %d\n", data->player_start_angle);
+	int i = 0;
+	while (i <= 3 && data->tab[i])
+	{
+		printf("%s = %s\n", tab[i], data->tab[i]);
+		i++;
+	}
+	i = 0;
+	while (i <= 3)
+	{
+		free(data->tab[i]);
+		i++;
+	}
+	if (data->map)
+		for (i = 0; data->map[i]; i++)
+			printf("%s\n", data->map[i]);
+	strings_free(data->map);
+}
+
 void	file_parser(t_config *scene_data, char *scene_descrption_file)
 {
 	int		map_flag;
@@ -116,9 +147,7 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 
 	map_flag = 0;
 	data_init(scene_data);
-	fd = open(scene_descrption_file, O_RDONLY);
-	if (!fd)
-		error_handler("can't open the file", NULL, NULL, NULL);
+	fd = open_cub_file(scene_descrption_file);
 	while (1)
 	{
 		line = read_line(fd);
@@ -135,37 +164,4 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 		error_handler("incomplete elements\n", NULL, line, scene_data);
 	scene_data->map = map_alloc(line, fd, scene_data);
 	map_parser(scene_data->map, scene_data);
-}
-
-void	print_config(t_config *data)
-{
-	char	*tab[4];
-
-	tab[0] = "NO";
-	tab[1] = "SO";
-	tab[2] = "WE";
-	tab[3] = "EA";
-	printf("C = %d\n", data->floor_color);
-	printf("F = %d\n", data->ceiling_color);
-	int i = 0;
-	while (i <= 3 && data->tab[i])
-	{
-		printf("%s = %s\n", tab[i], data->tab[i]);
-		i++;
-	}
-	i = 0;
-	while (i <= 3)
-	{
-		free(data->tab[i]);
-		i++;
-	}
-	for (i = 0; data->map[i]; i++)
-		printf("%s\n", data->map[i]);
-}
-
-int main()
-{
-	t_config data;
-	file_parser(&data, "file");
-	print_config(&data);
 }

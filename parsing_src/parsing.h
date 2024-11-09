@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/08 21:51:15 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:39:17 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@
 #include "../libft/libft.h"
 #include <errno.h>
 
-//     N
-//   W   E
-// 	   S
 #define FLOOR 1
 #define CEILING 0
 #define E_ANGLE 0
@@ -60,5 +57,7 @@ void		free_parsed_data(t_config *data);
 int			top_bottom_check(char *str);
 void		map_parser(char **map, t_config *scene_data);
 int			check_prev_members(t_config *scene_data);
+void		print_config(t_config *data);//temp
+int			open_cub_file(char *file);
 
 #endif
