@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/09 17:39:17 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:08:39 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 #include "../libft/libft.h"
 #include <errno.h>
 
-#define FLOOR 1
 #define CEILING 0
+
 #define E_ANGLE 0
 #define N_ANGLE 90
 #define W_ANGLE 180

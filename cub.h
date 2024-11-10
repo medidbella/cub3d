@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft/libft.h"
-#include "parsing_src/parsing.h"
+#include "parsing/parsing.h"
 #include <math.h>
 
 #define ROWS 11

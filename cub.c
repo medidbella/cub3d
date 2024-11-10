@@ -1,26 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/10 14:33:15 by midbella          #+#    #+#             */
+/*   Updated: 2024/11/10 14:34:47 by midbella         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 int main(int ac, char **av)
 {
+	t_config scene_data;
+
 	if (ac != 2)
-		return (write(2, "usage: ./cub3d map_in_format_*.cub", 34), 1);
-	
-	//void *paring_data;
-	//char **map = parser(parsing_data); this
-	//function will pars and set the data stored in the .cub file (av[1])
-	char *test_map[] = {
-		"111111111111111",
-		"100000000000001",
-		"101000111100001",
-		"11P000000000001",
-		"101010000010001",
-		"111110111111101",
-		"100000100000101",
-		"100000001011101",
-		"100011111110001",
-		"100000000000001",
-		"111111111111111",
-		NULL
-	};
-	get_start(test_map);
+		return (write(2, "Error\nusage : ./cub3d (map_in_format.cub)\n", 42), 1);
+	file_parser(&scene_data, av[1]);
+	get_start(scene_data.map);
 }
