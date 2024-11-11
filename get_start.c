@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/11 18:42:41 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/11 20:48:16 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,34 +127,3 @@ void draw_direction(t_data *data, int color)
     bresenham(data->player.x_c, data->player.y_c, data->player.x_direction2, data->player.y_direction2, color, data); 
 }
 
-void get_start(char **map)
-{
-	t_data data;
-
-	data.map = map;
-
-    // printf("==> %c\n", data.map[0][0]);exit(0);
-
-
-    for (int i = 0; map[i]; i++)
-    {
-        printf ("==> [%s]\n", map[i]);
-    }
-    // exit(0);
-    
-	data.player.player = 0;
-    data.player.angle = 0;
-	setup(&data);
-    printf("x_c : %d || y_c : %d\n", data.player.x_c, data.player.y_c);
-    data.player.angle = 20;
-    rotate(&data, LEFT);
-    ray_casting(&data);
-    draw_direction(&data, DIR_COLOR);
-	mlx_put_image_to_window(data.mlx, data.win, data.img.img, 0, 0);
-	mlx_put_image_to_window(data.mlx, data.win, data.player.player_img,
-				data.player.player_x, data.player.player_y);
-	mlx_hook(data.win, 2, 1L << 0, hooks, &data);
-	mlx_hook(data.win, 17, 1L << 2, close_win1, &data);
-	mlx_loop(data.mlx);
-
-}

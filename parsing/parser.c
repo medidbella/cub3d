@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/09 17:54:38 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/11 20:32:38 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,36 +107,6 @@ void	line_parser(char *line, t_config *scene_data, int *map_flag)
 must be followed by one information\n", words, line, scene_data);
 	get_textures(words, scene_data, line);
 	strings_free(words);
-}
-
-
-void	print_config(t_config *data)
-{
-	char	*tab[4];
-
-	tab[0] = "NO";
-	tab[1] = "SO";
-	tab[2] = "WE";
-	tab[3] = "EA";
-	printf("C = %d\n", data->floor_color);
-	printf("F = %d\n", data->ceiling_color);
-	printf("player angle = %d\n", data->player_start_angle);
-	int i = 0;
-	while (i <= 3 && data->tab[i])
-	{
-		printf("%s = %s\n", tab[i], data->tab[i]);
-		i++;
-	}
-	i = 0;
-	while (i <= 3)
-	{
-		free(data->tab[i]);
-		i++;
-	}
-	if (data->map)
-		for (i = 0; data->map[i]; i++)
-			printf("%s\n", data->map[i]);
-	strings_free(data->map);
 }
 
 void	file_parser(t_config *scene_data, char *scene_descrption_file)
