@@ -6,13 +6,13 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:53:05 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/08 21:41:59 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:38:02 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static	char *append_char(char *str, char c)
+static char	*append_char(char *str, char c)
 {
 	int		i;
 	char	*res;
@@ -34,17 +34,17 @@ static	char *append_char(char *str, char c)
 	return (res);
 }
 
-char *read_line(int fd)
+char	*read_line(int fd)
 {
-    char	*res;
-    char	c;
+	char	*res;
+	char	c;
 
 	res = NULL;
-    while (read(fd, &c, 1) > 0)
-    {
-        res = append_char(res, c);
-        if (c == '\n')
-            break;
-    }
-    return res;
+	while (read(fd, &c, 1) > 0)
+	{
+		res = append_char(res, c);
+		if (c == '\n')
+			break ;
+	}
+	return (res);
 }

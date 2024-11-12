@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:58 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/09 17:54:03 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:16:15 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_prev_members(t_config *scene_data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i <= 3)
@@ -24,14 +24,13 @@ int	check_prev_members(t_config *scene_data)
 		i++;
 	}
 	if (scene_data->ceiling_color == -1 || scene_data->floor_color == -1)
-			return (write(1, "here2\n", 6), 1);
+		return (write(1, "here2\n", 6), 1);
 	return (0);
 }
 
-
 int	is_map_line(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -43,9 +42,9 @@ int	is_map_line(char *str)
 	return (1);
 }
 
-int top_bottom_check(char *str)
+int	top_bottom_check(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -57,11 +56,11 @@ int top_bottom_check(char *str)
 	return (0);
 }
 
-int open_cub_file(char *file)
+int	open_cub_file(char *file)
 {
 	int		fd;
 	char	*dot_occur;
-	
+
 	dot_occur = ft_strrchr(file, '.');
 	if (!dot_occur || ft_strlen(file) == 4)
 		error_handler("invalid file format\n", NULL, NULL, NULL);

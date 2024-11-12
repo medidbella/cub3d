@@ -6,43 +6,42 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/11 20:33:23 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:19:09 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PARSING_H
+# define PARSING_H
 
-#ifndef PARS_H
-#define PARS_H
+# include "parsing.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
+# include <fcntl.h>
+# include "../libft/libft.h"
+# include "../cub.h"
+# include <errno.h>
 
-#include "parsing.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <fcntl.h>
-#include "../libft/libft.h"
-#include "../cub.h"
-#include <errno.h>
+# define CEILING 0
 
-#define CEILING 0
-
-#define E_ANGLE 0
-#define N_ANGLE 90
-#define W_ANGLE 180
-#define S_ANGLE 270
+# define E_ANGLE 0
+# define N_ANGLE 90
+# define W_ANGLE 180
+# define S_ANGLE 270
 
 typedef struct s_config
 {
-	char			*NO_texture_path;
-	char			*SO_texture_path;
-	char			*WE_texture_path;
-	char			*EA_texture_path;
+	char			*no_texture_path;
+	char			*so_texture_path;
+	char			*we_texture_path;
+	char			*ea_texture_path;
 	char			*tab[4];
 	char			**map;
 	int				floor_color;
 	int				ceiling_color;
 	int				player_start_angle;
-} t_config;
+}	t_config;
 
 char		*read_line(int fd);
 void		file_parser(t_config *scene, char *scene_descrption);

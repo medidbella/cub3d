@@ -6,16 +6,16 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/11 20:32:38 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/12 09:14:43 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int format_check(char *str)
+int	format_check(char *str)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	i = -1;
 	len = 0;
@@ -33,7 +33,7 @@ int format_check(char *str)
 	return (0);
 }
 
-void	color_parser(t_config *scene_data ,char *line, int type)
+void	color_parser(t_config *scene_data, char *line, int type)
 {
 	char	*color;
 	int		i;
@@ -52,7 +52,8 @@ void	color_parser(t_config *scene_data ,char *line, int type)
 	while (i < 3)
 	{
 		if (format_check(rgb[i]))
-			error_handler("R,G,B colors must be in range [0,255]\n", rgb, NULL, scene_data);
+			error_handler("R,G,B colors must be in range [0,255]\n", rgb,
+				NULL, scene_data);
 		color[i] = ft_atoi(rgb[i]);
 		i++;
 	}
@@ -74,7 +75,7 @@ void	get_textures(char **words, t_config *scene_data, char *line)
 	while (tab[i])
 	{
 		if (!ft_strncmp(words[0], tab[i], 3))
-			break;
+			break ;
 		i++;
 	}
 	if (i < 4)
@@ -125,7 +126,7 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 			break ;
 		line_parser(line, scene_data, &map_flag);
 		if (map_flag)
-			break;
+			break ;
 		free(line);
 	}
 	if (!map_flag)
@@ -134,4 +135,6 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 		error_handler("incomplete elements\n", NULL, line, scene_data);
 	scene_data->map = map_alloc(line, fd, scene_data);
 	map_parser(scene_data->map, scene_data);
+	if (scene_data->player_start_angle == -1)
+		error_handler("palayer not found in the map\n", NULL, NULL, scene_data);
 }
