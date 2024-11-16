@@ -12,8 +12,8 @@
 #define ROWS 7
 #define COLS 7
 #define TILE_SIZE 20
-#define WIDTH 1600
-#define HEIGHT 800
+#define WIDTH 2000
+#define HEIGHT 900
 #define WIDTH_2D (COLS * TILE_SIZE) 
 #define HEIGHT_2D (ROWS * TILE_SIZE)
 
@@ -36,13 +36,29 @@
 #define FOV 60
 #define DEVIDE 5
 
+#define NORTH_CLR 0xF7AA3E
+#define SOUTH_CLR 0x6EF48D
+#define EAST_CLR 0x908CC5
+#define WEST_CLR 0x5DBDFF
+
 
 typedef struct s_ray
 {
-	int x;
-	int y;
-	int wall_x;
-	int wall_y;
+	double	colums;
+	double	distance;
+	double	rayangle;
+	double	raystep;
+	double	horizontal_x;
+	double	horizontal_y;
+	double	horizontal_distance;
+	double	vertical_x;
+	double	vertical_y;
+	double	vertical_distance;
+	int		side_flag;
+
+	int		curr_color;
+	double	tall;
+
 }	t_ray;
 
 typedef struct s_player
@@ -50,22 +66,28 @@ typedef struct s_player
 	int		player;
 	void	*player_img;
 	void	*erase_img;
-	int		player_x;
-	int		player_y;
-	int		x_c;
-	int		y_c;
+	double		player_x;
+	double		player_y;
+	double		x_c;
+	double		y_c;
 	int		size_x;
 	int		size_y;
 	int		mov_speed;
 
-	float		x_direction1;
-	float		y_direction1;
-	float		x_direction2;
-	float		y_direction2;
-	float		angle;
+	double		x_direction;
+	double		y_direction;
+	double		angle;
 
-	float		fov;
-	float		angle_step; // the angle between each ray
+	double		fov;
+	double		angle_step; // the angle between each ray
+	double		distance_to_project_plan;
+
+	double		Projection_plane_distance;
+
+	double	first_x_fov;
+	double	last_x_fov;
+	double	first_y_fov;
+	double	last_y_fov;
 
 } t_player;
 
@@ -84,14 +106,15 @@ typedef struct  s_data
 	void		*win;
     char		**map;
     t_img		img;
+	t_img		img_2d;
 	t_player	player;
 }   t_data;
 
-void get_start(char **map);
+void get_start(char **map, int start_angle);
 int hooks(int key, t_data *data);
 int	close_win1(t_data *data);
 void rotate(t_data *data, int key);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int  get_color(t_data *data, int x, int y);
 float radian(float degree);
 float calculate_bc(t_data *data);
@@ -103,5 +126,9 @@ void DDA(int X0, int Y0, int X1, int Y1, int color, t_data *data);
 void d_a_moves(t_data *data, int key);
 void ray_casting(t_data *data);
 
+void draw(t_data *data);
+
+void move_player(t_data *data, int key);
+void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color);
 
 #endif

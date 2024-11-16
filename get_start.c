@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/11 18:42:41 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:49:02 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,27 @@ void DDA(int X0, int Y0, int X1, int Y1, int color, t_data *data)
         // delay(100); // for visualization of line- 
                     // generation step by step 
     } 
-} 
+}
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
+    if (x <= 0 || x >= WIDTH || y <= 0 || y >= HEIGHT)
+        return ;
 	dst = data->img.addr + (y * data->img.line_length + x * (data->img.bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+    if (x <= 0 || x >= WIDTH_2D || y <= 0 || y >= HEIGHT_2D)
+        return ;
+    // printf("x: %d || y: %d\n", x, y);
+    // exit (0);
+	dst = data->img_2d.addr + (y * data->img_2d.line_length + x * (data->img_2d.bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -58,7 +72,7 @@ void draw_cub(t_data *data, int x, int y, int color)
         // printf("--> %d\n", (y_ + TILE_SIZE));exit (0);
         while (x < x_ + TILE_SIZE)
         {
-            my_mlx_pixel_put(data, x, y, color);
+            my_mlx_pixel_put_2d(data, x, y, color);
             x++;
         }
         y++;
@@ -98,61 +112,72 @@ void draw(t_data *data)
 
 }
 
+void draw_direction(t_data *data, int color)
+{
+    bresenham(data->player.x_c, data->player.y_c, data->player.x_direction, data->player.y_direction, color, data); 
+}
+
 void setup(t_data *data)
 {
     data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "none");
+    
     data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->img.addr = mlx_get_data_addr(data->img.img, &(data->img.bits_per_pixel),
 			&(data->img.line_length), &(data->img.endian));
+
+    data->img_2d.img = mlx_new_image(data->mlx, WIDTH_2D, HEIGHT_2D);
+    data->img_2d.addr = mlx_get_data_addr(data->img_2d.img, &(data->img_2d.bits_per_pixel),
+            &(data->img_2d.line_length), &(data->img_2d.endian));
 
     data->player.player_img = mlx_xpm_file_to_image(data->mlx,
 		"textures/mini_player.xpm", &(data->player.size_x), &(data->player.size_y));
 
     data->player.erase_img = mlx_xpm_file_to_image(data->mlx,
 		"textures/erase.xpm", &(data->player.size_x), &(data->player.size_y));
+
 	draw(data);
+   
+    // printf("first coordinates x: %d || y: %d\n", data->player.player_x, data->player.player_y);
     data->player.x_c = data->player.player_x + (data->player.size_x / 2);
 	data->player.y_c = data->player.player_y + (data->player.size_y / 2);
-    data->player.x_direction1 = data->player.x_c;
-    data->player.y_direction1 = data->player.y_c - DIRECTION;
-    data->player.x_direction2 = data->player.x_direction1;
-    data->player.y_direction2 = data->player.y_direction1;
-    data->player.fov = radian(FOV);
+
+    
+    data->player.x_direction = data->player.x_c + DIRECTION;
+    data->player.y_direction = data->player.y_c;
+
+    data->player.fov = FOV;
     data->player.angle_step = (data->player.fov / WIDTH);
+    data->player.distance_to_project_plan = ((float)WIDTH / 2) * tan(radian((float)FOV / 2));
+    draw_direction(data, DIR_COLOR);
 }
 
-void draw_direction(t_data *data, int color)
-{
-    bresenham(data->player.x_c, data->player.y_c, data->player.x_direction2, data->player.y_direction2, color, data); 
-}
-
-void get_start(char **map)
+void get_start(char **map, int start_angle)
 {
 	t_data data;
 
-	data.map = map;
-
-    // printf("==> %c\n", data.map[0][0]);exit(0);
-
-
-    for (int i = 0; map[i]; i++)
-    {
-        printf ("==> [%s]\n", map[i]);
-    }
-    // exit(0);
-    
+    start_angle = 0;
+	data.map = map; 
 	data.player.player = 0;
-    data.player.angle = 0;
+    data.player.angle = start_angle;
 	setup(&data);
-    printf("x_c : %d || y_c : %d\n", data.player.x_c, data.player.y_c);
-    data.player.angle = 20;
-    rotate(&data, LEFT);
+
+    printf("W: %d || H: %d\n", WIDTH_2D, WIDTH_2D);
+    printf("x_c : %f || y_c : %f || angle: %f\n", data.player.x_c, data.player.y_c, data.player.angle);
+        
+    // data.player.angle = 20;
+    // rotate(&data, LEFT);
+    // printf("playerangle: %f\n", data.player.angle);
+    // printf("==========================================\n\n");
+    
     ray_casting(&data);
-    draw_direction(&data, DIR_COLOR);
+    // printf("here\n");
+    
 	mlx_put_image_to_window(data.mlx, data.win, data.img.img, 0, 0);
+	mlx_put_image_to_window(data.mlx, data.win, data.img_2d.img, 0, 0);
 	mlx_put_image_to_window(data.mlx, data.win, data.player.player_img,
 				data.player.player_x, data.player.player_y);
+
 	mlx_hook(data.win, 2, 1L << 0, hooks, &data);
 	mlx_hook(data.win, 17, 1L << 2, close_win1, &data);
 	mlx_loop(data.mlx);
