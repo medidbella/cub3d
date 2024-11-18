@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:22 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/08 21:54:37 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:09:34 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	free_parsed_data(t_config *data)
 {
-	free(data->EA_texture_path);
-	free(data->NO_texture_path);
-	free(data->SO_texture_path);
-	free(data->WE_texture_path);
+	int i;
+
+	i = 0;
+	while (i < 4)
+	{
+		free(data->tab[i]);
+		i++;
+	}
 	if (data->map)
 		strings_free(data->map);
 }

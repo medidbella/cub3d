@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/10 17:08:39 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:06:09 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 #include <string.h>
 #include <fcntl.h>
 #include "../libft/libft.h"
-#include <errno.h>
 
 #define CEILING 0
 
@@ -55,9 +54,9 @@ void		strings_free(char **strings);
 char		**map_alloc(char *line, int fd, t_config *scene_data);
 void		free_parsed_data(t_config *data);
 int			top_bottom_check(char *str);
+int			ft_access(char *file);
 void		map_parser(char **map, t_config *scene_data);
-int			check_prev_members(t_config *scene_data);
-void		print_config(t_config *data);//temp
+int			check_prev_members(t_config *scene_data, char *line);
 int			open_cub_file(char *file);
 
 #endif

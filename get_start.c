@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/15 18:49:02 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:19:23 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void draw(t_data *data)
                 color = WALL_COLOR;
             else if (data->map[i][j] == '0')
                 color = BLACK;
-            if (data->map[i][j] == 'N' && data->player.player == 0)
+            if (ft_strchr("NSWE", data->map[i][j])&& data->player.player == 0)
             {
                 data->player.player = 1;
                 data->player.player_x = j * TILE_SIZE + TILE_SIZE / 2;
@@ -156,7 +156,6 @@ void get_start(char **map, int start_angle)
 {
 	t_data data;
 
-    start_angle = 0;
 	data.map = map; 
 	data.player.player = 0;
     data.player.angle = start_angle;

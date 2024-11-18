@@ -12,8 +12,8 @@
 #define ROWS 7
 #define COLS 7
 #define TILE_SIZE 20
-#define WIDTH 2000
-#define HEIGHT 900
+#define WIDTH 1080
+#define HEIGHT 720
 #define WIDTH_2D (COLS * TILE_SIZE) 
 #define HEIGHT_2D (ROWS * TILE_SIZE)
 
