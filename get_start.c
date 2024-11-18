@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/18 17:19:23 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:09:37 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	char	*dst;
 
     if (x <= 0 || x >= WIDTH || y <= 0 || y >= HEIGHT)
+    {
         return ;
-	dst = data->img.addr + (y * data->img.line_length + x * (data->img.bits_per_pixel / 8));
+    }
+    dst = data->img.addr + (y * data->img.line_length + x * (data->img.bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -117,10 +119,10 @@ void draw_direction(t_data *data, int color)
     bresenham(data->player.x_c, data->player.y_c, data->player.x_direction, data->player.y_direction, color, data); 
 }
 
-void setup(t_data *data)
+void    setup(t_data *data)
 {
     data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "none");
+	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
     
     data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->img.addr = mlx_get_data_addr(data->img.img, &(data->img.bits_per_pixel),
@@ -152,15 +154,16 @@ void setup(t_data *data)
     draw_direction(data, DIR_COLOR);
 }
 
-void get_start(char **map, int start_angle)
+void get_start(t_config *parsed_data)//, int ceiling, int floor)
 {
-	t_data data;
+    t_data  data;
 
-	data.map = map; 
-	data.player.player = 0;
-    data.player.angle = start_angle;
+    data.map = parsed_data->map;
+    data.player.player = 0;
+    data.player.angle = parsed_data->player_start_angle;
+    data.ceiling_color = parsed_data->ceiling_color;
+    data.floor_color = parsed_data->floor_color;
 	setup(&data);
-
     printf("W: %d || H: %d\n", WIDTH_2D, WIDTH_2D);
     printf("x_c : %f || y_c : %f || angle: %f\n", data.player.x_c, data.player.y_c, data.player.angle);
         
@@ -172,9 +175,9 @@ void get_start(char **map, int start_angle)
     ray_casting(&data);
     // printf("here\n");
     
-	mlx_put_image_to_window(data.mlx, data.win, data.img.img, 0, 0);
-	mlx_put_image_to_window(data.mlx, data.win, data.img_2d.img, 0, 0);
-	mlx_put_image_to_window(data.mlx, data.win, data.player.player_img,
+    mlx_put_image_to_window(data.mlx, data.win, data.img.img, 0, 0);
+    mlx_put_image_to_window(data.mlx, data.win, data.img_2d.img, 0, 0);
+    mlx_put_image_to_window(data.mlx, data.win, data.player.player_img,
 				data.player.player_x, data.player.player_y);
 
 	mlx_hook(data.win, 2, 1L << 0, hooks, &data);

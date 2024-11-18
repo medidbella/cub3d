@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/16 12:51:28 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:10:14 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void distance_h(t_data *data, t_ray *ray, double rayangle)
 	ray->horizontal_y = data->player.y_c;
 	ray->horizontal_x = data->player.x_c;
 
-	int i = 0;
 	while (1)
 	{
 		if (find_horizontal(data, rayangle, &ray->horizontal_x, &ray->horizontal_y))
@@ -80,7 +79,7 @@ void distance_h(t_data *data, t_ray *ray, double rayangle)
 	ray->horizontal_distance = distance;
 }
 
-int find_vertical(t_data *data, double rayangle, double *vertical_x, double *vertical_y, int column)
+int find_vertical(t_data *data, double rayangle, double *vertical_x, double *vertical_y)
 {
 	double delta_x;
 	double delta_y;
@@ -112,7 +111,7 @@ int find_vertical(t_data *data, double rayangle, double *vertical_x, double *ver
 	return (0);
 }
 
-void	distance_v(t_data *data, t_ray *ray, double rayangle, int column)
+void	distance_v(t_data *data, t_ray *ray, double rayangle)
 {
 	double distance;
 
@@ -121,7 +120,7 @@ void	distance_v(t_data *data, t_ray *ray, double rayangle, int column)
 
 	while (1)
 	{
-		if (find_vertical(data, rayangle, &ray->vertical_x, &ray->vertical_y, column))
+		if (find_vertical(data, rayangle, &ray->vertical_x, &ray->vertical_y))
 		{
 			distance = -1.0;
 			break ;
@@ -177,7 +176,7 @@ void draw_column(t_data *data, t_ray *ray, int column)
 
 	while (i < start)
 	{
-		my_mlx_pixel_put(data, column, i, 0x0000ff);
+		my_mlx_pixel_put(data, column, i, data->ceiling_color);
 		i++;
 	}
 	i = start;
@@ -188,12 +187,12 @@ void draw_column(t_data *data, t_ray *ray, int column)
 	}
 	while (i < HEIGHT)
 	{
-		my_mlx_pixel_put(data, column, i, BLACK);
+		my_mlx_pixel_put(data, column, i, data->floor_color);
 		i++;
 	}
 }
 
-void real_distance(t_ray *ray, t_data *data)
+void real_distance(t_ray *ray)
 {
 	if (ray-> horizontal_distance != -1)
 		ray->horizontal_distance = cos(radian(ray->rayangle)) * ray->horizontal_distance;
@@ -284,7 +283,7 @@ void ray_casting(t_data *data)
 	while (column <= WIDTH)
 	{
 		distance_h(data, &ray, ray.rayangle);
-		distance_v(data, &ray, ray.rayangle, column);
+		distance_v(data, &ray, ray.rayangle);
 		// real_distance(&ray, data);
 		small_distance(data, &ray, &first_fov);
 

@@ -2,7 +2,8 @@
 #define CUB_h
 
 #include "parsing/parsing.h"
-#include "minilibx/mlx.h"
+// #include "minilibx/mlx.h"
+#include <mlx.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
@@ -21,11 +22,13 @@
 #define A 97
 #define S 115
 #define D 100
+
 #define RIGHT 65363
 #define LEFT 65361
 #define UP 65362
 #define DOWN 65364
 #define CLOSE 32
+
 #define IMG_SIZE_X 4
 #define IMG_SIZE_Y 4
 #define ANGLE 5
@@ -91,6 +94,13 @@ typedef struct s_player
 
 } t_player;
 
+typedef struct s_texture
+{
+	void	*img;
+	int		width;
+	int		hight;
+}	t_texture;
+
 typedef struct s_img
 {
 	void	*img;
@@ -105,12 +115,16 @@ typedef struct  s_data
     void		*mlx;
 	void		*win;
     char		**map;
+	t_texture	wall_textures[4];
+	int			ceiling_color;
+	int			floor_color;
     t_img		img;
 	t_img		img_2d;
 	t_player	player;
 }   t_data;
 
-void get_start(char **map, int start_angle);
+void    setup(t_data *data);
+void	get_start(t_config *parsed_data);
 int hooks(int key, t_data *data);
 int	close_win1(t_data *data);
 void rotate(t_data *data, int key);

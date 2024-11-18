@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/18 17:06:09 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:00:53 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,7 @@
 
 typedef struct s_config
 {
-	char			*NO_texture_path;
-	char			*SO_texture_path;
-	char			*WE_texture_path;
-	char			*EA_texture_path;
-	char			*tab[4];
+	char			*textures_paths[4];
 	char			**map;
 	int				floor_color;
 	int				ceiling_color;
