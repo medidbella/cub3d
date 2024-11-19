@@ -6,13 +6,24 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:53:05 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/08 21:41:59 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:56:14 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static	char *append_char(char *str, char c)
+int	ft_access(char *file)
+{
+	int fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	close(fd);
+	return (1);
+}
+
+char *append_char(char *str, char c)
 {
 	int		i;
 	char	*res;

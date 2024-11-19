@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:22 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/08 21:54:37 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:37:16 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,30 @@
 
 void	free_parsed_data(t_config *data)
 {
-	free(data->EA_texture_path);
-	free(data->NO_texture_path);
-	free(data->SO_texture_path);
-	free(data->WE_texture_path);
+	int i;
+
+	i = 0;
+	while (i < 4)
+	{
+		free(data->textures_paths[i]);
+		i++;
+	}
 	if (data->map)
 		strings_free(data->map);
 }
 
 void	data_init(t_config *data)
 {
-	data->NO_texture_path = NULL;
-	data->SO_texture_path = NULL;
-	data->WE_texture_path = NULL;
-	data->EA_texture_path = NULL;
+	int i;
+
+	i = 0;
+	while (i < 4)
+	{
+		data->textures_paths[i] = NULL;
+		i++;
+	}
 	data->player_start_angle = -1;
 	data->map = NULL;
-	data->tab[0] = data->NO_texture_path;
-	data->tab[1] = data->SO_texture_path;
-	data->tab[2] = data->WE_texture_path;
-	data->tab[3] = data->EA_texture_path;
 	data->floor_color = -1;
 	data->ceiling_color = -1;
 }
