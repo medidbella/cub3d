@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/18 17:36:36 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:54:38 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void	get_textures(char **words, t_config *scene_data, char *line)
 	}
 	if (i < 4)
 	{
-		if (scene_data->textures_paths[i])
+		if (scene_data->tab[i])
 			error_handler("duplicate type element", words, line, scene_data);
-		return (scene_data->textures_paths[i] = ft_strtrim(words[1], "\n"), free(NULL));
+		return (scene_data->tab[i] = ft_strtrim(words[1], "\n"), free(NULL));
 	}
 	if (!ft_strncmp(words[0], "F", 2) || !ft_strncmp(words[0], "C", 2))
 		return (color_parser(scene_data, line, (words[0][0] == 'F')));
@@ -109,6 +109,36 @@ must be followed by one information\n", words, line, scene_data);
 	strings_free(words);
 }
 
+
+void	print_config(t_config *data)
+{
+	char	*tab[4];
+
+	tab[0] = "NO";
+	tab[1] = "SO";
+	tab[2] = "WE";
+	tab[3] = "EA";
+	printf("C = %d\n", data->floor_color);
+	printf("F = %d\n", data->ceiling_color);
+	printf("player angle = %d\n", data->player_start_angle);
+	int i = 0;
+	while (i <= 3 && data->tab[i])
+	{
+		printf("%s = %s\n", tab[i], data->tab[i]);
+		i++;
+	}
+	i = 0;
+	while (i <= 3)
+	{
+		free(data->tab[i]);
+		i++;
+	}
+	if (data->map)
+		for (i = 0; data->map[i]; i++)
+			printf("%s\n", data->map[i]);
+	strings_free(data->map);
+}
+
 void	file_parser(t_config *scene_data, char *scene_descrption_file)
 {
 	int		map_flag;
@@ -129,8 +159,9 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 		free(line);
 	}
 	if (!map_flag)
-		error_handler("there no map in the file\n", NULL, line, scene_data);
-	check_prev_members(scene_data, line);
+		error_handler("there is no map in the file\n", NULL, line, scene_data);
+	if (check_prev_members(scene_data))
+		error_handler("incomplete elements\n", NULL, line, scene_data);
 	scene_data->map = map_alloc(line, fd, scene_data);
 	map_parser(scene_data->map, scene_data);
 }

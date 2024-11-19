@@ -1,14 +1,13 @@
-NO ./textures/N-texture.xpm
-SO ./textures/S-texture.xpm
-WE ./textures/W-texture.xpm
-EA ./textures/E-texture.xpm
-
-F 255,255,255
-C 0,0,0
+NO ./path_to_the_north_texture
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture
+F 0,0,0
+C 225,30,0
 1111111
 1000001
+1001101
+100E001
+1010001
 1000001
-1001001
-1000001
-1N00001
 1111111
