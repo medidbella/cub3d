@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/20 18:51:05 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/20 21:44:17 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,7 @@ void	move_player(t_data *data);
 void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color);
 void	horizontal_distance(t_data *data, t_ray *ray, double rayangle);
 double	get_distance(t_data *data, double x, double y);
-void	vertical_distance(t_data *data, t_ray *ray, double rayangle,
-			int column);
+void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
 void	draw_map2d(t_data *data);
 
 void	fov_coordinates(t_data *data, t_ray *ray, int *first_fov, int which);

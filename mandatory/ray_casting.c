@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/20 17:16:30 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/20 21:44:21 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	ray_casting(t_data *data)
 	while (column <= WIDTH)
 	{
 		horizontal_distance(data, &ray, ray.rayangle);
-		vertical_distance(data, &ray, ray.rayangle, column);
+		vertical_distance(data, &ray, ray.rayangle);
 		real_distance(&ray, data);
 		small_distance(data, &ray, &first_fov);
 		draw_fov(data, &ray);
