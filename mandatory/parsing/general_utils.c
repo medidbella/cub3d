@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:22 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/18 17:37:16 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:58:04 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_parsed_data(t_config *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 4)
@@ -28,7 +28,7 @@ void	free_parsed_data(t_config *data)
 
 void	data_init(t_config *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 4)
@@ -42,9 +42,9 @@ void	data_init(t_config *data)
 	data->ceiling_color = -1;
 }
 
-int strings_len(char **words)
+int	strings_len(char **words)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (!words)
@@ -56,15 +56,15 @@ int strings_len(char **words)
 
 void	strings_free(char **strings)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(strings[i])
+	while (strings[i])
 		free(strings[i++]);
 	free(strings);
 }
 
-void error_handler(char *err, char **free_me, char *me_too, t_config *data)
+void	error_handler(char *err, char **free_me, char *me_too, t_config *data)
 {
 	if (data)
 		free_parsed_data(data);
@@ -74,6 +74,5 @@ void error_handler(char *err, char **free_me, char *me_too, t_config *data)
 	write(2, "Error\n", 6);
 	if (err)
 		write(2, err, ft_strlen(err));
-	exit(1);
+	exit (1);
 }
- 

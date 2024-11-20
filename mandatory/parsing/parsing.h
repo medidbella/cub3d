@@ -6,26 +6,25 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/20 18:51:46 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:29:46 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PARSING_H
+# define PARSING_H
 
-#ifndef PARS_H
-#define PARS_H
+# include "../../libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
+# include <fcntl.h>
 
-#include "../../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <fcntl.h>
-
-#define CEILING 0
-#define E_ANGLE 0
-#define N_ANGLE 90
-#define W_ANGLE 180
-#define S_ANGLE 270
+# define CEILING 0
+# define E_ANGLE 0
+# define N_ANGLE 90
+# define W_ANGLE 180
+# define S_ANGLE 270
 
 typedef struct s_config
 {
@@ -34,7 +33,7 @@ typedef struct s_config
 	int				floor_color;
 	int				ceiling_color;
 	int				player_start_angle;
-} t_config;
+}	t_config;
 
 char		*read_line(int fd);
 void		file_parser(t_config *scene, char *scene_descrption);

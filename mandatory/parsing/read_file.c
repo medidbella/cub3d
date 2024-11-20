@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:53:05 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/18 16:56:14 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:31:08 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_access(char *file)
 {
-	int fd;
+	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -23,7 +23,7 @@ int	ft_access(char *file)
 	return (1);
 }
 
-char *append_char(char *str, char c)
+char	*append_char(char *str, char c)
 {
 	int		i;
 	char	*res;
@@ -45,17 +45,17 @@ char *append_char(char *str, char c)
 	return (res);
 }
 
-char *read_line(int fd)
+char	*read_line(int fd)
 {
-    char	*res;
-    char	c;
+	char	*res;
+	char	c;
 
 	res = NULL;
-    while (read(fd, &c, 1) > 0)
-    {
-        res = append_char(res, c);
-        if (c == '\n')
-            break;
-    }
-    return res;
+	while (read(fd, &c, 1) > 0)
+	{
+		res = append_char(res, c);
+		if (c == '\n')
+			break ;
+	}
+	return (res);
 }

@@ -6,16 +6,16 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/18 17:36:36 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:27:34 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int format_check(char *str)
+int	format_check(char *str)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	i = -1;
 	len = 0;
@@ -33,7 +33,7 @@ int format_check(char *str)
 	return (0);
 }
 
-void	color_parser(t_config *scene_data ,char *line, int type)
+void	color_parser(t_config *scene_data, char *line, int type)
 {
 	char	*color;
 	int		i;
@@ -52,7 +52,8 @@ void	color_parser(t_config *scene_data ,char *line, int type)
 	while (i < 3)
 	{
 		if (format_check(rgb[i]))
-			error_handler("R,G,B colors must be in range [0,255]\n", rgb, NULL, scene_data);
+			error_handler("R,G,B colors must be in range [0,255]\n",
+				rgb, NULL, scene_data);
 		color[i] = ft_atoi(rgb[i]);
 		i++;
 	}
@@ -74,14 +75,15 @@ void	get_textures(char **words, t_config *scene_data, char *line)
 	while (tab[i])
 	{
 		if (!ft_strncmp(words[0], tab[i], 3))
-			break;
+			break ;
 		i++;
 	}
 	if (i < 4)
 	{
 		if (scene_data->textures_paths[i])
 			error_handler("duplicate type element", words, line, scene_data);
-		return (scene_data->textures_paths[i] = ft_strtrim(words[1], "\n"), free(NULL));
+		return (scene_data->textures_paths[i] = ft_strtrim(words[1], "\n"),
+			free(NULL));
 	}
 	if (!ft_strncmp(words[0], "F", 2) || !ft_strncmp(words[0], "C", 2))
 		return (color_parser(scene_data, line, (words[0][0] == 'F')));
@@ -125,7 +127,7 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 			break ;
 		line_parser(line, scene_data, &map_flag);
 		if (map_flag)
-			break;
+			break ;
 		free(line);
 	}
 	if (!map_flag)
