@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/19 15:18:41 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:49:58 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 # define CUB_H
 
 # include "parsing/parsing.h"
-# include "minilibx/mlx.h"
+# include "../minilibx/mlx.h"
 # include <unistd.h>
 # include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
 
-# define ROWS 7
-# define COLS 7
+# define ROWS 9
+# define COLS 25
 # define TILE_SIZE 20
 # define WIDTH 1280
 # define HEIGHT 720
-# define WIDTH_2D (COLS * TILE_SIZE) 
-# define HEIGHT_2D (ROWS * TILE_SIZE)
 
 # define W 119
 # define A 97
@@ -40,13 +38,12 @@
 # define CLOSE 32
 # define IMG_SIZE_X 4
 # define IMG_SIZE_Y 4
-# define ANGLE 5
-# define DIRECTION 15
+# define ANGLE 0.2
 # define WALL_COLOR 0x61F5B5
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000
 # define FOV 60
-# define DEVIDE 5
+# define SPEED 0.5
 
 # define NORTH_CLR 0xF7AA3E
 # define SOUTH_CLR 0x6EF48D
@@ -113,6 +110,8 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	char		**map;
+	int			width_2d;
+	int			height_2d;
 	t_img		img;
 	t_img		img_2d;
 	t_player	player;
@@ -120,6 +119,7 @@ typedef struct s_data
 	t_texture	wall_textures[4];
 	int			ceiling_color;
 	int			floor_color;
+	int			keys[7];
 }	t_data;
 
 typedef struct s_draw
@@ -147,24 +147,27 @@ typedef struct s_draw_line
 }	t_draw_line;
 
 void	get_start(t_config *parsed_data);
-int		hooks(int key, t_data *data);
+int		loop_rendering(t_data *data);
 int		close_win1(t_data *data);
-void	rotate(t_data *data, int key);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		get_color(t_data *data, int x, int y);
 float	radian(float degree);
-void	rotate(t_data *data, int key);
-void	w_s_moves(t_data *data, int key);
+void	rotate(t_data *data);
+void	move_player(t_data *data);
+// void	w_moves(t_data *data);
+// void	s_moves(t_data *data);
+// void	d_moves(t_data *data);
+// void	a_moves(t_data *data);
 void	bresenham(t_data *data, t_ray *ray);
-void	d_a_moves(t_data *data, int key);
 void	ray_casting(t_data *data);
 void	draw(t_data *data);
-void	move_player(t_data *data, int key);
+void	move_player(t_data *data);
 void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color);
 void	horizontal_distance(t_data *data, t_ray *ray, double rayangle);
 double	get_distance(t_data *data, double x, double y);
 void	vertical_distance(t_data *data, t_ray *ray, double rayangle,
 			int column);
+void	draw_map2d(t_data *data);
 
 void	fov_coordinates(t_data *data, t_ray *ray, int *first_fov, int which);
 void	draw_fov(t_data *data, t_ray *ray);

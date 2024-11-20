@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/17 00:17:18 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:07:30 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle, int column)
 	{
 		find_vertical_point(data, rayangle, &ray->vertical_x, &ray->vertical_y);
 		if (rayangle == radian(90) || rayangle == radian(270)
-			|| ray->vertical_y > HEIGHT_2D || ray->vertical_x > WIDTH_2D
+			|| ray->vertical_y > data->height_2d || ray->vertical_x > data->width_2d
 			|| ray->vertical_x < 0 || ray->vertical_y < 0)
 		{
 			ray->vertical_distance = -1.0;

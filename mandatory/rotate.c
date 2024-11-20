@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:49:07 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/19 16:49:04 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:54:02 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ float	radian(float degree)
 	return (degree * M_PI / 180);
 }
 
-void	rotate(t_data *data, int key)
+void	rotate(t_data *data)
 {
-	if (key == RIGHT)
+	if (data->keys[0])
 	{
 		data->player.angle += radian(ANGLE);
 		if (data->player.angle >= radian(360))
 			data->player.angle -= radian(360);
 	}
-	else
+	if (data->keys[1])
 	{
 		data->player.angle -= radian(ANGLE);
 		if (data->player.angle < 0)
