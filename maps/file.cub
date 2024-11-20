@@ -1,7 +1,7 @@
-NO ../textures/N-texture.xpm
-SO ../textures/S-texture.xpm
-WE ../textures/W-texture.xpm
-EA ../textures/E-texture.xpm
+NO ./textures/N-texture.xpm
+SO ./textures/S-texture.xpm
+WE ./textures/W-texture.xpm
+EA ./textures/E-texture.xpm
 
 F 0,0,0
 C 225,30,0

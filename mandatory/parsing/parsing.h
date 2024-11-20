@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/18 18:00:53 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:51:46 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 #ifndef PARS_H
 #define PARS_H
 
-#include "parsing.h"
+#include "../../libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
-#include "../libft/libft.h"
 
 #define CEILING 0
-
 #define E_ANGLE 0
 #define N_ANGLE 90
 #define W_ANGLE 180

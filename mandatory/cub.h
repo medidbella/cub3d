@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/20 17:49:58 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:51:05 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB_H
 
 # include "parsing/parsing.h"
+# include "../libft/libft.h"
 # include "../minilibx/mlx.h"
 # include <unistd.h>
 # include <string.h>
@@ -38,7 +39,7 @@
 # define CLOSE 32
 # define IMG_SIZE_X 4
 # define IMG_SIZE_Y 4
-# define ANGLE 0.2
+# define ANGLE 0.8
 # define WALL_COLOR 0x61F5B5
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000

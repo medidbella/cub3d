@@ -1,18 +1,19 @@
 NAME = cub
-SRC = cub.c get_start.c hooks.c rotate.c player_moves.c ray_casting.c \
-		utils.c horizontal.c vertical.c\
-	parsing/general_utils.c parsing/map_parsing.c parsing/parser.c \
-	parsing/parsing_utils.c parsing/read_file.c
+SRC = mandatory/cub.c mandatory/get_start.c mandatory/hooks.c mandatory/rotate.c mandatory/player_moves.c mandatory/ray_casting.c \
+		mandatory/utils.c mandatory/horizontal.c mandatory/vertical.c\
+	mandatory/parsing/general_utils.c mandatory/parsing/map_parsing.c mandatory/parsing/parser.c \
+	mandatory/parsing/parsing_utils.c mandatory/parsing/read_file.c
 CC = cc
 CFLAGS = -fsanitize=address -g3 # -Wall -Wextra -Werror 
 MLX1 = -Lmlx_linux -lmlx_Linux -L minilibx -Imlx_linux -lXext -lX11 -lm -lz
 MLX2 = -Imlx_linux
+LIBFT = libft/libft.a
 OBJ = $(SRC:.c=.o)
 LIBFT_OBJ = $(shell cat libft/Makefile | grep "ft_" | tr -d '\\' | tr -d "\n" \
 			| tr "\t" " " |tr -s ' ' | sed 's/ / libft\//g' | sed 's/\.c/\.o/g')
 
 $(NAME): libft $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) libft/libft.a $(MLX1) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX1) -o $(NAME)
 
 libft: $(LIBFT_OBJ)
 		make bonus -C libft/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/20 17:53:36 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:39:29 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ void	setup(t_data *data)
 			&(data->img_2d.bits_per_pixel),
 			&(data->img_2d.line_length), &(data->img_2d.endian));
 	data->player.player_img = mlx_xpm_file_to_image(data->mlx,
-			"../textures/mini_player.xpm",
+			"./textures/mini_player.xpm",
 			&(data->player.size_x), &(data->player.size_y));
 	data->player.erase_img = mlx_xpm_file_to_image(data->mlx,
-			"../textures/erase.xpm", &(data->player.size_x),
+			"./textures/erase.xpm", &(data->player.size_x),
 			&(data->player.size_y));
 	draw(data);
 	data->player.x_c = data->player.player_x + (data->player.size_x / 2);
