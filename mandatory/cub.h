@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/20 21:44:17 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:03:01 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,19 @@
 # define EAST_CLR 0x908CC5
 # define WEST_CLR 0x5DBDFF
 
+# define N_INDEX 0
+# define S_INDEX 1
+# define W_INDEX 2
+# define E_INDEX 3
+
+
 typedef struct s_texture
 {
 	void	*img;
+	char	*iter;
+	int		pixel_bits;
+	int		endianess;
+	int		line_lenght;
 	int		width;
 	int		hight;
 }	t_texture;
@@ -71,6 +81,7 @@ typedef struct s_ray
 	double	vertical_y;
 	double	vertical_distance;
 	int		side_flag;
+	int		texture_idx;
 	int		curr_color;
 	double	height;
 }	t_ray;
@@ -147,7 +158,10 @@ typedef struct s_draw_line
 	int	color;
 }	t_draw_line;
 
-void	get_start(t_config *parsed_data);
+void	get_start(t_data *data, t_config *parsed_data);
+void	initialize_textures(t_data *data, t_config *parsed_data);
+void	setup(t_data *data);
+void	first_view(t_data *data);
 int		loop_rendering(t_data *data);
 int		close_win1(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -168,8 +182,10 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle);
 double	get_distance(t_data *data, double x, double y);
 void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
 void	draw_map2d(t_data *data);
-
 void	fov_coordinates(t_data *data, t_ray *ray, int *first_fov, int which);
 void	draw_fov(t_data *data, t_ray *ray);
+int		ft_key_press(int key, t_data *data);
+int		ft_key_release(int key, t_data *data);
+void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 
 #endif
