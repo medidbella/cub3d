@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/21 11:48:14 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:05:15 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,12 @@
 # define CLOSE 32
 # define IMG_SIZE_X 4
 # define IMG_SIZE_Y 4
-# define ANGLE 0.8
+# define ANGLE 0.7
 # define WALL_COLOR 0x61F5B5
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000
 # define FOV 60
-# define SPEED 0.5
-
+# define SPEED 0.6
 # define NORTH_CLR 0xF7AA3E
 # define SOUTH_CLR 0x6EF48D
 # define EAST_CLR 0x908CC5
@@ -116,7 +115,6 @@ typedef struct s_data
 	t_img		img;
 	t_img		img_2d;
 	t_player	player;
-
 	t_texture	wall_textures[4];
 	int			ceiling_color;
 	int			floor_color;
@@ -158,6 +156,10 @@ int		get_color(t_data *data, int x, int y);
 float	radian(float degree);
 void	rotate(t_data *data);
 void	move_player(t_data *data);
+void	a_moves(t_data *data);
+void	d_moves(t_data *data);
+void	s_moves(t_data *data);
+void	w_moves(t_data *data);
 void	bresenham(t_data *data, t_ray *ray);
 void	ray_casting(t_data *data);
 void	draw(t_data *data);
@@ -165,8 +167,7 @@ void	move_player(t_data *data);
 void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color);
 void	horizontal_distance(t_data *data, t_ray *ray, double rayangle);
 double	get_distance(t_data *data, double x, double y);
-void	vertical_distance(t_data *data, t_ray *ray, double rayangle,
-			int column);
+void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
 void	draw_map2d(t_data *data);
 
 void	fov_coordinates(t_data *data, t_ray *ray, int *first_fov, int which);

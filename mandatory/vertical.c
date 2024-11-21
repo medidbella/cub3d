@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/21 12:02:56 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:43:53 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	find_vertical_point(t_data *data, double rayangle, double *vertical_x
 	*vertical_y = *vertical_y - delta_y;
 }
 
-void	vertical_distance(t_data *data, t_ray *ray, double rayangle, int column)
+void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 {
 	double	check_x;
 

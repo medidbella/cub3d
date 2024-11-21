@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/21 09:54:08 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:43:57 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	ray_casting(t_data *data)
 	while (column <= WIDTH)
 	{
 		horizontal_distance(data, &ray, ray.rayangle);
-		vertical_distance(data, &ray, ray.rayangle, column);
+		vertical_distance(data, &ray, ray.rayangle);
 		real_distance(&ray, data);
 		small_distance(data, &ray, &first_fov);
 		draw_fov(data, &ray);
