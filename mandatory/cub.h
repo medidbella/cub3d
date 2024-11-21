@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/20 18:51:05 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/21 11:48:14 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,17 +148,16 @@ typedef struct s_draw_line
 }	t_draw_line;
 
 void	get_start(t_config *parsed_data);
+void	init_key_flags(t_data *data);
+int		ft_key_press(int key, t_data *data);
+int		ft_key_release(int key, t_data *data);
 int		loop_rendering(t_data *data);
-int		close_win1(t_data *data);
+int		close_win(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		get_color(t_data *data, int x, int y);
 float	radian(float degree);
 void	rotate(t_data *data);
 void	move_player(t_data *data);
-// void	w_moves(t_data *data);
-// void	s_moves(t_data *data);
-// void	d_moves(t_data *data);
-// void	a_moves(t_data *data);
 void	bresenham(t_data *data, t_ray *ray);
 void	ray_casting(t_data *data);
 void	draw(t_data *data);

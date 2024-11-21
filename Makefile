@@ -1,10 +1,13 @@
 NAME = cub
-SRC = mandatory/cub.c mandatory/get_start.c mandatory/hooks.c mandatory/rotate.c mandatory/player_moves.c mandatory/ray_casting.c \
-		mandatory/utils.c mandatory/horizontal.c mandatory/vertical.c\
-	mandatory/parsing/general_utils.c mandatory/parsing/map_parsing.c mandatory/parsing/parser.c \
-	mandatory/parsing/parsing_utils.c mandatory/parsing/read_file.c
+SRC = mandatory/cub.c mandatory/get_start.c mandatory/draw_pixels.c mandatory/hooks.c \
+		mandatory/rotate.c \
+		mandatory/player_moves.c mandatory/ray_casting.c mandatory/utils.c \
+		mandatory/horizontal.c mandatory/vertical.c mandatory/key_hooks.c \
+		mandatory/parsing/general_utils.c mandatory/parsing/map_parsing.c \
+		mandatory/parsing/parser.c mandatory/parsing/parsing_utils.c \
+		mandatory/parsing/read_file.c
 CC = cc
-CFLAGS = -fsanitize=address -g3 # -Wall -Wextra -Werror 
+CFLAGS = -fsanitize=address -g3  #-Wall -Wextra -Werror 
 MLX1 = -Lmlx_linux -lmlx_Linux -L minilibx -Imlx_linux -lXext -lX11 -lm -lz
 MLX2 = -Imlx_linux
 LIBFT = libft/libft.a
@@ -24,9 +27,11 @@ all: $(NAME)
 	$(CC) $(CFLAGS) $(MLX2) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) && make clean -C libft
+	@rm -f $(OBJ) && make clean -C libft
 
 fclean: clean
-	rm -f $(NAME) && make fclean -C libft
+	@rm -f $(NAME) && make fclean -C libft
 
 re: fclean all
+
+.SECONDARY: $(OBJ) $(LIBFT_OBJ)
