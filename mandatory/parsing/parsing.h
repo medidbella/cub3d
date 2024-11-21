@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/20 19:29:46 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/21 20:20:03 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 # define CEILING 0
 # define E_ANGLE 0
-# define N_ANGLE 90
+# define N_ANGLE 270
 # define W_ANGLE 180
-# define S_ANGLE 270
+# define S_ANGLE 90
 
 typedef struct s_config
 {

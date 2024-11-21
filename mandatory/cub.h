@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/21 12:03:01 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/21 20:51:59 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define ROWS 9
 # define COLS 25
 # define TILE_SIZE 20
-# define WIDTH 1280
+# define WIDTH 1080
 # define HEIGHT 720
 
 # define W 119
@@ -56,7 +56,9 @@
 # define W_INDEX 2
 # define E_INDEX 3
 
-
+// 	 N
+// W   E
+// 	 S
 typedef struct s_texture
 {
 	void	*img;

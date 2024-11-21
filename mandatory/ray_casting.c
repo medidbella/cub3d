@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/21 12:02:51 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/21 20:45:06 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	draw_column(t_data *data, t_ray *ray, int column)
 		my_mlx_pixel_put(data, column, i, data->floor_color);
 		i++;
 	}
+	printf("texture_idx = %d\n", ray->texture_idx);
 }
 
 void	real_distance(t_ray *ray, t_data *data)

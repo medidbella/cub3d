@@ -1,7 +1,7 @@
-NO ./textures/N-texture.xpm
-SO ./textures/S-texture.xpm
-WE ./textures/W-texture.xpm
-EA ./textures/E-texture.xpm
+NO ./textures/bleu.xpm
+SO ./textures/erase.xpm
+WE ./textures/green.xpm
+EA ./textures/perpule.xpm
 F 220,100,0
 C 225,30,0
 111111111111111111111111111111111
