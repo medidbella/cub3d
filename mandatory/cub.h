@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/22 11:16:32 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:10:00 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define ROWS 9
 # define COLS 25
 # define TILE_SIZE 20
-# define WIDTH 1080
+# define WIDTH 1280
 # define HEIGHT 720
 
 # define W 119
@@ -39,33 +39,28 @@
 # define CLOSE 32
 # define IMG_SIZE_X 4
 # define IMG_SIZE_Y 4
-# define ANGLE 0.8
+# define ANGLE 0.7
 # define WALL_COLOR 0x61F5B5
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000
 # define FOV 60
-# define SPEED 1.1
-
+# define SPEED 0.6
 # define NORTH_CLR 0xF7AA3E
 # define SOUTH_CLR 0x6EF48D
 # define EAST_CLR 0x908CC5
 # define WEST_CLR 0x5DBDFF
-
 # define N_INDEX 0
 # define S_INDEX 1
 # define W_INDEX 2
 # define E_INDEX 3
 
-// 	 N
-// W   E
-// 	 S
 typedef struct s_texture
 {
 	void	*img;
 	char	*iter;
+	int		line_lenght;
 	int		pixel_bits;
 	int		endianess;
-	int		line_lenght;
 	int		width;
 	int		hight;
 }	t_texture;
@@ -83,8 +78,8 @@ typedef struct s_ray
 	double	vertical_y;
 	double	vertical_distance;
 	int		side_flag;
-	int		texture_idx;
 	int		curr_color;
+	int		texture_idx;
 	double	height;
 }	t_ray;
 
@@ -129,7 +124,6 @@ typedef struct s_data
 	t_img		img;
 	t_img		img_2d;
 	t_player	player;
-
 	t_texture	wall_textures[4];
 	int			ceiling_color;
 	int			floor_color;
@@ -160,21 +154,21 @@ typedef struct s_draw_line
 	int	color;
 }	t_draw_line;
 
-void	get_start(t_data *data, t_config *parsed_data);
-void	initialize_textures(t_data *data, t_config *parsed_data);
-void	setup(t_data *data);
-void	first_view(t_data *data);
+void	get_start(t_config *parsed_data);
+void	init_key_flags(t_data *data);
+int		ft_key_press(int key, t_data *data);
+int		ft_key_release(int key, t_data *data);
 int		loop_rendering(t_data *data);
-int		close_win1(t_data *data);
+int		close_win(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		get_color(t_data *data, int x, int y);
 float	radian(float degree);
 void	rotate(t_data *data);
 void	move_player(t_data *data);
-// void	w_moves(t_data *data);
-// void	s_moves(t_data *data);
-// void	d_moves(t_data *data);
-// void	a_moves(t_data *data);
+void	a_moves(t_data *data);
+void	d_moves(t_data *data);
+void	s_moves(t_data *data);
+void	w_moves(t_data *data);
 void	bresenham(t_data *data, t_ray *ray);
 void	ray_casting(t_data *data);
 void	draw(t_data *data);
@@ -184,10 +178,9 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle);
 double	get_distance(t_data *data, double x, double y);
 void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
 void	draw_map2d(t_data *data);
+void	get_texture_color(t_data *data, t_ray *ray, int current_y);
+void	initialize_textures(t_data *data, t_config *parsed_data);
 void	fov_coordinates(t_data *data, t_ray *ray, int *first_fov, int which);
 void	draw_fov(t_data *data, t_ray *ray);
-int		ft_key_press(int key, t_data *data);
-int		ft_key_release(int key, t_data *data);
-void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/20 17:18:00 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:01:34 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	w_moves(t_data *data)
 
 	if (data->keys[2])
 	{
-		delta_x = cos(data->player.angle) * SPEED;
-		delta_y = sin(data->player.angle) * SPEED;
+		delta_x = (cos(data->player.angle) * SPEED);
+		delta_y = (sin(data->player.angle) * SPEED);
 		if (check_barriers(data, delta_x, delta_y))
 			return ;
 		data->player.player_x += delta_x;
@@ -78,9 +78,9 @@ void	d_moves(t_data *data)
 	double	delta_y;
 
 	if (data->keys[4])
-	{	
-		delta_x = sin(data->player.angle) * SPEED;
-		delta_y = cos(data->player.angle) * SPEED;
+	{
+		delta_x = (sin(data->player.angle) * SPEED);
+		delta_y = (cos(data->player.angle) * SPEED);
 		if (check_barriers(data, -delta_x, delta_y))
 			return ;
 		data->player.player_x -= delta_x;
@@ -96,7 +96,7 @@ void	a_moves(t_data *data)
 	double	delta_y;
 
 	if (data->keys[5])
-	{	
+	{
 		delta_x = (sin(data->player.angle) * SPEED) * -1;
 		delta_y = (cos(data->player.angle) * SPEED) * -1;
 		if (check_barriers(data, -delta_x, delta_y))
@@ -106,16 +106,4 @@ void	a_moves(t_data *data)
 		data->player.x_c -= delta_x;
 		data->player.y_c += delta_y;
 	}
-}
-
-void	move_player(t_data *data)
-{
-	if (!data->keys[2] && !data->keys[3] && !data->keys[4] && !data->keys[5])
-		return ;
-	mlx_put_image_to_window(data->mlx, data->win, data->player.erase_img,
-		data->player.player_x, data->player.player_y);
-	w_moves(data);
-	s_moves(data);
-	d_moves(data);
-	a_moves(data);
 }

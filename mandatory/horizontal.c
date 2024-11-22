@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/19 18:01:18 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/21 11:54:38 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 		find_horizontal_point(data, rayangle, &ray->horizontal_x,
 			&ray->horizontal_y);
 		if (rayangle == 0 || rayangle == radian(180)
-			|| ray->horizontal_y > data->height_2d || ray->horizontal_x > data->width_2d
-			|| ray->horizontal_y < 0 || ray->horizontal_x < 0)
+			|| ray->horizontal_y > data->height_2d || ray->horizontal_y < 0
+			|| ray->horizontal_x > data->width_2d || ray->horizontal_x < 0)
 		{
 			ray->horizontal_distance = -1.0;
 			break ;

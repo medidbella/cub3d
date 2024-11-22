@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/22 11:17:56 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:14:05 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	draw_column(t_data *data, t_ray *ray, int column)
 	height_and_color(data, ray);
 	start = (HEIGHT - ray->height) / 2;
 	end = start + ray->height;
+	if (end > HEIGHT)
+		end = HEIGHT;
 	i = -1;
 	while (++i < start)
 		my_mlx_pixel_put(data, column, i, data->ceiling_color);

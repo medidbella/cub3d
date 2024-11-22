@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/22 10:48:59 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:09:10 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ void	get_texture_color(t_data *data, t_ray *ray, int current_y)
 	float y_scale;
 	int current_x;
 
-	// printf("%d\n", current_y);
-	x_scale = (float)data->wall_textures[ray->texture_idx].hight / (float)TILE_SIZE;
-	y_scale = (float)data->wall_textures[ray->texture_idx].width / (float)ray->height;
+	x_scale = (float)data->wall_textures[ray->texture_idx].hight / TILE_SIZE;
+	y_scale = (float)data->wall_textures[ray->texture_idx].width / ray->height;
 	if (ray->texture_idx == N_INDEX)
 		current_x = (int)ray->horizontal_x % TILE_SIZE;
 	else if (ray->texture_idx == S_INDEX)
@@ -57,3 +56,4 @@ void	get_texture_color(t_data *data, t_ray *ray, int current_y)
 	ray->curr_color = get_cords_color(&data->wall_textures[ray->texture_idx],
 		current_x * x_scale, current_y * y_scale);
 }
+
