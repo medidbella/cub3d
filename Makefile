@@ -4,7 +4,7 @@ SRC = mandatory/cub.c mandatory/get_start.c mandatory/hooks.c mandatory/rotate.c
 	mandatory/parsing/general_utils.c mandatory/parsing/map_parsing.c mandatory/parsing/parser.c \
 	mandatory/parsing/parsing_utils.c mandatory/parsing/read_file.c
 CC = cc
-CFLAGS = -fsanitize=address -g3 # -Wall -Wextra -Werror 
+CFLAGS = -fsanitize=address -g3  -Wall -Wextra -Werror 
 MLX1 = minilibx/libmlx_Linux.a -lXext -lX11 -lm
 LIBFT = libft/libft.a
 OBJ = $(SRC:.c=.o)

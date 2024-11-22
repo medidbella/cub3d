@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/21 20:51:59 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:16:32 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000
 # define FOV 60
-# define SPEED 0.5
+# define SPEED 1.1
 
 # define NORTH_CLR 0xF7AA3E
 # define SOUTH_CLR 0x6EF48D
