@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/23 11:39:03 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/23 15:00:27 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	first_view(t_data *data)
 {
 	ray_casting(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->img_2d.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->player.player_img,
-		data->player.player_x, data->player.player_y);
+	// mlx_put_image_to_window(data->mlx, data->win, data->img_2d.img, 0, 0);
+	// mlx_put_image_to_window(data->mlx, data->win, data->player.player_img,
+		// data->player.player_x, data->player.player_y);
 }
 
 void	get_start(t_config *parsed_data)

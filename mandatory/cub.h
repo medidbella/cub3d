@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/23 14:52:20 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:36:10 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000
 # define FOV 60
-# define SPEED_DIVISOR 10
+# define SPEED_DIVISOR 6
 # define N_INDEX 0
 # define S_INDEX 1
 # define W_INDEX 2
