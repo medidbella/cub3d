@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/23 19:11:57 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/23 19:02:32 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ int	loop_rendering(t_data *data)
 	ray_casting(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	// draw_map2d(data);
+	// mlx_put_image_to_window(data->mlx, data->win, data->mini_map_img.img, 0, 0);
 	return (0);
 }

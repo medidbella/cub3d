@@ -6,11 +6,22 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/23 19:11:49 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/23 16:11:10 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+void	my_mlx_pixel_put_mini(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x <= 0 || x >= data->width_2d || y <= 0 || y >= data->height_2d)
+		return ;
+	dst = data->mini_map_img.addr + (y * data->mini_map_img.line_length + x
+			* (data->mini_map_img.bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
 
 void	setup(t_data *data)
 {
@@ -39,15 +50,33 @@ void	setup(t_data *data)
 	data->player.fov = radian(FOV);
 	data->player.distance_to_project_plan = ((float)WIDTH / 2)
 		/ tan(data->player.fov / 2);
+
+	data->mini_map_img.img = mlx_new_image(data->mlx, MIN_MAP_WIDTH,
+			MIN_MAP_HEIGHT);
+	data->mini_map_img.addr = mlx_get_data_addr(data->mini_map_img.img,
+			&(data->mini_map_img.bits_per_pixel),
+			&(data->mini_map_img.line_length), &(data->mini_map_img.endian));
+	int x = 0, y = 0;
+	while (x < MIN_MAP_WIDTH)
+	{
+		y = 0;
+		while (y < MIN_MAP_HEIGHT)
+		{
+			my_mlx_pixel_put_mini(data, x, y, 0xffffff);
+			y++;
+		}
+		x++;
+	}
 }
 
 void	first_view(t_data *data)
 {
 	ray_casting(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	// mlx_put_image_to_window(data->mlx, data->win, data->img_2d.img, 0, 0);
-	// mlx_put_image_to_window(data->mlx, data->win, data->player.player_img,
-		// data->player.player_x, data->player.player_y);
+	mlx_put_image_to_window(data->mlx, data->win, data->img_2d.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->player.player_img,
+		data->player.player_x, data->player.player_y);
+	// mlx_put_image_to_window(data->mlx, data->win, data->mini_map_img.img, 0, 0);
 }
 
 void	get_start(t_config *parsed_data)

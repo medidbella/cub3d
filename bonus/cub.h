@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/23 17:36:10 by midbella         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/23 14:34:42 by alaktari         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/11/23 15:51:03 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +25,8 @@
 # define TILE_SIZE 20
 # define WIDTH 1080
 # define HEIGHT 720
+# define MIN_MAP_WIDTH (WIDTH / 5)
+# define MIN_MAP_HEIGHT (HEIGHT / 5)
 
 # define W 119
 # define A 97
@@ -46,7 +44,7 @@
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000
 # define FOV 60
-# define SPEED_DIVISOR 6
+# define SPEED_DIVISOR 10
 # define N_INDEX 0
 # define S_INDEX 1
 # define W_INDEX 2
@@ -128,6 +126,9 @@ typedef struct s_data
 	int			ceiling_color;
 	int			floor_color;
 	int			keys[7];
+
+	int			mini_tile_size;
+	t_img		mini_map_img;
 }	t_data;
 
 typedef struct s_draw
