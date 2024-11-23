@@ -6,11 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/11/23 17:36:10 by midbella         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/23 14:34:42 by alaktari         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/11/23 19:18:20 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
