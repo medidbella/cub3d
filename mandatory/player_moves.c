@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/21 15:01:34 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/23 11:16:13 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ void	w_moves(t_data *data)
 {
 	double	delta_x;
 	double	delta_y;
+	double	speed;
 
 	if (data->keys[2])
 	{
-		delta_x = (cos(data->player.angle) * SPEED);
-		delta_y = (sin(data->player.angle) * SPEED);
+		speed = (double)TILE_SIZE / SPEED_DIVISOR;
+		delta_x = (cos(data->player.angle) * speed);
+		delta_y = (sin(data->player.angle) * speed);
 		if (check_barriers(data, delta_x, delta_y))
 			return ;
 		data->player.player_x += delta_x;
@@ -58,11 +60,14 @@ void	s_moves(t_data *data)
 {
 	double	delta_x;
 	double	delta_y;
+	double	speed;
 
 	if (data->keys[3])
 	{
-		delta_x = (cos(data->player.angle) * SPEED) * -1;
-		delta_y = (sin(data->player.angle) * SPEED) * -1;
+
+		speed = (double)TILE_SIZE / SPEED_DIVISOR;
+		delta_x = (cos(data->player.angle) * speed) * -1;
+		delta_y = (sin(data->player.angle) * speed) * -1;
 		if (check_barriers(data, delta_x, delta_y))
 			return ;
 		data->player.player_x += delta_x;
@@ -76,11 +81,13 @@ void	d_moves(t_data *data)
 {
 	double	delta_x;
 	double	delta_y;
+	double	speed;
 
 	if (data->keys[4])
 	{
-		delta_x = (sin(data->player.angle) * SPEED);
-		delta_y = (cos(data->player.angle) * SPEED);
+		speed = (double)TILE_SIZE / SPEED_DIVISOR;
+		delta_x = (sin(data->player.angle) * speed);
+		delta_y = (cos(data->player.angle) * speed);
 		if (check_barriers(data, -delta_x, delta_y))
 			return ;
 		data->player.player_x -= delta_x;
@@ -94,11 +101,13 @@ void	a_moves(t_data *data)
 {
 	double	delta_x;
 	double	delta_y;
+	double	speed;
 
 	if (data->keys[5])
 	{
-		delta_x = (sin(data->player.angle) * SPEED) * -1;
-		delta_y = (cos(data->player.angle) * SPEED) * -1;
+		speed = (double)TILE_SIZE / SPEED_DIVISOR;
+		delta_x = (sin(data->player.angle) * speed) * -1;
+		delta_y = (cos(data->player.angle) * speed) * -1;
 		if (check_barriers(data, -delta_x, delta_y))
 			return ;
 		data->player.player_x -= delta_x;

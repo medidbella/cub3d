@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/23 10:18:43 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/23 14:13:20 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdlib.h>
 # include <math.h>
 
-# define TILE_SIZE 140
+# define TILE_SIZE 20
 # define WIDTH 1080
 # define HEIGHT 720
 
@@ -37,12 +37,12 @@
 # define CLOSE 32
 # define IMG_SIZE_X 4
 # define IMG_SIZE_Y 4
-# define ANGLE 8
+# define ANGLE 1.5
 # define WALL_COLOR 0x61F5B5
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000
 # define FOV 60
-# define SPEED 12
+# define SPEED_DIVISOR 10
 # define N_INDEX 0
 # define S_INDEX 1
 # define W_INDEX 2

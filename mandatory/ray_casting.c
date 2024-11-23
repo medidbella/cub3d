@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/22 20:34:50 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/23 12:05:02 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,16 @@ void	draw_column(t_data *data, t_ray *ray, int column)
 	i = -1;
 	while (++i < start)
 		my_mlx_pixel_put(data, column, i, data->ceiling_color);
-	i = start;
-	while (i < end)
+	i = -1;
+	if (start > 0)
+		i = start - 1;
+	while (++i < end)
 	{
 		get_texture_color(data, ray, i - start);
 		my_mlx_pixel_put(data, column, i, ray->curr_color);
-		i++;
 	}
 	while (i < HEIGHT)
-	{
-		my_mlx_pixel_put(data, column, i, data->floor_color);
-		i++;
-	}
+		my_mlx_pixel_put(data, column, i++, data->floor_color);
 }
 
 void	real_distance(t_ray *ray, t_data *data)

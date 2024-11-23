@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:49:07 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/20 15:54:02 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/23 11:33:41 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ void	rotate(t_data *data)
 		if (data->player.angle < 0)
 			data->player.angle = radian(355);
 	}
+	// printf("player angle: %f\n", )
 }
