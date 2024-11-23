@@ -1,7 +1,7 @@
-NO ./textures/brickwall3.xpm
-SO ./textures/brickwall4.xpm
-WE ./textures/brickwall5.xpm
-EA ./textures/stonewall.xpm
+NO ./textures/brickwall1.xpm
+SO ./textures/brickwall2.xpm
+WE ./textures/brickwall3.xpm
+EA ./textures/brickwall4.xpm
 F 220,100,0
 C 225,30,0
         1111111111111111111111111
