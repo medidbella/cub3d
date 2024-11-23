@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/22 18:34:14 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:46:29 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void	draw(t_data *data)
 			draw.x = draw.j * TILE_SIZE;
 			if (data->map[draw.i][draw.j] == '1')
 				draw.color = WALL_COLOR;
-			else if (data->map[draw.i][draw.j] == '0')
-				draw.color = BLACK;
 			if (ft_strchr("NSEW", data->map[draw.i][draw.j])
 			&& data->player.player == 0)
 			{
