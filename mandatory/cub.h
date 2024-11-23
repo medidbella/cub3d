@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/22 12:10:00 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/23 10:18:43 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@
 # include <stdlib.h>
 # include <math.h>
 
-# define ROWS 9
-# define COLS 25
-# define TILE_SIZE 20
-# define WIDTH 1280
+# define TILE_SIZE 140
+# define WIDTH 1080
 # define HEIGHT 720
 
 # define W 119
@@ -39,16 +37,12 @@
 # define CLOSE 32
 # define IMG_SIZE_X 4
 # define IMG_SIZE_Y 4
-# define ANGLE 0.7
+# define ANGLE 8
 # define WALL_COLOR 0x61F5B5
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000
 # define FOV 60
-# define SPEED 0.6
-# define NORTH_CLR 0xF7AA3E
-# define SOUTH_CLR 0x6EF48D
-# define EAST_CLR 0x908CC5
-# define WEST_CLR 0x5DBDFF
+# define SPEED 12
 # define N_INDEX 0
 # define S_INDEX 1
 # define W_INDEX 2
@@ -116,6 +110,8 @@ typedef struct s_img
 
 typedef struct s_data
 {
+	int			map_hight;
+	int			map_width;
 	void		*mlx;
 	void		*win;
 	char		**map;

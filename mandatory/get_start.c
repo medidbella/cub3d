@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/22 12:12:35 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/23 10:07:19 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	setup(t_data *data)
 {
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "none");
+	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
 	data->img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->img.addr = mlx_get_data_addr(data->img.img,
 			&(data->img.bits_per_pixel), &(data->img.line_length),
 			&(data->img.endian));
-	data->width_2d = (COLS * TILE_SIZE);
-	data->height_2d = (ROWS * TILE_SIZE);
+	data->width_2d = (data->map_width * TILE_SIZE);
+	data->height_2d = (data->map_hight * TILE_SIZE);
 	data->img_2d.img = mlx_new_image(data->mlx, data->width_2d,
 			data->height_2d);
 	data->img_2d.addr = mlx_get_data_addr(data->img_2d.img,
@@ -45,9 +45,9 @@ void	first_view(t_data *data)
 {
 	ray_casting(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->img_2d.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->player.player_img,
-		data->player.player_x, data->player.player_y);
+	// mlx_put_image_to_window(data->mlx, data->win, data->img_2d.img, 0, 0);
+	// mlx_put_image_to_window(data->mlx, data->win, data->player.player_img,
+		// data->player.player_x, data->player.player_y);
 }
 
 void	get_start(t_config *parsed_data)
@@ -58,6 +58,8 @@ void	get_start(t_config *parsed_data)
 	data.player.player = 0;
 	data.ceiling_color = parsed_data->ceiling_color;
 	data.floor_color = parsed_data->floor_color;
+	data.map_hight = parsed_data->map_hight;
+	data.map_width = parsed_data->map_width;
 	data.player.angle = radian(parsed_data->player_start_angle);
 	data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
 	setup(&data);

@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/22 12:14:05 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:34:50 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,17 @@ void	height_and_color(t_data *data, t_ray *ray)
 	if (ray->side_flag == 1)
 	{
 		if (ray->rayangle >= radian(180))
-		{
 			ray->texture_idx = S_INDEX;
-			ray->curr_color = NORTH_CLR;//bleu
-		}
 		else
-		{
 			ray->texture_idx = N_INDEX;
-			ray->curr_color = SOUTH_CLR;//red
-		}
 	}
 	else
 	{
 		if ((ray->rayangle >= 0 && ray->rayangle <= radian(90))
 			|| ray->rayangle >= radian(270))
-		{
 			ray->texture_idx = W_INDEX;
-			ray->curr_color = EAST_CLR;//perpule
-		}
 		else
-		{
 			ray->texture_idx = E_INDEX;
-			ray->curr_color = WEST_CLR;//green
-		}
 	}
 	ray->height = ((double)TILE_SIZE / ray->distance)
 		* data->player.distance_to_project_plan;
