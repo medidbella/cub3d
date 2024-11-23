@@ -6,11 +6,25 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:58 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/20 19:28:44 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/23 10:14:19 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+void	set_hight_width(t_config *scene_data)
+{
+	int i;
+
+	i = 0;
+	while (scene_data->map[i])
+	{
+		scene_data->map_hight++;
+		if ((int)ft_strlen(scene_data->map[i]) > scene_data->map_width)
+			scene_data->map_width = ft_strlen(scene_data->map[i]);
+		i++;
+	}
+}
 
 int	check_prev_members(t_config *scene_data, char *line)
 {

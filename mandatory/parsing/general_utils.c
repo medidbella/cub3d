@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:22 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/20 18:58:04 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:24:50 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	data_init(t_config *data)
 		data->textures_paths[i] = NULL;
 		i++;
 	}
+	data->map_hight = 0;
+	data->map_width = 0;
 	data->player_start_angle = -1;
 	data->map = NULL;
 	data->floor_color = -1;

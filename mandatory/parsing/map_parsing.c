@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:44:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/22 09:23:50 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:48:07 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	map_pars_helper(char **map, int y, int x, t_config *scene_data)
 			NULL, scene_data);
 	if (ft_strchr("SNWE", map[y][x]))
 		set_player_angle(scene_data, map[y][x], y, x);
+	if (map[y][x] == ' ')
+				player_space_border_check(scene_data, y, x, ' ');
 }
 
 void	map_parser(char **map, t_config *scene_data)
@@ -106,10 +108,11 @@ void	map_parser(char **map, t_config *scene_data)
 				error_handler("map isn't surrounded by walls", NULL, NULL,
 					scene_data);
 			map_pars_helper(map, y, x, scene_data);
-			if (map[y][x] == ' ')
-				player_space_border_check(scene_data, y, x, ' ');
+			if (x > scene_data->map_width)
+				scene_data->map_width = x + 1;
 		}
 	}
 	if (scene_data->player_start_angle == -1)
 		error_handler("palayer not found in the map\n", NULL, NULL, scene_data);
+	
 }

@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/20 19:27:34 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/23 10:08:21 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,4 +135,5 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 	check_prev_members(scene_data, line);
 	scene_data->map = map_alloc(line, fd, scene_data);
 	map_parser(scene_data->map, scene_data);
+	set_hight_width(scene_data);
 }
