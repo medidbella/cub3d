@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 17:19:58 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:20:30 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	close_win(t_data *data)
 {
-	free_textures_memory(data->mlx, data->wall_textures);
+	free_textures_memory(data, data->wall_textures);
 	mlx_destroy_image(data->mlx, data->img.img);
 	mlx_destroy_image(data->mlx, data->img_2d.img);
 	mlx_destroy_image(data->mlx, data->player.erase_img);
