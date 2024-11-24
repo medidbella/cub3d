@@ -6,21 +6,28 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:53:05 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/23 17:16:43 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:00:38 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	ft_access(char *file)
+void	ft_access(char *file, t_config *scene_data, char *line, int i)
 {
 	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (0);
+	{
+		write(2, "Error\ncan't access \"", 20);
+		ft_putstr_fd(scene_data->textures_paths[i], 2);
+		write(2, "\"\n", 2);
+		free_parsed_data(scene_data);
+		free(line);
+		exit(1);
+	}
 	close(fd);
-	return (1);
+	return ;
 }
 
 char	*append_char(char *str, char c)

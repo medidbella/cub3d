@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/23 17:16:35 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:00:57 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void		strings_free(char **strings);
 char		**map_alloc(char *line, int fd, t_config *scene_data);
 void		free_parsed_data(t_config *data);
 int			top_bottom_check(char *str);
-int			ft_access(char *file);
+void		ft_access(char *file, t_config *scene_data, char *line, int i);
 void		map_parser(char **map, t_config *scene_data);
-int			check_prev_members(t_config *scene_data, char *line);
+void		check_prev_members(t_config *scene_data, char *line);
 int			open_cub_file(char *file);
 
 #endif
