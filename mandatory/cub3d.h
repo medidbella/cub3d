@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 13:43:24 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:09:17 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ typedef struct s_draw_line
 	int	color;
 }	t_draw_line;
 
+void	free_textures_memory(void *mlx, t_texture *my_textures);
 void	get_start(t_config *parsed_data);
 void	init_key_flags(t_data *data);
 int		ft_key_press(int key, t_data *data);

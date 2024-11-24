@@ -1,6 +1,6 @@
 
-NAME = cub
-BONUS = cub_bonus
+NAME = cub3d
+BONUS = cub3d_bonus
 CC = cc
 CFLAGS =  -Wall -Wextra -Werror #fsanitize=address -g3 
 SRC = mandatory/cub3d.c mandatory/get_start.c mandatory/draw_pixels.c mandatory/hooks.c \

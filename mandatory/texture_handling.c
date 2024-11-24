@@ -6,11 +6,23 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 12:32:47 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:09:05 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	free_textures_memory(void *mlx, t_texture *my_textures)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		mlx_destroy_image(mlx, my_textures[i].img);
+		i++;
+	}	
+}
 
 int	get_cords_color(t_texture *img, int x, int y)
 {
