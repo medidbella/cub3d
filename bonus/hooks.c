@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/23 19:02:32 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:53:13 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 
 int	close_win(t_data *data)
 {
+	free_textures_memory(data->mlx, data->wall_textures);
+	mlx_destroy_image(data->mlx, data->img.img);
+	mlx_destroy_image(data->mlx, data->img_2d.img);
+	mlx_destroy_image(data->mlx, data->player.erase_img);
+	mlx_destroy_image(data->mlx, data->player.player_img);
 	mlx_destroy_window(data->mlx, data->win);
+	strings_free(data->map);
 	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 	exit(0);
 }
 
