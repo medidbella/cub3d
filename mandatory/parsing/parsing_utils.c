@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:58 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/23 17:16:49 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:15:38 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_hight_width(t_config *scene_data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (scene_data->map[i])

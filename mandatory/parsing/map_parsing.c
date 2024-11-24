@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:44:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/23 17:17:02 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:17:12 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void	player_space_border_check(t_config *scene_data, int y, int x, char c)
 		flag = 1;
 	else if (y > 0 && (int)ft_strlen(map[y - 1]) >= x
 		&& !ft_strchr(set, map[y - 1][x]))
-			flag = 1;
+		flag = 1;
 	else if (map[y + 1] && (int)ft_strlen(map[y + 1]) >= x
 		&& !ft_strchr(set, map[y + 1][x]))
-			flag = 1;
+		flag = 1;
 	if (flag)
 		error_handler("map isn't surrounded by walls", NULL,
 			NULL, scene_data);
@@ -81,13 +81,13 @@ void	set_player_angle(t_config *scene_data, char player_char, int y,
 
 void	map_pars_helper(char **map, int y, int x, t_config *scene_data)
 {
-	
 	if (!ft_strchr(" 01NSWE", map[y][x]))
 		error_handler("use of invalid character in the map\n", NULL,
 			NULL, scene_data);
 	if (ft_strchr("SNWE", map[y][x]))
 		set_player_angle(scene_data, map[y][x], y, x);
-	if (map[y][x] == '0' && ((int)ft_strlen(map[y - 1]) <= x || (int)ft_strlen(map[y + 1]) <= x))
+	if (map[y][x] == '0' && ((int)ft_strlen(map[y - 1]) <= x
+		|| (int)ft_strlen(map[y + 1]) <= x))
 		error_handler("map isn't surrounded by walls",
 			NULL, NULL, scene_data);
 	if (map[y][x] == ' ')
@@ -109,7 +109,7 @@ void	map_parser(char **map, t_config *scene_data)
 		while (map[y][++x])
 		{
 			if ((x == 0 || x == (int)ft_strlen(map[y]) - 1)
-						&& !ft_strchr(" 1", map[y][x]))
+				&& !ft_strchr(" 1", map[y][x]))
 				error_handler("map isn't surrounded by walls", NULL, NULL,
 					scene_data);
 			map_pars_helper(map, y, x, scene_data);
@@ -119,5 +119,4 @@ void	map_parser(char **map, t_config *scene_data)
 	}
 	if (scene_data->player_start_angle == -1)
 		error_handler("palayer not found in the map\n", NULL, NULL, scene_data);
-	
 }

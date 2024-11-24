@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:49:07 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/23 11:33:41 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:40:13 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "cub3d.h"
 
 void	init_values(t_data *data, t_ray *ray, t_draw_line *line)
 {
@@ -39,33 +39,6 @@ void	init_values(t_data *data, t_ray *ray, t_draw_line *line)
 	line->err = line->dx - line->dy;
 }
 
-void	bresenham(t_data *data, t_ray *ray)
-{
-	t_draw_line	line;
-
-	init_values(data, ray, &line);
-	while (1)
-	{
-		if (!get_color(data, line.x1, line.y1))
-			my_mlx_pixel_put_2d(data, line.x1, line.y1, 0xFF0000);
-		else
-			break ;
-		if (line.x1 == line.x2 && line.y1 == line.y2)
-			break ;
-		line.err2 = line.err * 2;
-		if (line.err2 > -(line.dy))
-		{
-			line.err -= line.dy;
-			line.x1 += line.sx;
-		}
-		if (line.err2 < line.dx)
-		{
-			line.err += line.dx;
-			line.y1 += line.sy;
-		}
-	}
-}
-
 float	radian(float degree)
 {
 	return (degree * M_PI / 180);
@@ -73,6 +46,8 @@ float	radian(float degree)
 
 void	rotate(t_data *data)
 {
+	if (!data->keys[0] && !data->keys[1])
+		return ;
 	if (data->keys[0])
 	{
 		data->player.angle += radian(ANGLE);
@@ -85,5 +60,4 @@ void	rotate(t_data *data)
 		if (data->player.angle < 0)
 			data->player.angle = radian(355);
 	}
-	// printf("player angle: %f\n", )
 }

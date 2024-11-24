@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/23 12:05:02 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:52:22 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "cub3d.h"
 
 void	height_and_color(t_data *data, t_ray *ray)
 {
@@ -69,7 +69,7 @@ void	real_distance(t_ray *ray, t_data *data)
 			* ray->vertical_distance;
 }
 
-void	small_distance(t_data *data, t_ray *ray, int *first_fov)
+void	small_distance(t_ray *ray)
 {
 	if (ray->horizontal_distance == -1)
 	{
@@ -91,17 +91,13 @@ void	small_distance(t_data *data, t_ray *ray, int *first_fov)
 		ray->side_flag = 1;
 		ray->distance = ray->horizontal_distance;
 	}
-	if (*first_fov == 0)
-		fov_coordinates(data, ray, first_fov, 1);
 }
 
 void	ray_casting(t_data *data)
 {
 	t_ray	ray;
 	int		column;
-	int		first_fov;
 
-	first_fov = 0;
 	column = 0;
 	ray.rayangle = data->player.angle - (data->player.fov / 2);
 	if (ray.rayangle < 0)
@@ -111,8 +107,7 @@ void	ray_casting(t_data *data)
 		horizontal_distance(data, &ray, ray.rayangle);
 		vertical_distance(data, &ray, ray.rayangle);
 		real_distance(&ray, data);
-		small_distance(data, &ray, &first_fov);
-		draw_fov(data, &ray);
+		small_distance(&ray);
 		draw_column(data, &ray, column);
 		column++;
 		ray.rayangle += data->player.angle_step;

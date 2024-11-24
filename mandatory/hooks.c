@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/23 19:11:57 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:32:47 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "cub3d.h"
 
 int	close_win(t_data *data)
 {
@@ -19,19 +19,10 @@ int	close_win(t_data *data)
 	exit(0);
 }
 
-void	draw_map2d(t_data *data)
-{
-	mlx_put_image_to_window(data->mlx, data->win, data->img_2d.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->player.player_img,
-		data->player.player_x, data->player.player_y);
-}
-
 void	move_player(t_data *data)
 {
 	if (!data->keys[2] && !data->keys[3] && !data->keys[4] && !data->keys[5])
 		return ;
-	// mlx_put_image_to_window(data->mlx, data->win, data->player.erase_img,
-	// 	data->player.player_x, data->player.player_y);
 	w_moves(data);
 	s_moves(data);
 	d_moves(data);
@@ -58,6 +49,5 @@ int	loop_rendering(t_data *data)
 	draw(data);
 	ray_casting(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	// draw_map2d(data);
 	return (0);
 }

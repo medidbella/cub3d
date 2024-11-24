@@ -3,9 +3,9 @@ NAME = cub
 BONUS = cub_bonus
 CC = cc
 CFLAGS = -fsanitize=address -g3  -Wall -Wextra -Werror 
-SRC = mandatory/cub.c mandatory/get_start.c mandatory/draw_pixels.c mandatory/hooks.c \
+SRC = mandatory/cub3d.c mandatory/get_start.c mandatory/draw_pixels.c mandatory/hooks.c \
 		mandatory/rotate.c mandatory/texture_handling.c\
-		mandatory/player_moves.c mandatory/ray_casting.c mandatory/utils.c \
+		mandatory/player_movement.c mandatory/ray_casting.c \
 		mandatory/horizontal.c mandatory/vertical.c mandatory/key_hooks.c \
 		mandatory/parsing/general_utils.c mandatory/parsing/map_parsing.c \
 		mandatory/parsing/parser.c mandatory/parsing/parsing_utils.c \
