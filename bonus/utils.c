@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:04:34 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/16 18:18:12 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:19:58 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // this file is just a temp file and it will be deteted
-#include "cub.h"
+#include "cub3d.h"
 
 void	draw_fov(t_data *data, t_ray *ray)
 {

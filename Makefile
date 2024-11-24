@@ -10,13 +10,13 @@ SRC = mandatory/cub3d.c mandatory/get_start.c mandatory/draw_pixels.c mandatory/
 		mandatory/parsing/general_utils.c mandatory/parsing/map_parsing.c \
 		mandatory/parsing/parser.c mandatory/parsing/parsing_utils.c \
 		mandatory/parsing/read_file.c
-SRC_BONUS = bonus/cub.c bonus/get_start.c bonus/draw_pixels.c bonus/hooks.c \
+SRC_BONUS = bonus/cub3d.c bonus/get_start.c bonus/draw_pixels.c bonus/hooks.c \
 		bonus/rotate.c bonus/texture_handling.c\
-		bonus/player_moves.c bonus/ray_casting.c bonus/utils.c \
+		bonus/player_movement.c bonus/ray_casting.c bonus/utils.c \
 		bonus/horizontal.c bonus/vertical.c bonus/key_hooks.c \
 		bonus/parsing/general_utils.c bonus/parsing/map_parsing.c \
 		bonus/parsing/parser.c bonus/parsing/parsing_utils.c \
-		bonus/parsing/read_file.c
+		bonus/parsing/read_file.c bonus/parsing/parse_textures.c
 CC = cc
 MLX1 = minilibx/libmlx_Linux.a -lXext -lX11 -lm
 LIBFT = libft/libft.a
