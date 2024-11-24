@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:44:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 17:03:20 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:43:16 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	player_space_border_check(t_config *scene_data, int y, int x, char c)
 	map = scene_data->map;
 	set = " 1";
 	if (c == 'p')
-		set = "10";
+		set = "10VH";
 	if (map[y][x + 1] && !ft_strchr(set, map[y][x + 1]))
 		flag = 1;
 	else if (x > 0 && !ft_strchr(set, map[y][x - 1]))
@@ -90,6 +90,15 @@ void	map_pars_helper(char **map, int y, int x, t_config *scene_data)
 		|| (int)ft_strlen(map[y + 1]) <= x))
 		error_handler("map isn't surrounded by walls",
 			NULL, NULL, scene_data);
+	if (map[y][x] == 'W' || map[y][x] == 'V')
+	{
+		if (!scene_data->textures_paths[DOOR_IDX])
+			error_handler
+				("door present in tha map but it's texture isn't specified\n"
+				, NULL, NULL, scene_data);
+		else
+			scene_data->door_flag = 1;
+	}
 	if (map[y][x] == ' ')
 		player_space_border_check(scene_data, y, x, ' ');
 }

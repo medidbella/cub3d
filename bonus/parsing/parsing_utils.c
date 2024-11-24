@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:58 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 17:18:54 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:37:40 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,25 @@ void	set_hight_width(t_config *scene_data)
 	}
 }
 
-int	check_prev_members(t_config *scene_data, char *line)
+void	check_prev_members(t_config *scene_data, char *line)
 {
 	int	i;
 
 	i = 0;
-	while (i <= 4)
+	while (i <= 3)
 	{
 		if (!scene_data->textures_paths[i])
-			error_handler("incomplete elements\n", NULL, line, scene_data);
-		if (!ft_access(scene_data->textures_paths[i]))
-		{
-			write(2, "Error\ncan't access \"", 20);
-			ft_putstr_fd(scene_data->textures_paths[i], 2);
-			write(2, "\"\n", 2);
-			free_parsed_data(scene_data);
-			free(line);
-			exit(1);
-		}
+			error_handler("incomplete elements (a textures path)\n", NULL,
+				line, scene_data);
+		ft_access(scene_data->textures_paths[i], scene_data, line, i);
 		i++;
 	}
-	if (scene_data->ceiling_color == -1 || scene_data->floor_color == -1)
-		return (1);
-	return (0);
+	if (scene_data->ceiling_color == -1)
+		error_handler("incomplete elements (ceiling_color)\n", NULL,
+			line, scene_data);
+	if (scene_data->floor_color == -1)
+		error_handler("incomplete elements (floor_color)\n", NULL,
+			line, scene_data);
 }
 
 int	is_map_line(char *str)
