@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 17:19:58 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:23:46 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_textures_memory(void *mlx, t_texture *my_textures)
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		mlx_destroy_image(mlx, my_textures[i].img);
 		i++;
@@ -37,7 +37,7 @@ void	initialize_textures(t_data *data, t_config *parsed_data)
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		data->wall_textures[i].img = mlx_xpm_file_to_image(data->mlx,
 				parsed_data->textures_paths[i], &data->wall_textures[i].width,

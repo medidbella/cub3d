@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.h                                              :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 15:48:50 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:25:25 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define IMG_SIZE_Y 4
 # define ANGLE 2.5
 # define WALL_COLOR 0x61F5B5
-# define DIR_COLOR 0xFF0000
+# define DOOR_COLOR 0x0000ff
 # define BLACK 0x000000
 # define FOV 60
 # define SPEED_DIVISOR 10
@@ -49,6 +49,7 @@
 # define S_INDEX 1
 # define W_INDEX 2
 # define E_INDEX 3
+# define WALL_INDEX 4
 
 typedef struct s_texture
 {
@@ -122,7 +123,7 @@ typedef struct s_data
 	t_img		img;
 	t_img		img_2d;
 	t_player	player;
-	t_texture	wall_textures[4];
+	t_texture	wall_textures[5];
 	int			ceiling_color;
 	int			floor_color;
 	int			keys[7];
