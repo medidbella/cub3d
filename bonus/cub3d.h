@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 18:25:25 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:18:02 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_data
 	int			ceiling_color;
 	int			floor_color;
 	int			keys[7];
-
+	int			door_flag;
 	int			mini_tile_size;
 	t_img		mini_map_img;
 }	t_data;
@@ -156,7 +156,7 @@ typedef struct s_draw_line
 	int	color;
 }	t_draw_line;
 
-void	free_textures_memory(void *mlx, t_texture *my_textures);
+void	free_textures_memory(t_data *data, t_texture *my_textures);
 void	get_start(t_config *parsed_data);
 void	init_key_flags(t_data *data);
 int		ft_key_press(int key, t_data *data);
