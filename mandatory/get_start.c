@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 12:32:47 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 13:45:59 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	get_start(t_config *parsed_data)
 	data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
 	setup(&data);
 	initialize_textures(&data, parsed_data);
+	parsed_data->map = NULL;
+	free_parsed_data(parsed_data);
 	init_key_flags(&data);
 	first_view(&data);
 	mlx_hook(data.win, 17, 1L << 2, close_win, &data);

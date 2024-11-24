@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 12:44:07 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 13:43:24 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define LEFT 65361
 # define UP 65362
 # define DOWN 65364
-# define CLOSE 32
+# define CLOSE 65307
 # define IMG_SIZE_X 4
 # define IMG_SIZE_Y 4
 # define ANGLE 2.5

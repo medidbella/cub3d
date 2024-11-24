@@ -2,7 +2,7 @@
 NAME = cub
 BONUS = cub_bonus
 CC = cc
-CFLAGS = -fsanitize=address -g3  -Wall -Wextra -Werror 
+CFLAGS =  -Wall -Wextra -Werror #fsanitize=address -g3 
 SRC = mandatory/cub3d.c mandatory/get_start.c mandatory/draw_pixels.c mandatory/hooks.c \
 		mandatory/rotate.c mandatory/texture_handling.c\
 		mandatory/player_movement.c mandatory/ray_casting.c \
@@ -18,7 +18,6 @@ SRC_BONUS = bonus/cub.c bonus/get_start.c bonus/draw_pixels.c bonus/hooks.c \
 		bonus/parsing/parser.c bonus/parsing/parsing_utils.c \
 		bonus/parsing/read_file.c
 CC = cc
-CFLAGS = -fsanitize=address -g3 -Wall -Wextra -Werror 
 MLX1 = minilibx/libmlx_Linux.a -lXext -lX11 -lm
 LIBFT = libft/libft.a
 OBJ = $(SRC:.c=.o)
