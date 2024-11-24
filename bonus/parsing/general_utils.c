@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:22 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/22 20:24:50 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:19:22 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	data_init(t_config *data)
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i <= 4)
 	{
 		data->textures_paths[i] = NULL;
 		i++;

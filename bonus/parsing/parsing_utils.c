@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:58 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 12:15:38 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:18:54 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_prev_members(t_config *scene_data, char *line)
 	int	i;
 
 	i = 0;
-	while (i <= 3)
+	while (i <= 4)
 	{
 		if (!scene_data->textures_paths[i])
 			error_handler("incomplete elements\n", NULL, line, scene_data);

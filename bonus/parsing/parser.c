@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/23 10:08:21 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:09:25 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,35 +59,6 @@ void	color_parser(t_config *scene_data, char *line, int type)
 	}
 	color[3] = 0;
 	strings_free(rgb);
-}
-
-void	get_textures(char **words, t_config *scene_data, char *line)
-{
-	int		i;
-	char	*tab[5];
-
-	tab[0] = "NO";
-	tab[1] = "SO";
-	tab[2] = "WE";
-	tab[3] = "EA";
-	tab[4] = NULL;
-	i = 0;
-	while (tab[i])
-	{
-		if (!ft_strncmp(words[0], tab[i], 3))
-			break ;
-		i++;
-	}
-	if (i < 4)
-	{
-		if (scene_data->textures_paths[i])
-			error_handler("duplicate type element", words, line, scene_data);
-		return (scene_data->textures_paths[i] = ft_strtrim(words[1], "\n"),
-			free(NULL));
-	}
-	if (!ft_strncmp(words[0], "F", 2) || !ft_strncmp(words[0], "C", 2))
-		return (color_parser(scene_data, line, (words[0][0] == 'F')));
-	error_handler("unknown element\n", words, line, scene_data);
 }
 
 void	line_parser(char *line, t_config *scene_data, int *map_flag)

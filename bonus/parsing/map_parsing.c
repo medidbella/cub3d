@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:44:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 12:17:12 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:03:20 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	set_player_angle(t_config *scene_data, char player_char, int y,
 
 void	map_pars_helper(char **map, int y, int x, t_config *scene_data)
 {
-	if (!ft_strchr(" 01NSWE", map[y][x]))
+	if (!ft_strchr(" 01NSWEVH", map[y][x]))
 		error_handler("use of invalid character in the map\n", NULL,
 			NULL, scene_data);
 	if (ft_strchr("SNWE", map[y][x]))
 		set_player_angle(scene_data, map[y][x], y, x);
-	if (map[y][x] == '0' && ((int)ft_strlen(map[y - 1]) <= x
+	if (ft_strchr("0VH", map[y][x]) && ((int)ft_strlen(map[y - 1]) <= x
 		|| (int)ft_strlen(map[y + 1]) <= x))
 		error_handler("map isn't surrounded by walls",
 			NULL, NULL, scene_data);
