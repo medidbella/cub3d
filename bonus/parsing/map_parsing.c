@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:44:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/23 12:28:47 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:17:02 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,12 @@ void	player_space_border_check(t_config *scene_data, int y, int x, char c)
 		flag = 1;
 	else if (x > 0 && !ft_strchr(set, map[y][x - 1]))
 		flag = 1;
-	else if (y > 0)
-	{
-		if (!ft_strchr(set, map[y - 1][x]))
+	else if (y > 0 && (int)ft_strlen(map[y - 1]) >= x
+		&& !ft_strchr(set, map[y - 1][x]))
 			flag = 1;
-	}
-	else if (map[y + 1] && !ft_strchr(set, map[y + 1][x]))
-		flag = 1;
+	else if (map[y + 1] && (int)ft_strlen(map[y + 1]) >= x
+		&& !ft_strchr(set, map[y + 1][x]))
+			flag = 1;
 	if (flag)
 		error_handler("map isn't surrounded by walls", NULL,
 			NULL, scene_data);
@@ -88,8 +87,8 @@ void	map_pars_helper(char **map, int y, int x, t_config *scene_data)
 			NULL, scene_data);
 	if (ft_strchr("SNWE", map[y][x]))
 		set_player_angle(scene_data, map[y][x], y, x);
-	if (map[y][x] == '0' && ((int)ft_strlen(map[y - 1]) < x || (int)ft_strlen(map[y + 1]) < x))
-		error_handler("2 map isn't surrounded by walls",
+	if (map[y][x] == '0' && ((int)ft_strlen(map[y - 1]) <= x || (int)ft_strlen(map[y + 1]) <= x))
+		error_handler("map isn't surrounded by walls",
 			NULL, NULL, scene_data);
 	if (map[y][x] == ' ')
 		player_space_border_check(scene_data, y, x, ' ');
@@ -105,13 +104,13 @@ void	map_parser(char **map, t_config *scene_data)
 	{
 		x = -1;
 		if ((y == 0 || !map[y + 1]) && top_bottom_check(map[y]))
-			error_handler("3 map isn't surrounded by walls",
+			error_handler("map isn't surrounded by walls",
 				NULL, NULL, scene_data);
 		while (map[y][++x])
 		{
 			if ((x == 0 || x == (int)ft_strlen(map[y]) - 1)
 						&& !ft_strchr(" 1", map[y][x]))
-				error_handler("4 map isn't surrounded by walls", NULL, NULL,
+				error_handler("map isn't surrounded by walls", NULL, NULL,
 					scene_data);
 			map_pars_helper(map, y, x, scene_data);
 			if (x > scene_data->map_width)

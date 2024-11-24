@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/23 09:59:28 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:16:35 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_config
 	int				player_start_angle;
 }	t_config;
 
-void	set_hight_width(t_config *scene_data);
+void		set_hight_width(t_config *scene_data);
 char		*read_line(int fd);
 void		file_parser(t_config *scene, char *scene_descrption);
 void		data_init(t_config *data);
