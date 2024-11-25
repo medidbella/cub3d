@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixels.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 18:34:30 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:16:57 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	get_color(t_data *data, int x, int y)
 {
 	char	*dst;
 
+	// printf("color ==> x: %d || y: %d\n", x, y);
 	if (x >= data->width_2d || y >= data->height_2d || x <= 0 || y <= 0)
 		return (0);
 	dst = data->img_2d.addr + (y * data->img_2d.line_length + x

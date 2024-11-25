@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_handling.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 19:46:01 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:19:12 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	get_texture_color(t_data *data, t_ray *ray, int current_y)
 	float	y_scale;
 	int		current_x;
 
+	current_x = 0;
 	x_scale = (float)data->wall_textures[ray->texture_idx].hight / TILE_SIZE;
 	y_scale = (float)data->wall_textures[ray->texture_idx].width / ray->height;
 	if (ray->texture_idx == N_INDEX)

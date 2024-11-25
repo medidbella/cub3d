@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 19:18:02 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:59:48 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,10 +168,10 @@ int		get_color(t_data *data, int x, int y);
 float	radian(float degree);
 void	rotate(t_data *data);
 void	move_player(t_data *data);
-void	a_moves(t_data *data);
-void	d_moves(t_data *data);
-void	s_moves(t_data *data);
-void	w_moves(t_data *data);
+void	a_moves(t_data *data, float *tab);
+void	d_moves(t_data *data, float *tab);
+void	s_moves(t_data *data, float *tab);
+void	w_moves(t_data *data, float *tab);
 void	bresenham(t_data *data, t_ray *ray);
 void	ray_casting(t_data *data);
 void	draw(t_data *data);

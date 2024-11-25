@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 19:17:05 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:58:08 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,13 @@ void	get_start(t_config *parsed_data)
 	initialize_textures(&data, parsed_data);
 	data.door_flag = parsed_data->door_flag;
 	init_key_flags(&data);
+	
+	data.player.player_x = 20;
+	data.player.player_y = 40;
+	data.player.x_c = 22;
+	data.player.y_c = 42;
+	data.player.angle = 4.101524;
+	
 	first_view(&data);
 	mlx_hook(data.win, 17, 1L << 2, close_win, &data);
 	mlx_hook(data.win, 2, 1L << 0, ft_key_press, &data);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_moves.c                                     :+:      :+:    :+:   */
+/*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 12:32:47 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:29:20 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	w_moves(t_data *data)
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (cos(data->player.angle) * speed);
 		delta_y = (sin(data->player.angle) * speed);
+		if (delta_x < 0.00001 && delta_x > -0.00001)
+			delta_x = 0;
+		if (delta_y < 0.00001 && delta_y > -0.00001)
+			delta_y = 0;
 		if (check_barriers(data, delta_x, delta_y))
 			return ;
 		data->player.player_x += delta_x;
@@ -67,6 +71,10 @@ void	s_moves(t_data *data)
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (cos(data->player.angle) * speed) * -1;
 		delta_y = (sin(data->player.angle) * speed) * -1;
+		if (delta_x < 0.00001 && delta_x > -0.00001)
+			delta_x = 0;
+		if (delta_y < 0.00001 && delta_y > -0.00001)
+			delta_y = 0;
 		if (check_barriers(data, delta_x, delta_y))
 			return ;
 		data->player.player_x += delta_x;
@@ -85,13 +93,17 @@ void	d_moves(t_data *data)
 	if (data->keys[4])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
-		delta_x = (sin(data->player.angle) * speed);
+		delta_x = (sin(data->player.angle) * speed) * -1;
 		delta_y = (cos(data->player.angle) * speed);
+		if (delta_x < 0.00001 && delta_x > -0.00001)
+			delta_x = 0;
+		if (delta_y < 0.00001 && delta_y > -0.00001)
+			delta_y = 0;
 		if (check_barriers(data, -delta_x, delta_y))
 			return ;
-		data->player.player_x -= delta_x;
+		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;
-		data->player.x_c -= delta_x;
+		data->player.x_c += delta_x;
 		data->player.y_c += delta_y;
 	}
 }
@@ -105,13 +117,17 @@ void	a_moves(t_data *data)
 	if (data->keys[5])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
-		delta_x = (sin(data->player.angle) * speed) * -1;
+		delta_x = (sin(data->player.angle) * speed);
 		delta_y = (cos(data->player.angle) * speed) * -1;
+		if (delta_x < 0.00001 && delta_x > -0.00001)
+			delta_x = 0;
+		if (delta_y < 0.00001 && delta_y > -0.00001)
+			delta_y = 0;
 		if (check_barriers(data, -delta_x, delta_y))
 			return ;
-		data->player.player_x -= delta_x;
+		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;
-		data->player.x_c -= delta_x;
+		data->player.x_c += delta_x;
 		data->player.y_c += delta_y;
 	}
 }
