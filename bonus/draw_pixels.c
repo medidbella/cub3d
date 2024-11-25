@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixels.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/25 17:16:57 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:42:36 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	get_color(t_data *data, int x, int y)
 		return (0);
 	dst = data->img_2d.addr + (y * data->img_2d.line_length + x
 			* (data->img_2d.bits_per_pixel / 8));
-	return (*(unsigned int *) dst == WALL_COLOR);
+	return (*(unsigned int *) dst == WALL_COLOR
+		|| *(unsigned int *) dst == DOOR_COLOR);
 }
 
 void	draw_cub(t_data *data, int x, int y)
@@ -89,7 +90,10 @@ void	draw(t_data *data)
 				data->player.player_y = y * TILE_SIZE + TILE_SIZE / 2
 					- (data->player.size_y / 2);
 			}
-			draw_cub(data, x * TILE_SIZE, y * TILE_SIZE);
+			if (ft_strchr("HV", data->map[y][x]))
+				draw_2d_wall(data, x * TILE_SIZE, y * TILE_SIZE);
+			else 
+				draw_cub(data, x * TILE_SIZE, y * TILE_SIZE);
 		}
 	}
 }

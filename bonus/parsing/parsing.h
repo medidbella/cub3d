@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 19:06:26 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:20:42 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,6 @@ void		check_prev_members(t_config *scene_data, char *line);
 int			open_cub_file(char *file);
 void		get_textures(char **words, t_config *scene_data, char *line);
 void		color_parser(t_config *scene_data, char *line, int type);
+void		alignement_check(char **map, int x, int y, t_config *scene_data);
+
 #endif

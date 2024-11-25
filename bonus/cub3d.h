@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/25 18:59:48 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:42:19 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define IMG_SIZE_Y 4
 # define ANGLE 2.5
 # define WALL_COLOR 0x61F5B5
-# define DOOR_COLOR 0x0000ff
+# define DOOR_COLOR 0xffc704
 # define BLACK 0x000000
 # define FOV 60
 # define SPEED_DIVISOR 10
@@ -132,15 +132,6 @@ typedef struct s_data
 	t_img		mini_map_img;
 }	t_data;
 
-typedef struct s_draw
-{
-	int	i;
-	int	j;
-	int	x;
-	int	y;
-	int	color;
-}	t_draw;
-
 typedef struct s_draw_line
 {
 	int	x1;
@@ -156,6 +147,7 @@ typedef struct s_draw_line
 	int	color;
 }	t_draw_line;
 
+void	draw_cub(t_data *data, int x, int y);
 void	free_textures_memory(t_data *data, t_texture *my_textures);
 void	get_start(t_config *parsed_data);
 void	init_key_flags(t_data *data);
@@ -185,5 +177,6 @@ void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 void	initialize_textures(t_data *data, t_config *parsed_data);
 void	fov_coordinates(t_data *data, t_ray *ray, int *first_fov, int which);
 void	draw_fov(t_data *data, t_ray *ray);
+void	draw_2d_wall(t_data *data, int x, int y);
 
 #endif

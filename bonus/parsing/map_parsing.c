@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:44:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 19:43:16 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:01:05 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	set_player_angle(t_config *scene_data, char player_char, int y,
 		scene_data->player_start_angle = S_ANGLE;
 	player_space_border_check(scene_data, y, x, 'p');
 }
-
+ 
 void	map_pars_helper(char **map, int y, int x, t_config *scene_data)
 {
 	if (!ft_strchr(" 01NSWEVH", map[y][x]))
@@ -90,14 +90,14 @@ void	map_pars_helper(char **map, int y, int x, t_config *scene_data)
 		|| (int)ft_strlen(map[y + 1]) <= x))
 		error_handler("map isn't surrounded by walls",
 			NULL, NULL, scene_data);
-	if (map[y][x] == 'W' || map[y][x] == 'V')
+	if (map[y][x] == 'H' || map[y][x] == 'V')
 	{
 		if (!scene_data->textures_paths[DOOR_IDX])
 			error_handler
 				("door present in tha map but it's texture isn't specified\n"
 				, NULL, NULL, scene_data);
-		else
-			scene_data->door_flag = 1;
+		alignement_check(map, x, y, scene_data);
+		scene_data->door_flag = 1;
 	}
 	if (map[y][x] == ' ')
 		player_space_border_check(scene_data, y, x, ' ');

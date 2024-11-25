@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:08:52 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 17:24:24 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:23:40 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@ void	get_door_texture(char **words, char *line, t_config *scene_data)
 	if (ft_strncmp(words[0], "DOOR", 5))
 		error_handler("unknown element\n", words, line, scene_data);
 	scene_data->textures_paths[DOOR_IDX] = ft_strtrim(words[1], "\n");
+	return ;
+}
+
+void	alignement_check(char **map, int x, int y, t_config *scene_data)
+{
+	if (map[y][x] == 'H' && (map[y][x + 1] != '1' || map[y][x - 1] != '1'))
+		error_handler("the left and right sides of an horizontal \
+door must be walls ('1')", NULL, NULL, scene_data);
+	else if (map[y][x] == 'V' && (map[y - 1][x] != '1' || map[y + 1][x] != '1'))
+		error_handler("The top and bottom sides of a vertical door \
+must be walls ('1')", NULL, NULL, scene_data);
 	return ;
 }
 

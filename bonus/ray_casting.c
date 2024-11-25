@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/25 18:42:21 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/25 20:19:29 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	height_and_color(t_data *data, t_ray *ray)
+void	height_and_texture(t_data *data, t_ray *ray)
 {
 	if (ray->side_flag == 1)
 	{
@@ -39,7 +39,7 @@ void	draw_column(t_data *data, t_ray *ray, int column)
 	int	end;
 	int	i;
 
-	height_and_color(data, ray);
+	height_and_texture(data, ray);
 	start = (HEIGHT - ray->height) / 2;
 	end = start + ray->height;
 	if (end > HEIGHT)
@@ -112,7 +112,7 @@ void	ray_casting(t_data *data)
 		vertical_distance(data, &ray, ray.rayangle);
 		real_distance(&ray, data);
 		small_distance(data, &ray, &first_fov);
-		draw_fov(data, &ray);
+		// draw_fov(data, &ray);
 		draw_column(data, &ray, column);
 		column++;
 		ray.rayangle += data->player.angle_step;

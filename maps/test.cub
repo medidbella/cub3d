@@ -1,0 +1,21 @@
+NO ./textures/bleu.xpm
+
+SO ./textures/red.xpm
+
+WE ./textures/green.xpm
+
+EA ./textures/perpule.xpm
+
+DOOR ./textures/door.xpm
+
+F 100,100,250
+
+C 0,0,0
+
+111111111
+101000001
+101000001
+1H1000001
+100000001
+10S000001
+111111111
