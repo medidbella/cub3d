@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 14:09:17 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:51:06 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+# include <stdbool.h>
 
-# define TILE_SIZE 50
+# define TILE_SIZE 20
 # define WIDTH 1080
 # define HEIGHT 720
 
@@ -42,7 +43,7 @@
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000
 # define FOV 60
-# define SPEED_DIVISOR 6
+# define SPEED_DIVISOR 15
 # define N_INDEX 0
 # define S_INDEX 1
 # define W_INDEX 2
@@ -79,7 +80,6 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	int		player;
 	void	*player_img;
 	void	*erase_img;
 	double	player_x;
@@ -158,7 +158,6 @@ int		ft_key_release(int key, t_data *data);
 int		loop_rendering(t_data *data);
 int		close_win(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		get_color(t_data *data, int x, int y);
 float	radian(float degree);
 void	rotate(t_data *data);
 void	move_player(t_data *data);

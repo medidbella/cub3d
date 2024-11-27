@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixels.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 12:32:47 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:51:12 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,6 @@ void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color)
 	dst = data->img_2d.addr + (y * data->img_2d.line_length + x
 			* (data->img_2d.bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-int	get_color(t_data *data, int x, int y)
-{
-	char	*dst;
-
-	if (x >= data->width_2d || y >= data->height_2d || x <= 0 || y <= 0)
-		return (0);
-	dst = data->img_2d.addr + (y * data->img_2d.line_length + x
-			* (data->img_2d.bits_per_pixel / 8));
-	return (*(unsigned int *) dst == WALL_COLOR);
 }
 
 void	draw_cub(t_data *data, int x, int y, int color)
@@ -79,15 +68,6 @@ void	draw(t_data *data)
 			draw.x = draw.j * TILE_SIZE;
 			if (data->map[draw.i][draw.j] == '1')
 				draw.color = WALL_COLOR;
-			if (ft_strchr("NSEW", data->map[draw.i][draw.j])
-			&& data->player.player == 0)
-			{
-				data->player.player = 1;
-				data->player.player_x = draw.j * TILE_SIZE + TILE_SIZE / 2
-					- (data->player.size_x / 2);
-				data->player.player_y = draw.i * TILE_SIZE + TILE_SIZE / 2
-					- (data->player.size_y / 2);
-			}
 			draw_cub(data, draw.x, draw.y, draw.color);
 		}
 	}

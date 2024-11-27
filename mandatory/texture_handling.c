@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/25 16:19:25 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:34:40 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	free_textures_memory(void *mlx, t_texture *my_textures)
 	{
 		mlx_destroy_image(mlx, my_textures[i].img);
 		i++;
-	}	
+	}
 }
 
-int	get_cords_color(t_texture *img, int x, int y)
+static int	get_cords_color(t_texture *img, int x, int y)
 {
 	char	*dst;
 

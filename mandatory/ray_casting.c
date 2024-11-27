@@ -3,16 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/25 19:32:38 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:49:19 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	height_and_texture(t_data *data, t_ray *ray)
+void	init_values(t_data *data, t_ray *ray, t_draw_line *line)
+{
+	line->x1 = data->player.x_c;
+	line->y1 = data->player.y_c;
+	if (ray->side_flag == 1)
+	{
+		line->x2 = ray->horizontal_x;
+		line->y2 = ray->horizontal_y;
+	}
+	else
+	{
+		line->x2 = ray->vertical_x;
+		line->y2 = ray->vertical_y;
+	}
+	line->dx = abs(line->x2 - line->x1);
+	line->dy = abs(line->y2 - line->y1);
+	if (line->x1 < line->x2)
+		line->sx = 1;
+	else
+		line->sx = -1;
+	if (line->y1 < line->y2)
+		line->sy = 1;
+	else
+		line->sy = -1;
+	line->err = line->dx - line->dy;
+}
+
+void	bresenham(t_data *data, t_ray *ray)
+{
+	t_draw_line	line;
+	int			index_x;
+	int			index_y;
+
+	init_values(data, ray, &line);
+	while (1)
+	{
+		index_x = (line.x1 / TILE_SIZE) - ((int)line.x1 % TILE_SIZE == 0 && data->player.x_c > line.x1);
+		index_y = (line.y1 / TILE_SIZE) - ((int)line.y1 % TILE_SIZE == 0 && data->player.y_c > line.y1);
+		if (!((int)index_y < data->height_2d
+			&& (int)index_y >= 0 && (int)index_x >= 0
+			&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
+			break ;
+		if (!ft_strchr("NSEW0", data->map[(int)index_y][(int)index_x]))
+			break ;
+		my_mlx_pixel_put_2d(data, line.x1, line.y1, 0xFF0000);
+		if (line.x1 == line.x2 && line.y1 == line.y2)
+			break ;
+		line.err2 = line.err * 2;
+		if (line.err2 > -(line.dy))
+		{
+			line.err -= line.dy;
+			line.x1 += line.sx;
+		}
+		if (line.err2 < line.dx)
+		{
+			line.err += line.dx;
+			line.y1 += line.sy;
+		}
+	}
+}
+
+void	draw_fov(t_data *data, t_ray *ray)
+{
+	bresenham(data, ray);
+}
+
+//// the top lines are temp, only for debuging //////
+
+static void	height_and_texture(t_data *data, t_ray *ray)
 {
 	if (ray->side_flag == 1)
 	{
@@ -33,7 +101,7 @@ void	height_and_texture(t_data *data, t_ray *ray)
 		* data->player.distance_to_project_plan;
 }
 
-void	draw_column(t_data *data, t_ray *ray, int column)
+static void	draw_column(t_data *data, t_ray *ray, int column)
 {
 	int	start;
 	int	end;
@@ -59,7 +127,7 @@ void	draw_column(t_data *data, t_ray *ray, int column)
 		my_mlx_pixel_put(data, column, i++, data->floor_color);
 }
 
-void	real_distance(t_ray *ray, t_data *data)
+static void	real_distance(t_ray *ray, t_data *data)
 {
 	if (ray->horizontal_distance != -1)
 		ray->horizontal_distance = cos(ray->rayangle - data->player.angle)
@@ -108,6 +176,7 @@ void	ray_casting(t_data *data)
 		vertical_distance(data, &ray, ray.rayangle);
 		real_distance(&ray, data);
 		small_distance(&ray);
+		draw_fov(data, &ray);
 		draw_column(data, &ray, column);
 		column++;
 		ray.rayangle += data->player.angle_step;

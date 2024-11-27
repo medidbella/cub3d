@@ -3,16 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 13:45:59 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:24:32 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	setup(t_data *data)
+static void	player_first_coordinates(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (data->map[++y])
+	{
+		x = -1;
+		while (data->map[y][++x])
+		{
+			if (ft_strchr("NSEW", data->map[y][x]))
+			{
+				data->player.player_x = x * TILE_SIZE + TILE_SIZE / 2
+					- (data->player.size_x / 2);
+				data->player.player_y = y * TILE_SIZE + TILE_SIZE / 2
+					- (data->player.size_y / 2);
+				data->player.x_c = data->player.player_x
+					+ (data->player.size_x / 2);
+				data->player.y_c = data->player.player_y
+					+ (data->player.size_y / 2);
+				return ;
+			}
+		}
+	}
+}
+
+static void	setup(t_data *data)
 {
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
@@ -33,18 +60,20 @@ void	setup(t_data *data)
 	data->player.erase_img = mlx_xpm_file_to_image(data->mlx,
 			"./textures/erase.xpm", &(data->player.size_x),
 			&(data->player.size_y));
+	player_first_coordinates(data);
 	draw(data);
-	data->player.x_c = data->player.player_x + (data->player.size_x / 2);
-	data->player.y_c = data->player.player_y + (data->player.size_y / 2);
 	data->player.fov = radian(FOV);
 	data->player.distance_to_project_plan = ((float)WIDTH / 2)
 		/ tan(data->player.fov / 2);
 }
 
-void	first_view(t_data *data)
+static void	first_view(t_data *data)
 {
 	ray_casting(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img_2d.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->player.player_img,
+		data->player.player_x, data->player.player_y);
 }
 
 void	get_start(t_config *parsed_data)
@@ -52,7 +81,6 @@ void	get_start(t_config *parsed_data)
 	t_data	data;
 
 	data.map = parsed_data->map;
-	data.player.player = 0;
 	data.ceiling_color = parsed_data->ceiling_color;
 	data.floor_color = parsed_data->floor_color;
 	data.map_hight = parsed_data->map_hight;

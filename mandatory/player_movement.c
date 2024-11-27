@@ -6,32 +6,30 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/25 19:29:20 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:29:27 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_barriers(t_data *data, float x, float y)
+static int	check_barriers(t_data *data, float x, float y)
 {
-	int	new_x;
-	int	new_y;
+	float	new_x;
+	float	new_y;
+	float	index_x;
+	float	index_y;
 
-	new_x = data->player.player_x + x;
-	new_y = data->player.player_y + y;
-	if (get_color(data, new_x, new_y))
+	new_x = data->player.x_c + x;
+	new_y = data->player.y_c + y;
+	index_x = (new_x / TILE_SIZE)
+		- ((int)new_x % TILE_SIZE == 0 && data->player.x_c > new_x);
+	index_y = (new_y / TILE_SIZE)
+		- ((int)new_y % TILE_SIZE == 0 && data->player.y_c > new_y);
+	if (!((int)index_y < data->height_2d
+			&& (int)index_y >= 0 && (int)index_x >= 0
+			&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
 		return (1);
-	new_x = data->player.player_x + 4 + x;
-	new_y = data->player.player_y + y;
-	if (get_color(data, new_x, new_y))
-		return (1);
-	new_x = data->player.player_x + x;
-	new_y = data->player.player_y + 4 + y;
-	if (get_color(data, new_x, new_y))
-		return (1);
-	new_x = data->player.player_x + 4 + x;
-	new_y = data->player.player_y + 4 + y;
-	if (get_color(data, new_x, new_y))
+	if (!ft_strchr("NSEW0", data->map[(int)index_y][(int)index_x]))
 		return (1);
 	return (0);
 }
@@ -99,7 +97,7 @@ void	d_moves(t_data *data)
 			delta_x = 0;
 		if (delta_y < 0.00001 && delta_y > -0.00001)
 			delta_y = 0;
-		if (check_barriers(data, -delta_x, delta_y))
+		if (check_barriers(data, delta_x, delta_y))
 			return ;
 		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;
@@ -123,7 +121,7 @@ void	a_moves(t_data *data)
 			delta_x = 0;
 		if (delta_y < 0.00001 && delta_y > -0.00001)
 			delta_y = 0;
-		if (check_barriers(data, -delta_x, delta_y))
+		if (check_barriers(data, delta_x, delta_y))
 			return ;
 		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;

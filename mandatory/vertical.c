@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vertical.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 12:32:47 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:34:09 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	calculate_delta_x(t_data *data, double *vertical_x
+static double	calculate_delta_x(t_data *data, double *vertical_x
 							, double *vertical_y, double rayangle)
 {
 	double	delta_x;
@@ -40,8 +40,8 @@ double	calculate_delta_x(t_data *data, double *vertical_x
 	return (delta_x);
 }
 
-void	find_vertical_point(t_data *data, double rayangle, double *vertical_x
-							, double *vertical_y)
+static void	find_vertical_point(t_data *data, double rayangle
+				, double *vertical_x, double *vertical_y)
 {
 	double	delta_x;
 	double	delta_y;
@@ -54,26 +54,44 @@ void	find_vertical_point(t_data *data, double rayangle, double *vertical_x
 	*vertical_y = *vertical_y - delta_y;
 }
 
-void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
+static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 {
 	double	check_x;
 
+	check_x = ray->vertical_x;
+	if (ray->vertical_x < data->player.x_c)
+		check_x -= 1;
+	*x = check_x / TILE_SIZE;
+	*y = ray->vertical_y / TILE_SIZE;
+	if ((*y < data->height_2d && *y >= 0)
+		&& (*x >= 0 && *x < (int)ft_strlen(data->map[*y])))
+	{
+		if (data->map[*y][*x] == ' ')
+			return (true);
+	}
+	else
+		return (true);
+	return (false);
+}
+
+void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
+{
+	int		x;
+	int		y;
+
 	ray->vertical_y = data->player.y_c;
 	ray->vertical_x = data->player.x_c;
+	ray->vertical_distance = -1.0;
 	while (1)
 	{
 		find_vertical_point(data, rayangle, &ray->vertical_x, &ray->vertical_y);
 		if (rayangle == radian(90) || rayangle == radian(270)
 			|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
 			|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d)
-		{
-			ray->vertical_distance = -1.0;
 			break ;
-		}
-		check_x = ray->vertical_x;
-		if (rayangle > radian(90) && rayangle < radian(270))
-			check_x -= 1;
-		if (get_color(data, check_x, ray->vertical_y))
+		if (check_next_possition(data, ray, &x, &y))
+			break ;
+		if (data->map[y][x] == '1')
 		{
 			ray->vertical_distance = get_distance(data, ray->vertical_x,
 					ray->vertical_y);
