@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/27 16:51:12 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:31:14 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_cub(t_data *data, int x, int y, int color)
+static void	draw_cub(t_data *data, int x, int y, int color)
 {
 	int	x_;
 	int	y_;
@@ -72,4 +72,3 @@ void	draw(t_data *data)
 		}
 	}
 }
-// lines 85 and 87 will be removed in mandatory part

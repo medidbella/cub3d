@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/24 17:19:58 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:09:44 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,27 +62,44 @@ void	find_horizontal_point(t_data *data, double rayangle
 	*horizontal_y = *horizontal_y - delta_y;
 }
 
-void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
+static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 {
 	double	check_y;
 
+	check_y = ray->horizontal_y;
+	if (ray->horizontal_y < data->player.y_c)
+		check_y -= 1;
+	*x = ray->horizontal_x / TILE_SIZE;
+	*y = check_y / TILE_SIZE;
+	if ((*y < data->height_2d && *y >= 0) && (*x >= 0
+			&& *x < (int)ft_strlen(data->map[*y])))
+	{
+		if (data->map[*y][*x] == ' ')
+			return (true);
+	}
+	else
+		return (true);
+	return (false);
+}
+
+void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
+{
+	int		x;
+	int		y;
+
 	ray->horizontal_y = data->player.y_c;
 	ray->horizontal_x = data->player.x_c;
+	ray->horizontal_distance = -1.0;
 	while (1)
 	{
 		find_horizontal_point(data, rayangle, &ray->horizontal_x,
 			&ray->horizontal_y);
 		if (rayangle == 0 || rayangle == radian(180)
 			|| ray->horizontal_y > data->height_2d || ray->horizontal_y < 0
-			|| ray->horizontal_x > data->width_2d || ray->horizontal_x < 0)
-		{
-			ray->horizontal_distance = -1.0;
+			|| ray->horizontal_x > data->width_2d || ray->horizontal_x < 0
+			|| check_next_possition(data, ray, &x, &y))
 			break ;
-		}
-		check_y = ray->horizontal_y;
-		if (rayangle >= radian(180))
-			check_y -= 1;
-		if (get_color(data, ray->horizontal_x, check_y))
+		if (data->map[y][x] == '1')
 		{
 			ray->horizontal_distance = get_distance(data, ray->horizontal_x,
 					ray->horizontal_y);

@@ -3,24 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/25 20:27:02 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:39:30 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	my_mlx_pixel_put_mini(t_data *data, int x, int y, int color)
+static void	player_first_coordinates(t_data *data)
 {
-	char	*dst;
+	int	x;
+	int	y;
 
-	if (x <= 0 || x >= data->width_2d || y <= 0 || y >= data->height_2d)
-		return ;
-	dst = data->mini_map_img.addr + (y * data->mini_map_img.line_length + x
-			* (data->mini_map_img.bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	y = -1;
+	while (data->map[++y])
+	{
+		x = -1;
+		while (data->map[y][++x])
+		{
+			if (ft_strchr("NSEW", data->map[y][x]))
+			{
+				data->player.player_x = x * TILE_SIZE + TILE_SIZE / 2
+					- (data->player.size_x / 2);
+				data->player.player_y = y * TILE_SIZE + TILE_SIZE / 2
+					- (data->player.size_y / 2);
+				data->player.x_c = data->player.player_x
+					+ (data->player.size_x / 2);
+				data->player.y_c = data->player.player_y
+					+ (data->player.size_y / 2);
+				return ;
+			}
+		}
+	}
 }
 
 void	setup(t_data *data)
@@ -44,29 +60,11 @@ void	setup(t_data *data)
 	data->player.erase_img = mlx_xpm_file_to_image(data->mlx,
 			"./textures/erase.xpm", &(data->player.size_x),
 			&(data->player.size_y));
+	player_first_coordinates(data);
 	draw(data);
-	data->player.x_c = data->player.player_x + (data->player.size_x / 2);
-	data->player.y_c = data->player.player_y + (data->player.size_y / 2);
 	data->player.fov = radian(FOV);
 	data->player.distance_to_project_plan = ((float)WIDTH / 2)
 		/ tan(data->player.fov / 2);
-
-	data->mini_map_img.img = mlx_new_image(data->mlx, MIN_MAP_WIDTH,
-			MIN_MAP_HEIGHT);
-	data->mini_map_img.addr = mlx_get_data_addr(data->mini_map_img.img,
-			&(data->mini_map_img.bits_per_pixel),
-			&(data->mini_map_img.line_length), &(data->mini_map_img.endian));
-	int x = 0, y = 0;
-	while (x < MIN_MAP_WIDTH)
-	{
-		y = 0;
-		while (y < MIN_MAP_HEIGHT)
-		{
-			my_mlx_pixel_put_mini(data, x, y, 0xffffff);
-			y++;
-		}
-		x++;
-	}
 }
 
 void	first_view(t_data *data)
@@ -76,7 +74,6 @@ void	first_view(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img_2d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->player.player_img,
 		data->player.player_x, data->player.player_y);
-	// mlx_put_image_to_window(data->mlx, data->win, data->mini_map_img.img, 0, 0);
 }
 
 void	get_start(t_config *parsed_data)

@@ -3,35 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/25 20:19:18 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:21:43 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_barriers(t_data *data, float x, float y)
+static int	check_barriers(t_data *data, float x, float y)
 {
-	int	new_x;
-	int	new_y;
+	float	new_x;
+	float	new_y;
+	float	index_x;
+	float	index_y;
 
-	new_x = data->player.player_x + x;
-	new_y = data->player.player_y + y;
-	if (get_color(data, new_x, new_y))
+	new_x = data->player.x_c + x;
+	new_y = data->player.y_c + y;
+	index_x = (new_x / TILE_SIZE)
+		- ((int)new_x % TILE_SIZE == 0 && data->player.x_c > new_x);
+	index_y = (new_y / TILE_SIZE)
+		- ((int)new_y % TILE_SIZE == 0 && data->player.y_c > new_y);
+	if (!((int)index_y < data->height_2d
+			&& (int)index_y >= 0 && (int)index_x >= 0
+			&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
 		return (1);
-	new_x = data->player.player_x + 4 + x;
-	new_y = data->player.player_y + y;
-	if (get_color(data, new_x, new_y))
-		return (1);
-	new_x = data->player.player_x + x;
-	new_y = data->player.player_y + 4 + y;
-	if (get_color(data, new_x, new_y))
-		return (1);
-	new_x = data->player.player_x + 4 + x;
-	new_y = data->player.player_y + 4 + y;
-	if (get_color(data, new_x, new_y))
+	if (!ft_strchr("NSEW0", data->map[(int)index_y][(int)index_x]))
 		return (1);
 	return (0);
 }

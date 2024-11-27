@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixels.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/25 19:42:36 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:36:35 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,13 @@ void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	get_color(t_data *data, int x, int y)
+static void	draw_cub(t_data *data, int x, int y, int color)
 {
-	char	*dst;
-
-	// printf("color ==> x: %d || y: %d\n", x, y);
-	if (x >= data->width_2d || y >= data->height_2d || x <= 0 || y <= 0)
-		return (0);
-	dst = data->img_2d.addr + (y * data->img_2d.line_length + x
-			* (data->img_2d.bits_per_pixel / 8));
-	return (*(unsigned int *) dst == WALL_COLOR
-		|| *(unsigned int *) dst == DOOR_COLOR);
-}
-
-void	draw_cub(t_data *data, int x, int y)
-{
-	int	color;
 	int	x_;
 	int	y_;
 
 	x_ = x;
 	y_ = y;
-	color = BLACK;
-	if (data->map[y / TILE_SIZE][x / TILE_SIZE] == '1')
-		color = WALL_COLOR;
 	while (y < y_ + TILE_SIZE)
 	{
 		x = x_;
@@ -72,28 +55,20 @@ void	draw_cub(t_data *data, int x, int y)
 
 void	draw(t_data *data)
 {
-	int x;
-	int y;
+	t_draw	draw;
 
-	y = -1;
-	while (data->map[++y])
+	draw.i = -1;
+	while (data->map[++(draw.i)])
 	{
-		x = -1;
-		while (data->map[y][++x])
+		draw.j = -1;
+		draw.y = draw.i * TILE_SIZE;
+		while (data->map[draw.i][++(draw.j)])
 		{
-			if (ft_strchr("NSEW", data->map[y][x])
-				&& data->player.player == 0)
-			{
-				data->player.player = 1;
-				data->player.player_x = x * TILE_SIZE + TILE_SIZE / 2
-					- (data->player.size_x / 2);
-				data->player.player_y = y * TILE_SIZE + TILE_SIZE / 2
-					- (data->player.size_y / 2);
-			}
-			if (ft_strchr("HV", data->map[y][x]))
-				draw_2d_wall(data, x * TILE_SIZE, y * TILE_SIZE);
-			else 
-				draw_cub(data, x * TILE_SIZE, y * TILE_SIZE);
+			draw.color = BLACK;
+			draw.x = draw.j * TILE_SIZE;
+			if (data->map[draw.i][draw.j] == '1')
+				draw.color = WALL_COLOR;
+			draw_cub(data, draw.x, draw.y, draw.color);
 		}
 	}
 }

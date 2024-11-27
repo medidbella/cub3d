@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/25 20:18:59 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:39:55 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	move_player(t_data *data)
 
 	if (!data->keys[2] && !data->keys[3] && !data->keys[4] && !data->keys[5])
 		return ;
-	// mlx_put_image_to_window(data->mlx, data->win, data->player.erase_img,
-	// 	data->player.player_x, data->player.player_y);
 	w_moves(data, tab);
 	s_moves(data, tab);
 	d_moves(data, tab);
@@ -49,7 +47,6 @@ void	move_player(t_data *data)
 	data->player.player_y += tab[1];
 	data->player.x_c += tab[0];
 	data->player.y_c += tab[1];
-	
 }
 
 int	check_keys(t_data *data)
@@ -73,6 +70,5 @@ int	loop_rendering(t_data *data)
 	ray_casting(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	draw_map2d(data);
-	// mlx_put_image_to_window(data->mlx, data->win, data->mini_map_img.img, 0, 0);
 	return (0);
 }

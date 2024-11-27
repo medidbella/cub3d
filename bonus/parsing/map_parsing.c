@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:44:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/25 13:01:05 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:42:13 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	set_player_angle(t_config *scene_data, char player_char, int y,
 		scene_data->player_start_angle = S_ANGLE;
 	player_space_border_check(scene_data, y, x, 'p');
 }
- 
+
 void	map_pars_helper(char **map, int y, int x, t_config *scene_data)
 {
 	if (!ft_strchr(" 01NSWEVH", map[y][x]))

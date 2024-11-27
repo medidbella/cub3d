@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/27 16:49:19 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:15:34 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	bresenham(t_data *data, t_ray *ray)
 	}
 }
 
-void	draw_fov(t_data *data, t_ray *ray)
+static void	draw_fov(t_data *data, t_ray *ray)
 {
 	bresenham(data, ray);
 }

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/25 19:42:19 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:38:08 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_H
-# define CUB_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "parsing/parsing.h"
 # include "../libft/libft.h"
@@ -21,12 +21,11 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+# include <stdbool.h>
 
 # define TILE_SIZE 20
 # define WIDTH 1080
 # define HEIGHT 720
-# define MIN_MAP_WIDTH (WIDTH / 5)
-# define MIN_MAP_HEIGHT (HEIGHT / 5)
 
 # define W 119
 # define A 97
@@ -128,9 +127,16 @@ typedef struct s_data
 	int			floor_color;
 	int			keys[7];
 	int			door_flag;
-	int			mini_tile_size;
-	t_img		mini_map_img;
 }	t_data;
+
+typedef struct s_draw
+{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+	int	color;
+}	t_draw;
 
 typedef struct s_draw_line
 {
@@ -147,7 +153,7 @@ typedef struct s_draw_line
 	int	color;
 }	t_draw_line;
 
-void	draw_cub(t_data *data, int x, int y);
+// void	draw_cub(t_data *data, int x, int y);
 void	free_textures_memory(t_data *data, t_texture *my_textures);
 void	get_start(t_config *parsed_data);
 void	init_key_flags(t_data *data);
@@ -156,7 +162,7 @@ int		ft_key_release(int key, t_data *data);
 int		loop_rendering(t_data *data);
 int		close_win(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		get_color(t_data *data, int x, int y);
+// int		get_color(t_data *data, int x, int y);
 float	radian(float degree);
 void	rotate(t_data *data);
 void	move_player(t_data *data);
@@ -175,8 +181,7 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
 void	draw_map2d(t_data *data);
 void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 void	initialize_textures(t_data *data, t_config *parsed_data);
-void	fov_coordinates(t_data *data, t_ray *ray, int *first_fov, int which);
-void	draw_fov(t_data *data, t_ray *ray);
+// void	draw_fov(t_data *data, t_ray *ray);
 void	draw_2d_wall(t_data *data, int x, int y);
 
 #endif
