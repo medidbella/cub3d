@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/27 16:51:06 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:22:13 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <stdbool.h>
 
 # define TILE_SIZE 20
+# define MIN_TILE_SIZE 10
 # define WIDTH 1080
 # define HEIGHT 720
 
@@ -86,6 +87,8 @@ typedef struct s_player
 	double	player_y;
 	double	x_c;
 	double	y_c;
+	double	mini_x;
+	double	mini_y;
 	int		size_x;
 	int		size_y;
 	int		mov_speed;
@@ -112,11 +115,14 @@ typedef struct s_data
 {
 	int			map_hight;
 	int			map_width;
+	double		scale;
 	void		*mlx;
 	void		*win;
 	char		**map;
 	int			width_2d;
 	int			height_2d;
+	int			mini_width;
+	int			mini_height;
 	t_img		img;
 	t_img		img_2d;
 	t_player	player;
@@ -174,5 +180,6 @@ double	get_distance(t_data *data, double x, double y);
 void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
 void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 void	initialize_textures(t_data *data, t_config *parsed_data);
+void	draw_player(t_data *data);
 
 #endif

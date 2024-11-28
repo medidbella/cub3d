@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/27 19:15:34 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:18:40 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	bresenham(t_data *data, t_ray *ray)
 			break ;
 		if (!ft_strchr("NSEW0", data->map[(int)index_y][(int)index_x]))
 			break ;
-		my_mlx_pixel_put_2d(data, line.x1, line.y1, 0xFF0000);
+		my_mlx_pixel_put(data, line.x1, line.y1, 0xFF0000);
 		if (line.x1 == line.x2 && line.y1 == line.y2)
 			break ;
 		line.err2 = line.err * 2;
@@ -73,10 +73,10 @@ void	bresenham(t_data *data, t_ray *ray)
 	}
 }
 
-static void	draw_fov(t_data *data, t_ray *ray)
-{
-	bresenham(data, ray);
-}
+// static void	draw_fov(t_data *data, t_ray *ray)
+// {
+// 	bresenham(data, ray);
+// }
 
 //// the top lines are temp, only for debuging //////
 
@@ -176,7 +176,7 @@ void	ray_casting(t_data *data)
 		vertical_distance(data, &ray, ray.rayangle);
 		real_distance(&ray, data);
 		small_distance(&ray);
-		draw_fov(data, &ray);
+		// draw_fov(data, &ray);
 		draw_column(data, &ray, column);
 		column++;
 		ray.rayangle += data->player.angle_step;

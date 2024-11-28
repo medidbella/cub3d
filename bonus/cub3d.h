@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/27 19:38:08 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:23:46 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <stdbool.h>
 
 # define TILE_SIZE 20
+# define MIN_TILE_SIZE 10
 # define WIDTH 1080
 # define HEIGHT 720
 
@@ -88,6 +89,8 @@ typedef struct s_player
 	double	player_y;
 	double	x_c;
 	double	y_c;
+	double	mini_x;
+	double	mini_y;
 	int		size_x;
 	int		size_y;
 	int		mov_speed;
@@ -119,6 +122,9 @@ typedef struct s_data
 	char		**map;
 	int			width_2d;
 	int			height_2d;
+	int			mini_width;
+	int			mini_height;
+	double		scale;
 	t_img		img;
 	t_img		img_2d;
 	t_player	player;
@@ -153,7 +159,6 @@ typedef struct s_draw_line
 	int	color;
 }	t_draw_line;
 
-// void	draw_cub(t_data *data, int x, int y);
 void	free_textures_memory(t_data *data, t_texture *my_textures);
 void	get_start(t_config *parsed_data);
 void	init_key_flags(t_data *data);
@@ -162,7 +167,6 @@ int		ft_key_release(int key, t_data *data);
 int		loop_rendering(t_data *data);
 int		close_win(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-// int		get_color(t_data *data, int x, int y);
 float	radian(float degree);
 void	rotate(t_data *data);
 void	move_player(t_data *data);
@@ -181,7 +185,7 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
 void	draw_map2d(t_data *data);
 void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 void	initialize_textures(t_data *data, t_config *parsed_data);
-// void	draw_fov(t_data *data, t_ray *ray);
 void	draw_2d_wall(t_data *data, int x, int y);
+void	draw_player(t_data *data);
 
 #endif

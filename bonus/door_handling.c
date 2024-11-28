@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 20:31:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/25 19:30:04 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:30:50 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_2d_wall(t_data *data, int x, int y)
 		x = x_min;
 		while (x <= x_max)
 		{
-			my_mlx_pixel_put_2d(data, x, y_min, DOOR_COLOR);
+			my_mlx_pixel_put(data, x, y_min, DOOR_COLOR);
 			x++;
 		}
 		y_min++;

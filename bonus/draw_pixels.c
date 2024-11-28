@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/27 19:36:35 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:00:14 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,52 +23,101 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color)
+static void	fill_mini_map(t_data *data)
 {
-	char	*dst;
+	int	x;
+	int	y;
 
-	if (x <= 0 || x >= data->width_2d || y <= 0 || y >= data->height_2d)
-		return ;
-	dst = data->img_2d.addr + (y * data->img_2d.line_length + x
-			* (data->img_2d.bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-static void	draw_cub(t_data *data, int x, int y, int color)
-{
-	int	x_;
-	int	y_;
-
-	x_ = x;
-	y_ = y;
-	while (y < y_ + TILE_SIZE)
+	y = 0;
+	while (y <= data->mini_height)
 	{
-		x = x_;
-		while (x < x_ + TILE_SIZE)
+		x = 0;
+		while (x <= data->mini_width)
 		{
-			my_mlx_pixel_put_2d(data, x, y, color);
+			my_mlx_pixel_put(data, x, y, 0xFFFFFF);
 			x++;
 		}
 		y++;
 	}
 }
 
+void	draw_player(t_data *data)
+{
+	int	player_center_x;
+	int	player_center_y;
+	int	i;
+	int	j;
+	int	draw_x;
+	int	draw_y;
+
+	i = -2;
+	player_center_x = data->mini_width / 2;
+	player_center_y = data->mini_height / 2;
+	while (i <= 2)
+	{
+		j = -2;
+		while (j <= 2)
+		{
+			draw_x = player_center_x + j;
+			draw_y = player_center_y + i;
+			if (draw_x >= 0 && draw_x < data->mini_width
+				&& draw_y >= 0 && draw_y < data->mini_height)
+				mlx_put_image_to_window(data->mlx, data->win,
+					data->player.player_img, player_center_x, player_center_y);
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	draw_cub(t_data *data, int x, int y, int color)
+{
+	int	x_offset;
+	int	y_offset;
+	int	i;
+	int	j;
+	int	draw_x;
+	int	draw_y;
+
+	i = 0;
+	x_offset = x * MIN_TILE_SIZE - data->player.mini_x;
+	y_offset = y * MIN_TILE_SIZE - data->player.mini_y;
+	while (i < MIN_TILE_SIZE)
+	{
+		j = 0;
+		while (j < MIN_TILE_SIZE)
+		{
+			draw_x = x_offset + j;
+			draw_y = y_offset + i;
+			if (draw_x >= 0 && draw_x < data->mini_width
+				&& draw_y >= 0 && draw_y < data->mini_height)
+				my_mlx_pixel_put(data, draw_x, draw_y, color);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	draw(t_data *data)
 {
-	t_draw	draw;
+	int	i;
+	int	j;
+	int	color;
 
-	draw.i = -1;
-	while (data->map[++(draw.i)])
+	fill_mini_map(data);
+	i = -1;
+	while (data->map[++i])
 	{
-		draw.j = -1;
-		draw.y = draw.i * TILE_SIZE;
-		while (data->map[draw.i][++(draw.j)])
+		j = -1;
+		while (data->map[i][++j])
 		{
-			draw.color = BLACK;
-			draw.x = draw.j * TILE_SIZE;
-			if (data->map[draw.i][draw.j] == '1')
-				draw.color = WALL_COLOR;
-			draw_cub(data, draw.x, draw.y, draw.color);
+			color = 0xFFFFFF;
+			if (data->map[i][j] == '1')
+				color = WALL_COLOR;
+			else if (data->map[i][j] == '0'
+			|| ft_strchr("NSEW", data->map[i][j]))
+				color = BLACK;
+			draw_cub(data, j, i, color);
 		}
 	}
 }

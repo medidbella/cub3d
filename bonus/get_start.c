@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/27 19:39:30 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:01:06 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ static void	player_first_coordinates(t_data *data)
 					+ (data->player.size_x / 2);
 				data->player.y_c = data->player.player_y
 					+ (data->player.size_y / 2);
+				data->player.mini_x = data->player.x_c
+					* data->scale - (data->mini_width / 2);
+				data->player.mini_y = data->player.y_c
+					* data->scale - (data->mini_height / 2);
 				return ;
 			}
 		}
@@ -49,19 +53,16 @@ void	setup(t_data *data)
 			&(data->img.endian));
 	data->width_2d = (data->map_width * TILE_SIZE);
 	data->height_2d = (data->map_hight * TILE_SIZE);
-	data->img_2d.img = mlx_new_image(data->mlx, data->width_2d,
-			data->height_2d);
-	data->img_2d.addr = mlx_get_data_addr(data->img_2d.img,
-			&(data->img_2d.bits_per_pixel),
-			&(data->img_2d.line_length), &(data->img_2d.endian));
+	data->mini_width = WIDTH / 6;
+	data->mini_height = HEIGHT / 6;
 	data->player.player_img = mlx_xpm_file_to_image(data->mlx,
 			"./textures/mini_player.xpm",
 			&(data->player.size_x), &(data->player.size_y));
 	data->player.erase_img = mlx_xpm_file_to_image(data->mlx,
 			"./textures/erase.xpm", &(data->player.size_x),
 			&(data->player.size_y));
+	data->scale = (float)MIN_TILE_SIZE / TILE_SIZE;
 	player_first_coordinates(data);
-	draw(data);
 	data->player.fov = radian(FOV);
 	data->player.distance_to_project_plan = ((float)WIDTH / 2)
 		/ tan(data->player.fov / 2);
@@ -70,10 +71,9 @@ void	setup(t_data *data)
 void	first_view(t_data *data)
 {
 	ray_casting(data);
+	draw(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->img_2d.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->player.player_img,
-		data->player.player_x, data->player.player_y);
+	draw_player(data);
 }
 
 void	get_start(t_config *parsed_data)
