@@ -6,28 +6,29 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:33:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 17:33:34 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/29 21:55:43 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_values(t_data *data, t_ray *ray, t_draw_line *line)
+void	init_values(t_data *data, t_draw_line *line)
 {
-	line->x1 = data->player.player_x
-		+ (data->player.size_x / 2);
-	line->y1 = data->player.player_y
-		+ (data->player.size_y / 2);
-	if (ray->side_flag == 1)
-	{
-		line->x2 = ray->horizontal_x;
-		line->y2 = ray->horizontal_y;
-	}
-	else
-	{
-		line->x2 = ray->vertical_x;
-		line->y2 = ray->vertical_y;
-	}
+	printf("==> %p\n", data);
+	// line->x1 = data->player.mini_x
+	// 	+ (data->player.size_x / 2);
+	// line->y1 = data->player.mini_y
+	// 	+ (data->player.size_y / 2);
+	// if (ray->side_flag == 1)
+	// {
+	// 	line->x2 = ray->horizontal_x * data->scale;
+	// 	line->y2 = ray->horizontal_y * data->scale;
+	// }
+	// else
+	// {
+	// 	line->x2 = ray->vertical_x * data->scale;
+	// 	line->y2 = ray->vertical_y * data->scale;
+	// }
 	line->dx = abs(line->x2 - line->x1);
 	line->dy = abs(line->y2 - line->y1);
 	if (line->x1 < line->x2)
@@ -41,45 +42,73 @@ void	init_values(t_data *data, t_ray *ray, t_draw_line *line)
 	line->err = line->dx - line->dy;
 }
 
-void	bresenham(t_data *data, t_ray *ray)
+void	bresenham(t_data *data, t_draw_line *line)
 {
-	t_draw_line	line;
-	int			index_x;
-	int			index_y;
+	// int			index_x;
+	// int			index_y;
 
-	init_values(data, ray, &line);
+	init_values(data, line);
 	while (1)
 	{
-		index_x = (line.x1 / TILE_SIZE) - ((int)line.x1 % TILE_SIZE == 0
-				&& data->player.player_x > line.x1);
-		index_y = (line.y1 / TILE_SIZE) - ((int)line.y1 % TILE_SIZE == 0
-				&& data->player.player_y > line.y1);
-		if (!((int)index_y < data->height_2d
-				&& (int)index_y >= 0 && (int)index_x >= 0
-				&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
+		// index_x = ((line->x1 / data->scale) / TILE_SIZE) - ((int)(line->x1 / data->scale) % TILE_SIZE == 0
+		// 		&& data->player.player_x > line->x1);
+		// index_y = ((line->y1 / data->scale) / TILE_SIZE) - ((int)(line->y1 / data->scale) % TILE_SIZE == 0
+		// 		&& data->player.player_y > line->y1);
+		// if (!((int)index_y < data->height_2d
+		// 		&& (int)index_y >= 0 && (int)index_x >= 0
+		// 		&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
+		// 	break ;
+		// if (!ft_strchr("NSEW0", data->map[(int)index_y][(int)index_x]))
+		// 	break ;
+		my_mlx_pixel_put(data, line->x1, line->y1, 0xFF0000);
+		if (line->x1 == line->x2 && line->y1 == line->y2)
 			break ;
-		if (!ft_strchr("NSEW0", data->map[(int)index_y][(int)index_x]))
-			break ;
-		my_mlx_pixel_put(data, line.x1, line.y1, 0xFF0000);
-		if (line.x1 == line.x2 && line.y1 == line.y2)
-			break ;
-		line.err2 = line.err * 2;
-		if (line.err2 > -(line.dy))
+		line->err2 = line->err * 2;
+		if (line->err2 > -(line->dy))
 		{
-			line.err -= line.dy;
-			line.x1 += line.sx;
+			line->err -= line->dy;
+			line->x1 += line->sx;
 		}
-		if (line.err2 < line.dx)
+		if (line->err2 < line->dx)
 		{
-			line.err += line.dx;
-			line.y1 += line.sy;
+			line->err += line->dx;
+			line->y1 += line->sy;
 		}
 	}
 }
 
-// static void	draw_fov(t_data *data, t_ray *ray)
+// void	draw_fov(t_data *data)
 // {
-// 	bresenham(data, ray);
+// 	int		counter;
+// 	float	detla_x;
+// 	float	delta_y;
+// 	float	angle_beta;
+// 	float	start_angle;
+// 	float	angle_step;
+// 	float	hypotenus;
+// 	t_draw_line	line;
+
+// 	angle_step = (float)FOV / WIDTH;
+// 	start_angle = data->player.angle - (FOV / 2);
+// 	if (start_angle < 0)
+// 		start_angle += 360;
+// 	counter = 0;
+// 	line.x1 = data->player.mini_x
+// 		+ (data->player.size_x / 2);
+// 	line.y1 = data->player.mini_y
+// 		+ (data->player.size_y / 2);
+// 	while (counter <= WIDTH)
+// 	{
+// 		hypotenus = sin(radian(start_angle)) * FOV_LENGHT * 2;
+// 		angle_beta = 90 - ((float)(180 - start_angle) / 2);
+// 		detla_x = sin(radian(angle_beta)) * hypotenus;
+// 		delta_y = cos(radian(angle_beta)) * hypotenus;
+// 		line.x2 = line.x1 + detla_x;
+// 		line.y2 = line.y1 + delta_y;
+// 		bresenham(data, &line);
+// 		start_angle += angle_step;
+// 		counter++;
+// 	}
 // }
 
 //// the top lines are temp, only for debuging //////

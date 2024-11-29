@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 17:05:33 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/29 22:40:49 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	move_player(t_data *data)
 
 int	check_keys(t_data *data)
 {
-	if (!data->keys[0] && !data->keys[1] && !data->keys[2]
-		&& !data->keys[3] && !data->keys[4] && !data->keys[5]
-		&& !data->keys[6])
+	if (!data->keys[RIGHT_FLAG] && !data->keys[LEFT_FLAG] && !data->keys[W_FLAG]
+		&& !data->keys[S_FLAG] && !data->keys[D_FLAG] && !data->keys[A_FLAG]
+		&& !data->keys[CLOSE_FLAG] && !data->keys[R_MOUSE] && !data->keys[L_MOUSE])
 		return (0);
 	return (1);
 }
@@ -59,6 +59,7 @@ int	loop_rendering(t_data *data)
 	raplayer_yasting(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	draw(data);
+	// draw_fov(data);
 	draw_player(data);
 	return (0);
 }

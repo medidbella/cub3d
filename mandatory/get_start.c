@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 17:34:29 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/29 22:49:42 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,55 @@ static void	first_view(t_data *data)
 {
 	raplayer_yasting(data);
 	draw(data);
+	// draw_fov(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	draw_player(data);
+}
+
+// int	mouse_hook(int button, int x, int y, t_data *data)
+// {
+// 	printf("addr ==> %p\n", data);
+// 	printf("button: ==> %d || y: ==> %d || botton: ==> %d\n", button, x, y);
+// 	printf("hello from mouse hook\n");
+// 	return (0);
+// }
+
+int mouse_move_hook(int x, int y, t_data *data)
+{
+	y = y;
+	if (data->keys[MOUSE_FLAG] == 0)
+	{
+		data->mouse_x = x;
+		data->mouse_y = y;
+		data->keys[MOUSE_FLAG] = 1;
+		return (0);
+	}
+	if (x > data->mouse_x)
+	{
+		data->mouse_x = x;
+		data->mouse_y = y;
+		data->keys[R_MOUSE] = 1;
+		data->player.angle += (double)ANGLE * 0.02;
+		loop_rendering(data);
+		data->keys[R_MOUSE] = 0;
+	}
+	else if (x < data->mouse_x)
+	{
+		data->mouse_x = x;
+		data->mouse_y = y;
+		data->keys[L_MOUSE] = 1;
+		data->player.angle -= (double)ANGLE * 0.02;
+		loop_rendering(data);
+		data->keys[L_MOUSE] = 0;
+	}
+	return (0);
 }
 
 void	get_start(t_config *parsed_data)
 {
 	t_data	data;
 
+	printf("origine addr ==> %p\n", &data);
 	data.map = parsed_data->map;
 	data.ceiling_color = parsed_data->ceiling_color;
 	data.floor_color = parsed_data->floor_color;
@@ -92,6 +133,8 @@ void	get_start(t_config *parsed_data)
 	mlx_hook(data.win, 17, 1L << 2, close_win, &data);
 	mlx_hook(data.win, 2, 1L << 0, ft_key_press, &data);
 	mlx_hook(data.win, 3, 1L << 1, ft_key_release, &data);
+	// mlx_mouse_hook(data.win, mouse_hook, &data);
+	mlx_hook(data.win, 6, 1L << 6, mouse_move_hook, &data);
 	mlx_loop_hook(data.mlx, loop_rendering, &data);
 	mlx_loop(data.mlx);
 }
