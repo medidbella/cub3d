@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/28 15:01:06 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:15:02 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,9 @@ static void	player_first_coordinates(t_data *data)
 					- (data->player.size_x / 2);
 				data->player.player_y = y * TILE_SIZE + TILE_SIZE / 2
 					- (data->player.size_y / 2);
-				data->player.x_c = data->player.player_x
-					+ (data->player.size_x / 2);
-				data->player.y_c = data->player.player_y
-					+ (data->player.size_y / 2);
-				data->player.mini_x = data->player.x_c
+				data->player.mini_x = data->player.player_x
 					* data->scale - (data->mini_width / 2);
-				data->player.mini_y = data->player.y_c
+				data->player.mini_y = data->player.player_y
 					* data->scale - (data->mini_height / 2);
 				return ;
 			}

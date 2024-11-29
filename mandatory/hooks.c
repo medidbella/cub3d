@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/28 14:37:44 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:05:33 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	move_player(t_data *data)
 	s_moves(data);
 	d_moves(data);
 	a_moves(data);
-	data->player.mini_x = data->player.x_c
+	data->player.mini_x = data->player.player_x
 		* data->scale - (data->mini_width / 2);
-	data->player.mini_y = data->player.y_c
+	data->player.mini_y = data->player.player_y
 		* data->scale - (data->mini_height / 2);
 }
 
@@ -56,7 +56,7 @@ int	loop_rendering(t_data *data)
 		close_win(data);
 	rotate(data);
 	move_player(data);
-	ray_casting(data);
+	raplayer_yasting(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	draw(data);
 	draw_player(data);

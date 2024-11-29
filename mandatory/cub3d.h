@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/28 14:22:13 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:07:27 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define CLOSE 65307
 # define IMG_SIZE_X 4
 # define IMG_SIZE_Y 4
-# define ANGLE 2.5
+# define ANGLE 1.5
 # define WALL_COLOR 0x61F5B5
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000
@@ -85,8 +85,6 @@ typedef struct s_player
 	void	*erase_img;
 	double	player_x;
 	double	player_y;
-	double	x_c;
-	double	y_c;
 	double	mini_x;
 	double	mini_y;
 	int		size_x;
@@ -171,7 +169,7 @@ void	a_moves(t_data *data);
 void	d_moves(t_data *data);
 void	s_moves(t_data *data);
 void	w_moves(t_data *data);
-void	ray_casting(t_data *data);
+void	raplayer_yasting(t_data *data);
 void	draw(t_data *data);
 void	move_player(t_data *data);
 void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color);

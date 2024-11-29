@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/28 14:18:40 by alaktari         ###   ########.fr       */
+/*   Created: 2024/11/29 17:33:03 by alaktari          #+#    #+#             */
+/*   Updated: 2024/11/29 17:33:34 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	init_values(t_data *data, t_ray *ray, t_draw_line *line)
 {
-	line->x1 = data->player.x_c;
-	line->y1 = data->player.y_c;
+	line->x1 = data->player.player_x
+		+ (data->player.size_x / 2);
+	line->y1 = data->player.player_y
+		+ (data->player.size_y / 2);
 	if (ray->side_flag == 1)
 	{
 		line->x2 = ray->horizontal_x;
@@ -48,11 +50,13 @@ void	bresenham(t_data *data, t_ray *ray)
 	init_values(data, ray, &line);
 	while (1)
 	{
-		index_x = (line.x1 / TILE_SIZE) - ((int)line.x1 % TILE_SIZE == 0 && data->player.x_c > line.x1);
-		index_y = (line.y1 / TILE_SIZE) - ((int)line.y1 % TILE_SIZE == 0 && data->player.y_c > line.y1);
+		index_x = (line.x1 / TILE_SIZE) - ((int)line.x1 % TILE_SIZE == 0
+				&& data->player.player_x > line.x1);
+		index_y = (line.y1 / TILE_SIZE) - ((int)line.y1 % TILE_SIZE == 0
+				&& data->player.player_y > line.y1);
 		if (!((int)index_y < data->height_2d
-			&& (int)index_y >= 0 && (int)index_x >= 0
-			&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
+				&& (int)index_y >= 0 && (int)index_x >= 0
+				&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
 			break ;
 		if (!ft_strchr("NSEW0", data->map[(int)index_y][(int)index_x]))
 			break ;
@@ -161,7 +165,7 @@ void	small_distance(t_ray *ray)
 	}
 }
 
-void	ray_casting(t_data *data)
+void	raplayer_yasting(t_data *data)
 {
 	t_ray	ray;
 	int		column;

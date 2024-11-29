@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/28 15:01:57 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:15:44 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ void	move_player(t_data *data)
 	a_moves(data, tab);
 	data->player.player_x += tab[0];
 	data->player.player_y += tab[1];
-	data->player.x_c += tab[0];
-	data->player.y_c += tab[1];
-	data->player.mini_x = data->player.x_c
+	data->player.mini_x = data->player.player_x
 		* data->scale - (data->mini_width / 2);
-	data->player.mini_y = data->player.y_c
+	data->player.mini_y = data->player.player_y
 		* data->scale - (data->mini_height / 2);
 }
 
