@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/28 15:01:06 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:06:36 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	get_start(t_config *parsed_data)
 	data.player.angle = radian(parsed_data->player_start_angle);
 	data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
 	setup(&data);
-	initialize_textures(&data, parsed_data);
+	initialize_wall_textures(&data, parsed_data);
+	sprites_init(data.weapons, data.mlx);
 	data.door_flag = parsed_data->door_flag;
 	init_key_flags(&data);
 	first_view(&data);

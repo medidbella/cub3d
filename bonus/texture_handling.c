@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   texture_handling.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/25 16:19:12 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:55:45 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_textures_memory(t_data *data, t_texture *my_textures)
+void	free_wall_textures_memory(t_data *data, t_texture *my_textures)
 {
 	int	i;
 
@@ -32,22 +32,30 @@ int	get_cords_color(t_texture *img, int x, int y)
 	return (*(int *)dst);
 }
 
-void	initialize_textures(t_data *data, t_config *parsed_data)
+void	texture_init(void *mlx, t_texture *texture, char *file_path)
 {
-	int	i;
+	texture->img = mlx_xpm_file_to_image(mlx, file_path, &texture->width,
+		&texture->hight);
+	if (!texture->img)
+		printf("%s\n", file_path);
+	texture->iter = mlx_get_data_addr(texture->img, &texture->pixel_bits,
+		&texture->line_lenght, &texture->endianess);
+}
+
+void	initialize_wall_textures(t_data *data, t_config *parsed_data)
+{
+	int		i;
 
 	i = 0;
-	while (i <= 3 + (parsed_data->door_flag == 1))
+	while (i <= 3)
 	{
-		data->wall_textures[i].img = mlx_xpm_file_to_image(data->mlx,
-				parsed_data->textures_paths[i], &data->wall_textures[i].width,
-				&data->wall_textures[i].hight);
-		data->wall_textures[i].iter = mlx_get_data_addr
-			(data->wall_textures[i].img, &data->wall_textures[i].pixel_bits,
-				&data->wall_textures[i].line_lenght,
-				&data->wall_textures[i].endianess);
+		texture_init(data->mlx, &data->wall_textures[i],
+			parsed_data->textures_paths[i]);
 		i++;
 	}
+	if (parsed_data->door_flag == 1)
+		texture_init(data->mlx, &data->wall_textures[i],
+			parsed_data->textures_paths[i]);
 }
 
 void	get_texture_color(t_data *data, t_ray *ray, int current_y)
