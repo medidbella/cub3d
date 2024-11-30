@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 17:15:44 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:44:32 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	close_win(t_data *data)
 {
-	free_textures_memory(data, data->wall_textures);
+	free_wall_textures_memory(data, data->wall_textures);
 	mlx_destroy_image(data->mlx, data->img.img);
 	mlx_destroy_image(data->mlx, data->player.erase_img);
 	mlx_destroy_image(data->mlx, data->player.player_img);
@@ -64,5 +64,6 @@ int	loop_rendering(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	draw(data);
 	draw_player(data);
+	render_weapon(data, &data->weapons[0]);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 17:37:41 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:45:04 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,12 @@ void	bresenham(t_data *data, t_ray *ray)
 
 void	height_and_texture(t_data *data, t_ray *ray)
 {
-	if (ray->side_flag == 1)
+	if (ray->is_door)
+	{
+		ray->texture_idx = DOOR_IDX;
+		return ;
+	}	
+	else if (ray->side_flag == 1)
 	{
 		if (ray->rayangle >= radian(180))
 			ray->texture_idx = S_INDEX;
@@ -174,6 +179,7 @@ void	ray_casting(t_data *data)
 		ray.rayangle += radian(360);
 	while (column <= WIDTH)
 	{
+		ray.is_door = 0;
 		horizontal_distance(data, &ray, ray.rayangle);
 		vertical_distance(data, &ray, ray.rayangle);
 		real_distance(&ray, data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 17:13:32 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:46:50 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "parsing/parsing.h"
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
+# include "graphics.h"
 # include <unistd.h>
 # include <string.h>
 # include <stdio.h>
@@ -45,22 +46,7 @@
 # define BLACK 0x000000
 # define FOV 60
 # define SPEED_DIVISOR 10
-# define N_INDEX 0
-# define S_INDEX 1
-# define W_INDEX 2
-# define E_INDEX 3
-# define WALL_INDEX 4
 
-typedef struct s_texture
-{
-	void	*img;
-	char	*iter;
-	int		line_lenght;
-	int		pixel_bits;
-	int		endianess;
-	int		width;
-	int		hight;
-}	t_texture;
 
 typedef struct s_ray
 {
@@ -78,6 +64,7 @@ typedef struct s_ray
 	int		curr_color;
 	int		texture_idx;
 	double	height;
+	int		is_door;
 }	t_ray;
 
 typedef struct s_player
@@ -111,6 +98,7 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+
 typedef struct s_data
 {
 	int			map_hight;
@@ -127,6 +115,7 @@ typedef struct s_data
 	t_img		img_2d;
 	t_player	player;
 	t_texture	wall_textures[5];
+	t_weapon	weapons[WEAPON_NB];
 	int			ceiling_color;
 	int			floor_color;
 	int			keys[7];
@@ -157,7 +146,6 @@ typedef struct s_draw_line
 	int	color;
 }	t_draw_line;
 
-void	free_textures_memory(t_data *data, t_texture *my_textures);
 void	get_start(t_config *parsed_data);
 void	init_key_flags(t_data *data);
 int		ft_key_press(int key, t_data *data);
@@ -165,6 +153,7 @@ int		ft_key_release(int key, t_data *data);
 int		loop_rendering(t_data *data);
 int		close_win(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		get_color(t_data *data, int x, int y, int *is_door);
 float	radian(float degree);
 void	rotate(t_data *data);
 void	move_player(t_data *data);
@@ -176,14 +165,13 @@ void	bresenham(t_data *data, t_ray *ray);
 void	ray_casting(t_data *data);
 void	draw(t_data *data);
 void	move_player(t_data *data);
-void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color);
 void	horizontal_distance(t_data *data, t_ray *ray, double rayangle);
 double	get_distance(t_data *data, double x, double y);
 void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
-void	draw_map2d(t_data *data);
 void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 void	initialize_textures(t_data *data, t_config *parsed_data);
 void	draw_2d_wall(t_data *data, int x, int y);
 void	draw_player(t_data *data);
+
 
 #endif
