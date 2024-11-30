@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 22:49:42 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/30 13:22:08 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,22 +91,28 @@ int mouse_move_hook(int x, int y, t_data *data)
 		data->keys[MOUSE_FLAG] = 1;
 		return (0);
 	}
-	if (x > data->mouse_x)
+	if (x > data->mouse_x + 5)
 	{
 		data->mouse_x = x;
 		data->mouse_y = y;
 		data->keys[R_MOUSE] = 1;
 		data->player.angle += (double)ANGLE * 0.02;
+		if (data->player.angle > radian(360))
+			data->player.angle -= radian(360);
 		loop_rendering(data);
+		// raplayer_yasting(data);
 		data->keys[R_MOUSE] = 0;
 	}
-	else if (x < data->mouse_x)
+	else if (x < data->mouse_x - 5)
 	{
 		data->mouse_x = x;
 		data->mouse_y = y;
 		data->keys[L_MOUSE] = 1;
 		data->player.angle -= (double)ANGLE * 0.02;
+		if (data->player.angle < 0)
+			data->player.angle = radian(360) - data->player.angle;
 		loop_rendering(data);
+		// raplayer_yasting(data);
 		data->keys[L_MOUSE] = 0;
 	}
 	return (0);
