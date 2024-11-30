@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/28 18:05:48 by midbella         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:44:54 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static int	check_barriers(t_data *data, float x, float y)
 	float	index_x;
 	float	index_y;
 
-	new_x = data->player.x_c + x;
-	new_y = data->player.y_c + y;
+	new_x = data->player.player_x + x;
+	new_y = data->player.player_y + y;
 	index_x = (new_x / TILE_SIZE)
-		- ((int)new_x % TILE_SIZE == 0 && data->player.x_c > new_x);
+		- ((int)new_x % TILE_SIZE == 0 && data->player.player_x > new_x);
 	index_y = (new_y / TILE_SIZE)
-		- ((int)new_y % TILE_SIZE == 0 && data->player.y_c > new_y);
+		- ((int)new_y % TILE_SIZE == 0 && data->player.player_y > new_y);
 	if (!((int)index_y < data->height_2d
 			&& (int)index_y >= 0 && (int)index_x >= 0
 			&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))

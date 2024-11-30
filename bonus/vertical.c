@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/27 19:08:58 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:36:37 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ double	calculate_delta_x(t_data *data, double *vertical_x
 
 	if (rayangle > radian(90) && rayangle < radian(270))
 	{
-		if (*vertical_x == data->player.x_c && *vertical_y == data->player.y_c)
+		if (*vertical_x == data->player.player_x
+			&& *vertical_y == data->player.player_y)
 		{
 			delta_x = *vertical_x - (((int)(*vertical_x / TILE_SIZE))
 					* TILE_SIZE);
@@ -31,7 +32,8 @@ double	calculate_delta_x(t_data *data, double *vertical_x
 	}
 	else
 	{
-		if (*vertical_x == data->player.x_c && *vertical_y == data->player.y_c)
+		if (*vertical_x == data->player.player_x
+			&& *vertical_y == data->player.player_y)
 			delta_x = *vertical_x - (((int)(*vertical_x / TILE_SIZE) + 1)
 					* TILE_SIZE);
 		else
@@ -59,7 +61,7 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 	double	check_x;
 
 	check_x = ray->vertical_x;
-	if (ray->vertical_x < data->player.x_c)
+	if (ray->vertical_x < data->player.player_x)
 		check_x -= 1;
 	*x = check_x / TILE_SIZE;
 	*y = ray->vertical_y / TILE_SIZE;
@@ -79,8 +81,8 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 	int		x;
 	int		y;
 
-	ray->vertical_y = data->player.y_c;
-	ray->vertical_x = data->player.x_c;
+	ray->vertical_y = data->player.player_y;
+	ray->vertical_x = data->player.player_x;
 	ray->vertical_distance = -1.0;
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/27 19:09:36 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:05:33 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 double	get_distance(t_data *data, double x, double y)
 {
-	return (sqrt(pow((data->player.x_c - x), 2)
-			+ pow((data->player.y_c - y), 2)));
+	return (sqrt(pow((data->player.player_x - x), 2)
+			+ pow((data->player.player_y - y), 2)));
 }
 
 static double	calculate_delta_y(t_data *data, double *horizontal_x
@@ -25,8 +25,8 @@ static double	calculate_delta_y(t_data *data, double *horizontal_x
 
 	if (rayangle > radian(180))
 	{
-		if (*horizontal_x == data->player.x_c
-			&& *horizontal_y == data->player.y_c)
+		if (*horizontal_x == data->player.player_x
+			&& *horizontal_y == data->player.player_y)
 		{
 			delta_y = *horizontal_y
 				- (((int)(*horizontal_y / TILE_SIZE)) * (TILE_SIZE));
@@ -38,8 +38,8 @@ static double	calculate_delta_y(t_data *data, double *horizontal_x
 	}
 	else
 	{
-		if (*horizontal_x == data->player.x_c
-			&& *horizontal_y == data->player.y_c)
+		if (*horizontal_x == data->player.player_x
+			&& *horizontal_y == data->player.player_y)
 			delta_y = (*horizontal_y)
 				- (((int)((*horizontal_y) / TILE_SIZE) + 1) * TILE_SIZE);
 		else
@@ -67,7 +67,7 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 	double	check_y;
 
 	check_y = ray->horizontal_y;
-	if (ray->horizontal_y < data->player.y_c)
+	if (ray->horizontal_y < data->player.player_y)
 		check_y -= 1;
 	*x = ray->horizontal_x / TILE_SIZE;
 	*y = check_y / TILE_SIZE;
@@ -87,8 +87,8 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 	int		x;
 	int		y;
 
-	ray->horizontal_y = data->player.y_c;
-	ray->horizontal_x = data->player.x_c;
+	ray->horizontal_y = data->player.player_y;
+	ray->horizontal_x = data->player.player_x;
 	ray->horizontal_distance = -1.0;
 	while (1)
 	{
