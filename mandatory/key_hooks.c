@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:38:14 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 22:46:31 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/01 12:04:35 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	init_key_flags(t_data *data)
 	data->keys[D_FLAG] = 0;
 	data->keys[A_FLAG] = 0;
 	data->keys[CLOSE_FLAG] = 0;
-	data->keys[R_MOUSE] = 0;
-	data->keys[L_MOUSE] = 0;
 	data->keys[MOUSE_FLAG] = 0;
 }
 

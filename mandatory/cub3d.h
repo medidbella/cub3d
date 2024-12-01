@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 22:47:26 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/01 12:04:48 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@
 # define	D_FLAG 4
 # define	A_FLAG 5
 # define	CLOSE_FLAG 6
-# define	L_MOUSE 7
-# define	R_MOUSE 8
-# define	MOUSE_FLAG 9
+# define	MOUSE_FLAG 7
+# define	SENSITIVITY 0.005;
+
 
 
 
