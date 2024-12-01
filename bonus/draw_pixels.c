@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixels.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/28 18:07:07 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:13:25 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	draw_player(t_data *data)
 	int	draw_y;
 
 	i = -2;
-	player_center_x = data->mini_width / 2;
-	player_center_y = data->mini_height / 2;
+	player_center_x = (data->mini_width / 2) - (data->player.size_x / 2);
+	player_center_y = (data->mini_height / 2) - (data->player.size_y / 2);
 	while (i <= 2)
 	{
 		j = -2;
