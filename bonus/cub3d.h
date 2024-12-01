@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/30 11:46:50 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/01 12:47:27 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@
 # define FOV 60
 # define SPEED_DIVISOR 10
 
+# define RIGHT_FLAG 0
+# define LEFT_FLAG 1
+# define W_FLAG 2
+# define S_FLAG 3
+# define D_FLAG 4
+# define A_FLAG 5
+# define CLOSE_FLAG 6
+# define MOUSE_FLAG 7
+# define SENSITIVITY 0.005
 
 typedef struct s_ray
 {
@@ -98,7 +107,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-
 typedef struct s_data
 {
 	int			map_hight;
@@ -118,8 +126,10 @@ typedef struct s_data
 	t_weapon	weapons[WEAPON_NB];
 	int			ceiling_color;
 	int			floor_color;
-	int			keys[7];
+	int			keys[8];
 	int			door_flag;
+	int			mouse_x;
+	int			mouse_y;
 }	t_data;
 
 typedef struct s_draw
@@ -172,6 +182,5 @@ void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 void	initialize_textures(t_data *data, t_config *parsed_data);
 void	draw_2d_wall(t_data *data, int x, int y);
 void	draw_player(t_data *data);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 12:04:48 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/01 12:44:46 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,15 @@
 # define S_INDEX 1
 # define W_INDEX 2
 # define E_INDEX 3
-# define FOV_LENGHT 20
-# define	RIGHT_FLAG 0
-# define	LEFT_FLAG 1
-# define	W_FLAG 2
-# define	S_FLAG 3
-# define	D_FLAG 4
-# define	A_FLAG 5
-# define	CLOSE_FLAG 6
-# define	MOUSE_FLAG 7
-# define	SENSITIVITY 0.005;
 
-
-
+# define RIGHT_FLAG 0
+# define LEFT_FLAG 1
+# define W_FLAG 2
+# define S_FLAG 3
+# define D_FLAG 4
+# define A_FLAG 5
+# define CLOSE_FLAG 6
+# define MOUSE_FLAG 7
 
 typedef struct s_texture
 {
@@ -140,9 +136,7 @@ typedef struct s_data
 	t_texture	wall_textures[4];
 	int			ceiling_color;
 	int			floor_color;
-	int			keys[10];
-	int			mouse_x;
-	int			mouse_y;
+	int			keys[7];
 }	t_data;
 
 typedef struct s_draw
@@ -184,7 +178,7 @@ void	a_moves(t_data *data);
 void	d_moves(t_data *data);
 void	s_moves(t_data *data);
 void	w_moves(t_data *data);
-void	raplayer_yasting(t_data *data);
+void	ray_casting(t_data *data);
 void	draw(t_data *data);
 void	move_player(t_data *data);
 void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color);
@@ -194,7 +188,5 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
 void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 void	initialize_textures(t_data *data, t_config *parsed_data);
 void	draw_player(t_data *data);
-
-void	draw_fov(t_data *data);
 
 #endif

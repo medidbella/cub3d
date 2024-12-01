@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:56:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/28 17:56:44 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/01 12:50:24 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 # define DOOR_COLOR 0xffc704
 # define BLACK 0x000000
 
-typedef struct s_ray t_ray;
-typedef struct s_player t_player;
-typedef struct s_data t_data;
-typedef struct s_config t_config;
+typedef struct s_ray	t_ray;
+typedef struct s_player	t_player;
+typedef struct s_data	t_data;
+typedef struct s_config	t_config;
 
 typedef struct s_texture
 {
@@ -41,7 +41,7 @@ typedef struct s_texture
 	int		hight;
 }	t_texture;
 
-typedef	struct s_weapon
+typedef struct s_weapon
 {
 	t_texture	*wepoan_frames;
 	int			x_start;

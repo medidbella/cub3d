@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 12:05:39 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/01 12:39:17 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,12 @@ static void	setup(t_data *data)
 	data->player.fov = radian(FOV);
 	data->player.distance_to_project_plan = ((float)WIDTH / 2)
 		/ tan(data->player.fov / 2);
-	data->mouse_x = WIDTH / 2;
-	data->mouse_y = HEIGHT / 2;
-	mlx_mouse_hide(data->mlx, data->win);
 }
 
 static void	first_view(t_data *data)
 {
-	raplayer_yasting(data);
+	ray_casting(data);
 	draw(data);
-	// draw_fov(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	draw_player(data);
 }
@@ -96,11 +92,6 @@ void	get_start(t_config *parsed_data)
 	mlx_hook(data.win, 17, 1L << 2, close_win, &data);
 	mlx_hook(data.win, 2, 1L << 0, ft_key_press, &data);
 	mlx_hook(data.win, 3, 1L << 1, ft_key_release, &data);
-	// mlx_mouse_hook(data.win, mouse_hook, &data);
-	// mlx_hook(data.win, 6, 1L << 6, mouse_move_hook, &data);
 	mlx_loop_hook(data.mlx, loop_rendering, &data);
 	mlx_loop(data.mlx);
 }
-
-
-//i have a triangle abc , the angle b = 90 degrees, i know the lengths ab and bc and ac, i know the coordinates of each point, and i am looking for the angle a?

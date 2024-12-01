@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/30 11:44:26 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/01 12:16:31 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void	setup(t_data *data)
 	data->player.fov = radian(FOV);
 	data->player.distance_to_project_plan = ((float)WIDTH / 2)
 		/ tan(data->player.fov / 2);
+	data->mouse_x = WIDTH / 2;
+	data->mouse_y = HEIGHT / 2;
+	mlx_mouse_hide(data->mlx, data->win);
 }
 
 void	first_view(t_data *data)
@@ -77,7 +80,6 @@ void	get_start(t_config *parsed_data)
 	t_data	data;
 
 	data.map = parsed_data->map;
-	data.player.player = 0;
 	data.ceiling_color = parsed_data->ceiling_color;
 	data.floor_color = parsed_data->floor_color;
 	data.map_hight = parsed_data->map_hight;
