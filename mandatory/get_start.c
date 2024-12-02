@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 16:10:03 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/02 22:28:33 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,13 @@ void	get_start(t_config *parsed_data)
 	parsed_data->map = NULL;
 	free_parsed_data(parsed_data);
 	init_key_flags(&data);
+	
+	data.player.player_x = 71.079271;
+	data.player.player_y = 119.316774;
+	data.player.angle = 5.550147 + (5.062424 - 5.026548);
+	printf("angle:==> %f\n", data.player.angle * 180 / M_PI);
+	printf("Px: %f ||| Py: %f\n\n", data.player.player_x, data.player.player_y);
+	
 	first_view(&data);
 	mlx_hook(data.win, 17, 1L << 2, close_win, &data);
 	mlx_hook(data.win, 2, 1L << 0, ft_key_press, &data);

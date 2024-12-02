@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 17:35:14 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/02 23:11:30 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,12 @@ static void	find_vertical_point(t_data *data, double rayangle
 		return ;
 	delta_x = calculate_delta_x(data, vertical_x, vertical_y, rayangle);
 	delta_y = tan(rayangle) * delta_x;
+	// printf("ray angle ==> %f || tan ==> %f\n", rayangle, tan(rayangle));
 	*vertical_x = *vertical_x - delta_x;
 	*vertical_y = *vertical_y - delta_y;
+	
+	// printf("delta x: %f || delta y: %f\n", delta_x, delta_y);
+	// printf("V_x: %f || V_y: %f\n", *vertical_x, *vertical_y);
 }
 
 static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
@@ -65,6 +69,7 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 		check_x -= 1;
 	*x = check_x / TILE_SIZE;
 	*y = ray->vertical_y / TILE_SIZE;
+	// printf("index x: %d || index y: %d\n", *x, *y);
 	if ((*y < data->height_2d && *y >= 0)
 		&& (*x >= 0 && *x < (int)ft_strlen(data->map[*y])))
 	{
@@ -76,6 +81,22 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 	return (false);
 }
 
+static void	get_door_distance(t_data *data, t_ray *ray, double rayangle)
+{
+	double	x_door;
+	double	y_door;
+	double	delta_x;
+	double	delta_y;
+
+	delta_x = (double)TILE_SIZE / 2;
+	delta_y = tan(rayangle) * delta_x;
+	x_door = ray->vertical_x - delta_x;
+	y_door = ray->vertical_y - delta_y;
+
+	ray->vertical_distance = get_distance(data, x_door, y_door);
+		ray->v_door = 1;
+}
+
 void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 {
 	int		x;
@@ -84,9 +105,12 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 	ray->vertical_y = data->player.player_y;
 	ray->vertical_x = data->player.player_x;
 	ray->vertical_distance = -1.0;
+	// printf("Px: %f || Py: %f\n", data->player.player_x, data->player.player_y);
 	while (1)
 	{
 		find_vertical_point(data, rayangle, &ray->vertical_x, &ray->vertical_y);
+		// printf("=======================\n");
+		printf("V_x: %f || V_y: %f\n", ray->vertical_x, ray->vertical_y);
 		if (rayangle == radian(90) || rayangle == radian(270)
 			|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
 			|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d
@@ -94,9 +118,17 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 			break ;
 		if (data->map[y][x] == '1')
 		{
+			printf("Hitting wall\n");
 			ray->vertical_distance = get_distance(data, ray->vertical_x,
-					ray->vertical_y);
-			break ;
+				ray->vertical_y);
 		}
+		else if (data->map[y][x] == 'D')
+		{
+			printf("hitting door\n");
+			get_door_distance(data, ray, rayangle);
+		}
+		else
+			continue ;
+		break ;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 17:05:33 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/02 22:26:50 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,21 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 	return (false);
 }
 
+static void	get_door_distance(t_data *data, t_ray *ray, double rayangle)
+{
+	double	x_door;
+	double	y_door;
+	double	delta_x;
+	double	delta_y;
+
+	delta_y = (double)TILE_SIZE / 2;
+	delta_x = delta_y / tan(rayangle);
+	x_door = ray->horizontal_x - delta_x;
+	y_door = ray->horizontal_y - delta_y;
+	ray->horizontal_distance = get_distance(data, x_door, y_door);
+		ray->h_door = 1;
+}
+
 void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 {
 	int		x;
@@ -94,6 +109,7 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 	{
 		find_horizontal_point(data, rayangle, &ray->horizontal_x,
 			&ray->horizontal_y);
+		printf("H_x: %f || H_y: %f\n", ray->horizontal_x, ray->horizontal_y);
 		if (rayangle == 0 || rayangle == radian(180)
 			|| ray->horizontal_y > data->height_2d || ray->horizontal_y < 0
 			|| ray->horizontal_x > data->width_2d || ray->horizontal_x < 0
@@ -101,9 +117,17 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 			break ;
 		if (data->map[y][x] == '1')
 		{
+			printf("hitting wall\n");
 			ray->horizontal_distance = get_distance(data, ray->horizontal_x,
-					ray->horizontal_y);
-			break ;
+				ray->horizontal_y);
 		}
+		else if (data->map[y][x] == 'D')
+		{
+			printf("hitting door\n");
+			get_door_distance(data, ray, rayangle);
+		}
+		else
+			continue ;
+		break ;
 	}
 }

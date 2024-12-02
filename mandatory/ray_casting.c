@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:33:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 12:40:00 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/02 23:14:31 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,10 @@ static void	draw_column(t_data *data, t_ray *ray, int column)
 		i = start - 1;
 	while (++i < end)
 	{
-		get_texture_color(data, ray, i - start);
+		if (data->door)
+			ray->curr_color = 0xFFFFFF;
+		else
+			get_texture_color(data, ray, i - start);
 		my_mlx_pixel_put(data, column, i, ray->curr_color);
 	}
 	while (i < HEIGHT)
@@ -141,28 +144,33 @@ static void	real_distance(t_ray *ray, t_data *data)
 			* ray->vertical_distance;
 }
 
-void	small_distance(t_ray *ray)
+int	small_distance(t_ray *ray)
 {
 	if (ray->horizontal_distance == -1)
 	{
 		ray->side_flag = 2;
 		ray->distance = ray->vertical_distance;
+		return (ray->v_door);
 	}
 	else if (ray->vertical_distance == -1)
 	{
 		ray->side_flag = 1;
 		ray->distance = ray->horizontal_distance;
+		return (ray->h_door);
 	}
 	else if (ray->vertical_distance <= ray->horizontal_distance)
 	{
 		ray->side_flag = 2;
 		ray->distance = ray->vertical_distance;
+		return (ray->v_door);
 	}
 	else if (ray->horizontal_distance < ray->vertical_distance)
 	{
 		ray->side_flag = 1;
 		ray->distance = ray->horizontal_distance;
+		return (ray->h_door);
 	}
+	return (0);
 }
 
 void	ray_casting(t_data *data)
@@ -174,17 +182,39 @@ void	ray_casting(t_data *data)
 	ray.rayangle = data->player.angle - (data->player.fov / 2);
 	if (ray.rayangle < 0)
 		ray.rayangle += radian(360);
+	printf("first ray angle: %f\n\n", ray.rayangle * 180 / M_PI);
+	data->debug = 0;
 	while (column <= WIDTH)
 	{
+		ray.h_door = 0;
+		ray.v_door = 0;
+		printf("------------- horizontal -----------------\n");
 		horizontal_distance(data, &ray, ray.rayangle);
+		printf("-------------------------------------------\n\n");
+		printf("--------------- vertical -----------------\n");
 		vertical_distance(data, &ray, ray.rayangle);
+		printf("-------------------------------------------\n\n");
+
+
+		printf("H distance: %f\n", ray.horizontal_distance);
+		printf("V distance: %f\n", ray.vertical_distance);
+
 		real_distance(&ray, data);
-		small_distance(&ray);
+		data->door = small_distance(&ray);
+
+		if (data->debug == 0)
+		{
+			printf("door ==> %d\n", data->door);
+			printf("ray angle: %f\n", ray.rayangle);
+			exit(0);
+		}
+
 		// draw_fov(data, &ray);
 		draw_column(data, &ray, column);
 		column++;
 		ray.rayangle += data->player.angle_step;
 		if (ray.rayangle > radian(360))
 			ray.rayangle -= radian(360);
+		data->debug++;
 	}
 }

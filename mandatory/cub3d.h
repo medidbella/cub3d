@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 16:10:09 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:52:39 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct s_ray
 	int		curr_color;
 	int		texture_idx;
 	double	height;
+	int		h_door;
+	int		v_door;
 }	t_ray;
 
 typedef struct s_player
@@ -137,6 +139,8 @@ typedef struct s_data
 	int			ceiling_color;
 	int			floor_color;
 	int			keys[7];
+	int			door;
+	int			debug;
 }	t_data;
 
 typedef struct s_draw

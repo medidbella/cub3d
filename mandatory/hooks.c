@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 16:08:35 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:51:26 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,8 @@ int	loop_rendering(t_data *data)
 	draw(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	draw_player(data);
+	// printf("=============================\n");
+	// printf("player angle: %f\n", data->player.angle);
+	// printf("Px: %f || Py: %f\n", data->player.player_x, data->player.player_y);
 	return (0);
 }
