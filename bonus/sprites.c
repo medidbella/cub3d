@@ -6,19 +6,11 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:01:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/28 18:28:02 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:02:44 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	pre_init(t_weapon *weapons)
-{
-	weapons[0].frames_nb = PISTOLE_FNB;
-	weapons[1].frames_nb = SHOTGUN_FNB;
-	weapons[0].wepoan_frames = malloc(sizeof(t_texture) * weapons[0].frames_nb);
-	weapons[1].wepoan_frames = malloc(sizeof(t_texture) * weapons[1].frames_nb);
-}
 
 void	sprites_init(t_weapon *weapons, void *mlx)
 {
@@ -27,20 +19,26 @@ void	sprites_init(t_weapon *weapons, void *mlx)
 	char	*tab[WEAPON_NB];
 
 	i = -1;
+	weapons[PISTOLE].frames_nb = PISTOLE_FNB;
+	weapons[MACHIN_GUN].frames_nb = MACHINE_GUN_FNB;
+	weapons[ELECTRIC_GUN].frames_nb = ELECTRIC_FNB;
 	tab[0] = ft_strdup("textures/pistole/pist_f1.xpm");
-	tab[1] = ft_strdup("textures/shotgun/sgun_f1.xpm");
-	pre_init(weapons);
+	tab[1] = ft_strdup("textures/machine_gun/mgun_f1.xpm");
+	tab[2] = ft_strdup("textures/electric/electric_f1.xpm");
 	while (++i < WEAPON_NB)
 	{
 		iter = -1;
+		weapons[i].weapon_frames = malloc(sizeof(t_texture) * weapons[i].frames_nb);
+		weapons[i].current_frame_index = 0;
 		while (++iter < weapons[i].frames_nb)
 		{
-			texture_init(mlx, &weapons[i].wepoan_frames[iter], tab[i]);
+			texture_init(mlx, &weapons[i].weapon_frames[iter], tab[i]);
 			tab[i][ft_strlen(tab[i]) - 5]++;
 		}
 	}
 	free(tab[0]);
 	free(tab[1]);
+	free(tab[2]);
 }
 
 void	free_sprites_memory(t_weapon *weapons, void *mlx)
@@ -54,45 +52,47 @@ void	free_sprites_memory(t_weapon *weapons, void *mlx)
 		iter = 0;
 		while (iter < weapons[i].frames_nb)
 		{
-			mlx_destroy_image(weapons[i].wepoan_frames[iter].img, mlx);
+			mlx_destroy_image(weapons[i].weapon_frames[iter].img, mlx);
 			iter++;
 		}
 		i++;
 	}
-	free(weapons->wepoan_frames);
+	free(weapons->weapon_frames);
 }
 
-void	render_weapon(t_data *data, t_weapon *weapon)
+void	init_frame_render_data(t_weapon *weapon, int frame_index, int used_weapon)
 {
-	unsigned int	color;
-	int				x;
-	int				y;
-	int			new_width;
-	int			new_hight;
-
-	new_width = WIDTH / 4;
-	new_hight = HEIGHT / 2;
-	weapon->x_scale =  (float)weapon->wepoan_frames[0].width / new_width;
-	weapon->y_scale =  (float)weapon->wepoan_frames[0].hight / new_hight;
-	weapon->x_start = HEIGHT / 2 + (weapon->wepoan_frames[0].hight / 2);
-	x = 0;
-	while (x < new_width)
+	weapon->scaled_width = WIDTH / 3;
+	weapon->scaled_hight = HEIGHT / 3;
+	weapon->x_scale =  (float)weapon->weapon_frames[frame_index].width / weapon->scaled_width;
+	weapon->y_scale =  (float)weapon->weapon_frames[frame_index].hight / weapon->scaled_hight;
+	weapon->x_start = WIDTH / 2;
+	if (used_weapon == PISTOLE)
 	{
-		y = 0;
-		weapon->y_start = HEIGHT - new_hight;
-		while (y < new_hight)
-		{
-			color = get_cords_color(&weapon->wepoan_frames[0],
-				x * weapon->x_scale, y * weapon->y_scale);
-			if (color != 0xff000000)
-				mlx_pixel_put(data->mlx, data->win, weapon->x_start,
-					weapon->y_start, color);
-			weapon->y_start++;
-			y++;
-		}
-		weapon->x_start++;
-		x++;
+		weapon->scaled_width = WIDTH / 4;
+		weapon->scaled_hight = HEIGHT / 4;
 	}
 }
 
-//pist x = 110 y = 130
+void	start_animation(t_data	*data)
+{
+	if (data->weapons[data->used_weapon].current_frame_index != 0)
+		return ;
+	data->weapons[data->used_weapon].current_frame_index = 1;
+	data->last_frame_time = ft_get_time();
+}
+
+void	set_frame_index(t_data *data)
+{
+	unsigned long	elapsed_time;
+	
+	if (data->weapons[data->used_weapon].current_frame_index == 0)
+		return ;
+	elapsed_time = ft_get_time() - data->last_frame_time;
+	if (elapsed_time < FRAME_DELAY)
+		return ;
+	data->weapons[data->used_weapon].current_frame_index += 1;
+	if (data->weapons[data->used_weapon].current_frame_index > data->weapons[data->used_weapon].frames_nb - 1)
+		data->weapons[data->used_weapon].current_frame_index = 0;
+	data->last_frame_time = ft_get_time();
+}

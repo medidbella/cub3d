@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:44:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/28 18:18:43 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:01:27 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,22 @@ void	set_player_angle(t_config *scene_data, char player_char, int y,
 
 void	map_pars_helper(char **map, int y, int x, t_config *scene_data)
 {
-	if (!ft_strchr(" 01NSWEVH", map[y][x]))
+	if (!ft_strchr(" 01NSWED", map[y][x]))
 		error_handler("use of invalid character in the map\n", NULL,
 			NULL, scene_data);
 	if (ft_strchr("SNWE", map[y][x]))
 		set_player_angle(scene_data, map[y][x], y, x);
-	if (ft_strchr("0VH", map[y][x]) && ((int)ft_strlen(map[y - 1]) <= x
+	if (ft_strchr("0D", map[y][x]) && ((int)ft_strlen(map[y - 1]) <= x
 		|| (int)ft_strlen(map[y + 1]) <= x))
 		error_handler("map isn't surrounded by walls",
 			NULL, NULL, scene_data);
-	if (map[y][x] == 'H' || map[y][x] == 'V')
+	if (map[y][x] == 'D')
 	{
 		if (!scene_data->textures_paths[DOOR_IDX])
 			error_handler
 				("door present in tha map but it's texture isn't specified\n"
 				, NULL, NULL, scene_data);
-		alignement_check(map, x, y, scene_data);
+		alignment_check(map, x, y, scene_data);
 		scene_data->door_flag = 1;
 	}
 	if (map[y][x] == ' ')
@@ -127,5 +127,5 @@ void	map_parser(char **map, t_config *scene_data)
 		}
 	}
 	if (scene_data->player_start_angle == -1)
-		error_handler("palayer not found in the map\n", NULL, NULL, scene_data);
+		error_handler("player not found in the map\n", NULL, NULL, scene_data);
 }

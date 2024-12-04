@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/30 11:45:04 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/04 14:08:17 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,7 @@ void	bresenham(t_data *data, t_ray *ray)
 void	height_and_texture(t_data *data, t_ray *ray)
 {
 	if (ray->is_door)
-	{
 		ray->texture_idx = DOOR_IDX;
-		return ;
-	}	
 	else if (ray->side_flag == 1)
 	{
 		if (ray->rayangle >= radian(180))

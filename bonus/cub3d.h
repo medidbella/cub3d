@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 12:47:27 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:42:08 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+# include <sys/time.h>
 # include <stdbool.h>
 
 # define TILE_SIZE 20
@@ -41,9 +42,6 @@
 # define IMG_SIZE_X 4
 # define IMG_SIZE_Y 4
 # define ANGLE 1.5
-# define WALL_COLOR 0x61F5B5
-# define DOOR_COLOR 0xffc704
-# define BLACK 0x000000
 # define FOV 60
 # define SPEED_DIVISOR 10
 
@@ -55,6 +53,8 @@
 # define A_FLAG 5
 # define CLOSE_FLAG 6
 # define MOUSE_FLAG 7
+# define SWITCH_FLAG 8
+# define SHOOT_FLAG 9
 # define SENSITIVITY 0.005
 
 typedef struct s_ray
@@ -109,27 +109,30 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	int			map_hight;
-	int			map_width;
-	void		*mlx;
-	void		*win;
-	char		**map;
-	int			width_2d;
-	int			height_2d;
-	int			mini_width;
-	int			mini_height;
-	double		scale;
-	t_img		img;
-	t_img		img_2d;
-	t_player	player;
-	t_texture	wall_textures[5];
-	t_weapon	weapons[WEAPON_NB];
-	int			ceiling_color;
-	int			floor_color;
-	int			keys[8];
-	int			door_flag;
-	int			mouse_x;
-	int			mouse_y;
+	int				map_hight;
+	int				map_width;
+	void			*mlx;
+	void			*win;
+	char			**map;
+	int				width_2d;
+	int				height_2d;
+	int				mini_width;
+	int				mini_height;
+	double			scale;
+	t_img			img;
+	t_img			img_2d;
+	t_player		player;
+	t_texture		wall_textures[5];
+	t_weapon		weapons[WEAPON_NB];
+	int				ceiling_color;
+	int				floor_color;
+	int				door_flag;
+	int				mouse_x;
+	int				mouse_y;
+	int				used_weapon;
+	int				keys[10];
+	unsigned long	last_frame_time;
+	unsigned long	last_weapon_switch_time;
 }	t_data;
 
 typedef struct s_draw
@@ -163,7 +166,7 @@ int		ft_key_release(int key, t_data *data);
 int		loop_rendering(t_data *data);
 int		close_win(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		get_color(t_data *data, int x, int y, int *is_door);
+unsigned long	ft_get_time(void);
 float	radian(float degree);
 void	rotate(t_data *data);
 void	move_player(t_data *data);

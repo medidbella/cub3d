@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 12:16:31 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:35:14 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	first_view(t_data *data)
 	draw(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	draw_player(data);
+	render_weapon(data, &data->weapons[0], 0);
 }
 
 void	get_start(t_config *parsed_data)
@@ -86,12 +87,15 @@ void	get_start(t_config *parsed_data)
 	data.map_width = parsed_data->map_width;
 	data.player.angle = radian(parsed_data->player_start_angle);
 	data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
+	data.used_weapon = 0;
 	setup(&data);
 	initialize_wall_textures(&data, parsed_data);
 	sprites_init(data.weapons, data.mlx);
 	data.door_flag = parsed_data->door_flag;
 	init_key_flags(&data);
 	first_view(&data);
+	data.last_frame_time = ft_get_time();
+	data.last_weapon_switch_time = ft_get_time();
 	mlx_hook(data.win, 17, 1L << 2, close_win, &data);
 	mlx_hook(data.win, 2, 1L << 0, ft_key_press, &data);
 	mlx_hook(data.win, 3, 1L << 1, ft_key_release, &data);

@@ -17,10 +17,11 @@ SRC_BONUS = bonus/cub3d.c bonus/get_start.c bonus/draw_pixels.c bonus/hooks.c \
 		bonus/parsing/general_utils.c bonus/parsing/map_parsing.c \
 		bonus/parsing/parser.c bonus/parsing/parsing_utils.c \
 		bonus/parsing/read_file.c bonus/parsing/parse_textures.c\
-		bonus/door_handling.c bonus/sprites.c
+		bonus/door_handling.c bonus/sprites.c bonus/weapons.c
 CC = cc
 MLX1 = minilibx/libmlx_Linux.a -lXext -lX11 -lm
 LIBFT = libft/libft.a
+HEADERS = bonus/graphics.h bonus/cub3d.h
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 LIBFT_OBJ = $(shell cat libft/Makefile | grep "ft_" | tr -d '\\' | tr -d "\n" \
@@ -28,11 +29,12 @@ LIBFT_OBJ = $(shell cat libft/Makefile | grep "ft_" | tr -d '\\' | tr -d "\n" \
 
 TEST = test.c
 
+bla: bonus
 
-$(NAME): libft $(OBJ)
+$(NAME): libft $(OBJ) 
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX1) -o $(NAME)
 
-$(BONUS): libft $(OBJ_BONUS)
+$(BONUS): libft $(OBJ_BONUS) $(HEADERS)
 	$(CC) $(CFLAGS) $(OBJ_BONUS) $(LIBFT) $(MLX1) -o $(BONUS)
 
 libft: $(LIBFT_OBJ)

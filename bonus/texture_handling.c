@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/28 17:55:45 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/01 21:14:54 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	get_cords_color(t_texture *img, int x, int y)
 {
 	char	*dst;
 
-	dst = img->iter + (y * img->line_lenght + x * (img->pixel_bits / 8));
+	dst = img->iter + (y * img->line_length + x * (img->pixel_bits / 8));
 	return (*(int *)dst);
 }
 
@@ -36,10 +36,8 @@ void	texture_init(void *mlx, t_texture *texture, char *file_path)
 {
 	texture->img = mlx_xpm_file_to_image(mlx, file_path, &texture->width,
 		&texture->hight);
-	if (!texture->img)
-		printf("%s\n", file_path);
 	texture->iter = mlx_get_data_addr(texture->img, &texture->pixel_bits,
-		&texture->line_lenght, &texture->endianess);
+		&texture->line_length, &texture->endianess);
 }
 
 void	initialize_wall_textures(t_data *data, t_config *parsed_data)
