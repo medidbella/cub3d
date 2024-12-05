@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/04 17:35:14 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 09:54:18 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	first_view(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	draw_player(data);
 	render_weapon(data, &data->weapons[0], 0);
+	mlx_mouse_move(data->mlx, data->win, WIDTH / 2, HEIGHT / 2);
 }
 
 void	get_start(t_config *parsed_data)

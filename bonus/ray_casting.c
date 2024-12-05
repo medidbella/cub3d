@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/04 14:08:17 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:02:06 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	bresenham(t_data *data, t_ray *ray)
 
 void	height_and_texture(t_data *data, t_ray *ray)
 {
-	if (ray->is_door)
+	if (ray->door)
 		ray->texture_idx = DOOR_IDX;
 	else if (ray->side_flag == 1)
 	{
@@ -124,7 +124,10 @@ void	draw_column(t_data *data, t_ray *ray, int column)
 		i = start - 1;
 	while (++i < end)
 	{
-		get_texture_color(data, ray, i - start);
+		if (ray->door)
+			ray->curr_color = 0xFFFFFF;
+		else
+			get_texture_color(data, ray, i - start);
 		my_mlx_pixel_put(data, column, i, ray->curr_color);
 	}
 	while (i < HEIGHT)
@@ -141,28 +144,33 @@ void	real_distance(t_ray *ray, t_data *data)
 			* ray->vertical_distance;
 }
 
-void	small_distance(t_ray *ray)
+int	small_distance(t_ray *ray)
 {
 	if (ray->horizontal_distance == -1)
 	{
 		ray->side_flag = 2;
 		ray->distance = ray->vertical_distance;
+		return (ray->v_door);
 	}
 	else if (ray->vertical_distance == -1)
 	{
 		ray->side_flag = 1;
 		ray->distance = ray->horizontal_distance;
+		return (ray->h_door);
 	}
 	else if (ray->vertical_distance <= ray->horizontal_distance)
 	{
 		ray->side_flag = 2;
 		ray->distance = ray->vertical_distance;
+		return (ray->v_door);
 	}
 	else if (ray->horizontal_distance < ray->vertical_distance)
 	{
 		ray->side_flag = 1;
 		ray->distance = ray->horizontal_distance;
+		return (ray->h_door);
 	}
+	return (0);
 }
 
 void	ray_casting(t_data *data)
@@ -176,11 +184,14 @@ void	ray_casting(t_data *data)
 		ray.rayangle += radian(360);
 	while (column <= WIDTH)
 	{
-		ray.is_door = 0;
+		ray.h_door = 0;
+		ray.v_door = 0;
 		horizontal_distance(data, &ray, ray.rayangle);
 		vertical_distance(data, &ray, ray.rayangle);
 		real_distance(&ray, data);
-		small_distance(&ray);
+		ray.door = small_distance(&ray);
+		if (ray.door)
+			get_door_distance(data, &ray, ray.rayangle);
 		// draw_fov(data, &ray);
 		draw_column(data, &ray, column);
 		column++;

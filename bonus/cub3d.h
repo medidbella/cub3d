@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/04 17:42:08 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:08:31 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 # define MOUSE_FLAG 7
 # define SWITCH_FLAG 8
 # define SHOOT_FLAG 9
+# define KEYS_NB 10
 # define SENSITIVITY 0.005
 
 typedef struct s_ray
@@ -73,7 +74,9 @@ typedef struct s_ray
 	int		curr_color;
 	int		texture_idx;
 	double	height;
-	int		is_door;
+	int		h_door;
+	int		v_door;
+	int		door;
 }	t_ray;
 
 typedef struct s_player
@@ -130,7 +133,7 @@ typedef struct s_data
 	int				mouse_x;
 	int				mouse_y;
 	int				used_weapon;
-	int				keys[10];
+	int				keys[KEYS_NB];
 	unsigned long	last_frame_time;
 	unsigned long	last_weapon_switch_time;
 }	t_data;
@@ -159,31 +162,32 @@ typedef struct s_draw_line
 	int	color;
 }	t_draw_line;
 
-void	get_start(t_config *parsed_data);
-void	init_key_flags(t_data *data);
-int		ft_key_press(int key, t_data *data);
-int		ft_key_release(int key, t_data *data);
-int		loop_rendering(t_data *data);
-int		close_win(t_data *data);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			get_start(t_config *parsed_data);
+void			init_key_flags(t_data *data);
+int				ft_key_press(int key, t_data *data);
+int				ft_key_release(int key, t_data *data);
+int				loop_rendering(t_data *data);
+int				close_win(t_data *data);
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 unsigned long	ft_get_time(void);
-float	radian(float degree);
-void	rotate(t_data *data);
-void	move_player(t_data *data);
-void	a_moves(t_data *data, float *tab);
-void	d_moves(t_data *data, float *tab);
-void	s_moves(t_data *data, float *tab);
-void	w_moves(t_data *data, float *tab);
-void	bresenham(t_data *data, t_ray *ray);
-void	ray_casting(t_data *data);
-void	draw(t_data *data);
-void	move_player(t_data *data);
-void	horizontal_distance(t_data *data, t_ray *ray, double rayangle);
-double	get_distance(t_data *data, double x, double y);
-void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
-void	get_texture_color(t_data *data, t_ray *ray, int current_y);
-void	initialize_textures(t_data *data, t_config *parsed_data);
-void	draw_2d_wall(t_data *data, int x, int y);
-void	draw_player(t_data *data);
+float			radian(float degree);
+void			rotate(t_data *data);
+void			move_player(t_data *data);
+void			a_moves(t_data *data, float *tab);
+void			d_moves(t_data *data, float *tab);
+void			s_moves(t_data *data, float *tab);
+void			w_moves(t_data *data, float *tab);
+void			bresenham(t_data *data, t_ray *ray);
+void			ray_casting(t_data *data);
+void			draw(t_data *data);
+void			move_player(t_data *data);
+void			horizontal_distance(t_data *data, t_ray *ray, double rayangle);
+double			get_distance(t_data *data, double x, double y);
+void			vertical_distance(t_data *data, t_ray *ray, double rayangle);
+void			get_texture_color(t_data *data, t_ray *ray, int current_y);
+void			initialize_textures(t_data *data, t_config *parsed_data);
+void			draw_2d_wall(t_data *data, int x, int y);
+void			draw_player(t_data *data);
+void			get_door_distance(t_data *data, t_ray *ray, double rayangle);
 
 #endif

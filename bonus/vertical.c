@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/29 17:36:37 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/05 09:55:43 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,10 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 			|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d
 			|| check_next_possition(data, ray, &x, &y))
 			break ;
-		if (data->map[y][x] == '1')
+		if (data->map[y][x] == '1' || data->map[y][x] == 'D')
 		{
+			if (data->map[y][x] == 'D')
+				ray->v_door = 1;
 			ray->vertical_distance = get_distance(data, ray->vertical_x,
 					ray->vertical_y);
 			break ;

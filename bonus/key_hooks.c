@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:38:14 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/04 17:41:02 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:10:59 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	init_key_flags(t_data *data)
 	data->keys[MOUSE_FLAG] = 0;
 	data->keys[SWITCH_FLAG] = 0;
 	data->keys[SHOOT_FLAG] = 0;
-
 }
 
 int	ft_key_press(int key, t_data *data)

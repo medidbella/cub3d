@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/30 11:44:43 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 09:55:05 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,10 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 			|| ray->horizontal_x > data->width_2d || ray->horizontal_x < 0
 			|| check_next_possition(data, ray, &x, &y))
 			break ;
-		if (data->map[y][x] == '1')
+		if (data->map[y][x] == '1' || data->map[y][x] == 'D')
 		{
+			if (data->map[y][x] == 'D')
+				ray->h_door = 1;
 			ray->horizontal_distance = get_distance(data, ray->horizontal_x,
 					ray->horizontal_y);
 			break ;
