@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:01:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/04 17:02:44 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:21:59 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,18 @@ void	free_sprites_memory(t_weapon *weapons, void *mlx)
 
 void	init_frame_render_data(t_weapon *weapon, int frame_index, int used_weapon)
 {
-	weapon->scaled_width = WIDTH / 3;
-	weapon->scaled_hight = HEIGHT / 3;
+	float	divider;
+
+	divider = 3;
+	if (used_weapon == PISTOLE)
+		divider = 3.5;
+	else if (used_weapon == MACHIN_GUN)
+		divider = 2.3;
+	weapon->scaled_width = WIDTH / divider;
+	weapon->scaled_hight = HEIGHT / divider;
 	weapon->x_scale =  (float)weapon->weapon_frames[frame_index].width / weapon->scaled_width;
 	weapon->y_scale =  (float)weapon->weapon_frames[frame_index].hight / weapon->scaled_hight;
-	weapon->x_start = WIDTH / 2;
-	if (used_weapon == PISTOLE)
-	{
-		weapon->scaled_width = WIDTH / 4;
-		weapon->scaled_hight = HEIGHT / 4;
-	}
+	weapon->x_start = WIDTH / 2 ;
 }
 
 void	start_animation(t_data	*data)

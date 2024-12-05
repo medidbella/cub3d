@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:44:48 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/04 17:27:09 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:49:00 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ unsigned long	ft_get_time(void)
 	return ((curr.tv_sec * 1000) + (curr.tv_usec / 1000));
 }
 
-void	weapon_switch(t_data *data)
+void	weapon_switch(t_data *data, int flag)
 {
 	unsigned long elapsed_time;
 
@@ -29,9 +29,11 @@ void	weapon_switch(t_data *data)
 	elapsed_time = ft_get_time() - data->last_weapon_switch_time;
 	if (elapsed_time < CHANGE_DELAY)
 		return ;
-	data->used_weapon += 1;
+	data->used_weapon += flag;
 	if (data->used_weapon == WEAPON_NB)
 		data->used_weapon = 0;
+	else if (data->used_weapon < 0)
+		data->used_weapon = WEAPON_NB - 1;
 	data->last_frame_time = ft_get_time();
 	data->last_weapon_switch_time = ft_get_time();
 }

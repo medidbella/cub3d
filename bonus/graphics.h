@@ -6,13 +6,12 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:56:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/04 17:34:32 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:50:15 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
-
 # define PISTOLE 0
 # define MACHIN_GUN 1
 # define ELECTRIC_GUN 2
@@ -32,7 +31,7 @@
 # define DOOR_COLOR 0xffc704
 # define BLACK 0x000000
 # define FRAME_DELAY 50 //milliseconds
-# define CHANGE_DELAY 200
+# define CHANGE_DELAY 100
 typedef struct s_ray t_ray;
 typedef struct s_player t_player;
 typedef struct s_data t_data;
@@ -70,7 +69,7 @@ void	initialize_wall_textures(t_data *data, t_config *parsed_data);
 void	sprites_init(t_weapon *weapons, void *mlx);
 void	free_sprites_memory(t_weapon *weapons, void *mlx);
 void	render_weapon(t_data *data, t_weapon *weapon, int frame_index);
-void	weapon_switch(t_data *data);
+void	weapon_switch(t_data *data, int flag);
 void	start_animation(t_data *data);
 void	set_frame_index(t_data *data);
 void	init_frame_render_data(t_weapon *weapon, int frame_index, int used_weapon);

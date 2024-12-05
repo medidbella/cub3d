@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 09:54:18 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:36:53 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	get_start(t_config *parsed_data)
 	mlx_hook(data.win, 17, 1L << 2, close_win, &data);
 	mlx_hook(data.win, 2, 1L << 0, ft_key_press, &data);
 	mlx_hook(data.win, 3, 1L << 1, ft_key_release, &data);
+	mlx_hook(data.win, 4, 1L << 2, ft_mouse_press, &data);
+	mlx_hook(data.win, 5, 1L << 3, ft_mouse_release, &data);
 	mlx_loop_hook(data.mlx, loop_rendering, &data);
 	mlx_loop(data.mlx);
 }

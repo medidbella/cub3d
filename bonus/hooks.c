@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/04 17:43:47 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:48:38 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	move_player(t_data *data)
 
 int	check_keys(t_data *data)
 {
+	if (data->weapons[data->used_weapon].current_frame_index != 0)
+		return (1);
 	if (!data->keys[RIGHT_FLAG] && !data->keys[LEFT_FLAG] && !data->keys[W_FLAG]
 		&& !data->keys[S_FLAG] && !data->keys[D_FLAG] && !data->keys[A_FLAG]
 		&& !data->keys[CLOSE_FLAG] && !data->keys[MOUSE_FLAG]
@@ -76,7 +78,7 @@ int	loop_rendering(t_data *data)
 {
 	mouse_events(data);
 	if (data->keys[SWITCH_FLAG])
-		weapon_switch(data);
+		weapon_switch(data, 1);
 	if (data->keys[SHOOT_FLAG])
 		start_animation(data);
 	if (!check_keys(data))

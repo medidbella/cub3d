@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:38:14 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 10:10:59 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:47:47 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,33 @@ int	ft_key_release(int key, t_data *data)
 		data->keys[SHOOT_FLAG] = 0;
 	if (key == CHANGE_WEAPON)
 		data->keys[SWITCH_FLAG] = 0;
+	return (0);
+}
+
+int ft_mouse_press(int button, int x, int y, void *param)
+{
+	t_data *data;
+
+	(void)x;
+	(void)y;
+	data = param;
+	if (button == 1)
+		data->keys[SHOOT_FLAG] = 1;
+	else if (button == 4)
+		weapon_switch(data, 1);
+	else if (button == 5)
+		weapon_switch(data, -1);
+	return (0);
+}
+
+int ft_mouse_release(int button, int x, int y, void *param)
+{
+	t_data *data;
+
+	(void)x;
+	(void)y;
+	data = param;
+	if (button == 1)
+		data->keys[SHOOT_FLAG] = 0;
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 10:08:31 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:38:00 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,5 +189,6 @@ void			initialize_textures(t_data *data, t_config *parsed_data);
 void			draw_2d_wall(t_data *data, int x, int y);
 void			draw_player(t_data *data);
 void			get_door_distance(t_data *data, t_ray *ray, double rayangle);
-
+int				ft_mouse_press(int button, int x, int y, void *param);
+int				ft_mouse_release(int button, int x, int y, void *param);
 #endif
