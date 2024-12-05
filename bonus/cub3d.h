@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 10:58:25 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 16:49:59 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ typedef struct s_data
 	int				keys[KEYS_NB];
 	unsigned long	last_frame_time;
 	unsigned long	last_weapon_switch_time;
+	int				in_door;
+	int				debug;
 }	t_data;
 
 typedef struct s_draw

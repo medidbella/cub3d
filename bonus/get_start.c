@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 10:36:53 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:51:35 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,23 @@ void	get_start(t_config *parsed_data)
 	data.player.angle = radian(parsed_data->player_start_angle);
 	data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
 	data.used_weapon = 0;
+	
+	data.in_door = 0;
+	data.debug = 0;
+
 	setup(&data);
 	initialize_wall_textures(&data, parsed_data);
 	sprites_init(data.weapons, data.mlx);
 	data.door_flag = parsed_data->door_flag;
 	init_key_flags(&data);
+
+	// data.player.player_x = 109.0;
+	// data.player.player_y = 88.0;
+	// data.in_door = 1;
+
+	printf("first px: %f || first py: %f\n", data.player.player_x, data.player.player_y);
+	printf("angle ==> %f\n", data.player.angle * 180 / M_PI);
+
 	first_view(&data);
 	data.last_frame_time = ft_get_time();
 	data.last_weapon_switch_time = ft_get_time();

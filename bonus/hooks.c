@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 10:48:38 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:32:41 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	move_player(t_data *data)
 
 	if (!data->keys[2] && !data->keys[3] && !data->keys[4] && !data->keys[5])
 		return ;
+	// printf("in door in move play ==> %d\n", data->in_door);
 	w_moves(data, tab);
 	s_moves(data, tab);
 	d_moves(data, tab);
@@ -95,5 +96,6 @@ int	loop_rendering(t_data *data)
 	set_frame_index(data);
 	render_weapon(data, &data->weapons[data->used_weapon],
 		data->weapons[data->used_weapon].current_frame_index);
+	// printf("Px: %f || Py: %f\n", data->player.player_x, data->player.player_y);
 	return (0);
 }
