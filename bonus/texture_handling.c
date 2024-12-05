@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/01 21:14:54 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/05 11:13:57 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	get_texture_color(t_data *data, t_ray *ray, int current_y)
 	else if (ray->texture_idx == E_INDEX)
 		current_x = (int)ray->vertical_y % TILE_SIZE;
 	else if (ray->texture_idx == W_INDEX)
+		current_x = TILE_SIZE - ((int)ray->vertical_y % TILE_SIZE);
+	else if (ray->texture_idx == DOOR_IDX)
 		current_x = TILE_SIZE - ((int)ray->vertical_y % TILE_SIZE);
 	ray->curr_color = get_cords_color(&data->wall_textures[ray->texture_idx],
 			current_x * x_scale, current_y * y_scale);
