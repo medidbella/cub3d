@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 20:32:41 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:15:19 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ int	loop_rendering(t_data *data)
 	render_weapon(data, &data->weapons[data->used_weapon],
 		data->weapons[data->used_weapon].current_frame_index);
 	// printf("Px: %f || Py: %f\n", data->player.player_x, data->player.player_y);
+	// printf("angle: %f\n", data->player.angle);
 	return (0);
 }

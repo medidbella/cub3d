@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 21:02:15 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:57:30 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static bool	next_to_door(t_data *data, float new_x, float new_y, char c)
 				if (((int)data->player.player_y % TILE_SIZE) < (TILE_SIZE / 2))
 					return (data->in_door = 1, true);
 			}
-			else if ((((int)new_y % TILE_SIZE) > (TILE_SIZE / 2)) || (((int)new_y % TILE_SIZE) == 0))
+			if ((((int)new_y % TILE_SIZE) > (TILE_SIZE / 2)) || (((int)new_y % TILE_SIZE) == 0))
 				return (data->in_door = 1, true);
 			return (false);
 		}
@@ -59,7 +59,7 @@ static bool	next_to_door(t_data *data, float new_x, float new_y, char c)
 				if (((int)data->player.player_x % TILE_SIZE) < (TILE_SIZE / 2))
 					return (data->in_door = 1, true);
 			}
-			else if ((((int)new_x % TILE_SIZE) > (TILE_SIZE / 2)) || (((int)new_x % TILE_SIZE) == 0))
+			if ((((int)new_x % TILE_SIZE) > (TILE_SIZE / 2)) || (((int)new_x % TILE_SIZE) == 0))
 				return (data->in_door = 1, true);
 			return (false);
 		}
@@ -101,7 +101,10 @@ static int	check_barriers(t_data *data, float x, float y)
 	if (!ft_strchr("NSEW0HV", data->map[(int)index_y][(int)index_x]))
 		return (1);
 	if (ft_strchr("HV", data->map[(int)index_y][(int)index_x]))
+	{
+		// printf("new x: %f || new y: %f\n", new_x, new_y);
 		return (!next_to_door(data, new_x, new_y, data->map[(int)index_y][(int)index_x]));
+	}
 	return (0);
 }
 

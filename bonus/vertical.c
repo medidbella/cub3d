@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 14:49:32 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:57:02 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,13 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 	while (1)
 	{
 		find_vertical_point(data, rayangle, &ray->vertical_x, &ray->vertical_y);
+		// printf("Vx: %f || Vy: %f\n", ray->horizontal_x, ray->horizontal_y);
 		if (rayangle == radian(90) || rayangle == radian(270)
 			|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
 			|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d
 			|| check_next_possition(data, ray, &x, &y))
 			break ;
+		// printf("index x: %d || index y: %d\n", x, y);
 		if (ft_strchr("1HV", data->map[y][x]))
 		{
 			if (ft_strchr("HV", data->map[y][x]))
@@ -101,4 +103,5 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 			break ;
 		}
 	}
+	// printf("---------------------------------\n");
 }

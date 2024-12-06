@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 20:51:35 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:56:52 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,13 @@ void	get_start(t_config *parsed_data)
 	data.door_flag = parsed_data->door_flag;
 	init_key_flags(&data);
 
-	// data.player.player_x = 109.0;
-	// data.player.player_y = 88.0;
+	// data.player.player_x = 108.000000;
+	// data.player.player_y = 58.000000;
+	// data.player.angle = 4.843289;
 	// data.in_door = 1;
 
-	printf("first px: %f || first py: %f\n", data.player.player_x, data.player.player_y);
-	printf("angle ==> %f\n", data.player.angle * 180 / M_PI);
+	// printf("first px: %f || first py: %f\n", data.player.player_x, data.player.player_y);
+	// printf("angle ==> %f\n", data.player.angle * 180 / M_PI);
 
 	first_view(&data);
 	data.last_frame_time = ft_get_time();

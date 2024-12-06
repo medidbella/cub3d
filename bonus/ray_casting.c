@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 10:02:06 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:53:25 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,5 +198,6 @@ void	ray_casting(t_data *data)
 		ray.rayangle += data->player.angle_step;
 		if (ray.rayangle > radian(360))
 			ray.rayangle -= radian(360);
+		data->debug++;
 	}
 }

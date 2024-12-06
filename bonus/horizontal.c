@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 14:48:30 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:53:53 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,31 @@ double	get_distance(t_data *data, double x, double y)
 			+ pow((data->player.player_y - y), 2)));
 }
 
+char	get_char(t_data *data)
+{
+	int index_x;
+	int	index_y;
+
+	index_x = (int)data->player.player_x / TILE_SIZE;
+	index_y = (int)data->player.player_y / TILE_SIZE;
+	return (data->map[index_y][index_x]);
+}
+
 double	calculate_delta_y(t_data *data, double *horizontal_x
 							, double *horizontal_y, double rayangle)
 {
 	double	delta_y;
+	int		half_cube;
 
 	if (rayangle > radian(180))
 	{
-		if (*horizontal_x == data->player.player_x
+		if (data->in_door && get_char(data) == 'H' && (((int)data->player.player_y % TILE_SIZE) > (TILE_SIZE / 2)))
+		{
+			half_cube = (((int)(data->player.player_y / TILE_SIZE)) * (TILE_SIZE)) + (TILE_SIZE / 2);
+			delta_y = data->player.player_y - half_cube;
+		}
+		
+		else if (*horizontal_x == data->player.player_x
 			&& *horizontal_y == data->player.player_y)
 		{
 			delta_y = *horizontal_y
