@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:38:14 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 10:47:47 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:28:14 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int	ft_key_release(int key, t_data *data)
 	return (0);
 }
 
-int ft_mouse_press(int button, int x, int y, void *param)
+int	ft_mouse_press(int button, int x, int y, void *param)
 {
-	t_data *data;
+	t_data	*data;
 
 	(void)x;
 	(void)y;
@@ -86,9 +86,9 @@ int ft_mouse_press(int button, int x, int y, void *param)
 	return (0);
 }
 
-int ft_mouse_release(int button, int x, int y, void *param)
+int	ft_mouse_release(int button, int x, int y, void *param)
 {
-	t_data *data;
+	t_data	*data;
 
 	(void)x;
 	(void)y;

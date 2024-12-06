@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 16:49:59 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:29:51 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define DOWN 65364
 # define CLOSE 32
 # define MOUSE_L_CLICK 65364
-# define SCROLL_DOWNx 65364
+# define SCROLL_DOWNX 65364
 # define DOWN 65364
 
 # define IMG_SIZE_X 4
@@ -197,4 +197,8 @@ void			draw_player(t_data *data);
 void			get_door_distance(t_data *data, t_ray *ray, double rayangle);
 int				ft_mouse_press(int button, int x, int y, void *param);
 int				ft_mouse_release(int button, int x, int y, void *param);
+bool			h_ray_to_door(t_data *data, double rayangle, double *delta_y);
+bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
+bool			next_to_door(t_data *data, float new_x, float new_y, char c);
+
 #endif
