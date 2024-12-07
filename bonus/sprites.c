@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:01:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/05 10:21:59 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/07 09:53:47 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	sprites_init(t_weapon *weapons, void *mlx)
 
 void	free_sprites_memory(t_weapon *weapons, void *mlx)
 {
-	int i;
-	int iter;
+	int	i;
+	int	iter;
 
 	i = 0;
 	while (i < WEAPON_NB)
@@ -60,7 +60,8 @@ void	free_sprites_memory(t_weapon *weapons, void *mlx)
 	free(weapons->weapon_frames);
 }
 
-void	init_frame_render_data(t_weapon *weapon, int frame_index, int used_weapon)
+void	init_frame_render_data(t_weapon *weapon, int frame_index
+								, int used_weapon)
 {
 	float	divider;
 
@@ -71,8 +72,10 @@ void	init_frame_render_data(t_weapon *weapon, int frame_index, int used_weapon)
 		divider = 2.3;
 	weapon->scaled_width = WIDTH / divider;
 	weapon->scaled_hight = HEIGHT / divider;
-	weapon->x_scale =  (float)weapon->weapon_frames[frame_index].width / weapon->scaled_width;
-	weapon->y_scale =  (float)weapon->weapon_frames[frame_index].hight / weapon->scaled_hight;
+	weapon->x_scale = (float)weapon->weapon_frames[frame_index].width
+		/ weapon->scaled_width;
+	weapon->y_scale = (float)weapon->weapon_frames[frame_index].hight
+		/ weapon->scaled_hight;
 	weapon->x_start = WIDTH / 2 ;
 }
 
@@ -87,14 +90,15 @@ void	start_animation(t_data	*data)
 void	set_frame_index(t_data *data)
 {
 	unsigned long	elapsed_time;
-	
+
 	if (data->weapons[data->used_weapon].current_frame_index == 0)
 		return ;
 	elapsed_time = ft_get_time() - data->last_frame_time;
 	if (elapsed_time < FRAME_DELAY)
 		return ;
 	data->weapons[data->used_weapon].current_frame_index += 1;
-	if (data->weapons[data->used_weapon].current_frame_index > data->weapons[data->used_weapon].frames_nb - 1)
+	if (data->weapons[data->used_weapon].current_frame_index
+		> data->weapons[data->used_weapon].frames_nb - 1)
 		data->weapons[data->used_weapon].current_frame_index = 0;
 	data->last_frame_time = ft_get_time();
 }

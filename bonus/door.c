@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 11:24:24 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/05 10:10:24 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 09:44:36 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static double	get_door_distance_h(t_data *data, t_ray *ray, double rayangle)
 {
-	double	x_door;
-	double	y_door;
 	double	delta_x;
 	double	delta_y;
 
@@ -25,15 +23,13 @@ static double	get_door_distance_h(t_data *data, t_ray *ray, double rayangle)
 		delta_y *= -1;
 	if (data->player.player_x < ray->horizontal_x)
 		delta_x *= -1;
-	x_door = ray->horizontal_x - delta_x;
-	y_door = ray->horizontal_y - delta_y;
-	return (get_distance(data, x_door, y_door));
+	ray->hx_door = ray->horizontal_x - delta_x;
+	ray->hy_door = ray->horizontal_y - delta_y;
+	return (get_distance(data, ray->hx_door, ray->hy_door));
 }
 
 static double	get_door_distance_v(t_data *data, t_ray *ray, double rayangle)
 {
-	double	x_door;
-	double	y_door;
 	double	delta_x;
 	double	delta_y;
 
@@ -43,9 +39,9 @@ static double	get_door_distance_v(t_data *data, t_ray *ray, double rayangle)
 		delta_x *= -1;
 	if (data->player.player_y < ray->vertical_y)
 		delta_y *= -1;
-	x_door = ray->vertical_x - delta_x;
-	y_door = ray->vertical_y - delta_y;
-	return (get_distance(data, x_door, y_door));
+	ray->vx_door = ray->vertical_x - delta_x;
+	ray->vy_door = ray->vertical_y - delta_y;
+	return (get_distance(data, ray->vx_door, ray->vy_door));
 }
 
 void	horizontal_door(t_data *data, t_ray *ray, double rayangle)
@@ -66,6 +62,8 @@ void	horizontal_door(t_data *data, t_ray *ray, double rayangle)
 			}
 		}
 		ray->distance = h_door_dst;
+		ray->vertical_x = ray->hx_door;
+		ray->vertical_y = ray->hy_door;
 		ray->door = 1;
 		return ;
 	}
@@ -89,6 +87,8 @@ void	vertical_door(t_data *data, t_ray *ray, double rayangle)
 			}
 		}
 		ray->distance = v_door_dst;
+		ray->vertical_x = ray->vx_door;
+		ray->vertical_y = ray->vy_door;
 		ray->door = 1;
 		return ;
 	}

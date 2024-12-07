@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:56:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/05 10:59:54 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/07 09:55:36 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@
 # define BLACK 0x000000
 # define FRAME_DELAY 50 //milliseconds
 # define CHANGE_DELAY 100
-typedef struct s_ray t_ray;
-typedef struct s_player t_player;
-typedef struct s_data t_data;
-typedef struct s_config t_config;
+
+typedef struct s_ray	t_ray;
+typedef struct s_player	t_player;
+typedef struct s_data	t_data;
+typedef struct s_config	t_config;
 
 typedef struct s_texture
 {
@@ -72,6 +73,7 @@ void	render_weapon(t_data *data, t_weapon *weapon, int frame_index);
 void	weapon_switch(t_data *data, int flag);
 void	start_animation(t_data *data);
 void	set_frame_index(t_data *data);
-void	init_frame_render_data(t_weapon *weapon, int frame_index, int used_weapon);
+void	init_frame_render_data(t_weapon *weapon, int frame_index,
+			int used_weapon);
 
 #endif

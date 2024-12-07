@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_handling.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/05 11:13:57 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/07 09:49:55 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	get_cords_color(t_texture *img, int x, int y)
 void	texture_init(void *mlx, t_texture *texture, char *file_path)
 {
 	texture->img = mlx_xpm_file_to_image(mlx, file_path, &texture->width,
-		&texture->hight);
+			&texture->hight);
 	texture->iter = mlx_get_data_addr(texture->img, &texture->pixel_bits,
-		&texture->line_length, &texture->endianess);
+			&texture->line_length, &texture->endianess);
 }
 
 void	initialize_wall_textures(t_data *data, t_config *parsed_data)

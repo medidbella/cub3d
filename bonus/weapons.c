@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapons.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:44:48 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/05 10:49:00 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/07 09:54:17 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ unsigned long	ft_get_time(void)
 
 void	weapon_switch(t_data *data, int flag)
 {
-	unsigned long elapsed_time;
+	unsigned long	elapsed_time;
 
 	if (data->weapons[data->used_weapon].current_frame_index != 0)
 		return ;
@@ -53,7 +53,7 @@ void	render_weapon(t_data *data, t_weapon *weapon, int frame_index)
 		while (y < weapon->scaled_hight)
 		{
 			color = get_cords_color(&weapon->weapon_frames[frame_index],
-				x * weapon->x_scale, y * weapon->y_scale);
+					x * weapon->x_scale, y * weapon->y_scale);
 			if (color != 0xff000000)
 				my_mlx_pixel_put(data, weapon->x_start,
 					weapon->y_start, color);

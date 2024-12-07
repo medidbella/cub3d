@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/06 16:29:51 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 09:39:50 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ typedef struct s_ray
 	int		h_door;
 	int		v_door;
 	int		door;
+	float	hx_door;
+	float	hy_door;
+	float	vx_door;
+	float	vy_door;
 }	t_ray;
 
 typedef struct s_player
