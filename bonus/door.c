@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 11:24:24 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 09:44:36 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 17:26:28 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	horizontal_door(t_data *data, t_ray *ray, double rayangle)
 			}
 		}
 		ray->distance = h_door_dst;
-		ray->vertical_x = ray->hx_door;
-		ray->vertical_y = ray->hy_door;
+		ray->horizontal_x = ray->hx_door;
+		ray->horizontal_y = ray->hy_door;
 		ray->door = 1;
 		return ;
 	}

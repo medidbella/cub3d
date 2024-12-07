@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/06 16:52:24 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 17:23:15 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_barriers(t_data *data, float x, float y)
 			&& (int)index_y >= 0 && (int)index_x >= 0
 			&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
 		return (1);
-	if (!ft_strchr("NSEW0HV", data->map[(int)index_y][(int)index_x]))
+	if (!ft_strchr("NSEW0HVhv", data->map[(int)index_y][(int)index_x]))
 		return (1);
 	if (ft_strchr("HV", data->map[(int)index_y][(int)index_x]))
 		return (!next_to_door(data, new_x, new_y

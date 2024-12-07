@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:35:57 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/06 16:16:15 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 19:31:23 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,27 @@ bool	h_ray_to_door(t_data *data, double rayangle, double *delta_y)
 		}
 	}
 	return (false);
+}
+
+void	direction_of_player(t_data *data)
+{
+	printf("here\n");
+	exit(0);
+	if (!data->ray.door)
+	{
+		data->ray.direction_door = 0;
+		return ;
+	}
+	if (data->ray.side_flag == 1)
+	{
+		data->ray.direction_px = data->ray.horizontal_x;
+		data->ray.direction_py = data->ray.horizontal_y;
+	}
+	else
+	{
+		data->ray.direction_px = data->ray.vertical_x;
+		data->ray.direction_py = data->ray.vertical_y;
+	}
+	data->ray.direction_distance = data->ray.distance;
+	data->ray.direction_door = data->ray.door;
 }

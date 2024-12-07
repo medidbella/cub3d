@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 09:47:50 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 19:19:37 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,13 @@ void	get_start(t_config *parsed_data)
 	sprites_init(data.weapons, data.mlx);
 	data.door_flag = parsed_data->door_flag;
 	init_key_flags(&data);
+	
+	data.player.player_x = 88;
+	data.player.player_y = 48;
+	data.player.angle = 0;
+	printf("Px: %f || Py: %f || angle: %f\n", data.player.player_x, data.player.player_y, data.player.angle);
+	
+
 	first_view(&data);
 	data.last_frame_time = ft_get_time();
 	data.last_weapon_switch_time = ft_get_time();

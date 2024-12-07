@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 09:39:50 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 18:55:21 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@
 # define LEFT 65361
 # define UP 65362
 # define DOWN 65364
-# define CLOSE 32
+# define CLOSE 65307
 # define MOUSE_L_CLICK 65364
 # define SCROLL_DOWNX 65364
 # define DOWN 65364
+# define OPEN 32
 
 # define IMG_SIZE_X 4
 # define IMG_SIZE_Y 4
@@ -59,13 +60,14 @@
 # define MOUSE_FLAG 7
 # define SWITCH_FLAG 8
 # define SHOOT_FLAG 9
-# define KEYS_NB 10
+# define OPEN_DOOR 10
+# define KEYS_NB 11
 # define SENSITIVITY 0.005
 
 typedef struct s_ray
 {
-	double	colums;
 	double	distance;
+	// double	colums;
 	double	rayangle;
 	double	raystep;
 	double	horizontal_x;
@@ -75,6 +77,11 @@ typedef struct s_ray
 	double	vertical_y;
 	double	vertical_distance;
 	int		side_flag;
+	int		player_side_flag;
+	float	direction_px;
+	float	direction_py;
+	float	direction_distance;
+	int		direction_door;
 	int		curr_color;
 	int		texture_idx;
 	double	height;
@@ -145,7 +152,7 @@ typedef struct s_data
 	unsigned long	last_frame_time;
 	unsigned long	last_weapon_switch_time;
 	int				in_door;
-	int				debug;
+	t_ray			ray;
 }	t_data;
 
 typedef struct s_draw
@@ -204,5 +211,7 @@ int				ft_mouse_release(int button, int x, int y, void *param);
 bool			h_ray_to_door(t_data *data, double rayangle, double *delta_y);
 bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
 bool			next_to_door(t_data *data, float new_x, float new_y, char c);
+void			direction_of_player(t_data *data);
+void			open_door(t_data *data);
 
 #endif
