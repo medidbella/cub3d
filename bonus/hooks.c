@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 09:48:24 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 10:16:27 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	close_win(t_data *data)
-{
-	free_wall_textures_memory(data, data->wall_textures);
-	mlx_destroy_image(data->mlx, data->img.img);
-	mlx_destroy_image(data->mlx, data->player.erase_img);
-	mlx_destroy_image(data->mlx, data->player.player_img);
-	mlx_destroy_window(data->mlx, data->win);
-	strings_free(data->map);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
-	exit(0);
-}
 
 void	move_player(t_data *data)
 {

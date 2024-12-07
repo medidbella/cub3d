@@ -17,7 +17,7 @@ SRC_BONUS = bonus/cub3d.c bonus/get_start.c bonus/draw_pixels.c bonus/hooks.c \
 		bonus/parsing/general_utils.c bonus/parsing/map_parsing.c \
 		bonus/parsing/parser.c bonus/parsing/parsing_utils.c \
 		bonus/parsing/read_file.c bonus/parsing/parse_textures.c\
-		bonus/sprites.c bonus/weapons.c bonus/door.c
+		bonus/sprites.c bonus/weapons.c bonus/door.c bonus/mem_free.c
 CC = cc
 MLX1 = minilibx/libmlx_Linux.a -lXext -lX11 -lm
 LIBFT = libft/libft.a

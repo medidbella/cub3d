@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 09:50:37 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 10:14:16 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,7 @@ void	bresenham(t_data *data, t_ray *ray)
 
 void	height_and_texture(t_data *data, t_ray *ray)
 {
-	if (ray->door)
-		ray->texture_idx = DOOR_IDX;
-	else if (ray->side_flag == 1)
+	if (ray->side_flag == 1)
 	{
 		if (ray->rayangle >= radian(180))
 			ray->texture_idx = S_INDEX;
@@ -124,10 +122,11 @@ void	draw_column(t_data *data, t_ray *ray, int column)
 		i = start - 1;
 	while (++i < end)
 	{
-		if (ray->door)
-			ray->curr_color = 0xFFFFFF;
-		else
-			get_texture_color(data, ray, i - start);
+		// if (ray->door)
+		// 	ray->curr_color = 0xFFFFFF;
+		// else
+		// 	
+		get_texture_color(data, ray, i - start);
 		my_mlx_pixel_put(data, column, i, ray->curr_color);
 	}
 	while (i < HEIGHT)

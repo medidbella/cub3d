@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:56:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/07 09:55:36 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 10:11:45 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 # define PISTOLE 0
 # define MACHIN_GUN 1
 # define ELECTRIC_GUN 2
-
+# define SHOTGUN 3
 # define PISTOLE_FNB 5
 # define MACHINE_GUN_FNB 4
 # define ELECTRIC_FNB 11
-# define WEAPON_NB 3
+# define SHOTGUN_FNB 15
+
+# define WEAPON_NB 4
 # define N_INDEX 0
 # define S_INDEX 1
 # define W_INDEX 2
@@ -75,5 +77,6 @@ void	start_animation(t_data *data);
 void	set_frame_index(t_data *data);
 void	init_frame_render_data(t_weapon *weapon, int frame_index,
 			int used_weapon);
+void	init_frames_number(t_weapon *weapons);
 
 #endif

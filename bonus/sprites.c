@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:01:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/07 09:53:47 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 10:12:36 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ void	sprites_init(t_weapon *weapons, void *mlx)
 	char	*tab[WEAPON_NB];
 
 	i = -1;
-	weapons[PISTOLE].frames_nb = PISTOLE_FNB;
-	weapons[MACHIN_GUN].frames_nb = MACHINE_GUN_FNB;
-	weapons[ELECTRIC_GUN].frames_nb = ELECTRIC_FNB;
+	init_frames_number(weapons);
 	tab[0] = ft_strdup("textures/pistole/pist_f1.xpm");
 	tab[1] = ft_strdup("textures/machine_gun/mgun_f1.xpm");
 	tab[2] = ft_strdup("textures/electric/electric_f1.xpm");
+	tab[3] = ft_strdup("textures/shotgun/sgun_f1.xpm");
 	while (++i < WEAPON_NB)
 	{
 		iter = -1;
@@ -35,29 +34,8 @@ void	sprites_init(t_weapon *weapons, void *mlx)
 			texture_init(mlx, &weapons[i].weapon_frames[iter], tab[i]);
 			tab[i][ft_strlen(tab[i]) - 5]++;
 		}
+		free(tab[i]);
 	}
-	free(tab[0]);
-	free(tab[1]);
-	free(tab[2]);
-}
-
-void	free_sprites_memory(t_weapon *weapons, void *mlx)
-{
-	int	i;
-	int	iter;
-
-	i = 0;
-	while (i < WEAPON_NB)
-	{
-		iter = 0;
-		while (iter < weapons[i].frames_nb)
-		{
-			mlx_destroy_image(weapons[i].weapon_frames[iter].img, mlx);
-			iter++;
-		}
-		i++;
-	}
-	free(weapons->weapon_frames);
 }
 
 void	init_frame_render_data(t_weapon *weapon, int frame_index

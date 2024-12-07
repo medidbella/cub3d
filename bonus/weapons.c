@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapons.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:44:48 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/07 09:54:17 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 10:12:51 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ unsigned long	ft_get_time(void)
 
 	gettimeofday(&curr, NULL);
 	return ((curr.tv_sec * 1000) + (curr.tv_usec / 1000));
+}
+
+void	init_frames_number(t_weapon *weapons)
+{
+	weapons[PISTOLE].frames_nb = PISTOLE_FNB;
+	weapons[MACHIN_GUN].frames_nb = MACHINE_GUN_FNB;
+	weapons[ELECTRIC_GUN].frames_nb = ELECTRIC_FNB;
+	weapons[SHOTGUN].frames_nb = SHOTGUN_FNB;
 }
 
 void	weapon_switch(t_data *data, int flag)

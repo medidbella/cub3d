@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   texture_handling.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/07 09:49:55 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/07 10:12:40 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	free_wall_textures_memory(t_data *data, t_texture *my_textures)
-{
-	int	i;
-
-	i = 0;
-	while (i <= 3 + (data->door_flag == 1))
-	{
-		mlx_destroy_image(data->mlx, my_textures[i].img);
-		i++;
-	}
-}
 
 int	get_cords_color(t_texture *img, int x, int y)
 {
@@ -65,6 +53,11 @@ void	get_texture_color(t_data *data, t_ray *ray, int current_y)
 	current_x = 0;
 	x_scale = (float)data->wall_textures[ray->texture_idx].hight / TILE_SIZE;
 	y_scale = (float)data->wall_textures[ray->texture_idx].width / ray->height;
+	if (ray->door)
+	{
+		x_scale = (float)data->wall_textures[DOOR_IDX].hight / TILE_SIZE;
+		y_scale = (float)data->wall_textures[DOOR_IDX].width / ray->height;		
+	}
 	if (ray->texture_idx == N_INDEX)
 		current_x = (int)ray->horizontal_x % TILE_SIZE;
 	else if (ray->texture_idx == S_INDEX)
@@ -73,8 +66,10 @@ void	get_texture_color(t_data *data, t_ray *ray, int current_y)
 		current_x = (int)ray->vertical_y % TILE_SIZE;
 	else if (ray->texture_idx == W_INDEX)
 		current_x = TILE_SIZE - ((int)ray->vertical_y % TILE_SIZE);
-	else if (ray->texture_idx == DOOR_IDX)
-		current_x = TILE_SIZE - ((int)ray->vertical_y % TILE_SIZE);
-	ray->curr_color = get_cords_color(&data->wall_textures[ray->texture_idx],
+	if (ray->door)
+		ray->curr_color = get_cords_color(&data->wall_textures[WALL_INDEX],
+			current_x * x_scale, current_y * y_scale);
+	else
+		ray->curr_color = get_cords_color(&data->wall_textures[ray->texture_idx],
 			current_x * x_scale, current_y * y_scale);
 }
