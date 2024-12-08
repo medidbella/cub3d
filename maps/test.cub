@@ -1,10 +1,10 @@
-NO ./textures/bleu.xpm
+NO ./textures/colors/blue.xpm
 
-SO ./textures/red.xpm
+SO ./textures/colors/red.xpm
 
-WE ./textures/green.xpm
+WE ./textures/colors/green.xpm
 
-EA ./textures/perpule.xpm
+EA ./textures/colors/purple.xpm
 
 DOOR ./textures/door.xpm
 

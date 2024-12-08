@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:44:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/04 15:01:27 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/08 13:36:55 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	player_space_border_check(t_config *scene_data, int y, int x, char c)
 	map = scene_data->map;
 	set = " 1";
 	if (c == 'p')
-		set = "10VH";
+		set = "10D";
 	if (map[y][x + 1] && !ft_strchr(set, map[y][x + 1]))
 		flag = 1;
 	else if (x > 0 && !ft_strchr(set, map[y][x - 1]))
@@ -58,8 +58,11 @@ void	player_space_border_check(t_config *scene_data, int y, int x, char c)
 		&& !ft_strchr(set, map[y + 1][x]))
 		flag = 1;
 	if (flag)
-		error_handler("map isn't surrounded by walls", NULL,
+	{
+		write(1, &c, 1);
+		error_handler(" map isn't surrounded by walls", NULL,
 			NULL, scene_data);
+	}
 }
 
 void	set_player_angle(t_config *scene_data, char player_char, int y,

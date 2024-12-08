@@ -29,7 +29,7 @@ LIBFT_OBJ = $(shell cat libft/Makefile | grep "ft_" | tr -d '\\' | tr -d "\n" \
 
 TEST = test.c
 
-bla: bonus
+# bla: bonus
 
 $(NAME): libft $(OBJ) 
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX1) -o $(NAME)

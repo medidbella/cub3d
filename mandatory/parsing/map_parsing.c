@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:44:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 12:17:12 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/08 13:30:01 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	set_player_angle(t_config *scene_data, char player_char, int y,
 	int x)
 {
 	if (scene_data->player_start_angle != -1)
-		error_handler("duplicat player character in the map",
+		error_handler("duplicate player character in the map",
 			NULL, NULL, scene_data);
 	if (player_char == 'N')
 		scene_data->player_start_angle = N_ANGLE;
@@ -118,5 +118,5 @@ void	map_parser(char **map, t_config *scene_data)
 		}
 	}
 	if (scene_data->player_start_angle == -1)
-		error_handler("palayer not found in the map\n", NULL, NULL, scene_data);
+		error_handler("player not found in the map\n", NULL, NULL, scene_data);
 }

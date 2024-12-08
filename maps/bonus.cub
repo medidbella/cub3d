@@ -1,7 +1,7 @@
-NO ./textures/bleu.xpm
-SO ./textures/red.xpm
-WE ./textures/green.xpm
-EA ./textures/perpule.xpm
+NO ./textures/colors/blue.xpm
+SO ./textures/colors/red.xpm
+WE ./textures/colors/green.xpm
+EA ./textures/colors/purple.xpm
 DOOR ./textures/door.xpm
 F 100,100,250
 C 0,0,0
