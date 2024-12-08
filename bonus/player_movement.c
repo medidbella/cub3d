@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 17:23:15 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/08 14:33:14 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	check_barriers(t_data *data, float x, float y)
 	if (ft_strchr("HV", data->map[(int)index_y][(int)index_x]))
 		return (!next_to_door(data, new_x, new_y
 				, data->map[(int)index_y][(int)index_x]));
-	return (0);
+	return (data->in_door = 0, 0);
 }
 
 void	w_moves(t_data *data, float *tab)

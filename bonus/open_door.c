@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 10:27:07 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 19:29:38 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/08 14:37:00 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,6 @@ void	open_door(t_data *data)
 	{
 		index_x = data->ray.direction_px / TILE_SIZE;
 		index_y = data->ray.direction_py / TILE_SIZE;
-		printf("--------------------------------------\n");
-		printf("angle : %f\n" ,data->player.angle);
-		printf("Px: %f || Py: %f\n", data->player.player_x, data->player.player_y);
-		printf("\ndirection xd: %f || direction yd: %f\n", data->ray.direction_px, data->ray.direction_py);
-		printf("dierction distance to door: %f\ndoor => %d\n\n", data->ray.direction_distance, data->ray.direction_door);
-		printf("map[%d][%d] ==> %c\n", index_y, index_x, data->map[index_y][index_x]);
-		printf("--------------------------------------\n");
-		// exit(0);
 		if (data->map[index_y][index_x] == 'H'
 			|| data->map[index_y][index_x] == 'V')
 			data->map[index_y][index_x] += 32;

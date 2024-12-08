@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 18:54:46 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/08 21:56:53 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,11 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 			break ;
 		if (ft_strchr("1HV", data->map[y][x]))
 		{
-			if (ft_strchr("HV", data->map[y][x]))
+			if (ft_strchr("HV", data->map[y][x]) && ray->h_door == 0)
+			{
 				ray->h_door = 1;
+				continue ;
+			}
 			ray->horizontal_distance = get_distance(data, ray->horizontal_x,
 					ray->horizontal_y);
 			break ;

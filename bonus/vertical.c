@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 18:55:30 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/08 21:14:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	find_vertical_point(t_data *data, double rayangle, double *vertical_x
 
 	if (rayangle == radian(90) || rayangle == radian(270))
 		return ;
+		
 	if (!v_ray_to_door(data, rayangle, &delta_x))
 		delta_x = calculate_delta_x(data, vertical_x, vertical_y, rayangle);
 	delta_y = tan(rayangle) * delta_x;
@@ -85,9 +86,13 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 	ray->vertical_y = data->player.player_y;
 	ray->vertical_x = data->player.player_x;
 	ray->vertical_distance = -1.0;
+	
+	data->debug = 0;
+
 	while (1)
 	{
 		find_vertical_point(data, rayangle, &ray->vertical_x, &ray->vertical_y);
+		// printf("Vx: %f || Vy: %f\n", ray->vertical_x, ray->vertical_y);
 		if (rayangle == radian(90) || rayangle == radian(270)
 			|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
 			|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d
@@ -95,8 +100,11 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 			break ;
 		if (ft_strchr("1HV", data->map[y][x]))
 		{
-			if (ft_strchr("HV", data->map[y][x]))
+			if (ft_strchr("HV", data->map[y][x]) && ray->v_door == 0)
+			{
 				ray->v_door = 1;
+				continue ;
+			}
 			ray->vertical_distance = get_distance(data, ray->vertical_x,
 					ray->vertical_y);
 			break ;

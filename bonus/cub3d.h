@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 18:55:21 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/08 22:11:55 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ typedef struct s_data
 	unsigned long	last_weapon_switch_time;
 	int				in_door;
 	t_ray			ray;
+	
+	int	debug;
 }	t_data;
 
 typedef struct s_draw
@@ -213,5 +215,10 @@ bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
 bool			next_to_door(t_data *data, float new_x, float new_y, char c);
 void			direction_of_player(t_data *data);
 void			open_door(t_data *data);
+
+void	draw_direction(t_data *data);
+char	get_char(t_data *data, int which);
+bool	h_ray_to_door(t_data *data, double rayangle, double *delta_y);
+bool	v_ray_to_door(t_data *data, double rayangle, double *delta_x);
 
 #endif

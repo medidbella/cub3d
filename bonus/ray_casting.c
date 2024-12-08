@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 19:34:03 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/08 22:06:34 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ int	small_distance(t_ray *ray)
 	}
 	else if (ray->horizontal_distance < ray->vertical_distance)
 	{
+		// printf("here\n");
 		ray->side_flag = 1;
 		ray->distance = ray->horizontal_distance;
 		return (ray->h_door);
@@ -183,33 +184,18 @@ void	ray_casting(t_data *data)
 	ray->rayangle = data->player.angle - (data->player.fov / 2);
 	if (ray->rayangle < 0)
 		ray->rayangle += radian(360);
-	printf("============================\n");
-	printf("Px: %f || Py: %f || angle: %f\n", data->player.player_x, data->player.player_y, data->player.angle);
-	printf("ray angle: %f\n", ray->rayangle * 180 / M_PI);
-	printf("============================\n");
-	// exit(0);
 	while (column <= WIDTH)
 	{
-		// printf("width ==> %d\n", WIDTH);
 		if (column == (WIDTH / 2))
-		{
-			printf("column: %d\n", column);
-			printf("ray angle: %f\n", ray->rayangle * 180 / M_PI);
 			direction_of_player(data);
-		}
 		ray->h_door = 0;
 		ray->v_door = 0;
+		if (column == ((WIDTH / 2) - 1))
+			data->debug = 1;
 		horizontal_distance(data, ray, ray->rayangle);
 		vertical_distance(data, ray, ray->rayangle);
-		if (column == (WIDTH / 2) - 1)
-		{
-			printf("Hx: %f || Hy: %f || Vd: %f\n", ray->horizontal_x, ray->horizontal_y, ray->horizontal_distance);
-			printf("Vx: %f || Vy: %f || Vd: %f\n", ray->vertical_x, ray->vertical_y, ray->vertical_distance);
-		}
 		real_distance(ray, data);
 		ray->door = small_distance(ray);
-		if (ray->door)
-			get_door_distance(data, ray, ray->rayangle);
 		draw_column(data, ray, column);
 		column++;
 		ray->rayangle += data->player.angle_step;
