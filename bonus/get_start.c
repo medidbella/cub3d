@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/08 21:57:38 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:31:31 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,53 +68,6 @@ void	setup(t_data *data)
 	mlx_mouse_hide(data->mlx, data->win);
 }
 
-void bresenham_line(t_data *data, int x0, int y0, int x1, int y1) {
-    int dx = x1 - x0;   // Change in x
-    int dy = y1 - y0;   // Change in y
-    int sx = (dx > 0) ? 1 : -1; // Step in x direction
-    int sy = (dy > 0) ? 1 : -1; // Step in y direction
-    dx = abs(dx);
-    dy = abs(dy);
-
-    int err = (dx > dy ? dx : -dy) / 2; // Error term
-    int e2;
-
-    while (1) {
-        my_mlx_pixel_put(data, x0, y0, 0xFF0000); // Plot the current point
-
-        // Check if we have reached the end point
-        if (x0 == x1 && y0 == y1)
-            break;
-
-        e2 = err;
-
-        // Adjust x and y based on error
-        if (e2 > -dx) {
-            err -= dy;
-            x0 += sx;
-        }
-        if (e2 < dy) {
-            err += dx;
-            y0 += sy;
-        }
-    }
-}
-
-void	draw_direction(t_data *data)
-{
-	int delta_x;
-	int delta_y;
-	int	d_x;
-	int	d_y;
-
-	delta_y = cos(data->player.angle) * 15;
-	delta_x = sin(data->player.angle) * 15;
-	d_y = data->player.mini_y + delta_y;
-	d_x = data->player.mini_x + delta_x;
-	bresenham_line(data, (int)(data->player.mini_x), (int)(data->player.mini_y), d_x, d_y);
-}
-
-
 void	first_view(t_data *data)
 {
 	ray_casting(data);
@@ -123,7 +76,6 @@ void	first_view(t_data *data)
 	draw_player(data);
 	render_weapon(data, &data->weapons[0], 0);
 	mlx_mouse_move(data->mlx, data->win, WIDTH / 2, HEIGHT / 2);
-	draw_direction(data);
 }
 
 void	get_start(t_config *parsed_data)

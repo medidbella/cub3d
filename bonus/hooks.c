@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/08 21:57:30 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:23:57 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,6 @@ int	close_win(t_data *data)
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	exit(0);
-}
-
-void	move_player(t_data *data)
-{
-	float	tab[2];
-
-	if (!data->keys[2] && !data->keys[3] && !data->keys[4] && !data->keys[5])
-		return ;
-	w_moves(data, tab);
-	s_moves(data, tab);
-	d_moves(data, tab);
-	a_moves(data, tab);
-	data->player.player_x += tab[0];
-	data->player.player_y += tab[1];
-	data->player.mini_x = data->player.player_x
-		* data->scale - (data->mini_width / 2);
-	data->player.mini_y = data->player.player_y
-		* data->scale - (data->mini_height / 2);
 }
 
 bool	check_keys(t_data *data)
@@ -98,6 +80,5 @@ int	loop_rendering(t_data *data)
 	set_frame_index(data);
 	render_weapon(data, &data->weapons[data->used_weapon],
 		data->weapons[data->used_weapon].current_frame_index);
-	draw_direction(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/08 21:56:53 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:47:48 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 	int		x;
 	int		y;
 
-	ray->horizontal_y = data->player.player_y;
-	ray->horizontal_x = data->player.player_x;
-	ray->horizontal_distance = -1.0;
+	init_vars(data, ray, H_VARS);
 	while (1)
 	{
 		find_horizontal_point(data, rayangle, &ray->horizontal_x,
@@ -104,6 +102,7 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 		{
 			if (ft_strchr("HV", data->map[y][x]) && ray->h_door == 0)
 			{
+				data->ray.horizontal_door_flag = 1;
 				ray->h_door = 1;
 				continue ;
 			}

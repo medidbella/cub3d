@@ -6,11 +6,29 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/08 21:14:29 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:47:52 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_vars(t_data *data, t_ray *ray, int which)
+{
+	if (which == H_VARS)
+	{
+		ray->horizontal_y = data->player.player_y;
+		ray->horizontal_x = data->player.player_x;
+		ray->horizontal_distance = -1.0;
+		ray->horizontal_door_flag = 0;
+	}
+	else
+	{
+		ray->vertical_y = data->player.player_y;
+		ray->vertical_x = data->player.player_x;
+		ray->vertical_distance = -1.0;
+		ray->vertical_door_flag = 0;
+	}
+}
 
 double	calculate_delta_x(t_data *data, double *vertical_x
 							, double *vertical_y, double rayangle)
@@ -50,7 +68,6 @@ void	find_vertical_point(t_data *data, double rayangle, double *vertical_x
 
 	if (rayangle == radian(90) || rayangle == radian(270))
 		return ;
-		
 	if (!v_ray_to_door(data, rayangle, &delta_x))
 		delta_x = calculate_delta_x(data, vertical_x, vertical_y, rayangle);
 	delta_y = tan(rayangle) * delta_x;
@@ -83,16 +100,10 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 	int		x;
 	int		y;
 
-	ray->vertical_y = data->player.player_y;
-	ray->vertical_x = data->player.player_x;
-	ray->vertical_distance = -1.0;
-	
-	data->debug = 0;
-
+	init_vars(data, ray, V_VARS);
 	while (1)
 	{
 		find_vertical_point(data, rayangle, &ray->vertical_x, &ray->vertical_y);
-		// printf("Vx: %f || Vy: %f\n", ray->vertical_x, ray->vertical_y);
 		if (rayangle == radian(90) || rayangle == radian(270)
 			|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
 			|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d
@@ -102,6 +113,7 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 		{
 			if (ft_strchr("HV", data->map[y][x]) && ray->v_door == 0)
 			{
+				ray->vertical_door_flag = 1;
 				ray->v_door = 1;
 				continue ;
 			}

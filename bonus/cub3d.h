@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/08 22:11:55 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:45:38 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,14 @@
 # define OPEN_DOOR 10
 # define KEYS_NB 11
 # define SENSITIVITY 0.005
+# define DELTA_X 0
+# define DELTA_Y 1
+# define H_VARS 1
+# define V_VARS 2
 
 typedef struct s_ray
 {
 	double	distance;
-	// double	colums;
 	double	rayangle;
 	double	raystep;
 	double	horizontal_x;
@@ -92,6 +95,8 @@ typedef struct s_ray
 	float	hy_door;
 	float	vx_door;
 	float	vy_door;
+	int		vertical_door_flag;
+	int		horizontal_door_flag;
 }	t_ray;
 
 typedef struct s_player
@@ -153,8 +158,6 @@ typedef struct s_data
 	unsigned long	last_weapon_switch_time;
 	int				in_door;
 	t_ray			ray;
-	
-	int	debug;
 }	t_data;
 
 typedef struct s_draw
@@ -215,10 +218,11 @@ bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
 bool			next_to_door(t_data *data, float new_x, float new_y, char c);
 void			direction_of_player(t_data *data);
 void			open_door(t_data *data);
-
-void	draw_direction(t_data *data);
-char	get_char(t_data *data, int which);
-bool	h_ray_to_door(t_data *data, double rayangle, double *delta_y);
-bool	v_ray_to_door(t_data *data, double rayangle, double *delta_x);
+void			move_player(t_data *data);
+bool			check_barriers(t_data *data, float x, float y);
+char			get_char(t_data *data, int which);
+bool			h_ray_to_door(t_data *data, double rayangle, double *delta_y);
+bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
+void			init_vars(t_data *data, t_ray *ray, int which);
 
 #endif

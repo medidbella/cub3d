@@ -6,36 +6,11 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/08 14:33:14 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:14:33 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	check_barriers(t_data *data, float x, float y)
-{
-	float	new_x;
-	float	new_y;
-	float	index_x;
-	float	index_y;
-
-	new_x = data->player.player_x + x;
-	new_y = data->player.player_y + y;
-	index_x = (new_x / TILE_SIZE)
-		- ((int)new_x % TILE_SIZE == 0 && data->player.player_x > new_x);
-	index_y = (new_y / TILE_SIZE)
-		- ((int)new_y % TILE_SIZE == 0 && data->player.player_y > new_y);
-	if (!((int)index_y < data->height_2d
-			&& (int)index_y >= 0 && (int)index_x >= 0
-			&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
-		return (1);
-	if (!ft_strchr("NSEW0HVhv", data->map[(int)index_y][(int)index_x]))
-		return (1);
-	if (ft_strchr("HV", data->map[(int)index_y][(int)index_x]))
-		return (!next_to_door(data, new_x, new_y
-				, data->map[(int)index_y][(int)index_x]));
-	return (data->in_door = 0, 0);
-}
 
 void	w_moves(t_data *data, float *tab)
 {
@@ -44,22 +19,22 @@ void	w_moves(t_data *data, float *tab)
 	if (data->keys[2])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
-		tab[0] = (cos(data->player.angle) * speed);
-		tab[1] = (sin(data->player.angle) * speed);
-		if (tab[1] < 0.00001 && tab[1] > -0.00001)
-			tab[1] = 0;
-		if (tab[0] < 0.00001 && tab[0] > -0.00001)
-			tab[0] = 0;
-		if (check_barriers(data, tab[0], tab[1]))
+		tab[DELTA_X] = (cos(data->player.angle) * speed);
+		tab[DELTA_Y] = (sin(data->player.angle) * speed);
+		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
+			tab[DELTA_Y] = 0;
+		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
+			tab[DELTA_X] = 0;
+		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
-			if (!check_barriers(data, tab[0], 0))
-				tab[1] = 0;
-			else if (!check_barriers(data, 0, tab[1]))
-				tab[0] = 0;
+			if (!check_barriers(data, tab[DELTA_X], 0))
+				tab[DELTA_Y] = 0;
+			else if (!check_barriers(data, 0, tab[DELTA_Y]))
+				tab[DELTA_X] = 0;
 			else
 			{
-				tab[0] = 0.0;
-				tab[1] = 0.0;
+				tab[DELTA_X] = 0.0;
+				tab[DELTA_Y] = 0.0;
 				return ;
 			}
 		}
@@ -73,22 +48,22 @@ void	s_moves(t_data *data, float *tab)
 	if (data->keys[3])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
-		tab[0] = (cos(data->player.angle) * speed) * -1;
-		tab[1] = (sin(data->player.angle) * speed) * -1;
-		if (tab[1] < 0.00001 && tab[1] > -0.00001)
-			tab[1] = 0;
-		if (tab[0] < 0.00001 && tab[0] > -0.00001)
-			tab[0] = 0;
-		if (check_barriers(data, tab[0], tab[1]))
+		tab[DELTA_X] = (cos(data->player.angle) * speed) * -1;
+		tab[DELTA_Y] = (sin(data->player.angle) * speed) * -1;
+		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
+			tab[DELTA_Y] = 0;
+		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
+			tab[DELTA_X] = 0;
+		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
-			if (!check_barriers(data, tab[0], 0))
-				tab[1] = 0;
-			else if (!check_barriers(data, 0, tab[1]))
-				tab[0] = 0;
+			if (!check_barriers(data, tab[DELTA_X], 0))
+				tab[DELTA_Y] = 0;
+			else if (!check_barriers(data, 0, tab[DELTA_Y]))
+				tab[DELTA_X] = 0;
 			else
 			{
-				tab[0] = 0.0;
-				tab[1] = 0.0;
+				tab[DELTA_X] = 0.0;
+				tab[DELTA_Y] = 0.0;
 				return ;
 			}
 		}
@@ -102,22 +77,22 @@ void	d_moves(t_data *data, float *tab)
 	if (data->keys[4])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
-		tab[0] = (sin(data->player.angle) * speed) * -1;
-		tab[1] = (cos(data->player.angle) * speed);
-		if (tab[1] < 0.00001 && tab[1] > -0.00001)
-			tab[1] = 0;
-		if (tab[0] < 0.00001 && tab[0] > -0.00001)
-			tab[0] = 0;
-		if (check_barriers(data, tab[0], tab[1]))
+		tab[DELTA_X] = (sin(data->player.angle) * speed) * -1;
+		tab[DELTA_Y] = (cos(data->player.angle) * speed);
+		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
+			tab[DELTA_Y] = 0;
+		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
+			tab[DELTA_X] = 0;
+		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
-			if (!check_barriers(data, tab[0], 0))
-				tab[1] = 0;
-			else if (!check_barriers(data, 0, tab[1]))
-				tab[0] = 0;
+			if (!check_barriers(data, tab[DELTA_X], 0))
+				tab[DELTA_Y] = 0;
+			else if (!check_barriers(data, 0, tab[DELTA_Y]))
+				tab[DELTA_X] = 0;
 			else
 			{
-				tab[0] = 0.0;
-				tab[1] = 0.0;
+				tab[DELTA_X] = 0.0;
+				tab[DELTA_Y] = 0.0;
 				return ;
 			}
 		}
@@ -131,24 +106,42 @@ void	a_moves(t_data *data, float *tab)
 	if (data->keys[5])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
-		tab[0] = (sin(data->player.angle) * speed);
-		tab[1] = (cos(data->player.angle) * speed) * -1;
-		if (tab[1] < 0.00001 && tab[1] > -0.00001)
-			tab[1] = 0;
-		if (tab[0] < 0.00001 && tab[0] > -0.00001)
-			tab[0] = 0;
-		if (check_barriers(data, tab[0], tab[1]))
+		tab[DELTA_X] = (sin(data->player.angle) * speed);
+		tab[DELTA_Y] = (cos(data->player.angle) * speed) * -1;
+		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
+			tab[DELTA_Y] = 0;
+		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
+			tab[DELTA_X] = 0;
+		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
-			if (!check_barriers(data, tab[0], 0))
-				tab[1] = 0;
-			else if (!check_barriers(data, 0, tab[1]))
-				tab[0] = 0;
+			if (!check_barriers(data, tab[DELTA_X], 0))
+				tab[DELTA_Y] = 0;
+			else if (!check_barriers(data, 0, tab[DELTA_Y]))
+				tab[DELTA_X] = 0;
 			else
 			{
-				tab[0] = 0.0;
-				tab[1] = 0.0;
+				tab[DELTA_X] = 0.0;
+				tab[DELTA_Y] = 0.0;
 				return ;
 			}
 		}
 	}
+}
+
+void	move_player(t_data *data)
+{
+	float	tab[2];
+
+	if (!data->keys[2] && !data->keys[3] && !data->keys[4] && !data->keys[5])
+		return ;
+	w_moves(data, tab);
+	s_moves(data, tab);
+	d_moves(data, tab);
+	a_moves(data, tab);
+	data->player.player_x += tab[0];
+	data->player.player_y += tab[1];
+	data->player.mini_x = data->player.player_x
+		* data->scale - (data->mini_width / 2);
+	data->player.mini_y = data->player.player_y
+		* data->scale - (data->mini_height / 2);
 }
