@@ -11,10 +11,11 @@ SRC = mandatory/cub3d.c mandatory/get_start.c mandatory/draw_pixels.c mandatory/
 		mandatory/parsing/parser.c mandatory/parsing/parsing_utils.c \
 		mandatory/parsing/read_file.c
 SRC_BONUS = bonus/cub3d.c bonus/get_start.c bonus/draw_pixels.c bonus/hooks.c \
-		bonus/rotate.c bonus/texture_handling.c bonus/player_movement.c bonus/moves_utils.c \
-		bonus/ray_casting.c bonus/rays_utils.c\
-		bonus/horizontal.c bonus/vertical.c bonus/key_hooks.c \
-		bonus/parsing/general_utils.c bonus/parsing/map_parsing.c \
+		bonus/rotate.c bonus/texture_handling.c bonus/player_movement.c \
+		bonus/wall_checker.c bonus/moves_utils.c \
+		bonus/ray_casting.c bonus/rays_utils.c bonus/open_door.c \
+		bonus/horizontal.c bonus/vertical.c bonus/horizontal_utils.c bonus/vertical_utils.c \
+		bonus/key_hooks.c bonus/parsing/general_utils.c bonus/parsing/map_parsing.c \
 		bonus/parsing/parser.c bonus/parsing/parsing_utils.c \
 		bonus/parsing/read_file.c bonus/parsing/parse_textures.c\
 		bonus/sprites.c bonus/weapons.c bonus/door.c bonus/mem_free.c
@@ -29,7 +30,7 @@ LIBFT_OBJ = $(shell cat libft/Makefile | grep "ft_" | tr -d '\\' | tr -d "\n" \
 
 TEST = test.c
 
-# bla: bonus
+bla: bonus
 
 $(NAME): libft $(OBJ) 
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX1) -o $(NAME)

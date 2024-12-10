@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 10:12:02 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:22:22 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,6 @@ void	get_start(t_config *parsed_data)
 	sprites_init(data.weapons, data.mlx);
 	data.door_flag = parsed_data->door_flag;
 	init_key_flags(&data);
-
-	data.player.angle = 3.534292;
-
 	first_view(&data);
 	data.last_frame_time = ft_get_time();
 	data.last_weapon_switch_time = ft_get_time();
