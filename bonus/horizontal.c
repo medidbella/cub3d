@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/10 15:47:48 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/11 19:00:05 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 	{
 		find_horizontal_point(data, rayangle, &ray->horizontal_x,
 			&ray->horizontal_y);
+		// if (data->debug)
+		// 	printf("Hx: %f || Hy: %f\n", ray->horizontal_x, ray->horizontal_y);
 		if (rayangle == 0 || rayangle == radian(180)
 			|| ray->horizontal_y > data->height_2d || ray->horizontal_y < 0
 			|| ray->horizontal_x > data->width_2d || ray->horizontal_x < 0
@@ -110,5 +112,18 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 					ray->horizontal_y);
 			break ;
 		}
+		if (ray->h_checks < 2 && data->hdirection_flag && !data->ray.hit_h_openedoor)
+		{
+			ray->h_checks++;
+			if (ft_strchr("hv", data->map[y][x]))
+			{
+				data->ray.hit_h_openedoor = 1;
+				data->hdirection_flag = 0;
+				data->ray.openedoor_hx = ray->horizontal_x;
+				data->ray.openedoor_hy = ray->horizontal_y;
+			}
+		}
 	}
+	// if (data->debug)
+	// 	exit(0);
 }

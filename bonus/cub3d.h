@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/10 16:21:30 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:07:03 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,15 @@ typedef struct s_ray
 	float	vy_door;
 	int		vertical_door_flag;
 	int		horizontal_door_flag;
+
+	int		hit_v_openedoor;
+	int		hit_h_openedoor;
+	float	openedoor_hx;
+	float	openedoor_hy;
+	float	openedoor_vx;
+	float	openedoor_vy;
+	int		h_checks;
+	int 	v_checks;
 }	t_ray;
 
 typedef struct s_player
@@ -158,6 +167,11 @@ typedef struct s_data
 	unsigned long	last_weapon_switch_time;
 	int				in_door;
 	t_ray			ray;
+
+	int				hdirection_flag;
+	int				vdirection_flag;
+	int				debug;
+	int	hits;
 }	t_data;
 
 typedef struct s_draw

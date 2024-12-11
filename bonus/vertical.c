@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/10 16:25:02 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/11 19:00:32 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 	while (1)
 	{
 		find_vertical_point(data, rayangle, &ray->vertical_x, &ray->vertical_y);
+		if (data->debug)
+			printf("Vx: %f || Vy: %f\n", ray->vertical_x, ray->vertical_y);
 		if (rayangle == radian(90) || rayangle == radian(270)
 			|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
 			|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d
@@ -121,5 +123,21 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 					ray->vertical_y);
 			break ;
 		}
+		if (ray->v_checks < 2 && data->vdirection_flag && !data->ray.hit_v_openedoor)
+		{
+			// printf("%d checking vertical\n", data->hits);
+			ray->v_checks++;
+			if (ft_strchr("hv", data->map[y][x]))
+			{
+				// printf("hitting verticalllll\n");
+				data->ray.hit_v_openedoor = 1;
+				data->vdirection_flag = 0;
+				data->ray.openedoor_vx = ray->vertical_x;
+				data->ray.openedoor_vy = ray->vertical_y;
+			}
+		}
 	}
+		if (data->debug)
+			exit(0);
+
 }
