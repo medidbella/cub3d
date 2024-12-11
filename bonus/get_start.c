@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/11 18:41:20 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:10:41 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	setup(t_data *data)
 
 	data->ray.h_checks = 0;
 	data->ray.v_checks = 0;
+
+	data->to_close = 0;
 }
 
 void	first_view(t_data *data)

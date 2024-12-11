@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/11 19:00:10 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:13:15 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,16 +145,16 @@ void	ray_casting(t_data *data)
 			// printf("Hx: %f || Hy: %f\n", ray->horizontal_x, ray->horizontal_y);
 			// printf("Vx: %f || Vy: %f\n", ray->vertical_x, ray->vertical_y);
 
-			if (ray->hit_h_openedoor)
-				printf("is hitting the opened door in horizontal\n");
-			else
-				printf("is noooooooot in horizontal\n");
-			if (ray->hit_v_openedoor)
-				printf("is hitting the opened door in vertical\n");
-			else
-				printf("is noooooooot in vertical\n");
+			// if (ray->hit_h_openedoor)
+			// 	printf("is hitting the opened door in horizontal\n");
+			// else
+			// 	printf("is noooooooot in horizontal\n");
+			// if (ray->hit_v_openedoor)
+			// 	printf("is hitting the opened door in vertical\n");
+			// else
+			// 	printf("is noooooooot in vertical\n");
 			
-			printf("column: %d\n", column);
+			// printf("column: %d\n", column);
 			// exit(0);
 		}
 

@@ -6,13 +6,36 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:35:57 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/08 22:14:00 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:12:56 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	direction_of_player(t_data *data)
+// static	void	opened_door(t_data *data)
+// {
+// 	float	distance1;
+// 	float	distance2;
+// 	float	distance;
+
+// 	if (data->ray.hit_h_openedoor && !data->ray.hit_v_openedoor)
+// 		distance = get_distance(data, data->ray.openedoor_hx, data->ray.openedoor_hy);
+// 	else if (!data->ray.hit_h_openedoor && data->ray.hit_v_openedoor)
+// 		distance = get_distance(data, data->ray.openedoor_vx, data->ray.openedoor_vy);
+
+// 	else
+// 	{
+// 		distance1 = get_distance(data, data->ray.openedoor_hx, data->ray.openedoor_hy);
+// 		distance2 = get_distance(data, data->ray.openedoor_vx, data->ray.openedoor_vy);
+// 		distance = distance1;
+// 		if (distance < distance2)
+// 			distance = distance2;
+// 	}
+// 	if (distance < data->ray.distance)
+// 		data
+// }
+
+void	closed_door(t_data *data)
 {
 	if (!data->ray.door)
 	{
@@ -31,4 +54,12 @@ void	direction_of_player(t_data *data)
 	}
 	data->ray.direction_distance = data->ray.distance;
 	data->ray.direction_door = data->ray.door;
+}
+
+void	direction_of_player(t_data *data)
+{
+	// if (data->ray.hit_h_openedoor || data->ray.hit_v_openedoor)
+	// 	opened_door(data);
+	// else
+		closed_door(data);
 }

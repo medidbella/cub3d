@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 10:27:07 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/08 14:37:00 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:12:30 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,5 @@ void	open_door(t_data *data)
 			data->keys[OPEN_DOOR] = 0;
 	}
 }
+
+// void	open_and_close()

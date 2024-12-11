@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/11 18:07:03 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:10:26 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ typedef struct s_data
 	int				in_door;
 	t_ray			ray;
 
+	int				to_close;
 	int				hdirection_flag;
 	int				vdirection_flag;
 	int				debug;
