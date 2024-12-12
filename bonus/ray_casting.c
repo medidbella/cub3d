@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 17:58:29 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:30:50 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	draw_column(t_data *data, t_ray *ray, int column)
 	if (start > 0)
 		i = start - 1;
 	while (++i < end)
-	{	
+	{
 		get_texture_color(data, ray, i - start);
 		my_mlx_pixel_put(data, column, i, ray->curr_color);
 	}
@@ -61,25 +61,21 @@ void	draw_column(t_data *data, t_ray *ray, int column)
 
 void	real_distance(t_ray *ray, t_data *data)
 {
-	float	distance1;
-	float	distance2;
 	float	distance;
 
-	if (data->direction_flag)
+	if (ray->direction_flag)
 	{
 		if (ray->vertical_distance == -1)
-			distance = ray->horizontal_distance;
+			ray->direction_ray_distance = ray->horizontal_distance;
 		else if (ray->horizontal_distance == -1)
-			distance = ray->vertical_distance;
+			ray->direction_ray_distance = ray->vertical_distance;
 		else
 		{
-			distance1 = ray->horizontal_distance;
-			distance2 = ray->vertical_distance;
-			distance = distance1;
-			if (distance > distance2)
-				distance = distance1;
+			ray->direction_ray_distance = ray->horizontal_distance;
+			distance = ray->vertical_distance;
+			if (ray->direction_ray_distance > distance)
+				ray->direction_ray_distance = distance;
 		}
-		data->direction_ray_distance = distance;
 	}
 	if (ray->horizontal_distance != -1)
 		ray->horizontal_distance = cos(ray->rayangle - data->player.angle)
@@ -124,37 +120,17 @@ void	ray_casting(t_data *data)
 	int		column;
 
 	ray = &(data->ray);
-	column = 0;
-	ray->rayangle = data->player.angle - (data->player.fov / 2);
-	if (ray->rayangle < 0)
-		ray->rayangle += radian(360);
-
-	data->hdirection_flag = 0;
-	data->vdirection_flag = 0;
-	data->ray.hit_h_openedoor = 0;
-	data->ray.hit_v_openedoor = 0;
-
-	data->ray.h_checks = 0;
-	data->ray.v_checks = 0;
-	
-	data->direction_ray_distance = 0.0;
-	data->closest_hv = 0;
-	data->direction_flag = 0;
-	
+	initialize_vars(data, ray, &column);
 	while (column <= WIDTH)
 	{
 		if (column == ((WIDTH / 2) - 1))
-		{
-			data->hdirection_flag = 1;
-			data->vdirection_flag = 1;
-			data->direction_flag = 1;
-		}
+			ray->direction_flag = 1;
 		if (column == (WIDTH / 2))
 			direction_of_player(data);
 		ray->h_door = 0;
 		ray->v_door = 0;
-		horizontal_distance(data, ray, ray->rayangle);
-		vertical_distance(data, ray, ray->rayangle);
+		horizontal_distance(data, ray);
+		vertical_distance(data, ray);
 		real_distance(ray, data);
 		ray->door = small_distance(ray);
 		draw_column(data, ray, column);
@@ -162,6 +138,6 @@ void	ray_casting(t_data *data)
 		ray->rayangle += data->player.angle_step;
 		if (ray->rayangle >= radian(360))
 			ray->rayangle -= radian(360);
-		data->direction_flag = 0;
+		ray->direction_flag = 0;
 	}
 }

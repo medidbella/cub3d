@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 18:01:19 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:33:12 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,6 @@ void	setup(t_data *data)
 	data->mouse_y = HEIGHT / 2;
 	data->in_door = 0;
 	mlx_mouse_hide(data->mlx, data->win);
-
-	data->hdirection_flag = 0;
-	data->vdirection_flag = 0;
-	// data->debug = 0;
-
-	data->ray.hit_v_openedoor = 0;
-	data->ray.hit_h_openedoor = 0;
-	data->ray.openedoor_hx = 0;
-	data->ray.openedoor_hy = 0;
-	data->ray.openedoor_vx = 0;
-	data->ray.openedoor_vy = 0;
-	// data->hits = 0;
-
-	data->ray.h_checks = 0;
-	data->ray.v_checks = 0;
-
-	data->to_close = 0;
-	data->direction_ray_distance = 0;
-	data->closest_hv = 0;
-	data->direction_flag = 0;
 }
 
 void	first_view(t_data *data)
@@ -111,20 +91,10 @@ void	get_start(t_config *parsed_data)
 	data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
 	data.used_weapon = 0;
 	setup(&data);
-
-	data.player.player_x = 108;
-	data.player.player_y = 54.000000;
-	// data.player.angle = 1.178097;
-	data.map[1][5] = 'h';
-
 	initialize_wall_textures(&data, parsed_data);
 	sprites_init(data.weapons, data.mlx);
 	data.door_flag = parsed_data->door_flag;
 	init_key_flags(&data);
-
-	printf("Px: %f || Py: %f\n", data.player.player_x, data.player.player_y);
-	printf("========================================\n");
-
 	first_view(&data);
 	data.last_frame_time = ft_get_time();
 	data.last_weapon_switch_time = ft_get_time();

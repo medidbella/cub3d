@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 17:57:43 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:35:21 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,15 @@ typedef struct s_ray
 	float	vy_door;
 	int		vertical_door_flag;
 	int		horizontal_door_flag;
-
 	int		hit_v_openedoor;
 	int		hit_h_openedoor;
 	float	openedoor_hx;
 	float	openedoor_hy;
 	float	openedoor_vx;
 	float	openedoor_vy;
-	int		h_checks;
-	int 	v_checks;
+	int		direction_flag;
+	float	direction_ray_distance;
+	int		closest_hv;
 }	t_ray;
 
 typedef struct s_player
@@ -167,24 +167,14 @@ typedef struct s_data
 	unsigned long	last_weapon_switch_time;
 	int				in_door;
 	t_ray			ray;
-
-	int				to_close;
-	// int				flag_flag;
-	int				direction_flag;
-	int				hdirection_flag;
-	int				vdirection_flag;
-	float			direction_ray_distance;
-	int				closest_hv;
-	// int				debug;
-	// int	hits;
 }	t_data;
 
 typedef struct s_draw
 {
 	int	i;
 	int	j;
-	int	x;
-	int	y;
+	int	draw_x;
+	int	draw_y;
 	int	color;
 }	t_draw;
 
@@ -222,9 +212,9 @@ void			bresenham(t_data *data, t_ray *ray);
 void			ray_casting(t_data *data);
 void			draw(t_data *data);
 void			move_player(t_data *data);
-void			horizontal_distance(t_data *data, t_ray *ray, double rayangle);
+void			horizontal_distance(t_data *data, t_ray *ray);
 double			get_distance(t_data *data, double x, double y);
-void			vertical_distance(t_data *data, t_ray *ray, double rayangle);
+void			vertical_distance(t_data *data, t_ray *ray);
 void			get_texture_color(t_data *data, t_ray *ray, int current_y);
 void			initialize_textures(t_data *data, t_config *parsed_data);
 void			draw_2d_wall(t_data *data, int x, int y);
@@ -242,6 +232,7 @@ bool			check_barriers(t_data *data, float x, float y);
 char			get_char(t_data *data, int which);
 bool			h_ray_to_door(t_data *data, double rayangle, double *delta_y);
 bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
-void			init_vars(t_data *data, t_ray *ray, int which);
+void			init_vars(t_data *data, t_ray *ray, int *checks, int which);
+void			initialize_vars(t_data *data, t_ray *ray, int *column);
 
 #endif

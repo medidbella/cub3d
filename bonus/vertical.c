@@ -6,29 +6,11 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/11 22:00:01 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:32:09 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	init_vars(t_data *data, t_ray *ray, int which)
-{
-	if (which == H_VARS)
-	{
-		ray->horizontal_y = data->player.player_y;
-		ray->horizontal_x = data->player.player_x;
-		ray->horizontal_distance = -1.0;
-		ray->horizontal_door_flag = 0;
-	}
-	else
-	{
-		ray->vertical_y = data->player.player_y;
-		ray->vertical_x = data->player.player_x;
-		ray->vertical_distance = -1.0;
-		ray->vertical_door_flag = 0;
-	}
-}
 
 double	calculate_delta_x(t_data *data, double *vertical_x
 							, double *vertical_y, double rayangle)
@@ -60,12 +42,14 @@ double	calculate_delta_x(t_data *data, double *vertical_x
 	return (delta_x);
 }
 
-void	find_vertical_point(t_data *data, double rayangle, double *vertical_x
+void	find_vertical_point(t_data *data, double *vertical_x
 							, double *vertical_y)
 {
 	double	delta_x;
 	double	delta_y;
+	double	rayangle;
 
+	rayangle = data->ray.rayangle;
 	if (rayangle == radian(90) || rayangle == radian(270))
 		return ;
 	if (!v_ray_to_door(data, rayangle, &delta_x))
@@ -79,6 +63,10 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 {
 	double	check_x;
 
+	if (ray->rayangle == radian(90) || ray->rayangle == radian(270)
+		|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
+		|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d)
+		return (true);
 	check_x = ray->vertical_x;
 	if (ray->vertical_x < data->player.player_x)
 		check_x -= 1;
@@ -95,21 +83,28 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 	return (false);
 }
 
-void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
+static void	get_coords_for_direction(t_data *data, int *checks, int x, int y)
+{
+	(*checks)++;
+	if (ft_strchr("hv", data->map[y][x]))
+	{
+		data->ray.hit_v_openedoor = 1;
+		data->ray.openedoor_vx = data->ray.vertical_x;
+		data->ray.openedoor_vy = data->ray.vertical_y;
+	}
+}
+
+void	vertical_distance(t_data *data, t_ray *ray)
 {
 	int		x;
 	int		y;
+	int		checks;
 
-	init_vars(data, ray, V_VARS);
+	init_vars(data, ray, &checks, V_VARS);
 	while (1)
 	{
-		find_vertical_point(data, rayangle, &ray->vertical_x, &ray->vertical_y);
-		// if (data->debug)
-		// 	printf("Vx: %f || Vy: %f\n", ray->vertical_x, ray->vertical_y);
-		if (rayangle == radian(90) || rayangle == radian(270)
-			|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
-			|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d
-			|| check_next_possition(data, ray, &x, &y))
+		find_vertical_point(data, &ray->vertical_x, &ray->vertical_y);
+		if (check_next_possition(data, ray, &x, &y))
 			break ;
 		if (ft_strchr("1HV", data->map[y][x]))
 		{
@@ -123,21 +118,7 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 					ray->vertical_y);
 			break ;
 		}
-		if (ray->v_checks < 2 && data->vdirection_flag && !data->ray.hit_v_openedoor)
-		{
-			// printf("%d checking vertical\n", data->hits);
-			ray->v_checks++;
-			if (ft_strchr("hv", data->map[y][x]))
-			{
-				// printf("hitting verticalllll\n");
-				data->ray.hit_v_openedoor = 1;
-				data->vdirection_flag = 0;
-				data->ray.openedoor_vx = ray->vertical_x;
-				data->ray.openedoor_vy = ray->vertical_y;
-			}
-		}
+		if (ray->direction_flag && checks < 2 && !ray->hit_v_openedoor)
+			get_coords_for_direction(data, &checks, x, y);
 	}
-		// if (data->debug)
-		// 	exit(0);
-
 }

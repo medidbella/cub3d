@@ -6,43 +6,40 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 10:27:07 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 17:52:42 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:20:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	closing_possibility(t_data *data)
+static bool	closing_possibility(t_data *data, float distance1, float distance2,
+			float distance)
 {
-	float	distance1;
-	float	distance2;
-	float	distance;
-
-	data->closest_hv = 1;
+	data->ray.closest_hv = 1;
 	if (data->ray.hit_h_openedoor && !data->ray.hit_v_openedoor)
-		distance = get_distance(data, data->ray.openedoor_hx, data->ray.openedoor_hy);
+		distance = get_distance(data, data->ray.openedoor_hx,
+				data->ray.openedoor_hy);
 	else if (!data->ray.hit_h_openedoor && data->ray.hit_v_openedoor)
 	{
-		distance = get_distance(data, data->ray.openedoor_vx, data->ray.openedoor_vy);
-		data->closest_hv = 2;
+		distance = get_distance(data, data->ray.openedoor_vx,
+				data->ray.openedoor_vy);
+		data->ray.closest_hv = 2;
 	}
 	else
 	{
-		distance1 = get_distance(data, data->ray.openedoor_hx, data->ray.openedoor_hy);
-		distance2 = get_distance(data, data->ray.openedoor_vx, data->ray.openedoor_vy);
+		distance1 = get_distance(data, data->ray.openedoor_hx,
+				data->ray.openedoor_hy);
+		distance2 = get_distance(data, data->ray.openedoor_vx,
+				data->ray.openedoor_vy);
 		distance = distance1;
 		if (distance > distance2)
 		{
 			distance = distance2;
-			data->closest_hv = 2;
+			data->ray.closest_hv = 2;
 		}
 	}
-	if (distance < data->direction_ray_distance)
-	{
-		if (distance <= ((TILE_SIZE * 2) - (TILE_SIZE / 2)))
-			return (true);
-	}
-	return (false);
+	return ((distance < data->ray.direction_ray_distance)
+		&& (distance <= ((TILE_SIZE * 2) - (TILE_SIZE / 2))));
 }
 
 static void	opened_door(t_data *data)
@@ -50,20 +47,20 @@ static void	opened_door(t_data *data)
 	int	index_x;
 	int	index_y;
 
-	if (closing_possibility(data))
+	if (closing_possibility(data, 0.0, 0.0, 0.0))
 	{
-		if (data->closest_hv == 1)
+		if (data->ray.closest_hv == 1)
 		{
 			index_x = (data->ray.openedoor_hx / TILE_SIZE);
 			index_y = (data->ray.openedoor_hy / TILE_SIZE)
-			- (data->player.player_y > data->ray.openedoor_hy
-			&& ((int)data->ray.openedoor_hy % TILE_SIZE == 0));
+				- (data->player.player_y > data->ray.openedoor_hy
+					&& ((int)data->ray.openedoor_hy % TILE_SIZE == 0));
 		}
 		else
 		{
 			index_x = (data->ray.openedoor_vx / TILE_SIZE)
-			- (data->player.player_x > data->ray.openedoor_hx
-			&& ((int)data->ray.openedoor_hx % TILE_SIZE == 0));
+				- (data->player.player_x > data->ray.openedoor_vx
+					&& ((int)data->ray.openedoor_vx % TILE_SIZE == 0));
 			index_y = data->ray.openedoor_vy / TILE_SIZE;
 		}
 		if (data->map[index_y][index_x] == 'h'
@@ -73,6 +70,7 @@ static void	opened_door(t_data *data)
 			data->keys[OPEN_DOOR] = 0;
 	}
 }
+
 static bool	opening_possibility(t_data *data)
 {
 	if (data->ray.direction_door)

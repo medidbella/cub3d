@@ -28,10 +28,6 @@ OBJ_BONUS = $(SRC_BONUS:.c=.o)
 LIBFT_OBJ = $(shell cat libft/Makefile | grep "ft_" | tr -d '\\' | tr -d "\n" \
 			| tr "\t" " " |tr -s ' ' | sed 's/ / libft\//g' | sed 's/\.c/\.o/g')
 
-TEST = test.c
-
-bla: bonus
-
 $(NAME): libft $(OBJ) 
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX1) -o $(NAME)
 
