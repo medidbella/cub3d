@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 14:12:02 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:57:43 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,12 +169,14 @@ typedef struct s_data
 	t_ray			ray;
 
 	int				to_close;
+	// int				flag_flag;
+	int				direction_flag;
 	int				hdirection_flag;
 	int				vdirection_flag;
 	float			direction_ray_distance;
 	int				closest_hv;
-	int				debug;
-	int	hits;
+	// int				debug;
+	// int	hits;
 }	t_data;
 
 typedef struct s_draw

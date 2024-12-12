@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 14:12:27 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:58:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	real_distance(t_ray *ray, t_data *data)
 	float	distance2;
 	float	distance;
 
-	if (data->hdirection_flag && data->vdirection_flag)
+	if (data->direction_flag)
 	{
 		if (ray->vertical_distance == -1)
 			distance = ray->horizontal_distance;
@@ -133,59 +133,35 @@ void	ray_casting(t_data *data)
 	data->vdirection_flag = 0;
 	data->ray.hit_h_openedoor = 0;
 	data->ray.hit_v_openedoor = 0;
-	data->hits = 0;
 
 	data->ray.h_checks = 0;
 	data->ray.v_checks = 0;
 	
 	data->direction_ray_distance = 0.0;
 	data->closest_hv = 0;
+	data->direction_flag = 0;
 	
 	while (column <= WIDTH)
 	{
 		if (column == ((WIDTH / 2) - 1))
 		{
-			// printf("%d hello\n", data->hits);
-			data->debug = 1;
 			data->hdirection_flag = 1;
 			data->vdirection_flag = 1;
+			data->direction_flag = 1;
 		}
 		if (column == (WIDTH / 2))
-		{
-			
 			direction_of_player(data);
-		}
 		ray->h_door = 0;
 		ray->v_door = 0;
 		horizontal_distance(data, ray, ray->rayangle);
 		vertical_distance(data, ray, ray->rayangle);
-		// if (data->hdirection_flag && data->vdirection_flag)
-		// 	data->direction_ray_distance = get_direction_distance(data, ray);
 		real_distance(ray, data);
 		ray->door = small_distance(ray);
 		draw_column(data, ray, column);
-
-		if (column == ((WIDTH / 2) - 1))
-		{
-			// printf("Hx: %f || Hy: %f\n", ray->horizontal_x, ray->horizontal_y);
-			// printf("Vx: %f || Vy: %f\n", ray->vertical_x, ray->vertical_y);
-
-			// if (ray->hit_h_openedoor)
-			// 	printf("is hitting the opened door in horizontal\n");
-			// else
-			// 	printf("is noooooooot in horizontal\n");
-			// if (ray->hit_v_openedoor)
-			// 	printf("is hitting the opened door in vertical\n");
-			// else
-			// 	printf("is noooooooot in vertical\n");
-			
-			// printf("column: %d\n", column);
-			// exit(0);
-		}
-
 		column++;
 		ray->rayangle += data->player.angle_step;
 		if (ray->rayangle >= radian(360))
 			ray->rayangle -= radian(360);
+		data->direction_flag = 0;
 	}
 }

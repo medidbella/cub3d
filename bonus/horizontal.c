@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/11 19:00:05 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:02:26 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 					ray->horizontal_y);
 			break ;
 		}
+		// if (ray->h_checks < 2 && data->direction_flag && !data->ray.hit_h_openedoor)
 		if (ray->h_checks < 2 && data->hdirection_flag && !data->ray.hit_h_openedoor)
 		{
 			ray->h_checks++;

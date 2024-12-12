@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 10:27:07 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 14:33:53 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:52:42 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static bool	closing_possibility(t_data *data)
 	}
 	if (distance < data->direction_ray_distance)
 	{
-		if (distance <= (TILE_SIZE * 2))
+		if (distance <= ((TILE_SIZE * 2) - (TILE_SIZE / 2)))
 			return (true);
 	}
 	return (false);
@@ -54,12 +54,16 @@ static void	opened_door(t_data *data)
 	{
 		if (data->closest_hv == 1)
 		{
-			index_x = data->ray.openedoor_hx / TILE_SIZE;
-			index_y = data->ray.openedoor_hy / TILE_SIZE;
+			index_x = (data->ray.openedoor_hx / TILE_SIZE);
+			index_y = (data->ray.openedoor_hy / TILE_SIZE)
+			- (data->player.player_y > data->ray.openedoor_hy
+			&& ((int)data->ray.openedoor_hy % TILE_SIZE == 0));
 		}
 		else
 		{
-			index_x = data->ray.openedoor_vx / TILE_SIZE;
+			index_x = (data->ray.openedoor_vx / TILE_SIZE)
+			- (data->player.player_x > data->ray.openedoor_hx
+			&& ((int)data->ray.openedoor_hx % TILE_SIZE == 0));
 			index_y = data->ray.openedoor_vy / TILE_SIZE;
 		}
 		if (data->map[index_y][index_x] == 'h'
@@ -100,10 +104,8 @@ void	open_and_close_door(t_data *data)
 {
 	if (!data->keys[OPEN_DOOR])
 		return ;
-	printf("here\n");
 	if (data->ray.hit_h_openedoor || data->ray.hit_v_openedoor)
 		opened_door(data);
-	close_or_open(data);
+	else
+		close_or_open(data);
 }
-
-// void	open_and_close()
