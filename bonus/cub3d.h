@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/11 23:10:26 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:12:02 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,8 @@ typedef struct s_data
 	int				to_close;
 	int				hdirection_flag;
 	int				vdirection_flag;
+	float			direction_ray_distance;
+	int				closest_hv;
 	int				debug;
 	int	hits;
 }	t_data;
@@ -232,7 +234,7 @@ bool			h_ray_to_door(t_data *data, double rayangle, double *delta_y);
 bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
 bool			next_to_door(t_data *data, float new_x, float new_y, char c);
 void			direction_of_player(t_data *data);
-void			open_door(t_data *data);
+void			open_and_close_door(t_data *data);
 void			move_player(t_data *data);
 bool			check_barriers(t_data *data, float x, float y);
 char			get_char(t_data *data, int which);

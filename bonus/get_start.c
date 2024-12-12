@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/11 23:10:41 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:33:03 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	setup(t_data *data)
 	data->ray.v_checks = 0;
 
 	data->to_close = 0;
+	data->direction_ray_distance = 0;
+	data->closest_hv = 0;
 }
 
 void	first_view(t_data *data)
@@ -109,10 +111,10 @@ void	get_start(t_config *parsed_data)
 	data.used_weapon = 0;
 	setup(&data);
 
-	data.player.player_x = 81.041310;
-	data.player.player_y = 55.533631;
-	data.player.angle = 1.178097;
-	data.map[5][5] = 'h';
+	// data.player.player_x = 81.041310;
+	// data.player.player_y = 55.533631;
+	// data.player.angle = 1.178097;
+	data.map[1][5] = 'h';
 
 	initialize_wall_textures(&data, parsed_data);
 	sprites_init(data.weapons, data.mlx);

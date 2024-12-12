@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/11 23:13:15 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:12:27 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,26 @@ void	draw_column(t_data *data, t_ray *ray, int column)
 
 void	real_distance(t_ray *ray, t_data *data)
 {
+	float	distance1;
+	float	distance2;
+	float	distance;
+
+	if (data->hdirection_flag && data->vdirection_flag)
+	{
+		if (ray->vertical_distance == -1)
+			distance = ray->horizontal_distance;
+		else if (ray->horizontal_distance == -1)
+			distance = ray->vertical_distance;
+		else
+		{
+			distance1 = ray->horizontal_distance;
+			distance2 = ray->vertical_distance;
+			distance = distance1;
+			if (distance > distance2)
+				distance = distance1;
+		}
+		data->direction_ray_distance = distance;
+	}
 	if (ray->horizontal_distance != -1)
 		ray->horizontal_distance = cos(ray->rayangle - data->player.angle)
 			* ray->horizontal_distance;
@@ -118,6 +138,9 @@ void	ray_casting(t_data *data)
 	data->ray.h_checks = 0;
 	data->ray.v_checks = 0;
 	
+	data->direction_ray_distance = 0.0;
+	data->closest_hv = 0;
+	
 	while (column <= WIDTH)
 	{
 		if (column == ((WIDTH / 2) - 1))
@@ -136,6 +159,8 @@ void	ray_casting(t_data *data)
 		ray->v_door = 0;
 		horizontal_distance(data, ray, ray->rayangle);
 		vertical_distance(data, ray, ray->rayangle);
+		// if (data->hdirection_flag && data->vdirection_flag)
+		// 	data->direction_ray_distance = get_direction_distance(data, ray);
 		real_distance(ray, data);
 		ray->door = small_distance(ray);
 		draw_column(data, ray, column);

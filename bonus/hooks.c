@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/11 18:24:25 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:48:20 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	loop_rendering(t_data *data)
 	if (data->keys[SHOOT_FLAG])
 		start_animation(data);
 	if (data->keys[OPEN_DOOR])
-		open_door(data);
+		open_and_close_door(data);
 	if (!check_keys(data))
 		return (0);
 	if (data->keys[CLOSE_FLAG])
