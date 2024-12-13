@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:33:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 12:40:00 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:13:55 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,6 @@ void	ray_casting(t_data *data)
 		vertical_distance(data, &ray, ray.rayangle);
 		real_distance(&ray, data);
 		small_distance(&ray);
-		// draw_fov(data, &ray);
 		draw_column(data, &ray, column);
 		column++;
 		ray.rayangle += data->player.angle_step;

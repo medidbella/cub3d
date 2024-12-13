@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 19:35:21 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:57:33 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@
 # define ANGLE 1.5
 # define FOV 60
 # define SPEED_DIVISOR 10
+# define FOV_LENGTH 15
+# define FOV_COLOR	0xFF0000
+# define WHITE 0xFFFFFF
 
 # define RIGHT_FLAG 0
 # define LEFT_FLAG 1
@@ -117,6 +120,8 @@ typedef struct s_player
 	double	player_y;
 	double	mini_x;
 	double	mini_y;
+	float	player_center_x;
+	float	player_center_y;
 	int		size_x;
 	int		size_y;
 	int		mov_speed;
@@ -186,10 +191,28 @@ typedef struct s_draw_line
 	int	y2;
 	int	dx;
 	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	err2;
+	int	step;
+	float	x_increment;
+	float	y_increment;
+
+	int	r;
+	int	g;
+	int	b;
+
+	int r_s;
+	int g_s;
+	int b_s;
+
+	int	r_e;
+	int	g_e;
+	int	b_e;
+
+	float	delta_r;
+	float	delta_g;
+	float	delta_b;
+
+	int		steps;
+	
 	int	color;
 }	t_draw_line;
 
@@ -210,7 +233,7 @@ void			s_moves(t_data *data, float *tab);
 void			w_moves(t_data *data, float *tab);
 void			bresenham(t_data *data, t_ray *ray);
 void			ray_casting(t_data *data);
-void			draw(t_data *data);
+void			draw_mini_map(t_data *data);
 void			move_player(t_data *data);
 void			horizontal_distance(t_data *data, t_ray *ray);
 double			get_distance(t_data *data, double x, double y);
@@ -234,5 +257,7 @@ bool			h_ray_to_door(t_data *data, double rayangle, double *delta_y);
 bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
 void			init_vars(t_data *data, t_ray *ray, int *checks, int which);
 void			initialize_vars(t_data *data, t_ray *ray, int *column);
+void			draw_fov(t_data *data);
+
 
 #endif

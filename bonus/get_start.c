@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 18:33:12 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:52:34 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,13 @@ void	setup(t_data *data)
 
 void	first_view(t_data *data)
 {
+
+	data->player.player_center_x = (data->mini_width / 2);
+	data->player.player_center_y = (data->mini_height / 2);
 	ray_casting(data);
-	draw(data);
+	draw_mini_map(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	draw_player(data);
+	// draw_player(data);
 	render_weapon(data, &data->weapons[0], 0);
 	mlx_mouse_move(data->mlx, data->win, WIDTH / 2, HEIGHT / 2);
 }

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 18:32:05 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:37:53 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int	loop_rendering(t_data *data)
 	rotate(data);
 	move_player(data);
 	ray_casting(data);
-	draw(data);
+	draw_mini_map(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	draw_player(data);
+	// draw_player(data);
 	data->keys[MOUSE_FLAG] = 0;
 	data->keys[OPEN_DOOR] = 0;
 	set_frame_index(data);

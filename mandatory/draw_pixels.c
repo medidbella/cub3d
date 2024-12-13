@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 16:11:21 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:04:20 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,23 @@ void	draw_player(t_data *data)
 	i = -2;
 	player_center_x = (data->mini_width / 2) - (data->player.size_x / 2);
 	player_center_y = (data->mini_height / 2) - (data->player.size_y / 2);
-	while (i <= 2)
-	{
-		j = -2;
-		while (j <= 2)
-		{
-			draw_x = player_center_x + j;
-			draw_y = player_center_y + i;
-			if (draw_x >= 0 && draw_x < data->mini_width
-				&& draw_y >= 0 && draw_y < data->mini_height)
-				mlx_put_image_to_window(data->mlx, data->win,
+	mlx_put_image_to_window(data->mlx, data->win,
 					data->player.player_img, player_center_x, player_center_y);
-			j++;
-		}
-		i++;
-	}
+	// while (i <= 2)
+	// {
+	// 	j = -2;
+	// 	while (j <= 2)
+	// 	{
+	// 		draw_x = player_center_x + j;
+	// 		draw_y = player_center_y + i;
+	// 		if (draw_x >= 0 && draw_x < data->mini_width
+	// 			&& draw_y >= 0 && draw_y < data->mini_height)
+	// 			mlx_put_image_to_window(data->mlx, data->win,
+	// 				data->player.player_img, player_center_x, player_center_y);
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
 }
 
 static void	draw_cub(t_data *data, int x, int y, int color)
