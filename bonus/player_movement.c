@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/10 15:14:33 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:29:34 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void	w_moves(t_data *data, float *tab)
 {
 	double	speed;
+	data->debug = 1;
 
 	if (data->keys[2])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
+		// printf("speed: %f\n", speed);exit(0);
 		tab[DELTA_X] = (cos(data->player.angle) * speed);
 		tab[DELTA_Y] = (sin(data->player.angle) * speed);
 		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)

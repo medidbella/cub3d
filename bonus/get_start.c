@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/13 11:52:34 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:17:07 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,12 @@ void	get_start(t_config *parsed_data)
 	data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
 	data.used_weapon = 0;
 	setup(&data);
+
+	data.debug = 0;
+	data.player.player_x = 139.310472;
+	data.player.player_y = 41.694390;
+	data.player.angle = 2.393185;
+
 	initialize_wall_textures(&data, parsed_data);
 	sprites_init(data.weapons, data.mlx);
 	data.door_flag = parsed_data->door_flag;

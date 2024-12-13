@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:24:00 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/10 15:53:58 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:52:12 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ bool	check_barriers(t_data *data, float x, float y)
 
 	new_x = data->player.player_x + x;
 	new_y = data->player.player_y + y;
+	
+	// if (x)
+	// 	new_x++;
+	// if (y)
+	// 	new_y++;
+		
+	// printf("x: %f || y: %f\n", x, y);exit(0);
 	index_x = (new_x / TILE_SIZE)
 		- ((int)new_x % TILE_SIZE == 0 && data->player.player_x > new_x);
 	index_y = (new_y / TILE_SIZE)

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/13 11:57:33 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:10:19 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define FOV_LENGTH 15
 # define FOV_COLOR	0xFF0000
 # define WHITE 0xFFFFFF
+# define BACKGROUND 0x989898
 
 # define RIGHT_FLAG 0
 # define LEFT_FLAG 1
@@ -113,7 +114,7 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	int		player;
+	// int		player;
 	void	*player_img;
 	void	*erase_img;
 	double	player_x;
@@ -172,6 +173,8 @@ typedef struct s_data
 	unsigned long	last_weapon_switch_time;
 	int				in_door;
 	t_ray			ray;
+
+	int				debug;
 }	t_data;
 
 typedef struct s_draw

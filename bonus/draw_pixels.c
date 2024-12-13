@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/13 10:36:55 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:04:38 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	fill_mini_map(t_data *data)
 		x = 0;
 		while (x <= data->mini_width)
 		{
-			my_mlx_pixel_put(data, x, y, 0xFFFFFF);
+			my_mlx_pixel_put(data, x, y, 0xDCDCDC);
 			x++;
 		}
 		y++;
@@ -109,7 +109,7 @@ void	draw_mini_map(t_data *data)
 			if (data->map[i][j] == '1')
 				color = WALL_COLOR;
 			else if (data->map[i][j] == '0'
-			|| ft_strchr("NSEW", data->map[i][j]))
+			|| ft_strchr("NSEWhv", data->map[i][j]))
 				color = BLACK;
 			draw_cub(data, j, i, color);
 		}
