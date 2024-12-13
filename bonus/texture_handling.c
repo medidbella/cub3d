@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/07 10:12:40 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:54:02 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,17 @@ void	initialize_wall_textures(t_data *data, t_config *parsed_data)
 			parsed_data->textures_paths[i]);
 }
 
+void	set_calc_scales(t_data *data, t_ray *ray, float *scale1, float *scale2)
+{
+	*scale2 = (float)data->wall_textures[ray->texture_idx].hight / ray->height;
+	*scale1 = (float)data->wall_textures[ray->texture_idx].width / TILE_SIZE;
+	if (ray->door)
+	{
+		*scale1 = (float)data->wall_textures[DOOR_IDX].hight / TILE_SIZE;
+		*scale2 = (float)data->wall_textures[DOOR_IDX].width / ray->height;		
+	}
+}
+
 void	get_texture_color(t_data *data, t_ray *ray, int current_y)
 {
 	float	x_scale;
@@ -51,13 +62,7 @@ void	get_texture_color(t_data *data, t_ray *ray, int current_y)
 	int		current_x;
 
 	current_x = 0;
-	x_scale = (float)data->wall_textures[ray->texture_idx].hight / TILE_SIZE;
-	y_scale = (float)data->wall_textures[ray->texture_idx].width / ray->height;
-	if (ray->door)
-	{
-		x_scale = (float)data->wall_textures[DOOR_IDX].hight / TILE_SIZE;
-		y_scale = (float)data->wall_textures[DOOR_IDX].width / ray->height;		
-	}
+	set_calc_scales(data, ray, &x_scale, &y_scale);
 	if (ray->texture_idx == N_INDEX)
 		current_x = (int)ray->horizontal_x % TILE_SIZE;
 	else if (ray->texture_idx == S_INDEX)
