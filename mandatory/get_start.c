@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 16:10:03 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:13:23 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ static void	setup(t_data *data)
 static void	first_view(t_data *data)
 {
 	ray_casting(data);
-	draw(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	draw_player(data);
 }
 
 void	get_start(t_config *parsed_data)

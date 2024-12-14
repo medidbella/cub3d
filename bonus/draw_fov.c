@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 19:59:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/13 17:33:17 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:22:26 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void draw_line(t_data *data, float x2, float y2, int i)
 	t_draw_line	draw;
 	float		x;
 	float		y;
-	// int			check_color;
+	int			check_color;
 
 	ini_vars(data, &draw, x2, y2);
 	x = data->player.player_center_x;
@@ -83,15 +83,15 @@ void draw_line(t_data *data, float x2, float y2, int i)
 	
 	while (i <= draw.step)
 	{
-		// draw.r = (draw.r_s + (i * draw.delta_r));
-    	// draw.g = (draw.g_s + (i * draw.delta_g));
-    	// draw.b = (draw.b_s + (i * draw.delta_b));
-	    // draw.color = (draw.r << 16) | (draw.g << 8) | draw.b;
-		// if (draw.color == 0)
-		// 	break ;
-		// check_color = get_color(data, (int)x, (int)y);
-		// if (check_color == WALL_COLOR || ((check_color == WHITE) && (i > (draw.step) / 2)))
-		// 	break ;
+		draw.r = (draw.r_s + (i * draw.delta_r));
+    	draw.g = (draw.g_s + (i * draw.delta_g));
+    	draw.b = (draw.b_s + (i * draw.delta_b));
+	    draw.color = (draw.r << 16) | (draw.g << 8) | draw.b;
+		if (draw.color == 0)
+			break ;
+		check_color = get_color(data, (int)x, (int)y);
+		if (check_color == WALL_COLOR || ((check_color == WHITE) && (i > (draw.step) / 2)))
+			break ;
 		// if (data->debug)
 		// {
 		// 	printf("new color: %d\n", draw.color);
@@ -122,7 +122,7 @@ void    draw_fov(t_data *data)
 	if (ray->rayangle < 0)
 		ray->rayangle += radian(360);
 	column = 0;
-	printf("==> Px: %f || Py: %f || angle: %f\n", data->player.player_x, data->player.player_y, data->player.angle);
+	// printf("==> Px: %f || Py: %f || angle: %f\n", data->player.player_x, data->player.player_y, data->player.angle);
 	while (column <= WIDTH)
 	{
 		delta_x = cos(ray->rayangle) * FOV_LENGTH;

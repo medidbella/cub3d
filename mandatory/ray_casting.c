@@ -6,83 +6,11 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:33:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/13 10:13:55 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:16:27 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	init_values(t_data *data, t_ray *ray, t_draw_line *line)
-{
-	line->x1 = data->player.player_x
-		+ (data->player.size_x / 2);
-	line->y1 = data->player.player_y
-		+ (data->player.size_y / 2);
-	if (ray->side_flag == 1)
-	{
-		line->x2 = ray->horizontal_x;
-		line->y2 = ray->horizontal_y;
-	}
-	else
-	{
-		line->x2 = ray->vertical_x;
-		line->y2 = ray->vertical_y;
-	}
-	line->dx = abs(line->x2 - line->x1);
-	line->dy = abs(line->y2 - line->y1);
-	if (line->x1 < line->x2)
-		line->sx = 1;
-	else
-		line->sx = -1;
-	if (line->y1 < line->y2)
-		line->sy = 1;
-	else
-		line->sy = -1;
-	line->err = line->dx - line->dy;
-}
-
-void	bresenham(t_data *data, t_ray *ray)
-{
-	t_draw_line	line;
-	int			index_x;
-	int			index_y;
-
-	init_values(data, ray, &line);
-	while (1)
-	{
-		index_x = (line.x1 / TILE_SIZE) - ((int)line.x1 % TILE_SIZE == 0
-				&& data->player.player_x > line.x1);
-		index_y = (line.y1 / TILE_SIZE) - ((int)line.y1 % TILE_SIZE == 0
-				&& data->player.player_y > line.y1);
-		if (!((int)index_y < data->height_2d
-				&& (int)index_y >= 0 && (int)index_x >= 0
-				&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
-			break ;
-		if (!ft_strchr("NSEW0", data->map[(int)index_y][(int)index_x]))
-			break ;
-		my_mlx_pixel_put(data, line.x1, line.y1, 0xFF0000);
-		if (line.x1 == line.x2 && line.y1 == line.y2)
-			break ;
-		line.err2 = line.err * 2;
-		if (line.err2 > -(line.dy))
-		{
-			line.err -= line.dy;
-			line.x1 += line.sx;
-		}
-		if (line.err2 < line.dx)
-		{
-			line.err += line.dx;
-			line.y1 += line.sy;
-		}
-	}
-}
-
-// static void	draw_fov(t_data *data, t_ray *ray)
-// {
-// 	bresenham(data, ray);
-// }
-
-//// the top lines are temp, only for debuging //////
 
 static void	height_and_texture(t_data *data, t_ray *ray)
 {

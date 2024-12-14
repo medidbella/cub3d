@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:24:00 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/14 14:50:46 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:19:07 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	check_corners(t_data *data, int index_x, int index_y, int px)
 		if (wall_char(data, py, (px + 1)) && wall_char(data, (py - 1), px))
 			return (true);
 	}
-	return (data->in_door = 0, false);
+	return (false);
 }
 
 bool	check_barriers(t_data *data, float x, float y)
@@ -55,7 +55,6 @@ bool	check_barriers(t_data *data, float x, float y)
 
 	new_x = data->player.player_x + x;
 	new_y = data->player.player_y + y;
-	
 	index_x = (new_x / TILE_SIZE)
 		- ((int)new_x % TILE_SIZE == 0 && data->player.player_x > new_x);
 	index_y = (new_y / TILE_SIZE)
@@ -64,10 +63,7 @@ bool	check_barriers(t_data *data, float x, float y)
 			&& (int)index_y >= 0 && (int)index_x >= 0
 			&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
 		return (1);
-	if (!ft_strchr("NSEW0HVhv", data->map[(int)index_y][(int)index_x]))
+	if (!ft_strchr("NSEW0", data->map[(int)index_y][(int)index_x]))
 		return (1);
-	if (ft_strchr("HV", data->map[(int)index_y][(int)index_x]))
-		return (!next_to_door(data, new_x, new_y
-				, data->map[(int)index_y][(int)index_x]));
 	return (check_corners(data, (int)index_x, (int)index_y, 0));
 }

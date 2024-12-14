@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/13 17:10:19 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:35:35 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,10 +230,10 @@ unsigned long	ft_get_time(void);
 float			radian(float degree);
 void			rotate(t_data *data);
 void			move_player(t_data *data);
-void			a_moves(t_data *data, float *tab);
-void			d_moves(t_data *data, float *tab);
-void			s_moves(t_data *data, float *tab);
-void			w_moves(t_data *data, float *tab);
+// void			a_moves(t_data *data, float *tab);
+// void			d_moves(t_data *data, float *tab);
+// void			s_moves(t_data *data, float *tab);
+// void			w_moves(t_data *data, float *tab);
 void			bresenham(t_data *data, t_ray *ray);
 void			ray_casting(t_data *data);
 void			draw_mini_map(t_data *data);

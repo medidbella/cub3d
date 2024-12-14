@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 16:10:09 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:18:30 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,6 @@ double	get_distance(t_data *data, double x, double y);
 void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
 void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 void	initialize_textures(t_data *data, t_config *parsed_data);
-void	draw_player(t_data *data);
-
+void	move_player(t_data *data);
+bool	check_barriers(t_data *data, float x, float y);
 #endif

@@ -6,11 +6,21 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/13 17:29:34 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:36:48 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	update_coords(t_data *data, float delta_x, float delta_y)
+{
+	data->player.player_x += delta_x;
+	data->player.player_y += delta_y;
+	data->player.mini_x = data->player.player_x
+		* data->scale - (data->mini_width / 2);
+	data->player.mini_y = data->player.player_y
+		* data->scale - (data->mini_height / 2);
+}
 
 void	w_moves(t_data *data, float *tab)
 {
@@ -20,7 +30,6 @@ void	w_moves(t_data *data, float *tab)
 	if (data->keys[2])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
-		// printf("speed: %f\n", speed);exit(0);
 		tab[DELTA_X] = (cos(data->player.angle) * speed);
 		tab[DELTA_Y] = (sin(data->player.angle) * speed);
 		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
@@ -30,16 +39,12 @@ void	w_moves(t_data *data, float *tab)
 		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
 			if (!check_barriers(data, tab[DELTA_X], 0))
-				tab[DELTA_Y] = 0;
+				update_coords(data, tab[DELTA_X] * 0.3, 0.0);
 			else if (!check_barriers(data, 0, tab[DELTA_Y]))
-				tab[DELTA_X] = 0;
-			else
-			{
-				tab[DELTA_X] = 0.0;
-				tab[DELTA_Y] = 0.0;
-				return ;
-			}
+				update_coords(data, 0.0, DELTA_Y * 0.3);
+			return ;
 		}
+		update_coords(data, tab[DELTA_X], tab[DELTA_Y]);
 	}
 }
 
@@ -59,16 +64,12 @@ void	s_moves(t_data *data, float *tab)
 		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
 			if (!check_barriers(data, tab[DELTA_X], 0))
-				tab[DELTA_Y] = 0;
+				update_coords(data, tab[DELTA_X] * 0.3, 0.0);
 			else if (!check_barriers(data, 0, tab[DELTA_Y]))
-				tab[DELTA_X] = 0;
-			else
-			{
-				tab[DELTA_X] = 0.0;
-				tab[DELTA_Y] = 0.0;
-				return ;
-			}
+				update_coords(data, 0.0, DELTA_Y * 0.3);
+			return ;
 		}
+		update_coords(data, tab[DELTA_X], tab[DELTA_Y]);
 	}
 }
 
@@ -88,16 +89,12 @@ void	d_moves(t_data *data, float *tab)
 		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
 			if (!check_barriers(data, tab[DELTA_X], 0))
-				tab[DELTA_Y] = 0;
+				update_coords(data, tab[DELTA_X] * 0.3, 0.0);
 			else if (!check_barriers(data, 0, tab[DELTA_Y]))
-				tab[DELTA_X] = 0;
-			else
-			{
-				tab[DELTA_X] = 0.0;
-				tab[DELTA_Y] = 0.0;
-				return ;
-			}
+				update_coords(data, 0.0, DELTA_Y * 0.3);
+			return ;
 		}
+		update_coords(data, tab[DELTA_X], tab[DELTA_Y]);
 	}
 }
 
@@ -117,16 +114,12 @@ void	a_moves(t_data *data, float *tab)
 		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
 			if (!check_barriers(data, tab[DELTA_X], 0))
-				tab[DELTA_Y] = 0;
+				update_coords(data, tab[DELTA_X] * 0.3, 0.0);
 			else if (!check_barriers(data, 0, tab[DELTA_Y]))
-				tab[DELTA_X] = 0;
-			else
-			{
-				tab[DELTA_X] = 0.0;
-				tab[DELTA_Y] = 0.0;
-				return ;
-			}
+				update_coords(data, 0.0, DELTA_Y * 0.3);
+			return ;
 		}
+		update_coords(data, tab[DELTA_X], tab[DELTA_Y]);
 	}
 }
 
@@ -140,10 +133,4 @@ void	move_player(t_data *data)
 	s_moves(data, tab);
 	d_moves(data, tab);
 	a_moves(data, tab);
-	data->player.player_x += tab[0];
-	data->player.player_y += tab[1];
-	data->player.mini_x = data->player.player_x
-		* data->scale - (data->mini_width / 2);
-	data->player.mini_y = data->player.player_y
-		* data->scale - (data->mini_height / 2);
 }

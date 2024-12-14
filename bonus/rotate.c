@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:49:07 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/28 18:05:07 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:15:41 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ float	radian(float degree)
 
 void	rotate(t_data *data)
 {
+	if (!data->keys[0] && !data->keys[1])
+		return ;
 	if (data->keys[0])
 	{
 		data->player.angle += radian(ANGLE);
