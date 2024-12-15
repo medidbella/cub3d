@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/14 15:35:35 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:49:34 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,32 @@
 # define SWITCH_FLAG 8
 # define SHOOT_FLAG 9
 # define OPEN_DOOR 10
-# define KEYS_NB 11
+# define MOVE_FLAG 11
+# define KEYS_NB 12
 # define SENSITIVITY 0.005
 # define DELTA_X 0
 # define DELTA_Y 1
 # define H_VARS 1
 # define V_VARS 2
+
+// # define RIGHT_FLAG 0
+// # define LEFT_FLAG 1
+// # define MOVE_FLAG 2
+// # define W_FLAG 3
+// # define S_FLAG 4
+// # define D_FLAG 5
+// # define A_FLAG 6
+// # define CLOSE_FLAG 7
+// # define MOUSE_FLAG 8
+// # define SWITCH_FLAG 9
+// # define SHOOT_FLAG 10
+// # define OPEN_DOOR 11
+// # define KEYS_NB 12
+// # define SENSITIVITY 0.005
+// # define DELTA_X 0
+// # define DELTA_Y 1
+// # define H_VARS 1
+// # define V_VARS 2
 
 typedef struct s_ray
 {
@@ -230,10 +250,6 @@ unsigned long	ft_get_time(void);
 float			radian(float degree);
 void			rotate(t_data *data);
 void			move_player(t_data *data);
-// void			a_moves(t_data *data, float *tab);
-// void			d_moves(t_data *data, float *tab);
-// void			s_moves(t_data *data, float *tab);
-// void			w_moves(t_data *data, float *tab);
 void			bresenham(t_data *data, t_ray *ray);
 void			ray_casting(t_data *data);
 void			draw_mini_map(t_data *data);
@@ -254,13 +270,14 @@ bool			next_to_door(t_data *data, float new_x, float new_y, char c);
 void			direction_of_player(t_data *data);
 void			open_and_close_door(t_data *data);
 void			move_player(t_data *data);
-bool			check_barriers(t_data *data, float x, float y);
+bool			check_barriers(t_data *data, float x, float y, int cond);
+// bool			check_barriers(t_data *data, float x, float y);
 char			get_char(t_data *data, int which);
 bool			h_ray_to_door(t_data *data, double rayangle, double *delta_y);
 bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
 void			init_vars(t_data *data, t_ray *ray, int *checks, int which);
 void			initialize_vars(t_data *data, t_ray *ray, int *column);
 void			draw_fov(t_data *data);
-
+void			update_coords(t_data *data, float delta_x, float delta_y);
 
 #endif

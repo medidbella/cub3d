@@ -6,11 +6,23 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:24:00 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/14 14:50:46 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:49:03 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	update_coords(t_data *data, float delta_x, float delta_y)
+{
+	// printf("delta_x: %f || delta_y: %f\n", delta_x, delta_y);
+	data->player.player_x += delta_x;
+	data->player.player_y += delta_y;
+	data->player.mini_x = data->player.player_x
+		* data->scale - (data->mini_width / 2);
+	data->player.mini_y = data->player.player_y
+		* data->scale - (data->mini_height / 2);
+	data->keys[MOVE_FLAG] = 1;
+}
 
 bool	wall_char(t_data *data, int y, int x)
 {
@@ -46,7 +58,7 @@ bool	check_corners(t_data *data, int index_x, int index_y, int px)
 	return (data->in_door = 0, false);
 }
 
-bool	check_barriers(t_data *data, float x, float y)
+bool	check_barriers(t_data *data, float x, float y, int cond)
 {
 	float	new_x;
 	float	new_y;
@@ -55,7 +67,10 @@ bool	check_barriers(t_data *data, float x, float y)
 
 	new_x = data->player.player_x + x;
 	new_y = data->player.player_y + y;
-	
+	if (data->player.player_y < new_y && cond)
+		new_y += 2.0;
+	if (data->player.player_x < new_x && cond)
+		new_x += 2.0;
 	index_x = (new_x / TILE_SIZE)
 		- ((int)new_x % TILE_SIZE == 0 && data->player.player_x > new_x);
 	index_y = (new_y / TILE_SIZE)

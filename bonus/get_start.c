@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/14 15:23:55 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 13:50:16 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@ static void	player_first_coordinates(t_data *data)
 		{
 			if (ft_strchr("NSEW", data->map[y][x]))
 			{
-				data->player.player_x = x * TILE_SIZE + TILE_SIZE / 2
-					- (data->player.size_x / 2);
-				data->player.player_y = y * TILE_SIZE + TILE_SIZE / 2
-					- (data->player.size_y / 2);
+				data->player.player_x = x * TILE_SIZE + TILE_SIZE / 2 ;
+				// data->player.player_x += 0.5;
+					// - (data->player.size_x / 2);
+				data->player.player_y = y * TILE_SIZE + TILE_SIZE / 2;
+				// data->player.player_y += 0.5;
+
+					// - (data->player.size_y / 2);
 				data->player.mini_x = data->player.player_x
 					* data->scale - (data->mini_width / 2);
 				data->player.mini_y = data->player.player_y
@@ -51,15 +54,15 @@ void	setup(t_data *data)
 	data->height_2d = (data->map_hight * TILE_SIZE);
 	data->mini_width = WIDTH / 6;
 	data->mini_height = HEIGHT / 6;
-	data->player.player_img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/mini_player.xpm",
-			&(data->player.size_x), &(data->player.size_y));
-	data->player.erase_img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/erase.xpm", &(data->player.size_x),
-			&(data->player.size_y));
+	// data->player.player_img = mlx_xpm_file_to_image(data->mlx,
+	// 		"./textures/mini_player.xpm",
+			// &(data->player.size_x), &(data->player.size_y));
+	// data->player.erase_img = mlx_xpm_file_to_image(data->mlx,
+	// 		"./textures/erase.xpm", &(data->player.size_x),
+	// 		&(data->player.size_y));
 	data->scale = (float)MIN_TILE_SIZE / TILE_SIZE;
 	player_first_coordinates(data);
-	data->player.fov = radian(FOV);
+	data->player.fov = FOV;
 	data->player.distance_to_project_plan = ((float)WIDTH / 2)
 		/ tan(data->player.fov / 2);
 	data->mouse_x = WIDTH / 2;
@@ -90,21 +93,33 @@ void	get_start(t_config *parsed_data)
 	data.floor_color = parsed_data->floor_color;
 	data.map_hight = parsed_data->map_hight;
 	data.map_width = parsed_data->map_width;
-	data.player.angle = radian(parsed_data->player_start_angle);
-	data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
+	// data.player.angle = radian(parsed_data->player_start_angle);
+	data.player.angle = parsed_data->player_start_angle;
+	// data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
+	data.player.angle_step = ((double)(FOV) / (double)WIDTH);
 	data.used_weapon = 0;
 	setup(&data);
-
 	data.debug = 0;
-	// data.player.player_x = 139.310472;
-	// data.player.player_y = 41.694390;
-	// data.player.angle = 2.393185;
+
+	// data.player.player_x = 70.000000;
+	// data.player.player_y = 22.000000;
+	// data.player.angle = 4.712389;
+
+	data.player.mini_x = data.player.player_x
+		* data.scale - (data.mini_width / 2);
+	data.player.mini_y = data.player.player_y
+		* data.scale - (data.mini_height / 2);
 
 	initialize_wall_textures(&data, parsed_data);
 	sprites_init(data.weapons, data.mlx);
 	data.door_flag = parsed_data->door_flag;
 	init_key_flags(&data);
 	first_view(&data);
+	
+	printf("Px: %f || Py: %f || angle: %f\n", data.player.player_x, data.player.player_y, data.player.angle);
+	// printf("c_x: %f || c_y: %f\n", data.player.player_center_x, data.player.player_center_y);
+	// printf("min width: %d || height: %d\n", data.mini_width, data.mini_height);
+	
 	data.last_frame_time = ft_get_time();
 	data.last_weapon_switch_time = ft_get_time();
 	mlx_hook(data.win, 17, 1L << 2, close_win, &data);
