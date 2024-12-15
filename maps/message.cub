@@ -2,15 +2,13 @@ NO ./textures/colors/blue.xpm
 SO ./textures/colors/red.xpm
 WE ./textures/colors/green.xpm
 EA ./textures/colors/purple.xpm
-DOOR ./textures/door.xpm
 
 F 100,100,250
 C 0,0,0
 
-1111111111
-1000100001
-101001D101
-10D0000001
-10100S0001
-10001D1001
-1111111111
+111111111
+100000001
+100000N01
+100000001
+100000001
+111111111

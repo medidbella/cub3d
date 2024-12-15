@@ -6,33 +6,11 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 16:11:52 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:48:10 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	check_barriers(t_data *data, float x, float y)
-{
-	float	new_x;
-	float	new_y;
-	float	index_x;
-	float	index_y;
-
-	new_x = data->player.player_x + x;
-	new_y = data->player.player_y + y;
-	index_x = (new_x / TILE_SIZE)
-		- ((int)new_x % TILE_SIZE == 0 && data->player.player_x > new_x);
-	index_y = (new_y / TILE_SIZE)
-		- ((int)new_y % TILE_SIZE == 0 && data->player.player_y > new_y);
-	if (!((int)index_y < data->height_2d
-			&& (int)index_y >= 0 && (int)index_x >= 0
-			&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
-		return (1);
-	if (!ft_strchr("NSEW0", data->map[(int)index_y][(int)index_x]))
-		return (1);
-	return (0);
-}
 
 void	w_moves(t_data *data)
 {
@@ -40,7 +18,7 @@ void	w_moves(t_data *data)
 	double	delta_y;
 	double	speed;
 
-	if (data->keys[2])
+	if (data->keys[W_FLAG])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (cos(data->player.angle) * speed);
@@ -53,6 +31,7 @@ void	w_moves(t_data *data)
 			return ;
 		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;
+		data->keys[MOVE_FLAG] = 1;
 	}
 }
 
@@ -62,7 +41,7 @@ void	s_moves(t_data *data)
 	double	delta_y;
 	double	speed;
 
-	if (data->keys[3])
+	if (data->keys[S_FLAG])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (cos(data->player.angle) * speed) * -1;
@@ -75,6 +54,7 @@ void	s_moves(t_data *data)
 			return ;
 		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;
+		data->keys[MOVE_FLAG] = 1;
 	}
 }
 
@@ -84,7 +64,7 @@ void	d_moves(t_data *data)
 	double	delta_y;
 	double	speed;
 
-	if (data->keys[4])
+	if (data->keys[D_FLAG])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (sin(data->player.angle) * speed) * -1;
@@ -97,6 +77,7 @@ void	d_moves(t_data *data)
 			return ;
 		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;
+		data->keys[MOVE_FLAG] = 1;
 	}
 }
 
@@ -106,7 +87,7 @@ void	a_moves(t_data *data)
 	double	delta_y;
 	double	speed;
 
-	if (data->keys[5])
+	if (data->keys[A_FLAG])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (sin(data->player.angle) * speed);
@@ -119,5 +100,17 @@ void	a_moves(t_data *data)
 			return ;
 		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;
+		data->keys[MOVE_FLAG] = 1;
 	}
+}
+
+void	move_player(t_data *data)
+{
+	if (!data->keys[W_FLAG] && !data->keys[S_FLAG] && !data->keys[D_FLAG]
+		&& !data->keys[A_FLAG])
+		return ;
+	w_moves(data);
+	s_moves(data);
+	d_moves(data);
+	a_moves(data);
 }

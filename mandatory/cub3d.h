@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 16:10:09 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:46:55 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@
 # define D_FLAG 4
 # define A_FLAG 5
 # define CLOSE_FLAG 6
-# define MOUSE_FLAG 7
+# define ROTATE_FLAG 7
+# define MOVE_FLAG 8
+# define KEYS_NB 9
 
 typedef struct s_texture
 {
@@ -136,7 +138,7 @@ typedef struct s_data
 	t_texture	wall_textures[4];
 	int			ceiling_color;
 	int			floor_color;
-	int			keys[7];
+	int			keys[KEYS_NB];
 }	t_data;
 
 typedef struct s_draw
@@ -187,6 +189,6 @@ double	get_distance(t_data *data, double x, double y);
 void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
 void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 void	initialize_textures(t_data *data, t_config *parsed_data);
-void	draw_player(t_data *data);
-
+void	move_player(t_data *data);
+bool	check_barriers(t_data *data, float x, float y);
 #endif

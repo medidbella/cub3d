@@ -6,11 +6,22 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/01 16:08:35 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:46:46 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x <= 0 || x >= WIDTH || y <= 0 || y >= HEIGHT)
+		return ;
+	dst = data->img.addr + (y * data->img.line_length + x
+			* (data->img.bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
 
 int	close_win(t_data *data)
 {
@@ -25,24 +36,10 @@ int	close_win(t_data *data)
 	exit(0);
 }
 
-void	move_player(t_data *data)
-{
-	if (!data->keys[2] && !data->keys[3] && !data->keys[4] && !data->keys[5])
-		return ;
-	w_moves(data);
-	s_moves(data);
-	d_moves(data);
-	a_moves(data);
-	data->player.mini_x = data->player.player_x
-		* data->scale - (data->mini_width / 2);
-	data->player.mini_y = data->player.player_y
-		* data->scale - (data->mini_height / 2);
-}
-
 int	check_keys(t_data *data)
 {
-	if (!data->keys[RIGHT_FLAG] && !data->keys[LEFT_FLAG] && !data->keys[W_FLAG]
-		&& !data->keys[S_FLAG] && !data->keys[D_FLAG] && !data->keys[A_FLAG]
+	if (!data->keys[ROTATE_FLAG]
+		&& !data->keys[MOVE_FLAG]
 		&& !data->keys[CLOSE_FLAG])
 		return (0);
 	return (1);
@@ -50,15 +47,15 @@ int	check_keys(t_data *data)
 
 int	loop_rendering(t_data *data)
 {
-	if (!check_keys(data))
-		return (0);
-	if (data->keys[6])
+	if (data->keys[CLOSE_FLAG])
 		close_win(data);
 	rotate(data);
 	move_player(data);
+	if (!check_keys(data))
+		return (0);
 	ray_casting(data);
-	draw(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	draw_player(data);
+	data->keys[ROTATE_FLAG] = 0;
+	data->keys[MOVE_FLAG] = 0;
 	return (0);
 }

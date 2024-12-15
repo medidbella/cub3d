@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:49:07 by alaktari          #+#    #+#             */
-/*   Updated: 2024/11/26 16:57:50 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:35:51 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ void	rotate(t_data *data)
 {
 	if (!data->keys[0] && !data->keys[1])
 		return ;
-	if (data->keys[0])
+	if (data->keys[RIGHT_FLAG])
 	{
 		data->player.angle += radian(ANGLE);
 		if (data->player.angle >= radian(360))
 			data->player.angle -= radian(360);
 	}
-	if (data->keys[1])
+	if (data->keys[LEFT_FLAG])
 	{
 		data->player.angle -= radian(ANGLE);
 		if (data->player.angle < 0)
 			data->player.angle = radian(355);
 	}
+	data->keys[ROTATE_FLAG] = 1;
 }
