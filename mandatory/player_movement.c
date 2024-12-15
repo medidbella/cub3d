@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/14 17:39:15 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:48:10 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	w_moves(t_data *data)
 	double	delta_y;
 	double	speed;
 
-	if (data->keys[2])
+	if (data->keys[W_FLAG])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (cos(data->player.angle) * speed);
@@ -31,6 +31,7 @@ void	w_moves(t_data *data)
 			return ;
 		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;
+		data->keys[MOVE_FLAG] = 1;
 	}
 }
 
@@ -40,7 +41,7 @@ void	s_moves(t_data *data)
 	double	delta_y;
 	double	speed;
 
-	if (data->keys[3])
+	if (data->keys[S_FLAG])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (cos(data->player.angle) * speed) * -1;
@@ -53,6 +54,7 @@ void	s_moves(t_data *data)
 			return ;
 		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;
+		data->keys[MOVE_FLAG] = 1;
 	}
 }
 
@@ -62,7 +64,7 @@ void	d_moves(t_data *data)
 	double	delta_y;
 	double	speed;
 
-	if (data->keys[4])
+	if (data->keys[D_FLAG])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (sin(data->player.angle) * speed) * -1;
@@ -75,6 +77,7 @@ void	d_moves(t_data *data)
 			return ;
 		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;
+		data->keys[MOVE_FLAG] = 1;
 	}
 }
 
@@ -84,7 +87,7 @@ void	a_moves(t_data *data)
 	double	delta_y;
 	double	speed;
 
-	if (data->keys[5])
+	if (data->keys[A_FLAG])
 	{
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (sin(data->player.angle) * speed);
@@ -97,19 +100,17 @@ void	a_moves(t_data *data)
 			return ;
 		data->player.player_x += delta_x;
 		data->player.player_y += delta_y;
+		data->keys[MOVE_FLAG] = 1;
 	}
 }
 
 void	move_player(t_data *data)
 {
-	if (!data->keys[2] && !data->keys[3] && !data->keys[4] && !data->keys[5])
+	if (!data->keys[W_FLAG] && !data->keys[S_FLAG] && !data->keys[D_FLAG]
+		&& !data->keys[A_FLAG])
 		return ;
 	w_moves(data);
 	s_moves(data);
 	d_moves(data);
 	a_moves(data);
-// 	data->player.mini_x = data->player.player_x
-// 		* data->scale - (data->mini_width / 2);
-// 	data->player.mini_y = data->player.player_y
-// 		* data->scale - (data->mini_height / 2);
 }

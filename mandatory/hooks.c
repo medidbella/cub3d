@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/14 15:12:00 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 22:13:31 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	close_win(t_data *data)
 {
 	free_textures_memory(data->mlx, data->wall_textures);
 	mlx_destroy_image(data->mlx, data->img.img);
-	mlx_destroy_image(data->mlx, data->player.erase_img);
-	mlx_destroy_image(data->mlx, data->player.player_img);
 	mlx_destroy_window(data->mlx, data->win);
 	strings_free(data->map);
 	mlx_destroy_display(data->mlx);
@@ -38,8 +36,8 @@ int	close_win(t_data *data)
 
 int	check_keys(t_data *data)
 {
-	if (!data->keys[RIGHT_FLAG] && !data->keys[LEFT_FLAG] && !data->keys[W_FLAG]
-		&& !data->keys[S_FLAG] && !data->keys[D_FLAG] && !data->keys[A_FLAG]
+	if (!data->keys[ROTATE_FLAG]
+		&& !data->keys[MOVE_FLAG]
 		&& !data->keys[CLOSE_FLAG])
 		return (0);
 	return (1);
@@ -47,13 +45,15 @@ int	check_keys(t_data *data)
 
 int	loop_rendering(t_data *data)
 {
-	if (!check_keys(data))
-		return (0);
-	if (data->keys[6])
+	if (data->keys[CLOSE_FLAG])
 		close_win(data);
 	rotate(data);
 	move_player(data);
+	if (!check_keys(data))
+		return (0);
 	ray_casting(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+	data->keys[ROTATE_FLAG] = 0;
+	data->keys[MOVE_FLAG] = 0;
 	return (0);
 }

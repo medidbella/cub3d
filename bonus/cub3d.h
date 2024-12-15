@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/15 12:49:34 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 22:11:26 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define ANGLE 1.5
 # define FOV 60
 # define SPEED_DIVISOR 10
-# define FOV_LENGTH 15
+# define FOV_LENGTH 20
 # define FOV_COLOR	0xFF0000
 # define WHITE 0xFFFFFF
 # define BACKGROUND 0x989898
@@ -72,25 +72,6 @@
 # define DELTA_Y 1
 # define H_VARS 1
 # define V_VARS 2
-
-// # define RIGHT_FLAG 0
-// # define LEFT_FLAG 1
-// # define MOVE_FLAG 2
-// # define W_FLAG 3
-// # define S_FLAG 4
-// # define D_FLAG 5
-// # define A_FLAG 6
-// # define CLOSE_FLAG 7
-// # define MOUSE_FLAG 8
-// # define SWITCH_FLAG 9
-// # define SHOOT_FLAG 10
-// # define OPEN_DOOR 11
-// # define KEYS_NB 12
-// # define SENSITIVITY 0.005
-// # define DELTA_X 0
-// # define DELTA_Y 1
-// # define H_VARS 1
-// # define V_VARS 2
 
 typedef struct s_ray
 {
@@ -134,18 +115,12 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	// int		player;
-	void	*player_img;
-	void	*erase_img;
 	double	player_x;
 	double	player_y;
 	double	mini_x;
 	double	mini_y;
 	float	player_center_x;
 	float	player_center_y;
-	int		size_x;
-	int		size_y;
-	int		mov_speed;
 	double	angle;
 	double	fov;
 	double	angle_step;
@@ -193,8 +168,6 @@ typedef struct s_data
 	unsigned long	last_weapon_switch_time;
 	int				in_door;
 	t_ray			ray;
-
-	int				debug;
 }	t_data;
 
 typedef struct s_draw
@@ -208,35 +181,29 @@ typedef struct s_draw
 
 typedef struct s_draw_line
 {
-	int	x1;
-	int	x2;
-	int	y1;
-	int	y2;
-	int	dx;
-	int	dy;
-	int	step;
+	int		x1;
+	int		x2;
+	int		y1;
+	int		y2;
+	int		dx;
+	int		dy;
+	int		step;
 	float	x_increment;
 	float	y_increment;
-
-	int	r;
-	int	g;
-	int	b;
-
-	int r_s;
-	int g_s;
-	int b_s;
-
-	int	r_e;
-	int	g_e;
-	int	b_e;
-
+	int		r;
+	int		g;
+	int		b;
+	int		r_s;
+	int		g_s;
+	int		b_s;
+	int		r_e;
+	int		g_e;
+	int		b_e;
 	float	delta_r;
 	float	delta_g;
 	float	delta_b;
-
 	int		steps;
-	
-	int	color;
+	int		color;
 }	t_draw_line;
 
 void			get_start(t_config *parsed_data);
@@ -270,14 +237,13 @@ bool			next_to_door(t_data *data, float new_x, float new_y, char c);
 void			direction_of_player(t_data *data);
 void			open_and_close_door(t_data *data);
 void			move_player(t_data *data);
-bool			check_barriers(t_data *data, float x, float y, int cond);
-// bool			check_barriers(t_data *data, float x, float y);
+bool			check_barriers(t_data *data, float x, float y);
 char			get_char(t_data *data, int which);
 bool			h_ray_to_door(t_data *data, double rayangle, double *delta_y);
 bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
 void			init_vars(t_data *data, t_ray *ray, int *checks, int which);
 void			initialize_vars(t_data *data, t_ray *ray, int *column);
-void			draw_fov(t_data *data);
+void			draw_fov(t_data *data, float x2, float y2);
 void			update_coords(t_data *data, float delta_x, float delta_y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/15 13:10:56 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:56:33 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,21 @@ bool	w_moves(t_data *data, float *tab)
 
 	if (data->keys[W_FLAG])
 	{
-		// data->debug++;
 		speed = (double)TILE_SIZE / SPEED_DIVISOR;
 		tab[DELTA_X] = (cos(data->player.angle) * speed);
 		tab[DELTA_Y] = (sin(data->player.angle) * speed);
-
-		// printf("debug: %d\n", data->debug);
-		// printf("delta X: %f || delta Y: %f\n", tab[DELTA_X], tab[DELTA_Y]);
-		// exit(0);
-		
 		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
 			tab[DELTA_X] = 0;
-		
-		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y], 1))
+		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
-			// if (!check_barriers(data, tab[DELTA_X], 0, 0))
-			// 	return (update_coords(data, tab[DELTA_X] * 0.3, 0.0), true);
-			// else if (!check_barriers(data, 0, tab[DELTA_Y], 0))
-			// 	return (update_coords(data, 0.0, DELTA_Y * 0.3), true);
+			if (!tab[DELTA_X] || !tab[DELTA_Y])
+				return (false);
+			if (!check_barriers(data, tab[DELTA_X], 0.0))
+				return (update_coords(data, tab[DELTA_X] * 0.3, 0.0), true);
+			else if (!check_barriers(data, 0, tab[DELTA_Y]))
+				return (update_coords(data, 0.0, tab[DELTA_Y] * 0.3), true);
 			return (false);
 		}
 		return (update_coords(data, tab[DELTA_X], tab[DELTA_Y]), true);
@@ -58,12 +53,14 @@ bool	s_moves(t_data *data, float *tab)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
 			tab[DELTA_X] = 0;
-		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y], 1))
+		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
-			// if (!check_barriers(data, tab[DELTA_X], 0.0, 0))
-			// 	return (update_coords(data, tab[DELTA_X] * 0.3, 0.0), true);
-			// else if (!check_barriers(data, 0.0, tab[DELTA_Y], 0))
-			// 	return (update_coords(data, 0.0, DELTA_Y * 0.3), true);
+			if (!tab[DELTA_X] || !tab[DELTA_Y])
+				return (false);
+			if (!check_barriers(data, tab[DELTA_X], 0.0))
+				return (update_coords(data, tab[DELTA_X] * 0.3, 0.0), true);
+			else if (!check_barriers(data, 0.0, tab[DELTA_Y]))
+				return (update_coords(data, 0.0, tab[DELTA_Y] * 0.3), true);
 			return (false);
 		}
 		return (update_coords(data, tab[DELTA_X], tab[DELTA_Y]), true);
@@ -84,19 +81,20 @@ bool	d_moves(t_data *data, float *tab)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
 			tab[DELTA_X] = 0;
-		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y], 1))
+		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
-			// if (!check_barriers(data, tab[DELTA_X], 0.0, 0))
-			// 	return (update_coords(data, tab[DELTA_X] * 0.3, 0.0), true);
-			// else if (!check_barriers(data, 0.0, tab[DELTA_Y], 0))
-			// 	return (update_coords(data, 0.0, DELTA_Y * 0.3), true);
+			if (!tab[DELTA_X] || !tab[DELTA_Y])
+				return (false);
+			if (!check_barriers(data, tab[DELTA_X], 0.0))
+				return (update_coords(data, tab[DELTA_X] * 0.3, 0.0), true);
+			else if (!check_barriers(data, 0.0, tab[DELTA_Y]))
+				return (update_coords(data, 0.0, tab[DELTA_Y] * 0.3), true);
 			return (false);
 		}
 		return (update_coords(data, tab[DELTA_X], tab[DELTA_Y]), true);
 	}
 	return (false);
 }
-
 
 bool	a_moves(t_data *data, float *tab)
 {
@@ -111,12 +109,14 @@ bool	a_moves(t_data *data, float *tab)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
 			tab[DELTA_X] = 0;
-		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y], 1))
+		if (check_barriers(data, tab[DELTA_X], tab[DELTA_Y]))
 		{
-			// if (!check_barriers(data, tab[DELTA_X], 0.0, 0))
-			// 	return (update_coords(data, tab[DELTA_X] * 0.3, 0.0), true);
-			// else if (!check_barriers(data, 0.0, tab[DELTA_Y], 0))
-			// 	return (update_coords(data, 0.0, DELTA_Y * 0.3), true);
+			if (!tab[DELTA_X] || !tab[DELTA_Y])
+				return (false);
+			if (!check_barriers(data, tab[DELTA_X], 0.0))
+				return (update_coords(data, tab[DELTA_X] * 0.3, 0.0), true);
+			else if (!check_barriers(data, 0.0, tab[DELTA_Y]))
+				return (update_coords(data, 0.0, tab[DELTA_Y] * 0.3), true);
 			return (false);
 		}
 		return (update_coords(data, tab[DELTA_X], tab[DELTA_Y]), true);

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/15 12:20:12 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:52:47 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ bool	check_keys(t_data *data)
 {
 	if (data->weapons[data->used_weapon].current_frame_index != 0)
 		return (true);
-	if (!data->keys[MOVE_FLAG] && !data->keys[RIGHT_FLAG] && !data->keys[LEFT_FLAG]
-		&& !data->keys[CLOSE_FLAG] && !data->keys[MOUSE_FLAG]
-		&& !data->keys[SWITCH_FLAG] && !data->keys[SHOOT_FLAG]
-		&& !data->keys[OPEN_DOOR])
+	if (!data->keys[MOVE_FLAG] && !data->keys[RIGHT_FLAG]
+		&& !data->keys[LEFT_FLAG] && !data->keys[CLOSE_FLAG]
+		&& !data->keys[MOUSE_FLAG] && !data->keys[SWITCH_FLAG]
+		&& !data->keys[SHOOT_FLAG] && !data->keys[OPEN_DOOR])
 		return (false);
 	return (true);
 }
@@ -54,7 +54,8 @@ int	loop_rendering(t_data *data)
 		open_and_close_door(data);
 	if (data->keys[CLOSE_FLAG])
 		close_win(data);
-	if (data->keys[MOUSE_FLAG] || data->keys[RIGHT_FLAG] || data->keys[LEFT_FLAG])
+	if (data->keys[MOUSE_FLAG] || data->keys[RIGHT_FLAG]
+		|| data->keys[LEFT_FLAG])
 		rotate(data);
 	move_player(data);
 	if (!check_keys(data))
@@ -62,15 +63,11 @@ int	loop_rendering(t_data *data)
 	ray_casting(data);
 	draw_mini_map(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	// draw_player(data);
 	data->keys[MOUSE_FLAG] = 0;
 	data->keys[OPEN_DOOR] = 0;
 	data->keys[MOVE_FLAG] = 0;
 	set_frame_index(data);
 	render_weapon(data, &data->weapons[data->used_weapon],
 		data->weapons[data->used_weapon].current_frame_index);
-	// printf("%d\n", data->debug);
-	// data->debug = 0;
-	// printf("Px: %f || Py: %f || angle: %f\n", data->player.player_x, data->player.player_y, data->player.angle);
 	return (0);
 }
