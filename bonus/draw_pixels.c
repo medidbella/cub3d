@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 19:40:02 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:59:23 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,36 +34,10 @@ static void	fill_mini_map(t_data *data)
 		x = 0;
 		while (x <= data->mini_width)
 		{
-			my_mlx_pixel_put(data, x, y, 0xFFFFFF);
+			my_mlx_pixel_put(data, x, y, 0xDCDCDC);
 			x++;
 		}
 		y++;
-	}
-}
-
-void	draw_player(t_data *data)
-{
-	int		player_center_x;
-	int		player_center_y;
-	t_draw	draw;
-
-	draw.i = -2;
-	player_center_x = (data->mini_width / 2) - (data->player.size_x / 2);
-	player_center_y = (data->mini_height / 2) - (data->player.size_y / 2);
-	while (draw.i <= 2)
-	{
-		draw.j = -2;
-		while (draw.j <= 2)
-		{
-			draw.draw_x = player_center_x + draw.j;
-			draw.draw_y = player_center_y + draw.i;
-			if (draw.draw_x >= 0 && draw.draw_x < data->mini_width
-				&& draw.draw_y >= 0 && draw.draw_y < data->mini_height)
-				mlx_put_image_to_window(data->mlx, data->win,
-					data->player.player_img, player_center_x, player_center_y);
-			draw.j++;
-		}
-		draw.i++;
 	}
 }
 
@@ -92,7 +66,7 @@ static void	draw_cub(t_data *data, int x, int y, int color)
 	}
 }
 
-void	draw(t_data *data)
+void	draw_mini_map(t_data *data)
 {
 	int	i;
 	int	j;
@@ -109,9 +83,10 @@ void	draw(t_data *data)
 			if (data->map[i][j] == '1')
 				color = WALL_COLOR;
 			else if (data->map[i][j] == '0'
-			|| ft_strchr("NSEW", data->map[i][j]))
+			|| ft_strchr("NSEWhv", data->map[i][j]))
 				color = BLACK;
 			draw_cub(data, j, i, color);
 		}
 	}
+	draw_fov(data, 0.0, 0.0);
 }

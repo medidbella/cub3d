@@ -6,11 +6,22 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:24:00 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/10 15:53:58 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:56:04 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	update_coords(t_data *data, float delta_x, float delta_y)
+{
+	data->player.player_x += delta_x;
+	data->player.player_y += delta_y;
+	data->player.mini_x = data->player.player_x
+		* data->scale - (data->mini_width / 2);
+	data->player.mini_y = data->player.player_y
+		* data->scale - (data->mini_height / 2);
+	data->keys[MOVE_FLAG] = 1;
+}
 
 bool	wall_char(t_data *data, int y, int x)
 {
@@ -55,6 +66,10 @@ bool	check_barriers(t_data *data, float x, float y)
 
 	new_x = data->player.player_x + x;
 	new_y = data->player.player_y + y;
+	if (data->player.player_y < new_y)
+		new_y += 2.0;
+	if (data->player.player_x < new_x)
+		new_x += 2.0;
 	index_x = (new_x / TILE_SIZE)
 		- ((int)new_x % TILE_SIZE == 0 && data->player.player_x > new_x);
 	index_y = (new_y / TILE_SIZE)

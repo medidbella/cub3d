@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:31:39 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/05 16:33:03 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/15 22:08:15 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int	close_win(t_data *data)
 {
 	free_wall_textures_memory(data, data->wall_textures);
 	mlx_destroy_image(data->mlx, data->img.img);
-	mlx_destroy_image(data->mlx, data->player.erase_img);
-	mlx_destroy_image(data->mlx, data->player.player_img);
 	mlx_destroy_window(data->mlx, data->win);
 	strings_free(data->map);
 	mlx_destroy_display(data->mlx);

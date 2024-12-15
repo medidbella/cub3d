@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/15 19:46:59 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 23:05:06 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ static void	player_first_coordinates(t_data *data)
 		{
 			if (ft_strchr("NSEW", data->map[y][x]))
 			{
-				data->player.player_x = (x * TILE_SIZE + TILE_SIZE / 2)
-					- (data->player.size_x / 2);
-				data->player.player_y = (y * TILE_SIZE + TILE_SIZE / 2)
-					- (data->player.size_y / 2);
+				data->player.player_x = (x * TILE_SIZE + TILE_SIZE / 2);
+				data->player.player_y = (y * TILE_SIZE + TILE_SIZE / 2);
 				data->player.mini_x = data->player.player_x
 					* data->scale - (data->mini_width / 2);
 				data->player.mini_y = data->player.player_y
@@ -51,12 +49,6 @@ static void	setup(t_data *data)
 	data->height_2d = (data->map_hight * TILE_SIZE);
 	data->mini_width = WIDTH / 6;
 	data->mini_height = HEIGHT / 6;
-	data->player.player_img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/mini_player.xpm",
-			&(data->player.size_x), &(data->player.size_y));
-	data->player.erase_img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/erase.xpm", &(data->player.size_x),
-			&(data->player.size_y));
 	data->scale = (float)MIN_TILE_SIZE / TILE_SIZE;
 	player_first_coordinates(data);
 	data->player.fov = radian(FOV);

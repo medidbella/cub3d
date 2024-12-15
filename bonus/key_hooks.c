@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:38:14 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 11:15:24 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:54:46 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_key_flags(t_data *data)
 {
 	data->keys[RIGHT_FLAG] = 0;
 	data->keys[LEFT_FLAG] = 0;
+	data->keys[MOVE_FLAG] = 0;
 	data->keys[W_FLAG] = 0;
 	data->keys[S_FLAG] = 0;
 	data->keys[D_FLAG] = 0;
@@ -30,7 +31,7 @@ void	init_key_flags(t_data *data)
 int	ft_key_press(int key, t_data *data)
 {
 	if (key == RIGHT)
-		data->keys[0] = (key == RIGHT);
+		data->keys[RIGHT_FLAG] = 1;
 	else if (key == LEFT)
 		data->keys[LEFT_FLAG] = 1;
 	else if (key == W)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/13 20:55:03 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/15 23:03:59 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@
 # define ANGLE 1.5
 # define FOV 60
 # define SPEED_DIVISOR 10
+# define FOV_LENGTH 20
+# define FOV_COLOR	0xFF0000
+# define WHITE 0xFFFFFF
+# define BACKGROUND 0x989898
 
 # define RIGHT_FLAG 0
 # define LEFT_FLAG 1
@@ -61,7 +65,8 @@
 # define SWITCH_FLAG 8
 # define SHOOT_FLAG 9
 # define OPEN_DOOR 10
-# define KEYS_NB 11
+# define MOVE_FLAG 11
+# define KEYS_NB 12
 # define SENSITIVITY 0.005
 # define DELTA_X 0
 # define DELTA_Y 1
@@ -110,16 +115,12 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	int		player;
-	void	*player_img;
-	void	*erase_img;
 	double	player_x;
 	double	player_y;
 	double	mini_x;
 	double	mini_y;
-	int		size_x;
-	int		size_y;
-	int		mov_speed;
+	float	player_center_x;
+	float	player_center_y;
 	double	angle;
 	double	fov;
 	double	angle_step;
@@ -180,17 +181,29 @@ typedef struct s_draw
 
 typedef struct s_draw_line
 {
-	int	x1;
-	int	x2;
-	int	y1;
-	int	y2;
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	err2;
-	int	color;
+	int		x1;
+	int		x2;
+	int		y1;
+	int		y2;
+	int		dx;
+	int		dy;
+	int		step;
+	float	x_increment;
+	float	y_increment;
+	int		r;
+	int		g;
+	int		b;
+	int		r_s;
+	int		g_s;
+	int		b_s;
+	int		r_e;
+	int		g_e;
+	int		b_e;
+	float	delta_r;
+	float	delta_g;
+	float	delta_b;
+	int		steps;
+	int		color;
 }	t_draw_line;
 
 void			get_start(t_config *parsed_data);
@@ -204,13 +217,9 @@ unsigned long	ft_get_time(void);
 float			radian(float degree);
 void			rotate(t_data *data);
 void			move_player(t_data *data);
-void			a_moves(t_data *data, float *tab);
-void			d_moves(t_data *data, float *tab);
-void			s_moves(t_data *data, float *tab);
-void			w_moves(t_data *data, float *tab);
 void			bresenham(t_data *data, t_ray *ray);
 void			ray_casting(t_data *data);
-void			draw(t_data *data);
+void			draw_mini_map(t_data *data);
 void			move_player(t_data *data);
 void			horizontal_distance(t_data *data, t_ray *ray);
 double			get_distance(t_data *data, double x, double y);
@@ -234,5 +243,7 @@ bool			h_ray_to_door(t_data *data, double rayangle, double *delta_y);
 bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
 void			init_vars(t_data *data, t_ray *ray, int *checks, int which);
 void			initialize_vars(t_data *data, t_ray *ray, int *column);
+void			draw_fov(t_data *data, float x2, float y2);
+void			update_coords(t_data *data, float delta_x, float delta_y);
 
 #endif

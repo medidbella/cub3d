@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/15 19:46:55 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/15 23:04:49 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,10 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	void	*player_img;
-	void	*erase_img;
 	double	player_x;
 	double	player_y;
 	double	mini_x;
 	double	mini_y;
-	int		size_x;
-	int		size_y;
-	int		mov_speed;
 	double	angle;
 	double	fov;
 	double	angle_step;
