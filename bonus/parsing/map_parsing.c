@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:44:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/08 13:36:55 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:02:52 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,15 @@ void	player_space_border_check(t_config *scene_data, int y, int x, char c)
 		&& !ft_strchr(set, map[y + 1][x]))
 		flag = 1;
 	if (flag)
-	{
-		write(1, &c, 1);
-		error_handler(" map isn't surrounded by walls", NULL,
+		error_handler("map isn't surrounded by walls", NULL,
 			NULL, scene_data);
-	}
 }
 
 void	set_player_angle(t_config *scene_data, char player_char, int y,
 	int x)
 {
 	if (scene_data->player_start_angle != -1)
-		error_handler("duplicat player character in the map",
+		error_handler("duplicate player character in the map",
 			NULL, NULL, scene_data);
 	if (player_char == 'N')
 		scene_data->player_start_angle = N_ANGLE;

@@ -1,5 +1,5 @@
 NO ./textures/wood.xpm
-SO ./textures/stone.xpm
+SO ./textures/wood.xpm
 WE ./textures/brickwall4.xpm
 EA ./textures/brickwall3.xpm
 F 255,255,250

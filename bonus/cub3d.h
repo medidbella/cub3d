@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/16 14:01:21 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:45:45 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-# define TILE_SIZE 150
+# define TILE_SIZE 1000
 # define MIN_TILE_SIZE 10
 # define WIDTH 1080
 # define HEIGHT 720

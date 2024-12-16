@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:08:52 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/05 14:29:56 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:17:48 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,38 @@ void	get_door_texture(char **words, char *line, t_config *scene_data)
 void	alignment_check(char **map, int x, int y, t_config *scene_data)
 {
 	if (map[y][x + 1] == '1' && map[y][x - 1] == '1')
-		map[y][x] = 'H';
+		return ;
 	if (map[y - 1][x] == '1' && map[y + 1][x] == '1')
-		map[y][x] = 'V';
-	if (map[y][x] == 'D')
-		error_handler("doors must be vertically or horizontally \
+		return ;
+	error_handler("doors must be vertically or horizontally \
 surrounded by walls ('1')", NULL, NULL, scene_data);
 	return ;
+}
+
+void	switch_doors(char **map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (map[j])
+	{
+		i = 0;
+		while (map[j][i])
+		{
+			if (map[j][i] == 'D')
+			{
+				if (map[j][i + 1] == '1' && map[j][i - 1] == '1')
+					map[j][i] = 'H';
+				if (map[j - 1][i] == '1' && map[j + 1][i] == '1')
+					map[j][i] = 'V';
+			}
+			i++;
+		}
+		j++;
+	}
+	
 }
 
 void	get_textures(char **words, t_config *scene_data, char *line)
