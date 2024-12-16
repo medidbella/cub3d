@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:01:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/07 10:12:36 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:41:34 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	sprites_init(t_weapon *weapons, void *mlx)
 	while (++i < WEAPON_NB)
 	{
 		iter = -1;
-		weapons[i].weapon_frames = malloc(sizeof(t_texture) * weapons[i].frames_nb);
+		weapons[i].weapon_frames = malloc(sizeof(t_texture)
+				* weapons[i].frames_nb);
 		weapons[i].current_frame_index = 0;
 		while (++iter < weapons[i].frames_nb)
 		{

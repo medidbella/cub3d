@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:31:39 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/15 22:08:15 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:38:14 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	free_sprites_memory(t_weapon *weapons, void *mlx)
 {
-	int i;
-	int iter;
+	int	i;
+	int	iter;
 
 	i = 0;
 	while (i < WEAPON_NB)

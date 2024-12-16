@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/16 14:34:15 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:04:29 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	initialize_wall_textures(t_data *data, t_config *parsed_data)
 
 void	set_scale(t_data *data, t_ray *ray, float *scale1, float *scale2)
 {
-	*scale2 = (float)data->wall_textures[ray->texture_idx].hight / ray->height;
 	*scale1 = (float)data->wall_textures[ray->texture_idx].width / TILE_SIZE;
+	*scale2 = (float)data->wall_textures[ray->texture_idx].hight / ray->height;
 	if (ray->door)
 	{
-		*scale1 = (float)data->wall_textures[DOOR_IDX].hight / TILE_SIZE;
-		*scale2 = (float)data->wall_textures[DOOR_IDX].width / ray->height;		
+		*scale1 = (float)data->wall_textures[DOOR_IDX].width / TILE_SIZE;
+		*scale2 = (float)data->wall_textures[DOOR_IDX].hight / ray->height;
 	}
 }
 
@@ -73,8 +73,8 @@ void	get_texture_color(t_data *data, t_ray *ray, int current_y)
 		current_x = TILE_SIZE - ((int)ray->vertical_y % TILE_SIZE);
 	if (ray->door)
 		ray->curr_color = get_cords_color(&data->wall_textures[WALL_INDEX],
-			current_x * x_scale, current_y * y_scale);
+				current_x * x_scale, current_y * y_scale);
 	else
-		ray->curr_color = get_cords_color(&data->wall_textures[ray->texture_idx],
-			current_x * x_scale, current_y * y_scale);
+		ray->curr_color = get_cords_color(&data->wall_textures
+			[ray->texture_idx], current_x * x_scale, current_y * y_scale);
 }

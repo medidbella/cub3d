@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:56:40 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/07 10:11:45 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:37:57 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define MACHINE_GUN_FNB 4
 # define ELECTRIC_FNB 11
 # define SHOTGUN_FNB 15
-
 # define WEAPON_NB 4
 # define N_INDEX 0
 # define S_INDEX 1
@@ -32,8 +31,8 @@
 # define WALL_COLOR 0x61F5B5
 # define DOOR_COLOR 0xffc704
 # define BLACK 0x000000
-# define FRAME_DELAY 50 //milliseconds
-# define CHANGE_DELAY 100
+# define FRAME_DELAY 50
+# define CHANGE_DELAY 200
 
 typedef struct s_ray	t_ray;
 typedef struct s_player	t_player;

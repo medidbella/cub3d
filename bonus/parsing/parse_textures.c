@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:08:52 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/16 16:17:48 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:37:21 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ surrounded by walls ('1')", NULL, NULL, scene_data);
 
 void	switch_doors(char **map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -54,7 +54,6 @@ void	switch_doors(char **map)
 		}
 		j++;
 	}
-	
 }
 
 void	get_textures(char **words, t_config *scene_data, char *line)

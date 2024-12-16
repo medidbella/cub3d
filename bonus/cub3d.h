@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/16 14:45:45 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:10:03 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "parsing/parsing.h"
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
+// # include <mlx.>"
 # include "graphics.h"
 # include <unistd.h>
 # include <string.h>
