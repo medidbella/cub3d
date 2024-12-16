@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/15 23:03:59 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:01:21 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ typedef struct s_data
 	unsigned long	last_weapon_switch_time;
 	int				in_door;
 	t_ray			ray;
+	float			speed;
 }	t_data;
 
 typedef struct s_draw

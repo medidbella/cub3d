@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:24:00 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/15 18:56:04 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:01:06 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ bool	check_barriers(t_data *data, float x, float y)
 	new_x = data->player.player_x + x;
 	new_y = data->player.player_y + y;
 	if (data->player.player_y < new_y)
-		new_y += 2.0;
+		new_y += data->speed;
 	if (data->player.player_x < new_x)
-		new_x += 2.0;
+		new_x += data->speed;
 	index_x = (new_x / TILE_SIZE)
 		- ((int)new_x % TILE_SIZE == 0 && data->player.player_x > new_x);
 	index_y = (new_y / TILE_SIZE)

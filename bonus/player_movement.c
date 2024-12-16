@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/15 19:56:33 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:01:58 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 bool	w_moves(t_data *data, float *tab)
 {
-	double	speed;
-
 	if (data->keys[W_FLAG])
 	{
-		speed = (double)TILE_SIZE / SPEED_DIVISOR;
-		tab[DELTA_X] = (cos(data->player.angle) * speed);
-		tab[DELTA_Y] = (sin(data->player.angle) * speed);
+		tab[DELTA_X] = (cos(data->player.angle) * data->speed);
+		tab[DELTA_Y] = (sin(data->player.angle) * data->speed);
 		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
@@ -42,13 +39,10 @@ bool	w_moves(t_data *data, float *tab)
 
 bool	s_moves(t_data *data, float *tab)
 {
-	double	speed;
-
 	if (data->keys[S_FLAG])
 	{
-		speed = (double)TILE_SIZE / SPEED_DIVISOR;
-		tab[DELTA_X] = (cos(data->player.angle) * speed) * -1;
-		tab[DELTA_Y] = (sin(data->player.angle) * speed) * -1;
+		tab[DELTA_X] = (cos(data->player.angle) * data->speed) * -1;
+		tab[DELTA_Y] = (sin(data->player.angle) * data->speed) * -1;
 		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
@@ -70,13 +64,10 @@ bool	s_moves(t_data *data, float *tab)
 
 bool	d_moves(t_data *data, float *tab)
 {
-	double	speed;
-
 	if (data->keys[D_FLAG])
 	{
-		speed = (double)TILE_SIZE / SPEED_DIVISOR;
-		tab[DELTA_X] = (sin(data->player.angle) * speed) * -1;
-		tab[DELTA_Y] = (cos(data->player.angle) * speed);
+		tab[DELTA_X] = (sin(data->player.angle) * data->speed) * -1;
+		tab[DELTA_Y] = (cos(data->player.angle) * data->speed);
 		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
@@ -98,13 +89,10 @@ bool	d_moves(t_data *data, float *tab)
 
 bool	a_moves(t_data *data, float *tab)
 {
-	double	speed;
-
 	if (data->keys[A_FLAG])
 	{
-		speed = (double)TILE_SIZE / SPEED_DIVISOR;
-		tab[DELTA_X] = (sin(data->player.angle) * speed);
-		tab[DELTA_Y] = (cos(data->player.angle) * speed) * -1;
+		tab[DELTA_X] = (sin(data->player.angle) * data->speed);
+		tab[DELTA_Y] = (cos(data->player.angle) * data->speed) * -1;
 		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
