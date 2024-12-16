@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 22:09:48 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/10 15:38:11 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:25:21 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,17 @@ char	get_char(t_data *data, int which)
 
 	if (which == 1)
 	{
-		index_x = (int)data->player.player_x / TILE_SIZE;
-		index_y = (int)data->player.player_y / TILE_SIZE;
+		// printf("\n cond ==> %d\n\n", (data->in_h_door && data->player.angle > radian(180) && (int)data->player.player_y % TILE_SIZE == 0));
+		// exit(0);
+		index_x = (int)data->player.player_x / TILE_SIZE
+			- (data->in_v_door && data->player.angle > radian(90) && data->player.angle < radian(270)
+			&& (((int)data->player.player_x % TILE_SIZE == 0)));
+
+		index_y = (int)data->player.player_y / TILE_SIZE
+			- (data->in_h_door && data->player.angle > radian(180)
+			&& (((int)data->player.player_y % TILE_SIZE == 0)));
+
+		// printf("index x: %d || index y: %d\n", index_x, index_y);exit(0);
 	}
 	else if (which == 2)
 	{
@@ -45,10 +54,15 @@ static bool	player_in_door_cube_h(t_data *data, double rayangle,
 	if (rayangle > radian(180))
 	{
 		if (get_char(data, 1) == 'H'
-			&& (((int)data->player.player_y % TILE_SIZE) > (TILE_SIZE / 2)))
+			&& ((((int)data->player.player_y % TILE_SIZE) > (TILE_SIZE / 2))
+			|| (((int)data->player.player_y % TILE_SIZE) == 0)))
 		{
 			half_cube = (((int)(data->player.player_y / TILE_SIZE))
-					* (TILE_SIZE)) + (TILE_SIZE / 2);
+					* (TILE_SIZE));// + (TILE_SIZE / 2);
+			if ((int)data->player.player_y % TILE_SIZE == 0)
+				half_cube -= (TILE_SIZE / 2);
+			else
+				half_cube += (TILE_SIZE / 2);
 			*delta_y = data->player.player_y - half_cube;
 			return (data->ray.h_door = 1, true);
 		}

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/13 10:32:22 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/16 21:50:59 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	ray_casting(t_data *data)
 {
 	t_ray	*ray;
 	int		column;
-
+	
 	ray = &(data->ray);
 	initialize_vars(data, ray, &column);
 	while (column <= WIDTH)
@@ -131,6 +131,9 @@ void	ray_casting(t_data *data)
 		ray->v_door = 0;
 		horizontal_distance(data, ray);
 		vertical_distance(data, ray);
+		// printf("hx: %f || hy: %f || h distance: %f\n", ray->horizontal_x, ray->horizontal_y, ray->horizontal_distance);
+		// printf("vx: %f || vy: %f || v distance: %f\n", ray->vertical_x, ray->vertical_y, ray->vertical_distance);
+		// exit(0);
 		real_distance(ray, data);
 		ray->door = small_distance(ray);
 		draw_column(data, ray, column);
@@ -140,4 +143,6 @@ void	ray_casting(t_data *data)
 			ray->rayangle -= radian(360);
 		ray->direction_flag = 0;
 	}
+	// printf("hit h: %d || hit v: %d\n", ray->hit_h_openedoor, ray->hit_v_openedoor);
+	// exit(0);
 }

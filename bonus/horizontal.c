@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/12 19:14:42 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:33:35 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	horizontal_distance(t_data *data, t_ray *ray)
 	while (1)
 	{
 		find_horizontal_point(data, &ray->horizontal_x, &ray->horizontal_y);
+		// printf("hx: %f || hy: %f || h distance: %f\n", ray->horizontal_x, ray->horizontal_y, ray->horizontal_distance);
+		// exit(0);
 		if (check_next_possition(data, ray, &x, &y))
 			break ;
 		if (ft_strchr("1HV", data->map[y][x]))
