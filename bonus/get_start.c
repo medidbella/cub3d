@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/16 22:22:21 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:37:26 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	player_first_coordinates(t_data *data)
 		{
 			if (ft_strchr("NSEW", data->map[y][x]))
 			{
-				data->player.player_x = x * TILE_SIZE + TILE_SIZE / 2 ;
+				data->player.player_x = x * TILE_SIZE + TILE_SIZE / 2;
 				data->player.player_y = y * TILE_SIZE + TILE_SIZE / 2;
 				data->player.mini_x = data->player.player_x
 					* data->scale - (data->mini_width / 2);
@@ -62,9 +62,6 @@ void	setup(t_data *data, t_config *parsed_data)
 		/ tan(data->player.fov / 2);
 	data->mouse_x = WIDTH / 2;
 	data->mouse_y = HEIGHT / 2;
-	data->in_door = 0;
-	data->in_h_door = 0;
-	data->in_v_door = 0;
 	mlx_mouse_hide(data->mlx, data->win);
 }
 
@@ -73,7 +70,9 @@ void	first_view(t_data *data)
 	data->player.player_center_x = (data->mini_width / 2);
 	data->player.player_center_y = (data->mini_height / 2);
 	data->speed = (double)TILE_SIZE / SPEED_DIVISOR;
-	// printf("speed: %f\n", data->speed);
+	data->in_door = 0;
+	data->in_h_door = 0;
+	data->in_v_door = 0;
 	ray_casting(data);
 	draw_mini_map(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
@@ -93,21 +92,25 @@ void	get_start(t_config *parsed_data)
 	data.door_flag = parsed_data->door_flag;
 	init_key_flags(&data);
 
+	// data.debug = 0;
 
-	// data.player.player_x = 65.000000;
-	// data.player.player_y = 40;
+	// data.player.angle = 0.010000;
+	// data.player.player_x = 74.000000;
+	// data.player.player_y = 58.000000;
 	// data.player.mini_x = data.player.player_x
 	// 	* data.scale - (data.mini_width / 2);
 	// data.player.mini_y = data.player.player_y
 	// 	* data.scale - (data.mini_height / 2);
 
 	// data.in_door = 1;
-	// // data.in_h_door = 1;
-	// data.in_v_door = 1;
+	// data.in_h_door = 1;
 
-	printf("Px: %f || Py: %f || in door: %d\n", data.player.player_x, data.player.player_y, data.in_door);
+	// printf("Px: %f || Py: %f || angle: %f\n", data.player.player_x, data.player.player_y, data.player.angle);
+	// printf("in_door: %d || in_h_door: %d || in_v_door: %d\n\n", data.in_door, data.in_h_door, data.in_v_door);
 
 	first_view(&data);
+
+	
 	data.last_frame_time = ft_get_time();
 	data.last_weapon_switch_time = ft_get_time();
 	mlx_hook(data.win, 17, 1L << 2, close_win, &data);

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/16 16:02:50 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:35:37 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct s_data
 	int				in_v_door;
 	t_ray			ray;
 	float			speed;
+	int		debug;
 }	t_data;
 
 typedef struct s_draw
