@@ -1,0 +1,13 @@
+NO ./textures/colors/red.xpm
+SO ./textures/colors/blue.xpm
+WE ./textures/colors/green.xpm
+EA ./textures/colors/purple.xpm
+DOOR ./textures/door.xpm
+F 100,100,250
+C 0,0,0
+
+1111
+1D11
+1N01
+1001
+1111

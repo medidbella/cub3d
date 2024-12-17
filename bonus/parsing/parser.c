@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/11/24 17:09:25 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:18:44 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ must be followed by one information\n", words, line, scene_data);
 	strings_free(words);
 }
 
-void	file_parser(t_config *scene_data, char *scene_descrption_file)
+void	file_parser(t_config *scene_data, char *scene_description_file)
 {
 	int		map_flag;
 	int		fd;
@@ -90,7 +90,7 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 
 	map_flag = 0;
 	data_init(scene_data);
-	fd = open_cub_file(scene_descrption_file);
+	fd = open_cub_file(scene_description_file);
 	while (1)
 	{
 		line = read_line(fd);
@@ -106,5 +106,6 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 	check_prev_members(scene_data, line);
 	scene_data->map = map_alloc(line, fd, scene_data);
 	map_parser(scene_data->map, scene_data);
+	switch_doors(scene_data->map);
 	set_hight_width(scene_data);
 }

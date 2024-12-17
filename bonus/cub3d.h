@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/17 17:22:46 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:31:20 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "parsing/parsing.h"
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
+// # include <mlx.>"
 # include "graphics.h"
 # include <unistd.h>
 # include <string.h>
@@ -25,7 +26,7 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-# define TILE_SIZE 150
+# define TILE_SIZE 1000
 # define MIN_TILE_SIZE 10
 # define WIDTH 1080
 # define HEIGHT 720

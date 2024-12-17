@@ -1,5 +1,5 @@
 NO ./textures/wood.xpm
-SO ./textures/stone.xpm
+SO ./textures/wood.xpm
 WE ./textures/grass.xpm
 EA ./textures/brick.xpm
 DOOR ./textures/door.xpm

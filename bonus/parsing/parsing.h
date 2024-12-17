@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:30 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/04 15:00:45 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:18:26 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_config
 
 void		set_hight_width(t_config *scene_data);
 char		*read_line(int fd);
-void		file_parser(t_config *scene, char *scene_descrption);
+void		file_parser(t_config *scene, char *scene_description);
 void		data_init(t_config *data);
 int			strings_len(char **words);
 void		error_handler(char *err, char **free_me, char *me_too,
@@ -58,5 +58,6 @@ int			open_cub_file(char *file);
 void		get_textures(char **words, t_config *scene_data, char *line);
 void		color_parser(t_config *scene_data, char *line, int type);
 void		alignment_check(char **map, int x, int y, t_config *scene_data);
+void		switch_doors(char **map);
 
 #endif
