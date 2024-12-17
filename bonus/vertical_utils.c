@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 22:08:14 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/17 12:17:03 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:06:48 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static bool	player_in_door_cube_v(t_data *data, double rayangle,
 			double *delta_x, int half_cube)
 {
 	half_cube = (((int)(data->player.player_x / TILE_SIZE)) * (TILE_SIZE));
-	if (rayangle > radian(90) && rayangle < radian(270))
+	if (rayangle > 90 && rayangle < 270)
 	{
 		if (get_char(data, 1) == 'V'
 			&& ((((int)data->player.player_x % TILE_SIZE) > (TILE_SIZE / 2))
-			|| (((int)data->player.player_x % TILE_SIZE) == 0)))
+				|| (((int)data->player.player_x % TILE_SIZE) == 0)))
 		{
 			if ((int)data->player.player_x % TILE_SIZE == 0)
 				half_cube -= (TILE_SIZE / 2);

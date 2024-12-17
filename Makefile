@@ -12,7 +12,7 @@ SRC = mandatory/cub3d.c mandatory/get_start.c mandatory/hooks.c \
 		mandatory/parsing/read_file.c
 SRC_BONUS = bonus/cub3d.c bonus/get_start.c bonus/draw_pixels.c bonus/hooks.c \
 		bonus/rotate.c bonus/texture_handling.c bonus/player_movement.c \
-		bonus/wall_checker.c bonus/moves_utils.c \
+		bonus/wall_checker.c bonus/wall_utils.c bonus/moves_utils.c \
 		bonus/ray_casting.c bonus/rays_utils.c bonus/open_door.c \
 		bonus/horizontal.c bonus/vertical.c bonus/horizontal_utils.c bonus/vertical_utils.c \
 		bonus/key_hooks.c bonus/parsing/general_utils.c bonus/parsing/map_parsing.c \

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 19:59:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/15 20:03:25 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:59:38 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	draw_line(t_data *data, float x2, float y2, int i)
 	ini_vars(data, &draw, x2, y2);
 	x = data->player.player_center_x;
 	y = data->player.player_center_y;
-	draw.color = 0xFFFFFF;
+	draw.color = WHITE;
 	while (++i <= draw.step)
 	{
 		draw.r = (draw.r_s + (i * draw.delta_r));
@@ -97,12 +97,12 @@ void	draw_fov(t_data *data, float x2, float y2)
 	ray = &(data->ray);
 	ray->rayangle = data->player.angle - (data->player.fov / 2);
 	if (ray->rayangle < 0)
-		ray->rayangle += radian(360);
+		ray->rayangle += 360;
 	column = 0;
 	while (column <= WIDTH)
 	{
-		delta_x = cos(ray->rayangle) * FOV_LENGTH;
-		delta_y = sin(ray->rayangle) * FOV_LENGTH;
+		delta_x = cos(radian(ray->rayangle)) * FOV_LENGTH;
+		delta_y = sin(radian(ray->rayangle)) * FOV_LENGTH;
 		x2 = data->player.player_center_x + delta_x;
 		y2 = data->player.player_center_y + delta_y;
 		draw_line(data, x2, y2, -1);

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 22:09:48 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/17 12:21:48 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:53:16 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ char	get_char(t_data *data, int which)
 	if (which == 1)
 	{
 		index_x = (int)data->player.player_x / TILE_SIZE - (data->in_v_door
-				&& data->player.angle > radian(90)
-				&& data->player.angle < radian(270)
+				&& data->player.angle > 90
+				&& data->player.angle < 270
 				&& (((int)data->player.player_x % TILE_SIZE == 0)));
 		index_y = (int)data->player.player_y / TILE_SIZE
-			- (data->in_h_door && data->player.angle > radian(180)
+			- (data->in_h_door && data->player.angle > 180
 				&& (((int)data->player.player_y % TILE_SIZE == 0)));
 		return (data->map[index_y][index_x]);
 	}
@@ -45,7 +45,7 @@ static bool	player_in_door_cube_h(t_data *data, double rayangle,
 			double *delta_y, int half_cube)
 {
 	half_cube = (((int)(data->player.player_y / TILE_SIZE)) * (TILE_SIZE));
-	if (rayangle > radian(180))
+	if (rayangle > 180)
 	{
 		if (get_char(data, 1) == 'H'
 			&& ((((int)data->player.player_y % TILE_SIZE) > (TILE_SIZE / 2))

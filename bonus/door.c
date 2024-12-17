@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 11:24:24 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/07 10:15:10 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:39:53 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static double	get_door_distance_h(t_data *data, t_ray *ray, double rayangle)
 	double	delta_y;
 
 	delta_y = (double)TILE_SIZE / 2;
-	delta_x = fabs(delta_y / tan(rayangle));
+	delta_x = fabs(delta_y / tan(radian(rayangle)));
 	if (data->player.player_y < ray->horizontal_y)
 		delta_y *= -1;
 	if (data->player.player_x < ray->horizontal_x)
@@ -34,7 +34,7 @@ static double	get_door_distance_v(t_data *data, t_ray *ray, double rayangle)
 	double	delta_y;
 
 	delta_x = (double)TILE_SIZE / 2;
-	delta_y = fabs(tan(rayangle) * delta_x);
+	delta_y = fabs(tan(radian(rayangle)) * delta_x);
 	if (data->player.player_x < ray->vertical_x)
 		delta_x *= -1;
 	if (data->player.player_y < ray->vertical_y)

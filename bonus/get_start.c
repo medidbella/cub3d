@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/17 12:37:26 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:02:10 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	setup(t_data *data, t_config *parsed_data)
 	data->mini_height = HEIGHT / 6;
 	data->scale = (float)MIN_TILE_SIZE / TILE_SIZE;
 	player_first_coordinates(data);
-	data->player.fov = radian(FOV);
+	data->player.fov = FOV;
 	data->player.distance_to_project_plan = ((float)WIDTH / 2)
-		/ tan(data->player.fov / 2);
+		/ tan(radian(data->player.fov / 2));
 	data->mouse_x = WIDTH / 2;
 	data->mouse_y = HEIGHT / 2;
 	mlx_mouse_hide(data->mlx, data->win);
@@ -84,33 +84,14 @@ void	get_start(t_config *parsed_data)
 {
 	t_data	data;
 
-	data.player.angle = radian(parsed_data->player_start_angle);
-	data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
+	data.player.angle = parsed_data->player_start_angle;
+	data.player.angle_step = ((double)FOV / (double)WIDTH);
 	setup(&data, parsed_data);
 	initialize_wall_textures(&data, parsed_data);
 	sprites_init(data.weapons, data.mlx);
 	data.door_flag = parsed_data->door_flag;
 	init_key_flags(&data);
-
-	// data.debug = 0;
-
-	// data.player.angle = 0.010000;
-	// data.player.player_x = 74.000000;
-	// data.player.player_y = 58.000000;
-	// data.player.mini_x = data.player.player_x
-	// 	* data.scale - (data.mini_width / 2);
-	// data.player.mini_y = data.player.player_y
-	// 	* data.scale - (data.mini_height / 2);
-
-	// data.in_door = 1;
-	// data.in_h_door = 1;
-
-	// printf("Px: %f || Py: %f || angle: %f\n", data.player.player_x, data.player.player_y, data.player.angle);
-	// printf("in_door: %d || in_h_door: %d || in_v_door: %d\n\n", data.in_door, data.in_h_door, data.in_v_door);
-
 	first_view(&data);
-
-	
 	data.last_frame_time = ft_get_time();
 	data.last_weapon_switch_time = ft_get_time();
 	mlx_hook(data.win, 17, 1L << 2, close_win, &data);

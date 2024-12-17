@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/17 12:08:38 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:07:07 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ double	calculate_delta_x(t_data *data, double *vertical_x
 {
 	double	delta_x;
 
-	if (rayangle > radian(90) && rayangle < radian(270))
+	if (rayangle > 90 && rayangle < 270)
 	{
 		if (*vertical_x == data->player.player_x
 			&& *vertical_y == data->player.player_y)
@@ -50,11 +50,11 @@ void	find_vertical_point(t_data *data, double *vertical_x
 	double	rayangle;
 
 	rayangle = data->ray.rayangle;
-	if (rayangle == radian(90) || rayangle == radian(270))
+	if (rayangle == 90 || rayangle == 270)
 		return ;
 	if (!v_ray_to_door(data, rayangle, &delta_x))
 		delta_x = calculate_delta_x(data, vertical_x, vertical_y, rayangle);
-	delta_y = tan(rayangle) * delta_x;
+	delta_y = tan(radian(rayangle)) * delta_x;
 	*vertical_x = *vertical_x - delta_x;
 	*vertical_y = *vertical_y - delta_y;
 }
@@ -63,7 +63,7 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 {
 	double	check_x;
 
-	if (ray->rayangle == radian(90) || ray->rayangle == radian(270)
+	if (ray->rayangle == 90 || ray->rayangle == 270
 		|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
 		|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d)
 		return (true);

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/17 12:37:06 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:22:24 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,15 @@ void	mouse_events(t_data *data)
 	data->keys[MOUSE_FLAG] = 1;
 	delta_x = x - (WIDTH / 2);
 	data->player.angle += delta_x * SENSITIVITY;
-	if (data->player.angle > radian(360))
-		data->player.angle -= radian(360);
+	if (data->player.angle > 360)
+		data->player.angle -= 360;
 	else if (data->player.angle < 0)
-		data->player.angle += radian(360);
+		data->player.angle += 360;
 	mlx_mouse_move(data->mlx, data->win, WIDTH / 2, HEIGHT / 2);
 }
 
 int	loop_rendering(t_data *data)
 {
-	if (data->debug)
-		return (0);
 	mouse_events(data);
 	if (data->keys[SWITCH_FLAG])
 		weapon_switch(data, 1);
@@ -71,9 +69,5 @@ int	loop_rendering(t_data *data)
 	set_frame_index(data);
 	render_weapon(data, &data->weapons[data->used_weapon],
 		data->weapons[data->used_weapon].current_frame_index);
-	// printf("Px: %f || Py: %f || angle: %f\n", data->player.player_x, data->player.player_y, data->player.angle);
-	// printf("in_door: %d || in_h_door: %d || in_v_door: %d\n", data->in_door, data->in_h_door, data->in_v_door);
-	// printf("---------------------------------------\n");
-	// data->debug++;
 	return (0);
 }

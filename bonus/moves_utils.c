@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:29:11 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/16 21:36:06 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:47:09 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ static	bool	player_moves_left(t_data *data, float new_x)
 	}
 	if ((((int)new_x % TILE_SIZE) > (TILE_SIZE / 2))
 		|| (((int)new_x % TILE_SIZE) == 0))
-	{
-		// printf("wwwww\n");exit(0);
 		return (data->in_door = 1, data->in_v_door = 1, true);
-	}
 	return (false);
 }
 
@@ -81,9 +78,7 @@ static bool	v_door(t_data *data, float new_x)
 			return (data->in_door = 1, data->in_v_door = 1, true);
 	}
 	if (((int)new_x % TILE_SIZE) < (TILE_SIZE / 2))
-	{
 		return (data->in_door = 1, data->in_v_door = 1, true);
-	}
 	return (false);
 }
 
@@ -92,9 +87,6 @@ bool	next_to_door(t_data *data, float new_x, float new_y, char c)
 	if (c == 'H')
 		return (h_door(data, new_y));
 	else if (c == 'V')
-	{
-		// printf("heree\n");exit(0);
 		return (v_door(data, new_x));
-	}
 	return (data->in_door = 0, data->in_h_door = 0, data->in_v_door = 0, false);
 }

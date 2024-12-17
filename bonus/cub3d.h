@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/17 12:35:37 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:22:46 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-# define TILE_SIZE 20
+# define TILE_SIZE 150
 # define MIN_TILE_SIZE 10
 # define WIDTH 1080
 # define HEIGHT 720
@@ -67,7 +67,7 @@
 # define OPEN_DOOR 10
 # define MOVE_FLAG 11
 # define KEYS_NB 12
-# define SENSITIVITY 0.005
+# define SENSITIVITY 0.2
 # define DELTA_X 0
 # define DELTA_Y 1
 # define H_VARS 1
@@ -171,7 +171,8 @@ typedef struct s_data
 	int				in_v_door;
 	t_ray			ray;
 	float			speed;
-	int		debug;
+	int				x_added;
+	int				y_added;
 }	t_data;
 
 typedef struct s_draw
@@ -249,5 +250,7 @@ void			init_vars(t_data *data, t_ray *ray, int *checks, int which);
 void			initialize_vars(t_data *data, t_ray *ray, int *column);
 void			draw_fov(t_data *data, float x2, float y2);
 void			update_coords(t_data *data, float delta_x, float delta_y);
+int				get_indexes(t_data *data, float *new_x, float *new_y,
+					float *index_x);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/16 21:50:59 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:06:19 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	height_and_texture(t_data *data, t_ray *ray)
 {
 	if (ray->side_flag == 1)
 	{
-		if (ray->rayangle >= radian(180))
+		if (ray->rayangle >= 180)
 			ray->texture_idx = S_INDEX;
 		else
 			ray->texture_idx = N_INDEX;
 	}
 	else
 	{
-		if ((ray->rayangle >= 0 && ray->rayangle <= radian(90))
-			|| ray->rayangle >= radian(270))
+		if ((ray->rayangle >= 0 && ray->rayangle <= 90)
+			|| ray->rayangle >= 270)
 			ray->texture_idx = W_INDEX;
 		else
 			ray->texture_idx = E_INDEX;
@@ -78,11 +78,11 @@ void	real_distance(t_ray *ray, t_data *data)
 		}
 	}
 	if (ray->horizontal_distance != -1)
-		ray->horizontal_distance = cos(ray->rayangle - data->player.angle)
-			* ray->horizontal_distance;
+		ray->horizontal_distance = cos(radian(ray->rayangle
+					- data->player.angle)) * ray->horizontal_distance;
 	if (ray->vertical_distance != -1)
-		ray->vertical_distance = cos(ray->rayangle - data->player.angle)
-			* ray->vertical_distance;
+		ray->vertical_distance = cos(radian(ray->rayangle
+					- data->player.angle)) * ray->vertical_distance;
 }
 
 int	small_distance(t_ray *ray)
@@ -118,7 +118,7 @@ void	ray_casting(t_data *data)
 {
 	t_ray	*ray;
 	int		column;
-	
+
 	ray = &(data->ray);
 	initialize_vars(data, ray, &column);
 	while (column <= WIDTH)
@@ -131,18 +131,13 @@ void	ray_casting(t_data *data)
 		ray->v_door = 0;
 		horizontal_distance(data, ray);
 		vertical_distance(data, ray);
-		// printf("hx: %f || hy: %f || h distance: %f\n", ray->horizontal_x, ray->horizontal_y, ray->horizontal_distance);
-		// printf("vx: %f || vy: %f || v distance: %f\n", ray->vertical_x, ray->vertical_y, ray->vertical_distance);
-		// exit(0);
 		real_distance(ray, data);
 		ray->door = small_distance(ray);
 		draw_column(data, ray, column);
 		column++;
 		ray->rayangle += data->player.angle_step;
-		if (ray->rayangle >= radian(360))
-			ray->rayangle -= radian(360);
+		if (ray->rayangle >= 360)
+			ray->rayangle -= 360;
 		ray->direction_flag = 0;
 	}
-	// printf("hit h: %d || hit v: %d\n", ray->hit_h_openedoor, ray->hit_v_openedoor);
-	// exit(0);
 }
