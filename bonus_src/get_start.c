@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:01:34 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:26:09 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	player_first_coordinates(t_data *data)
 		{
 			if (ft_strchr("NSEW", data->map[y][x]))
 			{
-				data->player.player_x = x * TILE_SIZE + TILE_SIZE / 2 ;
+				data->player.player_x = x * TILE_SIZE + TILE_SIZE / 2;
 				data->player.player_y = y * TILE_SIZE + TILE_SIZE / 2;
 				data->player.mini_x = data->player.player_x
 					* data->scale - (data->mini_width / 2);
@@ -57,12 +57,11 @@ void	setup(t_data *data, t_config *parsed_data)
 	data->mini_height = HEIGHT / 6;
 	data->scale = (float)MIN_TILE_SIZE / TILE_SIZE;
 	player_first_coordinates(data);
-	data->player.fov = radian(FOV);
+	data->player.fov = FOV;
 	data->player.distance_to_project_plan = ((float)WIDTH / 2)
-		/ tan(data->player.fov / 2);
+		/ tan(radian(data->player.fov / 2));
 	data->mouse_x = WIDTH / 2;
 	data->mouse_y = HEIGHT / 2;
-	data->in_door = 0;
 	mlx_mouse_hide(data->mlx, data->win);
 }
 
@@ -71,6 +70,9 @@ void	first_view(t_data *data)
 	data->player.player_center_x = (data->mini_width / 2);
 	data->player.player_center_y = (data->mini_height / 2);
 	data->speed = (double)TILE_SIZE / SPEED_DIVISOR;
+	data->in_door = 0;
+	data->in_h_door = 0;
+	data->in_v_door = 0;
 	ray_casting(data);
 	draw_mini_map(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
@@ -82,8 +84,8 @@ void	get_start(t_config *parsed_data)
 {
 	t_data	data;
 
-	data.player.angle = radian(parsed_data->player_start_angle);
-	data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
+	data.player.angle = parsed_data->player_start_angle;
+	data.player.angle_step = ((double)FOV / (double)WIDTH);
 	setup(&data, parsed_data);
 	initialize_wall_textures(&data, parsed_data);
 	sprites_init(data.weapons, data.mlx);

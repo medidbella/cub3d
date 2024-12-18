@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:01:34 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:26:44 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ bool	w_moves(t_data *data, float *tab)
 {
 	if (data->keys[W_FLAG])
 	{
-		tab[DELTA_X] = (cos(data->player.angle) * data->speed);
-		tab[DELTA_Y] = (sin(data->player.angle) * data->speed);
+		tab[DELTA_X] = (cos(radian(data->player.angle)) * data->speed);
+		tab[DELTA_Y] = (sin(radian(data->player.angle)) * data->speed);
 		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
@@ -41,8 +41,8 @@ bool	s_moves(t_data *data, float *tab)
 {
 	if (data->keys[S_FLAG])
 	{
-		tab[DELTA_X] = (cos(data->player.angle) * data->speed) * -1;
-		tab[DELTA_Y] = (sin(data->player.angle) * data->speed) * -1;
+		tab[DELTA_X] = (cos(radian(data->player.angle)) * data->speed) * -1;
+		tab[DELTA_Y] = (sin(radian(data->player.angle)) * data->speed) * -1;
 		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
@@ -66,8 +66,8 @@ bool	d_moves(t_data *data, float *tab)
 {
 	if (data->keys[D_FLAG])
 	{
-		tab[DELTA_X] = (sin(data->player.angle) * data->speed) * -1;
-		tab[DELTA_Y] = (cos(data->player.angle) * data->speed);
+		tab[DELTA_X] = (sin(radian(data->player.angle)) * data->speed) * -1;
+		tab[DELTA_Y] = (cos(radian(data->player.angle)) * data->speed);
 		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)
@@ -91,8 +91,8 @@ bool	a_moves(t_data *data, float *tab)
 {
 	if (data->keys[A_FLAG])
 	{
-		tab[DELTA_X] = (sin(data->player.angle) * data->speed);
-		tab[DELTA_Y] = (cos(data->player.angle) * data->speed) * -1;
+		tab[DELTA_X] = (sin(radian(data->player.angle)) * data->speed);
+		tab[DELTA_Y] = (cos(radian(data->player.angle)) * data->speed) * -1;
 		if (tab[DELTA_Y] < 0.00001 && tab[DELTA_Y] > -0.00001)
 			tab[DELTA_Y] = 0;
 		if (tab[DELTA_X] < 0.00001 && tab[DELTA_X] > -0.00001)

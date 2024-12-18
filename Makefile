@@ -18,7 +18,8 @@ SRC_BONUS = bonus_src/cub3d.c bonus_src/get_start.c bonus_src/draw_pixels.c bonu
 		bonus_src/key_hooks.c bonus_src/parsing/general_utils.c bonus_src/parsing/map_parsing.c \
 		bonus_src/parsing/parser.c bonus_src/parsing/parsing_utils.c \
 		bonus_src/parsing/read_file.c bonus_src/parsing/parse_textures.c\
-		bonus_src/sprites.c bonus_src/weapons.c bonus_src/door.c bonus_src/mem_free.c bonus_src/draw_fov.c
+		bonus_src/sprites.c bonus_src/weapons.c bonus_src/door.c bonus_src/mem_free.c\
+		bonus_src/draw_fov.c bonus_src/wall_utils.c
 CC = cc
 MLX1 = -lXext -lX11 -lm -Imlx -lmlx
 LIBFT = libft/libft.a

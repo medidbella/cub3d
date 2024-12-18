@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:29:11 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:01:34 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:26:34 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static bool	player_moves_up(t_data *data, float new_y)
 				|| ((int)new_y % (TILE_SIZE / 2) == 0)))
 			return (false);
 		if (((int)data->player.player_y % TILE_SIZE) < (TILE_SIZE / 2))
-			return (data->in_door = 1, true);
+			return (data->in_door = 1, data->in_h_door = 1, true);
 	}
 	if ((((int)new_y % TILE_SIZE) > (TILE_SIZE / 2))
 		|| (((int)new_y % TILE_SIZE) == 0))
-		return (data->in_door = 1, true);
+		return (data->in_door = 1, data->in_h_door = 1, true);
 	return (false);
 }
 
@@ -40,10 +40,10 @@ static bool	h_door(t_data *data, float new_y)
 				|| ((int)new_y % (TILE_SIZE / 2) == 0)))
 			return (false);
 		if (((int)data->player.player_y % TILE_SIZE) > (TILE_SIZE / 2))
-			return (data->in_door = 1, true);
+			return (data->in_door = 1, data->in_h_door = 1, true);
 	}
 	if (((int)new_y % TILE_SIZE) < (TILE_SIZE / 2))
-		return (data->in_door = 1, true);
+		return (data->in_door = 1, data->in_h_door = 1, true);
 	return (false);
 }
 
@@ -56,11 +56,11 @@ static	bool	player_moves_left(t_data *data, float new_x)
 				|| ((int)new_x % (TILE_SIZE / 2) == 0)))
 			return (false);
 		if (((int)data->player.player_x % TILE_SIZE) < (TILE_SIZE / 2))
-			return (data->in_door = 1, true);
+			return (data->in_door = 1, data->in_v_door = 1, true);
 	}
 	if ((((int)new_x % TILE_SIZE) > (TILE_SIZE / 2))
 		|| (((int)new_x % TILE_SIZE) == 0))
-		return (data->in_door = 1, true);
+		return (data->in_door = 1, data->in_v_door = 1, true);
 	return (false);
 }
 
@@ -75,10 +75,10 @@ static bool	v_door(t_data *data, float new_x)
 				|| ((int)new_x % (TILE_SIZE / 2) == 0)))
 			return (false);
 		if (((int)data->player.player_x % TILE_SIZE) > (TILE_SIZE / 2))
-			return (data->in_door = 1, true);
+			return (data->in_door = 1, data->in_v_door = 1, true);
 	}
 	if (((int)new_x % TILE_SIZE) < (TILE_SIZE / 2))
-		return (data->in_door = 1, true);
+		return (data->in_door = 1, data->in_v_door = 1, true);
 	return (false);
 }
 
@@ -88,5 +88,5 @@ bool	next_to_door(t_data *data, float new_x, float new_y, char c)
 		return (h_door(data, new_y));
 	else if (c == 'V')
 		return (v_door(data, new_x));
-	return (data->in_door = 0, false);
+	return (data->in_door = 0, data->in_h_door = 0, data->in_v_door = 0, false);
 }

@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:24:00 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:01:34 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:27:12 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	check_corners(t_data *data, int index_x, int index_y, int px)
 		if (wall_char(data, py, (px + 1)) && wall_char(data, (py - 1), px))
 			return (true);
 	}
-	return (data->in_door = 0, false);
+	return (data->in_door = 0, data->in_h_door = 0, data->in_v_door = 0, false);
 }
 
 bool	check_barriers(t_data *data, float x, float y)
@@ -66,14 +66,7 @@ bool	check_barriers(t_data *data, float x, float y)
 
 	new_x = data->player.player_x + x;
 	new_y = data->player.player_y + y;
-	if (data->player.player_y < new_y)
-		new_y += data->speed;
-	if (data->player.player_x < new_x)
-		new_x += data->speed;
-	index_x = (new_x / TILE_SIZE)
-		- ((int)new_x % TILE_SIZE == 0 && data->player.player_x > new_x);
-	index_y = (new_y / TILE_SIZE)
-		- ((int)new_y % TILE_SIZE == 0 && data->player.player_y > new_y);
+	index_y = get_indexes(data, &new_x, &new_y, &index_x);
 	if (!((int)index_y < data->height_2d
 			&& (int)index_y >= 0 && (int)index_x >= 0
 			&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))

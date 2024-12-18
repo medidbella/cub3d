@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:35:57 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:01:34 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:26:54 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	initialize_vars(t_data *data, t_ray *ray, int *column)
 	*column = 0;
 	ray->rayangle = data->player.angle - (data->player.fov / 2);
 	if (ray->rayangle < 0)
-		ray->rayangle += radian(360);
+		ray->rayangle += 360;
 	data->ray.hit_h_openedoor = 0;
 	data->ray.hit_v_openedoor = 0;
 	ray->direction_ray_distance = 0.0;

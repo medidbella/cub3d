@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:01:34 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:26:11 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	check_keys(t_data *data)
 	if (!data->keys[MOVE_FLAG] && !data->keys[RIGHT_FLAG]
 		&& !data->keys[LEFT_FLAG] && !data->keys[CLOSE_FLAG]
 		&& !data->keys[MOUSE_FLAG] && !data->keys[SWITCH_FLAG]
-		&& !data->keys[SHOOT_FLAG] && !data->keys[OPEN_DOOR])
+		&& !data->keys[SHOOT_FLAG] && data->keys[OPEN_DOOR] != 1)
 		return (false);
 	return (true);
 }
@@ -36,10 +36,10 @@ void	mouse_events(t_data *data)
 	data->keys[MOUSE_FLAG] = 1;
 	delta_x = x - (WIDTH / 2);
 	data->player.angle += delta_x * SENSITIVITY;
-	if (data->player.angle > radian(360))
-		data->player.angle -= radian(360);
+	if (data->player.angle > 360)
+		data->player.angle -= 360;
 	else if (data->player.angle < 0)
-		data->player.angle += radian(360);
+		data->player.angle += 360;
 	mlx_mouse_move(data->mlx, data->win, WIDTH / 2, HEIGHT / 2);
 }
 
