@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/17 17:22:24 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:12:58 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ int	loop_rendering(t_data *data)
 		open_and_close_door(data);
 	if (data->keys[CLOSE_FLAG])
 		close_win(data);
-	if (data->keys[MOUSE_FLAG] || data->keys[RIGHT_FLAG]
-		|| data->keys[LEFT_FLAG])
+	if (data->keys[RIGHT_FLAG] || data->keys[LEFT_FLAG])
 		rotate(data);
 	move_player(data);
 	if (!check_keys(data))
@@ -69,5 +68,9 @@ int	loop_rendering(t_data *data)
 	set_frame_index(data);
 	render_weapon(data, &data->weapons[data->used_weapon],
 		data->weapons[data->used_weapon].current_frame_index);
+	data->debug++;
+	if (data->debug == 2)
+		while(1);
+	printf("%d\n", data->debug);
 	return (0);
 }

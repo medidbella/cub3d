@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 10:27:07 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/16 14:38:06 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:51:05 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,35 @@ static bool	closing_possibility(t_data *data, float distance1, float distance2,
 		&& (distance <= ((TILE_SIZE * 2) - (TILE_SIZE / 2))));
 }
 
-static void	opened_door(t_data *data)
-{
-	int	index_x;
-	int	index_y;
 
-	if (closing_possibility(data, 0.0, 0.0, 0.0))
+static void	close_door(t_data *data, int *index_x, int *index_y)
+{
+	// int	index_x;
+	// int	index_y;
+
+	// next_to_opendoor(data, &index_x, &index_y);
+	if (data->in_opendoor || closing_possibility(data, 0.0, 0.0, 0.0))
 	{
-		if (data->ray.closest_hv == 1)
+		if (!data->in_opendoor && data->ray.closest_hv == 1)
 		{
-			index_x = (data->ray.openedoor_hx / TILE_SIZE);
-			index_y = (data->ray.openedoor_hy / TILE_SIZE)
-				- (data->player.player_y > data->ray.openedoor_hy
-					&& ((int)data->ray.openedoor_hy % TILE_SIZE == 0));
+			if (!data->in_opendoor)
+			{
+				*index_x = (data->ray.openedoor_hx / TILE_SIZE);
+				*index_y = (data->ray.openedoor_hy / TILE_SIZE)
+					- (data->player.player_y > data->ray.openedoor_hy
+						&& ((int)data->ray.openedoor_hy % TILE_SIZE == 0));
+			}
 		}
-		else
+		else if (!data->in_opendoor)
 		{
-			index_x = (data->ray.openedoor_vx / TILE_SIZE)
+			*index_x = (data->ray.openedoor_vx / TILE_SIZE)
 				- (data->player.player_x > data->ray.openedoor_vx
 					&& ((int)data->ray.openedoor_vx % TILE_SIZE == 0));
-			index_y = data->ray.openedoor_vy / TILE_SIZE;
+			*index_y = data->ray.openedoor_vy / TILE_SIZE;
 		}
-		if (data->map[index_y][index_x] == 'h'
-			|| data->map[index_y][index_x] == 'v')
-			data->map[index_y][index_x] -= 32;
+		if (data->map[*index_y][*index_x] == 'h'
+			|| data->map[*index_y][*index_x] == 'v')
+			data->map[*index_y][*index_x] -= 32;
 		else
 			data->keys[OPEN_DOOR] = 0;
 	}
@@ -81,11 +86,20 @@ static bool	opening_possibility(t_data *data)
 	return (false);
 }
 
-static	void	close_or_open(t_data *data)
+
+static	void	open_door(t_data *data)
 {
 	int	index_x;
 	int	index_y;
 
+	// if (data->debug == 10)
+	// {
+	// 	printf("=====> %d\n", data->in_opendoor);
+	// 	printf("Px: %f || Py: %f || angle: %f\n", data->player.player_x, data->player.player_y, data->player.angle);
+	// 	printf("hit h: %d || hit v: %d\n", data->ray.hit_h_openedoor, data->ray.hit_v_openedoor);
+	// 	exit(0);
+	// }
+	// data->in_opendoor = 0;
 	if (opening_possibility(data))
 	{
 		index_x = data->ray.direction_px / TILE_SIZE;
@@ -98,12 +112,50 @@ static	void	close_or_open(t_data *data)
 	}
 }
 
+void	next_to_opendoor(t_data *data, int *index_x, int *index_y)
+{
+	*index_x = (int)data->player.player_x / TILE_SIZE;
+	*index_y = (int)data->player.player_y / TILE_SIZE;
+	data->in_opendoor = 0;
+	// if (data->debug == 10)
+	// {
+	// 	printf("index x: %d || index y: %d\n", *index_x, *index_y);
+	// 	printf("char ==> [%c]\n", data->map[*index_y][*index_x]);
+	// 	exit(0);
+	// }
+	if (data->map[*index_y][*index_x] == 'h')
+	{
+		if (data->player.angle > 180 && (((int)data->player.player_y % TILE_SIZE) > (TILE_SIZE / 2)))
+			data->in_opendoor = 1;
+		else if (data->player.angle > 0 && data->player.angle < 180 && (((int)data->player.player_y % TILE_SIZE) < (TILE_SIZE / 2)))
+			data->in_opendoor = 1;
+	}
+	else if (data->map[*index_y][*index_x] == 'v')
+	{
+		if (data->player.angle > 90 && data->player.angle < 270 &&  (((int)data->player.player_y % TILE_SIZE) > (TILE_SIZE / 2)))
+			data->in_opendoor = 1;
+		else if ((data->player.angle > 270 || data->player.angle < 90) && data->player.angle < 270 &&  (((int)data->player.player_y % TILE_SIZE) > (TILE_SIZE / 2)))
+			data->in_opendoor = 1;
+	}
+}
+
 void	open_and_close_door(t_data *data)
 {
+	int	index_x;
+	int	index_y;
+
 	if (!data->keys[OPEN_DOOR])
 		return ;
-	if (data->ray.hit_h_openedoor || data->ray.hit_v_openedoor)
-		opened_door(data);
+	next_to_opendoor(data, &index_x, &index_y);
+	// if (data->debug == 10)
+	// {
+	// 	printf("Px: %f || Py: %f || angle: %f\n", data->player.player_x, data->player.player_y, data->player.angle);
+	// 	printf("hit h: %d || hit v: %d\n", data->ray.hit_h_openedoor, data->ray.hit_v_openedoor);
+	// 	printf("in opened  door: %d\n", data->in_opendoor);
+	// 	exit(0);
+	// }
+	if (data->in_opendoor || data->ray.hit_h_openedoor || data->ray.hit_v_openedoor)
+		close_door(data, &index_x, &index_y);
 	else
-		close_or_open(data);
+		open_door(data);
 }

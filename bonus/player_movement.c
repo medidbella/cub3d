@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/17 16:51:36 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:52:44 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	w_moves(t_data *data, float *tab)
 				return (false);
 			if (!check_barriers(data, tab[DELTA_X], 0.0))
 				return (update_coords(data, tab[DELTA_X] * 0.3, 0.0), true);
-			else if (!check_barriers(data, 0, tab[DELTA_Y]))
+			else if (!check_barriers(data, 0.0, tab[DELTA_Y]))
 				return (update_coords(data, 0.0, tab[DELTA_Y] * 0.3), true);
 			return (false);
 		}

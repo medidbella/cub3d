@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/17 16:03:56 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:08:03 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 
 static void	get_coords_for_direction(t_data *data, int *checks, int x, int y)
 {
+	// int	index_x;
+	// int	index_y;
+
+	// index_x = 
 	(*checks)++;
 	if (ft_strchr("hv", data->map[y][x]))
 	{
@@ -104,6 +108,8 @@ void	horizontal_distance(t_data *data, t_ray *ray)
 	while (1)
 	{
 		find_horizontal_point(data, &ray->horizontal_x, &ray->horizontal_y);
+		// if (data->debug == 9 && ray->direction_flag == 1)
+		// 	printf("Hx: %f || Hy: %f\n", ray->horizontal_x, ray->horizontal_y);
 		if (check_next_possition(data, ray, &x, &y))
 			break ;
 		if (ft_strchr("1HV", data->map[y][x]))
@@ -121,4 +127,6 @@ void	horizontal_distance(t_data *data, t_ray *ray)
 		if (ray->direction_flag && checks < 2 && !ray->hit_h_openedoor)
 			get_coords_for_direction(data, &checks, x, y);
 	}
+	// if (data->debug == 9 && ray->direction_flag == 1)
+	// 	exit(0);
 }
