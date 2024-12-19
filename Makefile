@@ -1,26 +1,26 @@
-
 NAME = cub3d
 BONUS = cub3d_bonus
 CC = cc
 CFLAGS =  -Wall -Wextra -Werror -fsanitize=address -g3
-SRC = mandatory/cub3d.c mandatory/get_start.c mandatory/hooks.c \
-		mandatory/rotate.c mandatory/texture_handling.c mandatory/wall_checker.c\
-		mandatory/player_movement.c mandatory/ray_casting.c \
-		mandatory/horizontal.c mandatory/vertical.c mandatory/key_hooks.c \
-		mandatory/parsing/general_utils.c mandatory/parsing/map_parsing.c \
-		mandatory/parsing/parser.c mandatory/parsing/parsing_utils.c \
-		mandatory/parsing/read_file.c
-SRC_BONUS = bonus/cub3d.c bonus/get_start.c bonus/draw_pixels.c bonus/hooks.c \
-		bonus/rotate.c bonus/texture_handling.c bonus/player_movement.c \
-		bonus/wall_checker.c bonus/wall_utils.c bonus/moves_utils.c \
-		bonus/ray_casting.c bonus/rays_utils.c bonus/open_door.c bonus/door_utils.c \
-		bonus/horizontal.c bonus/vertical.c bonus/horizontal_utils.c bonus/vertical_utils.c \
-		bonus/key_hooks.c bonus/parsing/general_utils.c bonus/parsing/map_parsing.c \
-		bonus/parsing/parser.c bonus/parsing/parsing_utils.c \
-		bonus/parsing/read_file.c bonus/parsing/parse_textures.c\
-		bonus/sprites.c bonus/weapons.c bonus/door.c bonus/mem_free.c bonus/draw_fov.c
+SRC = mandatory_src/cub3d.c mandatory_src/get_start.c mandatory_src/hooks.c \
+		mandatory_src/rotate.c mandatory_src/texture_handling.c mandatory_src/wall_checker.c\
+		mandatory_src/player_movement.c mandatory_src/ray_casting.c \
+		mandatory_src/horizontal.c mandatory_src/vertical.c mandatory_src/key_hooks.c \
+		mandatory_src/parsing/general_utils.c mandatory_src/parsing/map_parsing.c \
+		mandatory_src/parsing/parser.c mandatory_src/parsing/parsing_utils.c \
+		mandatory_src/parsing/read_file.c
+SRC_BONUS = bonus_src/cub3d.c bonus_src/get_start.c bonus_src/draw_pixels.c bonus_src/hooks.c \
+		bonus_src/rotate.c bonus_src/texture_handling.c bonus_src/player_movement.c \
+		bonus_src/wall_checker.c bonus_src/moves_utils.c \
+		bonus_src/ray_casting.c bonus_src/rays_utils.c bonus_src/open_door.c bonus_src/door_utils.c\
+		bonus_src/horizontal.c bonus_src/vertical.c bonus_src/horizontal_utils.c bonus_src/vertical_utils.c \
+		bonus_src/key_hooks.c bonus_src/parsing/general_utils.c bonus_src/parsing/map_parsing.c \
+		bonus_src/parsing/parser.c bonus_src/parsing/parsing_utils.c \
+		bonus_src/parsing/read_file.c bonus_src/parsing/parse_textures.c\
+		bonus_src/sprites.c bonus_src/weapons.c bonus_src/door.c bonus_src/mem_free.c\
+		bonus_src/draw_fov.c bonus_src/wall_utils.c
 CC = cc
-MLX1 = minilibx/libmlx_Linux.a -lXext -lX11 -lm
+MLX1 = -lXext -lX11 -lm -Imlx -lmlx
 LIBFT = libft/libft.a
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
