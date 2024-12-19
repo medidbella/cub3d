@@ -6,18 +6,18 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 11:24:24 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:14:57 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-static double	get_door_distance_h(t_data *data, t_ray *ray, double rayangle)
+static float	get_door_distance_h(t_data *data, t_ray *ray, float rayangle)
 {
-	double	delta_x;
-	double	delta_y;
+	float	delta_x;
+	float	delta_y;
 
-	delta_y = (double)TILE_SIZE / 2;
+	delta_y = (float)TILE_SIZE / 2;
 	delta_x = fabs(delta_y / tan(radian(rayangle)));
 	if (data->player.player_y < ray->horizontal_y)
 		delta_y *= -1;
@@ -28,12 +28,12 @@ static double	get_door_distance_h(t_data *data, t_ray *ray, double rayangle)
 	return (get_distance(data, ray->hx_door, ray->hy_door));
 }
 
-static double	get_door_distance_v(t_data *data, t_ray *ray, double rayangle)
+static float	get_door_distance_v(t_data *data, t_ray *ray, float rayangle)
 {
-	double	delta_x;
-	double	delta_y;
+	float	delta_x;
+	float	delta_y;
 
-	delta_x = (double)TILE_SIZE / 2;
+	delta_x = (float)TILE_SIZE / 2;
 	delta_y = fabs(tan(radian(rayangle)) * delta_x);
 	if (data->player.player_x < ray->vertical_x)
 		delta_x *= -1;
@@ -44,9 +44,9 @@ static double	get_door_distance_v(t_data *data, t_ray *ray, double rayangle)
 	return (get_distance(data, ray->vx_door, ray->vy_door));
 }
 
-void	horizontal_door(t_data *data, t_ray *ray, double rayangle)
+void	horizontal_door(t_data *data, t_ray *ray, float rayangle)
 {
-	double	h_door_dst;
+	float	h_door_dst;
 
 	if (ray->h_door)
 	{
@@ -69,9 +69,9 @@ void	horizontal_door(t_data *data, t_ray *ray, double rayangle)
 	}
 }
 
-void	vertical_door(t_data *data, t_ray *ray, double rayangle)
+void	vertical_door(t_data *data, t_ray *ray, float rayangle)
 {
-	double	v_door_dst;
+	float	v_door_dst;
 
 	if (ray->v_door)
 	{
@@ -94,7 +94,7 @@ void	vertical_door(t_data *data, t_ray *ray, double rayangle)
 	}
 }
 
-void	get_door_distance(t_data *data, t_ray *ray, double rayangle)
+void	get_door_distance(t_data *data, t_ray *ray, float rayangle)
 {
 	if (ray->side_flag == 1)
 		horizontal_door(data, ray, rayangle);

@@ -6,13 +6,13 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:35:57 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:19:19 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-double	get_distance(t_data *data, double x, double y)
+float	get_distance(t_data *data, float x, float y)
 {
 	return (sqrt(pow((data->player.player_x - x), 2)
 			+ pow((data->player.player_y - y), 2)));

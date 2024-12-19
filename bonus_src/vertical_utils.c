@@ -6,14 +6,14 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 22:08:14 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:13:25 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-static bool	player_in_door_cube_v(t_data *data, double rayangle,
-			double *delta_x, int half_cube)
+static bool	player_in_door_cube_v(t_data *data, float rayangle,
+			float *delta_x, int half_cube)
 {
 	half_cube = (((int)(data->player.player_x / TILE_SIZE)) * (TILE_SIZE));
 	if (rayangle > 90 && rayangle < 270)
@@ -41,7 +41,7 @@ static bool	player_in_door_cube_v(t_data *data, double rayangle,
 	return (false);
 }
 
-static bool	ray_hits_door_v(t_data *data, double *delta_x)
+static bool	ray_hits_door_v(t_data *data, float *delta_x)
 {
 	int	half_cube;
 
@@ -66,7 +66,7 @@ static bool	ray_hits_door_v(t_data *data, double *delta_x)
 	return (false);
 }
 
-bool	v_ray_to_door(t_data *data, double rayangle, double *delta_x)
+bool	v_ray_to_door(t_data *data, float rayangle, float *delta_x)
 {
 	if (!data->in_door && !data->ray.v_door)
 		return (false);

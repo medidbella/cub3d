@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 13:35:24 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	get_start(t_config *parsed_data)
 	data.map_hight = parsed_data->map_hight;
 	data.map_width = parsed_data->map_width;
 	data.player.angle = parsed_data->player_start_angle;
-	data.player.angle_step = ((double)(FOV) / (double)WIDTH);
+	data.player.angle_step = ((float)(FOV) / (float)WIDTH);
 	setup(&data);
 	initialize_textures(&data, parsed_data);
 	parsed_data->map = NULL;

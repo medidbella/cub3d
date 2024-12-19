@@ -6,16 +6,16 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 13:46:32 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static double	calculate_delta_x(t_data *data, double *vertical_x
-							, double *vertical_y, double rayangle)
+static float	calculate_delta_x(t_data *data, float *vertical_x
+							, float *vertical_y, float rayangle)
 {
-	double	delta_x;
+	float	delta_x;
 
 	if (rayangle > 90 && rayangle < 270)
 	{
@@ -42,11 +42,11 @@ static double	calculate_delta_x(t_data *data, double *vertical_x
 	return (delta_x);
 }
 
-static void	find_vertical_point(t_data *data, double rayangle
-				, double *vertical_x, double *vertical_y)
+static void	find_vertical_point(t_data *data, float rayangle
+				, float *vertical_x, float *vertical_y)
 {
-	double	delta_x;
-	double	delta_y;
+	float	delta_x;
+	float	delta_y;
 
 	if (rayangle == 90 || rayangle == 270)
 		return ;
@@ -58,7 +58,7 @@ static void	find_vertical_point(t_data *data, double rayangle
 
 static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 {
-	double	check_x;
+	float	check_x;
 
 	if (ray->rayangle == 90 || ray->rayangle == 270
 		|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
@@ -80,7 +80,7 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 	return (false);
 }
 
-void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
+void	vertical_distance(t_data *data, t_ray *ray, float rayangle)
 {
 	int		x;
 	int		y;

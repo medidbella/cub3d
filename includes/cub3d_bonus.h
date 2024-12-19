@@ -75,15 +75,15 @@
 
 typedef struct s_ray
 {
-	double	distance;
-	double	rayangle;
-	double	raystep;
-	double	horizontal_x;
-	double	horizontal_y;
-	double	horizontal_distance;
-	double	vertical_x;
-	double	vertical_y;
-	double	vertical_distance;
+	float	distance;
+	float	rayangle;
+	float	raystep;
+	float	horizontal_x;
+	float	horizontal_y;
+	float	horizontal_distance;
+	float	vertical_x;
+	float	vertical_y;
+	float	vertical_distance;
 	int		side_flag;
 	int		player_side_flag;
 	float	direction_px;
@@ -92,7 +92,7 @@ typedef struct s_ray
 	int		direction_door;
 	int		curr_color;
 	int		texture_idx;
-	double	height;
+	float	height;
 	bool	h_door;
 	bool	v_door;
 	bool	door;
@@ -115,20 +115,20 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	double	player_x;
-	double	player_y;
-	double	mini_x;
-	double	mini_y;
+	float	player_x;
+	float	player_y;
+	float	mini_x;
+	float	mini_y;
 	float	player_center_x;
 	float	player_center_y;
-	double	angle;
-	double	fov;
-	double	angle_step;
-	double	distance_to_project_plan;
-	double	first_x_fov;
-	double	last_x_fov;
-	double	first_y_fov;
-	double	last_y_fov;
+	float	angle;
+	float	fov;
+	float	angle_step;
+	float	distance_to_project_plan;
+	float	first_x_fov;
+	float	last_x_fov;
+	float	first_y_fov;
+	float	last_y_fov;
 }	t_player;
 
 typedef struct s_img
@@ -151,7 +151,7 @@ typedef struct s_data
 	int				height_2d;
 	int				mini_width;
 	int				mini_height;
-	double			scale;
+	float			scale;
 	t_img			img;
 	t_img			img_2d;
 	t_player		player;
@@ -228,25 +228,25 @@ void			ray_casting(t_data *data);
 void			draw_mini_map(t_data *data);
 void			move_player(t_data *data);
 void			horizontal_distance(t_data *data, t_ray *ray);
-double			get_distance(t_data *data, double x, double y);
+float			get_distance(t_data *data, float x, float y);
 void			vertical_distance(t_data *data, t_ray *ray);
 void			get_texture_color(t_data *data, t_ray *ray, int current_y);
 void			initialize_textures(t_data *data, t_config *parsed_data);
 void			draw_2d_wall(t_data *data, int x, int y);
 void			draw_player(t_data *data);
-void			get_door_distance(t_data *data, t_ray *ray, double rayangle);
+void			get_door_distance(t_data *data, t_ray *ray, float rayangle);
 int				ft_mouse_press(int button, int x, int y, void *param);
 int				ft_mouse_release(int button, int x, int y, void *param);
-bool			h_ray_to_door(t_data *data, double rayangle, double *delta_y);
-bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
+bool			h_ray_to_door(t_data *data, float rayangle, float *delta_y);
+bool			v_ray_to_door(t_data *data, float rayangle, float *delta_x);
 bool			next_to_door(t_data *data, float new_x, float new_y, char c);
 void			direction_of_player(t_data *data);
 void			open_and_close_door(t_data *data);
 void			move_player(t_data *data);
 bool			check_barriers(t_data *data, float x, float y);
 char			get_char(t_data *data, int which);
-bool			h_ray_to_door(t_data *data, double rayangle, double *delta_y);
-bool			v_ray_to_door(t_data *data, double rayangle, double *delta_x);
+bool			h_ray_to_door(t_data *data, float rayangle, float *delta_y);
+bool			v_ray_to_door(t_data *data, float rayangle, float *delta_x);
 void			init_vars(t_data *data, t_ray *ray, int *checks, int which);
 void			initialize_vars(t_data *data, t_ray *ray, int *column);
 void			draw_fov(t_data *data, float x2, float y2);

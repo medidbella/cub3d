@@ -6,22 +6,22 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 13:41:45 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-double	get_distance(t_data *data, double x, double y)
+float	get_distance(t_data *data, float x, float y)
 {
 	return (sqrt(pow((data->player.player_x - x), 2)
 			+ pow((data->player.player_y - y), 2)));
 }
 
-static double	calculate_delta_y(t_data *data, double *horizontal_x
-							, double *horizontal_y, double rayangle)
+static float	calculate_delta_y(t_data *data, float *horizontal_x
+							, float *horizontal_y, float rayangle)
 {
-	double	delta_y;
+	float	delta_y;
 
 	if (rayangle > 180)
 	{
@@ -48,11 +48,11 @@ static double	calculate_delta_y(t_data *data, double *horizontal_x
 	return (delta_y);
 }
 
-static void	find_horizontal_point(t_data *data, double rayangle
-					, double *horizontal_x, double *horizontal_y)
+static void	find_horizontal_point(t_data *data, float rayangle
+					, float *horizontal_x, float *horizontal_y)
 {
-	double	delta_x;
-	double	delta_y;
+	float	delta_x;
+	float	delta_y;
 
 	if (rayangle == 0 || rayangle == 180)
 		return ;
@@ -64,7 +64,7 @@ static void	find_horizontal_point(t_data *data, double rayangle
 
 static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 {
-	double	check_y;
+	float	check_y;
 
 	if (ray->rayangle == 0 || ray->rayangle == 180
 		|| ray->horizontal_y > data->height_2d || ray->horizontal_y < 0
@@ -86,7 +86,7 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 	return (false);
 }
 
-void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
+void	horizontal_distance(t_data *data, t_ray *ray, float rayangle)
 {
 	int		x;
 	int		y;

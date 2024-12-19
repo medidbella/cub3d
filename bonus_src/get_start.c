@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:22:05 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	first_view(t_data *data)
 {
 	data->player.player_center_x = (data->mini_width / 2);
 	data->player.player_center_y = (data->mini_height / 2);
-	data->speed = (double)TILE_SIZE / SPEED_DIVISOR;
+	data->speed = (float)TILE_SIZE / SPEED_DIVISOR;
 	data->in_door = false;
 	data->in_h_door = false;
 	data->in_v_door = false;
@@ -85,7 +85,7 @@ void	get_start(t_config *parsed_data)
 	t_data	data;
 
 	data.player.angle = parsed_data->player_start_angle;
-	data.player.angle_step = ((double)FOV / (double)WIDTH);
+	data.player.angle_step = ((float)FOV / (float)WIDTH);
 	setup(&data, parsed_data);
 	initialize_wall_textures(&data, parsed_data);
 	sprites_init(data.weapons, data.mlx);

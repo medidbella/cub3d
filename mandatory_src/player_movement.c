@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:49:46 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 13:58:30 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	w_moves(t_data *data)
 {
-	double	delta_x;
-	double	delta_y;
-	double	speed;
+	float	delta_x;
+	float	delta_y;
+	float	speed;
 
 	if (data->keys[W_FLAG])
 	{
-		speed = (double)TILE_SIZE / SPEED_DIVISOR;
+		speed = (float)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (cos(radian(data->player.angle)) * speed);
 		delta_y = (sin(radian(data->player.angle)) * speed);
 		if (delta_x < 0.00001 && delta_x > -0.00001)
@@ -37,13 +37,13 @@ static void	w_moves(t_data *data)
 
 static void	s_moves(t_data *data)
 {
-	double	delta_x;
-	double	delta_y;
-	double	speed;
+	float	delta_x;
+	float	delta_y;
+	float	speed;
 
 	if (data->keys[S_FLAG])
 	{
-		speed = (double)TILE_SIZE / SPEED_DIVISOR;
+		speed = (float)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (cos(radian(data->player.angle)) * speed) * -1;
 		delta_y = (sin(radian(data->player.angle)) * speed) * -1;
 		if (delta_x < 0.00001 && delta_x > -0.00001)
@@ -60,13 +60,13 @@ static void	s_moves(t_data *data)
 
 static void	d_moves(t_data *data)
 {
-	double	delta_x;
-	double	delta_y;
-	double	speed;
+	float	delta_x;
+	float	delta_y;
+	float	speed;
 
 	if (data->keys[D_FLAG])
 	{
-		speed = (double)TILE_SIZE / SPEED_DIVISOR;
+		speed = (float)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (sin(radian(data->player.angle)) * speed) * -1;
 		delta_y = (cos(radian(data->player.angle)) * speed);
 		if (delta_x < 0.00001 && delta_x > -0.00001)
@@ -83,13 +83,13 @@ static void	d_moves(t_data *data)
 
 static void	a_moves(t_data *data)
 {
-	double	delta_x;
-	double	delta_y;
-	double	speed;
+	float	delta_x;
+	float	delta_y;
+	float	speed;
 
 	if (data->keys[A_FLAG])
 	{
-		speed = (double)TILE_SIZE / SPEED_DIVISOR;
+		speed = (float)TILE_SIZE / SPEED_DIVISOR;
 		delta_x = (sin(radian(data->player.angle)) * speed);
 		delta_y = (cos(radian(data->player.angle)) * speed) * -1;
 		if (delta_x < 0.00001 && delta_x > -0.00001)

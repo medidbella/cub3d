@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 22:09:48 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:11:25 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char	get_char(t_data *data, int which)
 	return (data->map[index_y][index_x]);
 }
 
-static bool	player_in_door_cube_h(t_data *data, double rayangle,
-			double *delta_y, int half_cube)
+static bool	player_in_door_cube_h(t_data *data, float rayangle,
+			float *delta_y, int half_cube)
 {
 	half_cube = (((int)(data->player.player_y / TILE_SIZE)) * (TILE_SIZE));
 	if (rayangle > 180)
@@ -70,7 +70,7 @@ static bool	player_in_door_cube_h(t_data *data, double rayangle,
 	return (false);
 }
 
-static bool	ray_hits_door_h(t_data *data, double *delta_y)
+static bool	ray_hits_door_h(t_data *data, float *delta_y)
 {
 	int	half_cube;
 
@@ -95,7 +95,7 @@ static bool	ray_hits_door_h(t_data *data, double *delta_y)
 	return (false);
 }
 
-bool	h_ray_to_door(t_data *data, double rayangle, double *delta_y)
+bool	h_ray_to_door(t_data *data, float rayangle, float *delta_y)
 {
 	if (!data->in_door && !data->ray.h_door)
 		return (false);

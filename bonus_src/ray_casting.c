@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:19:14 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	height_and_texture(t_data *data, t_ray *ray)
 		else
 			ray->texture_idx = E_INDEX;
 	}
-	ray->height = ((double)TILE_SIZE / ray->distance)
+	ray->height = ((float)TILE_SIZE / ray->distance)
 		* data->player.distance_to_project_plan;
 }
 

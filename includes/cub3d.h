@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 13:59:23 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,36 +74,36 @@ typedef struct s_texture
 
 typedef struct s_ray
 {
-	double	colums;
-	double	distance;
-	double	rayangle;
-	double	raystep;
-	double	horizontal_x;
-	double	horizontal_y;
-	double	horizontal_distance;
-	double	vertical_x;
-	double	vertical_y;
-	double	vertical_distance;
+	float	colums;
+	float	distance;
+	float	rayangle;
+	float	raystep;
+	float	horizontal_x;
+	float	horizontal_y;
+	float	horizontal_distance;
+	float	vertical_x;
+	float	vertical_y;
+	float	vertical_distance;
 	int		side_flag;
 	int		curr_color;
 	int		texture_idx;
-	double	height;
+	float	height;
 }	t_ray;
 
 typedef struct s_player
 {
-	double	player_x;
-	double	player_y;
-	double	mini_x;
-	double	mini_y;
-	double	angle;
-	double	fov;
-	double	angle_step;
-	double	distance_to_project_plan;
-	double	first_x_fov;
-	double	last_x_fov;
-	double	first_y_fov;
-	double	last_y_fov;
+	float	player_x;
+	float	player_y;
+	float	mini_x;
+	float	mini_y;
+	float	angle;
+	float	fov;
+	float	angle_step;
+	float	distance_to_project_plan;
+	float	first_x_fov;
+	float	last_x_fov;
+	float	first_y_fov;
+	float	last_y_fov;
 }	t_player;
 
 typedef struct s_img
@@ -119,7 +119,7 @@ typedef struct s_data
 {
 	int			map_hight;
 	int			map_width;
-	double		scale;
+	float		scale;
 	void		*mlx;
 	void		*win;
 	char		**map;
@@ -175,9 +175,9 @@ void	ray_casting(t_data *data);
 void	draw(t_data *data);
 void	move_player(t_data *data);
 void	my_mlx_pixel_put_2d(t_data *data, int x, int y, int color);
-void	horizontal_distance(t_data *data, t_ray *ray, double rayangle);
-double	get_distance(t_data *data, double x, double y);
-void	vertical_distance(t_data *data, t_ray *ray, double rayangle);
+void	horizontal_distance(t_data *data, t_ray *ray, float rayangle);
+float	get_distance(t_data *data, float x, float y);
+void	vertical_distance(t_data *data, t_ray *ray, float rayangle);
 void	get_texture_color(t_data *data, t_ray *ray, int current_y);
 void	initialize_textures(t_data *data, t_config *parsed_data);
 void	move_player(t_data *data);

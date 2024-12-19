@@ -6,16 +6,16 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:18:26 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-double	calculate_delta_y(t_data *data, double *horizontal_x
-							, double *horizontal_y, double rayangle)
+float	calculate_delta_y(t_data *data, float *horizontal_x
+							, float *horizontal_y, float rayangle)
 {
-	double	delta_y;
+	float	delta_y;
 
 	if (rayangle > 180)
 	{
@@ -42,12 +42,12 @@ double	calculate_delta_y(t_data *data, double *horizontal_x
 	return (delta_y);
 }
 
-void	find_horizontal_point(t_data *data, double *horizontal_x,
-					double *horizontal_y)
+void	find_horizontal_point(t_data *data, float *horizontal_x,
+					float *horizontal_y)
 {
-	double	delta_x;
-	double	delta_y;
-	double	rayangle;
+	float	delta_x;
+	float	delta_y;
+	float	rayangle;
 
 	rayangle = data->ray.rayangle;
 	if (rayangle == 0 || rayangle == 180)
@@ -61,7 +61,7 @@ void	find_horizontal_point(t_data *data, double *horizontal_x,
 
 static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 {
-	double	check_y;
+	float	check_y;
 
 	if (ray->rayangle == 0 || ray->rayangle == 180
 		|| ray->horizontal_y > data->height_2d || ray->horizontal_y < 0
