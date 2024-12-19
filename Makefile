@@ -24,9 +24,7 @@ MLX1 = -lXext -lX11 -lm -Imlx -lmlx
 LIBFT = libft/libft.a
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
-LIBFT_OBJ = $(shell cat libft/Makefile | grep "ft_" | tr -d '\\' | tr -d "\n" \
-			| tr "\t" " " |tr -s ' ' | sed 's/ / libft\//g' | sed 's/\.c/\.o/g')
-
+LIBFT_OBJ = $(shell ls libft | grep ft_ | tr "\n" " " | sed 's/\.c/\.o/g' | sed 's/ft_/libft\/ft_/g')
 $(NAME): libft $(OBJ) 
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX1) -o $(NAME)
 
@@ -37,12 +35,6 @@ libft: $(LIBFT_OBJ)
 		make bonus -C libft/
 
 all: $(NAME)
-
-test:
-	$(CC) $(CFLAGS) $(TEST) $(MLX1)
-
-move:
-	rm a.out
 
 bonus: $(BONUS)
 

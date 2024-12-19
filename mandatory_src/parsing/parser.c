@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/19 13:05:30 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:09:53 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ int	format_check(char *str)
 	int	len;
 	int	i;
 
-	i = -1;
+	i = 0;
 	len = 0;
-	while (str[++i])
+	while (str[i] == '0' || str[i] == ' ')
+		i++;
+	while (str[i])
 	{
 		if (ft_isdigit(str[i]))
 			len++;
 		else if (str[i] != ' ' && str[i] != '\n')
 			return (1);
+		i++;
 	}
 	if (len > 3)
 		return (1);
@@ -39,7 +42,7 @@ void	color_parser(t_config *scene_data, char *line, int type)
 	int		i;
 	char	**rgb;
 
-	i = 0;
+	i = -1;
 	color = (char *)&scene_data->floor_color;
 	if (type == CEILING)
 		color = (char *)&scene_data->ceiling_color;
@@ -49,15 +52,13 @@ void	color_parser(t_config *scene_data, char *line, int type)
 	if (strings_len(rgb) != 3)
 		error_handler("floor and ceiling color must be in format R,G,B \n",
 			rgb, line, scene_data);
-	while (i < 3)
-	{
+	while (++i < 3)
 		if (format_check(rgb[i]))
 			error_handler("R,G,B colors must be in range [0,255]\n",
 				rgb, NULL, scene_data);
-		color[i] = ft_atoi(rgb[i]);
-		i++;
-	}
-	color[3] = 0;
+	while (--i >= 0)
+		*color++ = ft_atoi(rgb[i]);
+	*color = 0;
 	strings_free(rgb);
 }
 
@@ -111,7 +112,7 @@ must be followed by one information\n", words, line, scene_data);
 	strings_free(words);
 }
 
-void	file_parser(t_config *scene_data, char *scene_descrption_file)
+void	file_parser(t_config *scene_data, char *scene_description_file)
 {
 	int		map_flag;
 	int		fd;
@@ -119,7 +120,7 @@ void	file_parser(t_config *scene_data, char *scene_descrption_file)
 
 	map_flag = 0;
 	data_init(scene_data);
-	fd = open_cub_file(scene_descrption_file);
+	fd = open_cub_file(scene_description_file);
 	while (1)
 	{
 		line = read_line(fd);

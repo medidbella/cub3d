@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:19:17 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "parsing.h"
 # include "../libft/libft.h"
-# include "mlx.h"
+# include <mlx.h>
 # include <unistd.h>
 # include <string.h>
 # include <stdio.h>
@@ -65,7 +65,7 @@ typedef struct s_texture
 {
 	void	*img;
 	char	*iter;
-	int		line_lenght;
+	int		line_length;
 	int		pixel_bits;
 	int		endianess;
 	int		width;
@@ -133,7 +133,7 @@ typedef struct s_data
 	t_texture	wall_textures[4];
 	int			ceiling_color;
 	int			floor_color;
-	bool			keys[KEYS_NB];
+	bool		keys[KEYS_NB];
 }	t_data;
 
 typedef struct s_draw
