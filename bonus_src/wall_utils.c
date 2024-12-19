@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:18:52 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:27:43 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:25:42 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ static float	ft_indexes(t_data *data, float *new_x, float *new_y,
 {
 	float	index_y;
 
-	data->x_added = 0;
-	data->y_added = 0;
+	data->x_added = false;
+	data->y_added = false;
 	if (data->player.player_y < (*new_y) && !data->in_door
 		&& (int)(*new_y) % TILE_SIZE != 0)
 	{
 		(*new_y) += data->speed;
-		data->y_added = 1;
+		data->y_added = true;
 	}
 	if (data->player.player_x < (*new_x) && !data->in_door
 		&& (int)(*new_x) % TILE_SIZE != 0)
 	{
 		(*new_x) += data->speed;
-		data->x_added = 1;
+		data->x_added = true;
 	}
 	*index_x = ((*new_x) / TILE_SIZE) - ((int)(*new_x) % TILE_SIZE == 0
 			&& ((data->player.player_x > (*new_x) && !data->in_v_door)

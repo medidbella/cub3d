@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:24:00 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:27:12 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:33:23 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	update_coords(t_data *data, float delta_x, float delta_y)
 		* data->scale - (data->mini_width / 2);
 	data->player.mini_y = data->player.player_y
 		* data->scale - (data->mini_height / 2);
-	data->keys[MOVE_FLAG] = 1;
+	data->keys[MOVE_FLAG] = true;
 }
 
 bool	wall_char(t_data *data, int y, int x)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:06:11 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:46:32 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static double	calculate_delta_x(t_data *data, double *vertical_x
 {
 	double	delta_x;
 
-	if (rayangle > radian(90) && rayangle < radian(270))
+	if (rayangle > 90 && rayangle < 270)
 	{
 		if (*vertical_x == data->player.player_x
 			&& *vertical_y == data->player.player_y)
@@ -48,10 +48,10 @@ static void	find_vertical_point(t_data *data, double rayangle
 	double	delta_x;
 	double	delta_y;
 
-	if (rayangle == radian(90) || rayangle == radian(270))
+	if (rayangle == 90 || rayangle == 270)
 		return ;
 	delta_x = calculate_delta_x(data, vertical_x, vertical_y, rayangle);
-	delta_y = tan(rayangle) * delta_x;
+	delta_y = tan(radian(rayangle)) * delta_x;
 	*vertical_x = *vertical_x - delta_x;
 	*vertical_y = *vertical_y - delta_y;
 }
@@ -60,6 +60,10 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 {
 	double	check_x;
 
+	if (ray->rayangle == 90 || ray->rayangle == 270
+		|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
+		|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d)
+		return (true);
 	check_x = ray->vertical_x;
 	if (ray->vertical_x < data->player.player_x)
 		check_x -= 1;
@@ -87,10 +91,7 @@ void	vertical_distance(t_data *data, t_ray *ray, double rayangle)
 	while (1)
 	{
 		find_vertical_point(data, rayangle, &ray->vertical_x, &ray->vertical_y);
-		if (rayangle == radian(90) || rayangle == radian(270)
-			|| ray->vertical_x < 0 || ray->vertical_x > data->width_2d
-			|| ray->vertical_y < 0 || ray->vertical_y > data->height_2d
-			|| check_next_possition(data, ray, &x, &y))
+		if (check_next_possition(data, ray, &x, &y))
 			break ;
 		if (data->map[y][x] == '1')
 		{

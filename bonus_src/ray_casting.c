@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 00:10:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 11:59:54 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:19:14 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	real_distance(t_ray *ray, t_data *data)
 					- data->player.angle)) * ray->vertical_distance;
 }
 
-int	small_distance(t_ray *ray)
+static bool	small_distance(t_ray *ray)
 {
 	if (ray->horizontal_distance == -1)
 	{
@@ -124,11 +124,11 @@ void	ray_casting(t_data *data)
 	while (column <= WIDTH)
 	{
 		if (column == ((WIDTH / 2) - 1))
-			ray->direction_flag = 1;
+			ray->direction_flag = true;
 		if (column == (WIDTH / 2))
 			direction_of_player(data);
-		ray->h_door = 0;
-		ray->v_door = 0;
+		ray->h_door = false;
+		ray->v_door = false;
 		horizontal_distance(data, ray);
 		vertical_distance(data, ray);
 		real_distance(ray, data);
@@ -138,6 +138,6 @@ void	ray_casting(t_data *data)
 		ray->rayangle += data->player.angle_step;
 		if (ray->rayangle >= 360)
 			ray->rayangle -= 360;
-		ray->direction_flag = 0;
+		ray->direction_flag = false;
 	}
 }

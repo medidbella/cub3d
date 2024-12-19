@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 22:09:48 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 11:59:18 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:11:25 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static bool	player_in_door_cube_h(t_data *data, double rayangle,
 			else
 				half_cube += (TILE_SIZE / 2);
 			*delta_y = data->player.player_y - half_cube;
-			return (data->ray.h_door = 1, true);
+			return (data->ray.h_door = true, true);
 		}
 		return (false);
 	}
@@ -65,7 +65,7 @@ static bool	player_in_door_cube_h(t_data *data, double rayangle,
 	{
 		half_cube += (TILE_SIZE / 2);
 		*delta_y = data->player.player_y - half_cube;
-		return (data->ray.h_door = 1, true);
+		return (data->ray.h_door = true, true);
 	}
 	return (false);
 }

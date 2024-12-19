@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:06:45 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:59:23 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct s_data
 	t_texture	wall_textures[4];
 	int			ceiling_color;
 	int			floor_color;
-	int			keys[KEYS_NB];
+	bool			keys[KEYS_NB];
 }	t_data;
 
 typedef struct s_draw
@@ -171,10 +171,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 float	radian(float degree);
 void	rotate(t_data *data);
 void	move_player(t_data *data);
-void	a_moves(t_data *data);
-void	d_moves(t_data *data);
-void	s_moves(t_data *data);
-void	w_moves(t_data *data);
 void	ray_casting(t_data *data);
 void	draw(t_data *data);
 void	move_player(t_data *data);

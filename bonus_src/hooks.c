@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 11:59:03 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:27:23 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	mouse_events(t_data *data)
 	mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
 	if (data->mouse_x == x)
 		return ;
-	data->keys[MOUSE_FLAG] = 1;
+	data->keys[MOUSE_FLAG] = true;
 	delta_x = x - (WIDTH / 2);
 	data->player.angle += delta_x * SENSITIVITY;
 	if (data->player.angle > 360)
@@ -62,9 +62,9 @@ int	loop_rendering(t_data *data)
 	ray_casting(data);
 	draw_mini_map(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	data->keys[MOUSE_FLAG] = 0;
-	data->keys[OPEN_DOOR] = 0;
-	data->keys[MOVE_FLAG] = 0;
+	data->keys[MOUSE_FLAG] = false;
+	data->keys[OPEN_DOOR] = false;
+	data->keys[MOVE_FLAG] = false;
 	set_frame_index(data);
 	render_weapon(data, &data->weapons[data->used_weapon],
 		data->weapons[data->used_weapon].current_frame_index);

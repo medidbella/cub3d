@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 11:58:13 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:22:05 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	first_view(t_data *data)
 	data->player.player_center_x = (data->mini_width / 2);
 	data->player.player_center_y = (data->mini_height / 2);
 	data->speed = (double)TILE_SIZE / SPEED_DIVISOR;
-	data->in_door = 0;
-	data->in_h_door = 0;
-	data->in_v_door = 0;
+	data->in_door = false;
+	data->in_h_door = false;
+	data->in_v_door = false;
 	ray_casting(data);
 	draw_mini_map(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);

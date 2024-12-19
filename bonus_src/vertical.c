@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:49:47 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:27:06 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:18:08 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	get_coords_for_direction(t_data *data, int *checks, int x, int y)
 	(*checks)++;
 	if (ft_strchr("hv", data->map[y][x]))
 	{
-		data->ray.hit_v_openedoor = 1;
+		data->ray.hit_v_openedoor = true;
 		data->ray.openedoor_vx = data->ray.vertical_x;
 		data->ray.openedoor_vy = data->ray.vertical_y;
 	}
@@ -110,8 +110,8 @@ void	vertical_distance(t_data *data, t_ray *ray)
 		{
 			if (ft_strchr("HV", data->map[y][x]) && ray->v_door == 0)
 			{
-				ray->vertical_door_flag = 1;
-				ray->v_door = 1;
+				ray->vertical_door_flag = true;
+				ray->v_door = true;
 				continue ;
 			}
 			ray->vertical_distance = get_distance(data, ray->vertical_x,

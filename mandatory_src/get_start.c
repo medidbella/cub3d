@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:06:11 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:35:24 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static void	setup(t_data *data)
 	data->mini_height = HEIGHT / 6;
 	data->scale = (float)MIN_TILE_SIZE / TILE_SIZE;
 	player_first_coordinates(data);
-	data->player.fov = radian(FOV);
+	data->player.fov = FOV;
 	data->player.distance_to_project_plan = ((float)WIDTH / 2)
-		/ tan(data->player.fov / 2);
+		/ tan(radian(data->player.fov / 2));
 }
 
 static void	first_view(t_data *data)
@@ -71,8 +71,8 @@ void	get_start(t_config *parsed_data)
 	data.floor_color = parsed_data->floor_color;
 	data.map_hight = parsed_data->map_hight;
 	data.map_width = parsed_data->map_width;
-	data.player.angle = radian(parsed_data->player_start_angle);
-	data.player.angle_step = radian(((double)(FOV) / (double)WIDTH));
+	data.player.angle = parsed_data->player_start_angle;
+	data.player.angle_step = ((double)(FOV) / (double)WIDTH);
 	setup(&data);
 	initialize_textures(&data, parsed_data);
 	parsed_data->map = NULL;

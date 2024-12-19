@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:35:57 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:26:54 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:19:19 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	init_vars(t_data *data, t_ray *ray, int *checks, int which)
 		ray->horizontal_y = data->player.player_y;
 		ray->horizontal_x = data->player.player_x;
 		ray->horizontal_distance = -1.0;
-		ray->horizontal_door_flag = 0;
+		ray->horizontal_door_flag = false;
 	}
 	else
 	{
 		ray->vertical_y = data->player.player_y;
 		ray->vertical_x = data->player.player_x;
 		ray->vertical_distance = -1.0;
-		ray->vertical_door_flag = 0;
+		ray->vertical_door_flag = false;
 	}
 	*checks = 0;
 }
@@ -44,11 +44,11 @@ void	initialize_vars(t_data *data, t_ray *ray, int *column)
 	ray->rayangle = data->player.angle - (data->player.fov / 2);
 	if (ray->rayangle < 0)
 		ray->rayangle += 360;
-	data->ray.hit_h_openedoor = 0;
-	data->ray.hit_v_openedoor = 0;
+	data->ray.hit_h_openedoor = false;
+	data->ray.hit_v_openedoor = false;
 	ray->direction_ray_distance = 0.0;
 	ray->closest_hv = 0;
-	ray->direction_flag = 0;
+	ray->direction_flag = false;
 }
 
 void	get_direction_coords(t_data *data)

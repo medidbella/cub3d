@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:33:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:06:11 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:02:27 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ static void	height_and_texture(t_data *data, t_ray *ray)
 {
 	if (ray->side_flag == 1)
 	{
-		if (ray->rayangle >= radian(180))
+		if (ray->rayangle >= 180)
 			ray->texture_idx = S_INDEX;
 		else
 			ray->texture_idx = N_INDEX;
 	}
 	else
 	{
-		if ((ray->rayangle >= 0 && ray->rayangle <= radian(90))
-			|| ray->rayangle >= radian(270))
+		if ((ray->rayangle >= 0 && ray->rayangle <= 90)
+			|| ray->rayangle >= 270)
 			ray->texture_idx = W_INDEX;
 		else
 			ray->texture_idx = E_INDEX;
@@ -62,14 +62,14 @@ static void	draw_column(t_data *data, t_ray *ray, int column)
 static void	real_distance(t_ray *ray, t_data *data)
 {
 	if (ray->horizontal_distance != -1)
-		ray->horizontal_distance = cos(ray->rayangle - data->player.angle)
-			* ray->horizontal_distance;
+		ray->horizontal_distance = cos(radian(ray->rayangle
+					- data->player.angle)) * ray->horizontal_distance;
 	if (ray->vertical_distance != -1)
-		ray->vertical_distance = cos(ray->rayangle - data->player.angle)
+		ray->vertical_distance = cos(radian(ray->rayangle - data->player.angle))
 			* ray->vertical_distance;
 }
 
-void	small_distance(t_ray *ray)
+static void	small_distance(t_ray *ray)
 {
 	if (ray->horizontal_distance == -1)
 	{
@@ -101,7 +101,7 @@ void	ray_casting(t_data *data)
 	column = 0;
 	ray.rayangle = data->player.angle - (data->player.fov / 2);
 	if (ray.rayangle < 0)
-		ray.rayangle += radian(360);
+		ray.rayangle += 360;
 	while (column <= WIDTH)
 	{
 		horizontal_distance(data, &ray, ray.rayangle);
@@ -111,7 +111,7 @@ void	ray_casting(t_data *data)
 		draw_column(data, &ray, column);
 		column++;
 		ray.rayangle += data->player.angle_step;
-		if (ray.rayangle > radian(360))
-			ray.rayangle -= radian(360);
+		if (ray.rayangle >= 360)
+			ray.rayangle -= 360;
 	}
 }

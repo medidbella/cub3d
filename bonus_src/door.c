@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 11:24:24 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:25:59 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:14:57 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	horizontal_door(t_data *data, t_ray *ray, double rayangle)
 		ray->distance = h_door_dst;
 		ray->horizontal_x = ray->hx_door;
 		ray->horizontal_y = ray->hy_door;
-		ray->door = 1;
+		ray->door = true;
 		return ;
 	}
 }
@@ -89,7 +89,7 @@ void	vertical_door(t_data *data, t_ray *ray, double rayangle)
 		ray->distance = v_door_dst;
 		ray->vertical_x = ray->vx_door;
 		ray->vertical_y = ray->vy_door;
-		ray->door = 1;
+		ray->door = true;
 		return ;
 	}
 }

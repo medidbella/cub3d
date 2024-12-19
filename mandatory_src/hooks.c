@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:06:11 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:54:43 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int	close_win(t_data *data)
 	exit(0);
 }
 
-int	check_keys(t_data *data)
+static bool	check_keys(t_data *data)
 {
 	if (!data->keys[ROTATE_FLAG]
 		&& !data->keys[MOVE_FLAG]
 		&& !data->keys[CLOSE_FLAG])
-		return (0);
-	return (1);
+		return (false);
+	return (true);
 }
 
 int	loop_rendering(t_data *data)

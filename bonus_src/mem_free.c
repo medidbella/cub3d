@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:31:39 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/18 19:01:34 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:20:47 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_wall_textures_memory(t_data *data, t_texture *my_textures)
 	int	i;
 
 	i = 0;
-	while (i <= 3 + (data->door_flag == 1))
+	while (i <= 3 + (data->door_flag == true))
 	{
 		mlx_destroy_image(data->mlx, my_textures[i].img);
 		i++;

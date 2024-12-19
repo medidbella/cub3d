@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   wall_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:24:00 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:06:11 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:01:23 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-bool	wall_char(t_data *data, int y, int x)
+static bool	wall_char(t_data *data, int y, int x)
 {
 	return (data->map[y][x] == '1');
 }
 
-bool	check_corners(t_data *data, int index_x, int index_y, int px)
+static bool	check_corners(t_data *data, int index_x, int index_y, int px)
 {
 	int	py;
 

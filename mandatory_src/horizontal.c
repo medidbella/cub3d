@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:06:11 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:41:45 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static double	calculate_delta_y(t_data *data, double *horizontal_x
 {
 	double	delta_y;
 
-	if (rayangle > radian(180))
+	if (rayangle > 180)
 	{
 		if (*horizontal_x == data->player.player_x
 			&& *horizontal_y == data->player.player_y)
@@ -54,10 +54,10 @@ static void	find_horizontal_point(t_data *data, double rayangle
 	double	delta_x;
 	double	delta_y;
 
-	if (rayangle == 0 || rayangle == radian(180))
+	if (rayangle == 0 || rayangle == 180)
 		return ;
 	delta_y = calculate_delta_y(data, horizontal_x, horizontal_y, rayangle);
-	delta_x = delta_y / tan(rayangle);
+	delta_x = delta_y / tan(radian(rayangle));
 	*horizontal_x = *horizontal_x - delta_x;
 	*horizontal_y = *horizontal_y - delta_y;
 }
@@ -66,6 +66,10 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 {
 	double	check_y;
 
+	if (ray->rayangle == 0 || ray->rayangle == 180
+		|| ray->horizontal_y > data->height_2d || ray->horizontal_y < 0
+		|| ray->horizontal_x > data->width_2d || ray->horizontal_x < 0)
+		return (true);
 	check_y = ray->horizontal_y;
 	if (ray->horizontal_y < data->player.player_y)
 		check_y -= 1;
@@ -94,10 +98,7 @@ void	horizontal_distance(t_data *data, t_ray *ray, double rayangle)
 	{
 		find_horizontal_point(data, rayangle, &ray->horizontal_x,
 			&ray->horizontal_y);
-		if (rayangle == 0 || rayangle == radian(180)
-			|| ray->horizontal_y > data->height_2d || ray->horizontal_y < 0
-			|| ray->horizontal_x > data->width_2d || ray->horizontal_x < 0
-			|| check_next_possition(data, ray, &x, &y))
+		if (check_next_possition(data, ray, &x, &y))
 			break ;
 		if (data->map[y][x] == '1')
 		{

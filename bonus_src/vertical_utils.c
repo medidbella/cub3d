@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 22:08:14 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:27:02 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:13:25 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static bool	player_in_door_cube_v(t_data *data, double rayangle,
 			else
 				half_cube += (TILE_SIZE / 2);
 			*delta_x = data->player.player_x - half_cube;
-			return (data->ray.v_door = 1, true);
+			return (data->ray.v_door = true, true);
 		}
 		return (false);
 	}
@@ -36,7 +36,7 @@ static bool	player_in_door_cube_v(t_data *data, double rayangle,
 	{
 		half_cube += (TILE_SIZE / 2);
 		*delta_x = data->player.player_x - half_cube;
-		return (data->ray.v_door = 1, true);
+		return (data->ray.v_door = true, true);
 	}
 	return (false);
 }

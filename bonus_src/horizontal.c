@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 11:59:26 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:18:26 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	get_coords_for_direction(t_data *data, int *checks, int x, int y)
 	(*checks)++;
 	if (ft_strchr("hv", data->map[y][x]))
 	{
-		data->ray.hit_h_openedoor = 1;
+		data->ray.hit_h_openedoor = true;
 		data->ray.openedoor_hx = data->ray.horizontal_x;
 		data->ray.openedoor_hy = data->ray.horizontal_y;
 	}
@@ -110,8 +110,8 @@ void	horizontal_distance(t_data *data, t_ray *ray)
 		{
 			if (ft_strchr("HV", data->map[y][x]) && ray->h_door == 0)
 			{
-				data->ray.horizontal_door_flag = 1;
-				ray->h_door = 1;
+				data->ray.horizontal_door_flag = true;
+				ray->h_door = true;
 				continue ;
 			}
 			ray->horizontal_distance = get_distance(data, ray->horizontal_x,
