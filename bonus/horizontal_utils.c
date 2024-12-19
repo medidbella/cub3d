@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 22:09:48 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 11:38:06 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:42:59 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,6 @@ bool	h_ray_to_door(t_data *data, double rayangle, double *delta_y)
 {
 	if (!data->in_door && !data->ray.h_door)
 		return (false);
-	// if (data->debug == 9 && data->ray.direction_flag == 1)
-	// {
-	// 	printf("inside \n");
-	// 	printf("in door: %d\n", )
-	// 	exit(0);
-	// }
 	if (data->in_door && !data->ray.horizontal_door_flag)
 		return (player_in_door_cube_h(data, rayangle, delta_y, 0));
 	else

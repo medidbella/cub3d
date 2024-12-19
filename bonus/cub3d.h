@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 11:43:18 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:51:30 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,8 +175,6 @@ typedef struct s_data
 	float			speed;
 	int				x_added;
 	int				y_added;
-
-	int				debug;
 }	t_data;
 
 typedef struct s_draw
@@ -256,5 +254,8 @@ void			draw_fov(t_data *data, float x2, float y2);
 void			update_coords(t_data *data, float delta_x, float delta_y);
 int				get_indexes(t_data *data, float *new_x, float *new_y,
 					float *index_x);
+bool			closing_possibility(t_data *data, float distance1,
+					float distance2, float distance);
+bool			opening_possibility(t_data *data);
 
 #endif
