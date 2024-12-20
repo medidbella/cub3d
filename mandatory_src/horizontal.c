@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:47:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:41:43 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static bool	check_next_possition(t_data *data, t_ray *ray, int *x, int *y)
 		check_y -= 1;
 	*x = ray->horizontal_x / TILE_SIZE;
 	*y = check_y / TILE_SIZE;
-	if ((*y < data->height_2d && *y >= 0) && (*x >= 0
+	if ((*y < data->map_hight && *y >= 0) && (*x >= 0
 			&& *x < (int)ft_strlen(data->map[*y])))
 	{
 		if (data->map[*y][*x] == ' ')

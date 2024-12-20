@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:24:00 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:33:23 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:26:26 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	check_barriers(t_data *data, float x, float y)
 	new_x = data->player.player_x + x;
 	new_y = data->player.player_y + y;
 	index_y = get_indexes(data, &new_x, &new_y, &index_x);
-	if (!((int)index_y < data->height_2d
+	if (!((int)index_y < data->map_hight
 			&& (int)index_y >= 0 && (int)index_x >= 0
 			&& (int)index_x < (int)ft_strlen(data->map[(int)index_y])))
 		return (1);

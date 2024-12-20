@@ -53,6 +53,7 @@
 # define FOV_COLOR	0xFF0000
 # define WHITE 0xFFFFFF
 # define BACKGROUND 0x989898
+# define EMPTY 0xDCDCDC
 
 # define RIGHT_FLAG 0
 # define LEFT_FLAG 1
@@ -193,7 +194,6 @@ typedef struct s_draw_line
 	int		y2;
 	int		dx;
 	int		dy;
-	int		step;
 	float	x_increment;
 	float	y_increment;
 	int		r;

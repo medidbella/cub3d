@@ -3,39 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   draw_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 19:59:36 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/18 19:26:04 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:08:51 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-static int	count_pixels(t_data *data, float x2, float y2)
-{
-	int			dx;
-	int			dy;
-
-	dx = fabs(x2 - data->player.player_center_x);
-	dy = fabs(y2 - data->player.player_center_y);
-	if (dx > dy)
-		return (dx);
-	else
-		return (dy);
-}
-
 static void	ini_vars(t_data *data, t_draw_line *draw, float x2, float y2)
 {
-	draw->steps = count_pixels(data, x2, y2) - 1;
 	draw->dx = x2 - data->player.player_center_x;
 	draw->dy = y2 - data->player.player_center_y;
 	if (abs(draw->dx) > abs(draw->dy))
-		draw->step = abs(draw->dx);
+		draw->steps = abs(draw->dx);
 	else
-		draw->step = abs(draw->dy);
-	draw->x_increment = draw->dx / (float)draw->step;
-	draw->y_increment = draw->dy / (float)draw->step;
+		draw->steps = abs(draw->dy);
+	draw->x_increment = draw->dx / (float)draw->steps;
+	draw->y_increment = draw->dy / (float)draw->steps;
 	draw->r_s = (FOV_COLOR >> 16) & 0xFF;
 	draw->g_s = (FOV_COLOR >> 8) & 0xFF;
 	draw->b_s = FOV_COLOR & 0xFF;
@@ -69,7 +55,7 @@ void	draw_line(t_data *data, float x2, float y2, int i)
 	x = data->player.player_center_x;
 	y = data->player.player_center_y;
 	draw.color = WHITE;
-	while (++i <= draw.step)
+	while (++i <= draw.steps)
 	{
 		draw.r = (draw.r_s + (i * draw.delta_r));
 		draw.g = (draw.g_s + (i * draw.delta_g));
@@ -78,8 +64,8 @@ void	draw_line(t_data *data, float x2, float y2, int i)
 		if (draw.color == 0)
 			break ;
 		check_color = get_color(data, (int)x, (int)y);
-		if (check_color == WALL_COLOR || ((check_color == WHITE)
-				&& (i > (draw.step) / 2)))
+		if (check_color == WALL_COLOR || check_color == WHITE || check_color
+			== EMPTY || ((check_color == WHITE) && (i > (draw.steps) / 2)))
 			break ;
 		my_mlx_pixel_put(data, (int)x, (int)y, draw.color);
 		x += draw.x_increment;

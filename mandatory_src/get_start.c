@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:44:42 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ static void	player_first_coordinates(t_data *data)
 			{
 				data->player.player_x = (x * TILE_SIZE + TILE_SIZE / 2);
 				data->player.player_y = (y * TILE_SIZE + TILE_SIZE / 2);
-				data->player.mini_x = data->player.player_x
-					* data->scale - (data->mini_width / 2);
-				data->player.mini_y = data->player.player_y
-					* data->scale - (data->mini_height / 2);
 				return ;
 			}
 		}
@@ -47,9 +43,6 @@ static void	setup(t_data *data)
 			&(data->img.endian));
 	data->width_2d = (data->map_width * TILE_SIZE);
 	data->height_2d = (data->map_hight * TILE_SIZE);
-	data->mini_width = WIDTH / 6;
-	data->mini_height = HEIGHT / 6;
-	data->scale = (float)MIN_TILE_SIZE / TILE_SIZE;
 	player_first_coordinates(data);
 	data->player.fov = FOV;
 	data->player.distance_to_project_plan = ((float)WIDTH / 2)

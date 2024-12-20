@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:44:38 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ typedef struct s_player
 {
 	float	player_x;
 	float	player_y;
-	float	mini_x;
-	float	mini_y;
 	float	angle;
 	float	fov;
 	float	angle_step;
@@ -119,21 +117,17 @@ typedef struct s_data
 {
 	int			map_hight;
 	int			map_width;
-	float		scale;
 	void		*mlx;
 	void		*win;
 	char		**map;
 	int			width_2d;
 	int			height_2d;
-	int			mini_width;
-	int			mini_height;
 	t_img		img;
-	t_img		img_2d;
 	t_player	player;
 	t_texture	wall_textures[4];
 	int			ceiling_color;
 	int			floor_color;
-	bool			keys[KEYS_NB];
+	bool		keys[KEYS_NB];
 }	t_data;
 
 typedef struct s_draw
