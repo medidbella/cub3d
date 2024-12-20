@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/20 10:44:38 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:22:13 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "parsing.h"
 # include "../libft/libft.h"
-# include "mlx.h"
+# include <mlx.h>
 # include <unistd.h>
 # include <string.h>
 # include <stdio.h>
@@ -65,7 +65,7 @@ typedef struct s_texture
 {
 	void	*img;
 	char	*iter;
-	int		line_lenght;
+	int		line_length;
 	int		pixel_bits;
 	int		endianess;
 	int		width;

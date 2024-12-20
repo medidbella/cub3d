@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/18 19:06:11 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:13:52 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	get_cords_color(t_texture *img, int x, int y)
 {
 	char	*dst;
 
-	dst = img->iter + (y * img->line_lenght + x * (img->pixel_bits / 8));
+	dst = img->iter + (y * img->line_length + x * (img->pixel_bits / 8));
 	return (*(int *)dst);
 }
 
@@ -44,7 +44,7 @@ void	initialize_textures(t_data *data, t_config *parsed_data)
 				&data->wall_textures[i].hight);
 		data->wall_textures[i].iter = mlx_get_data_addr
 			(data->wall_textures[i].img, &data->wall_textures[i].pixel_bits,
-				&data->wall_textures[i].line_lenght,
+				&data->wall_textures[i].line_length,
 				&data->wall_textures[i].endianess);
 		i++;
 	}
@@ -57,8 +57,8 @@ void	get_texture_color(t_data *data, t_ray *ray, int current_y)
 	int		current_x;
 
 	current_x = 0;
-	x_scale = (float)data->wall_textures[ray->texture_idx].hight / TILE_SIZE;
-	y_scale = (float)data->wall_textures[ray->texture_idx].width / ray->height;
+	x_scale = (float)data->wall_textures[ray->texture_idx].width / TILE_SIZE;
+	y_scale = (float)data->wall_textures[ray->texture_idx].hight / ray->height;
 	if (ray->texture_idx == N_INDEX)
 		current_x = (int)ray->horizontal_x % TILE_SIZE;
 	else if (ray->texture_idx == S_INDEX)

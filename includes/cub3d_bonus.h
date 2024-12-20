@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_bonus.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 11:51:30 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:20:28 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "parsing_bonus.h"
 # include "../libft/libft.h"
-# include "mlx.h"
+# include <mlx.h>
 # include "graphics.h"
 # include <unistd.h>
 # include <string.h>
@@ -25,7 +25,7 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-# define TILE_SIZE 20
+# define TILE_SIZE 1000
 # define MIN_TILE_SIZE 10
 # define WIDTH 1080
 # define HEIGHT 720
@@ -160,11 +160,11 @@ typedef struct s_data
 	t_weapon		weapons[WEAPON_NB];
 	int				ceiling_color;
 	int				floor_color;
-	bool				door_flag;
+	bool			door_flag;
 	int				mouse_x;
 	int				mouse_y;
 	int				used_weapon;
-	bool				keys[KEYS_NB];
+	bool			keys[KEYS_NB];
 	unsigned long	last_frame_time;
 	unsigned long	last_weapon_switch_time;
 	bool			in_door;
