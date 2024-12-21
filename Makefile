@@ -1,7 +1,7 @@
 NAME = cub3d
 BONUS = cub3d_bonus
 CC = cc
-CFLAGS =  -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror 
 SRC = mandatory_src/cub3d.c mandatory_src/get_start.c mandatory_src/hooks.c \
 		mandatory_src/rotate.c mandatory_src/texture_handling.c mandatory_src/wall_checker.c\
 		mandatory_src/player_movement.c mandatory_src/ray_casting.c \
@@ -20,11 +20,12 @@ SRC_BONUS = bonus_src/cub3d.c bonus_src/get_start.c bonus_src/draw_pixels.c bonu
 		bonus_src/sprites.c bonus_src/weapons.c bonus_src/door.c bonus_src/mem_free.c\
 		bonus_src/draw_fov.c bonus_src/wall_utils.c
 CC = cc
-MLX1 = -lXext -lX11 -lm -Imlx -lmlx
+MLX1 = -lmlx_Linux -lXext -lX11 -lm
 LIBFT = libft/libft.a
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 LIBFT_OBJ = $(shell ls libft | grep ft_ | tr "\n" " " | sed 's/\.c/\.o/g' | sed 's/ft_/libft\/ft_/g')
+
 $(NAME): libft $(OBJ) 
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX1) -o $(NAME)
 
