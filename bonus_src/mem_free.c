@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:31:39 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/22 15:41:34 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:47:56 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	free_wall_textures_memory(t_data *data, t_texture *my_textures)
 void	free_sprites_textures_memory(void *mlx, t_weapon *weapons)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (i < WEAPON_NB)
@@ -57,9 +57,7 @@ void	free_sprites_textures_memory(void *mlx, t_weapon *weapons)
 		free(weapons[i].weapon_frames);
 		i++;
 	}
-	
 }
-
 
 int	close_win(t_data *data)
 {
