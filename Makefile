@@ -1,7 +1,7 @@
 NAME = cub3d
 BONUS = cub3d_bonus
 CC = cc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
 SRC = mandatory_src/cub3d.c mandatory_src/get_start.c mandatory_src/hooks.c \
 		mandatory_src/rotate.c mandatory_src/texture_handling.c mandatory_src/wall_checker.c\
 		mandatory_src/player_movement.c mandatory_src/ray_casting.c \

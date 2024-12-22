@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/20 11:22:13 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:13:16 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define DIR_COLOR 0xFF0000
 # define BLACK 0x000000
 # define FOV 60
-# define SPEED_DIVISOR 15
+# define SPEED_DIVISOR 25
 # define N_INDEX 0
 # define S_INDEX 1
 # define W_INDEX 2

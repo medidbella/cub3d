@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/21 14:38:46 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/22 13:29:10 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define IMG_SIZE_Y 4
 # define ANGLE 1.5
 # define FOV 60
-# define SPEED_DIVISOR 30
+# define SPEED_DIVISOR 25
 # define FOV_LENGTH 30
 # define FOV_COLOR	0xFF0000
 # define WHITE 0xFFFFFF
