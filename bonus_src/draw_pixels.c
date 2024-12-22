@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:49:03 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/20 11:05:21 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/22 22:05:41 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,14 @@ void	draw_mini_map(t_data *data)
 		j = -1;
 		while (data->map[i][++j])
 		{
-			color = 0xFFFFFF;
+			color = WHITE;
 			if (data->map[i][j] == '1')
 				color = WALL_COLOR;
 			else if (data->map[i][j] == '0'
-			|| ft_strchr("NSEWhv", data->map[i][j]))
+			|| ft_strchr("NSEW", data->map[i][j]))
 				color = BLACK;
+			else if (ft_strchr("hv", data->map[i][j]))
+				color = GRAY;
 			draw_cub(data, j, i, color);
 		}
 	}

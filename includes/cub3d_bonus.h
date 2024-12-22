@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/22 18:14:45 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/22 21:52:27 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,13 @@
 # define IMG_SIZE_Y 4
 # define ANGLE 1.5
 # define FOV 60
-# define SPEED_DIVISOR 25
+# define SPEED_DIVISOR 30
 # define FOV_LENGTH 30
 # define FOV_COLOR	0xFF0000
 # define WHITE 0xFFFFFF
 # define BACKGROUND 0x989898
 # define EMPTY 0xDCDCDC
+# define GRAY 0x808080
 
 # define RIGHT_FLAG 0
 # define LEFT_FLAG 1
@@ -211,6 +212,7 @@ typedef struct s_draw_line
 	float	delta_b;
 	int		steps;
 	int		color;
+	int		skip;
 }	t_draw_line;
 
 void			get_start(t_config *parsed_data);
@@ -236,7 +238,7 @@ void			initialize_textures(t_data *data, t_config *parsed_data);
 void			draw_2d_wall(t_data *data, int x, int y);
 void			draw_player(t_data *data);
 void			get_door_distance(t_data *data, t_ray *ray, float rayangle);
-int				ft_mouse_press(int button, int x, int y, void *param);
+int				ft_mouse_press(int button, int x, int y, t_data *data);
 int				ft_mouse_release(int button, int x, int y, void *param);
 bool			h_ray_to_door(t_data *data, float rayangle, float *delta_y);
 bool			v_ray_to_door(t_data *data, float rayangle, float *delta_x);

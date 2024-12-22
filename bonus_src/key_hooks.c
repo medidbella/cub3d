@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:38:14 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/22 18:20:42 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/22 20:06:18 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,18 @@ int	ft_key_release(int key, t_data *data)
 	return (0);
 }
 
-int	ft_mouse_press(int button, int x, int y, void *param)
+int	ft_mouse_press(int button, int x, int y, t_data *data)
 {
-	t_data	*data;
-
-	(void)x;
-	(void)y;
-	data = param;
+	x = y + x;
 	if (data->use_mouse == false)
+	{
+		if (button == 3)
+		{
+			data->use_mouse = true;
+			mlx_mouse_hide(data->mlx, data->win);
+		}
 		return (0);
+	}
 	if (button == 1)
 		data->keys[SHOOT_FLAG] = true;
 	else if (button == 4)
@@ -93,7 +96,10 @@ int	ft_mouse_press(int button, int x, int y, void *param)
 		weapon_switch(data, -1);
 	else if (button == 3)
 	{
-		data->use_mouse = false;
+		if (data->use_mouse == true)
+			data->use_mouse = false;
+		else
+			data->use_mouse = true;
 		mlx_mouse_show(data->mlx, data->win);
 	}
 	return (0);
