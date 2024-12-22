@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:38:14 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:27:51 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/22 18:20:42 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,19 @@ int	ft_mouse_press(int button, int x, int y, void *param)
 	(void)x;
 	(void)y;
 	data = param;
+	if (data->use_mouse == false)
+		return (0);
 	if (button == 1)
 		data->keys[SHOOT_FLAG] = true;
 	else if (button == 4)
 		weapon_switch(data, 1);
 	else if (button == 5)
 		weapon_switch(data, -1);
+	else if (button == 3)
+	{
+		data->use_mouse = false;
+		mlx_mouse_show(data->mlx, data->win);
+	}
 	return (0);
 }
 
@@ -99,6 +106,8 @@ int	ft_mouse_release(int button, int x, int y, void *param)
 	(void)x;
 	(void)y;
 	data = param;
+	if (data->use_mouse == false)
+		return (0);
 	if (button == 1)
 		data->keys[SHOOT_FLAG] = false;
 	return (0);

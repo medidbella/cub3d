@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/22 13:29:10 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/22 18:14:45 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ typedef struct s_data
 	float			speed;
 	bool			x_added;
 	bool			y_added;
+	bool			use_mouse;
 }	t_data;
 
 typedef struct s_draw

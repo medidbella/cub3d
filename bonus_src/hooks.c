@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:35:28 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:27:23 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/22 18:19:06 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	mouse_events(t_data *data)
 	int	y;
 	int	delta_x;
 
+	if (data->use_mouse == false)
+		return ;
 	mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
 	if (data->mouse_x == x)
 		return ;
