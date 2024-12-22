@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:52:58 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/18 18:58:50 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/22 17:41:51 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	check_prev_members(t_config *scene_data, char *line)
 		ft_access(scene_data->textures_paths[i], scene_data, line, i);
 		i++;
 	}
+	ft_access(scene_data->textures_paths[DOOR_IDX], scene_data, line, i);
 	if (scene_data->ceiling_color == -1)
 		error_handler("incomplete elements (ceiling_color)\n", NULL,
 			line, scene_data);

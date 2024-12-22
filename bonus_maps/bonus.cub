@@ -2,7 +2,7 @@ NO ./textures/colors/blue.xpm
 SO ./textures/colors/red.xpm
 WE ./textures/colors/green.xpm
 EA ./textures/colors/purple.xpm
-DOOR ./textures/door.xpm
+DOOR ./textures/doors/door.xpm
 F 100,100,250
 C 0,0,0
 

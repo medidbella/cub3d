@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 17:03:31 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/22 15:42:13 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/22 13:29:10 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@
 # include <math.h>
 # include <sys/time.h>
 # include <stdbool.h>
-// # include <X11/extensions/Xfixes.h>
 
-# define TILE_SIZE 20
+# define TILE_SIZE 1000
 # define MIN_TILE_SIZE 10
 # define WIDTH 1080
 # define HEIGHT 720
@@ -49,7 +48,7 @@
 # define IMG_SIZE_Y 4
 # define ANGLE 1.5
 # define FOV 60
-# define SPEED_DIVISOR 20
+# define SPEED_DIVISOR 25
 # define FOV_LENGTH 30
 # define FOV_COLOR	0xFF0000
 # define WHITE 0xFFFFFF
@@ -176,7 +175,6 @@ typedef struct s_data
 	float			speed;
 	bool			x_added;
 	bool			y_added;
-	bool			use_mouse;
 }	t_data;
 
 typedef struct s_draw

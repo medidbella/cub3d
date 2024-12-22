@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:53:05 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/22 13:24:55 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/22 17:43:53 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_access(char *file, t_config *scene_data, char *line, int i)
 {
 	int	fd;
 
+	if (!file)
+		return ;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{

@@ -1,7 +1,7 @@
-NO ./textures/brickwall1.xpm
-SO ./textures/brickwall2.xpm
-WE ./textures/brickwall3.xpm
-EA ./textures/brickwall4.xpm
+NO ./textures/brick_walls/brickwall1.xpm
+SO ./textures/brick_walls/brickwall2.xpm
+WE ./textures/brick_walls/brickwall3.xpm
+EA ./textures/brick_walls/brickwall4.xpm
 
 C 133,200,86
 F 86,200,133

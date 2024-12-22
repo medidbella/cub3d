@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:01:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/18 19:01:22 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/22 17:54:22 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_frame_render_data(t_weapon *weapon, int frame_index
 		/ weapon->scaled_width;
 	weapon->y_scale = (float)weapon->weapon_frames[frame_index].hight
 		/ weapon->scaled_hight;
-	weapon->x_start = WIDTH / 2 ;
+	weapon->x_start = WIDTH / 2;
 }
 
 void	start_animation(t_data	*data)
