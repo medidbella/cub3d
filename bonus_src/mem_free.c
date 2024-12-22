@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:31:39 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/22 15:30:49 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:41:34 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,31 @@ void	free_wall_textures_memory(t_data *data, t_texture *my_textures)
 	}
 }
 
+void	free_sprites_textures_memory(void *mlx, t_weapon *weapons)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	while (i < WEAPON_NB)
+	{
+		j = 0;
+		while (j < weapons[i].frames_nb)
+			mlx_destroy_image(mlx, weapons[i].weapon_frames[j++].img);
+		free(weapons[i].weapon_frames);
+		i++;
+	}
+	
+}
+
+
 int	close_win(t_data *data)
 {
 	free_wall_textures_memory(data, data->wall_textures);
 	mlx_destroy_image(data->mlx, data->img.img);
 	mlx_destroy_window(data->mlx, data->win);
 	strings_free(data->map);
+	free_sprites_textures_memory(data->mlx, data->weapons);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	exit(0);

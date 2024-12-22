@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:01:07 by midbella          #+#    #+#             */
-/*   Updated: 2024/12/18 19:01:34 by midbella         ###   ########.fr       */
+/*   Updated: 2024/12/22 13:25:51 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,15 @@ void	initialize_wall_textures(t_data *data, t_config *parsed_data)
 	{
 		texture_init(data->mlx, &data->wall_textures[i],
 			parsed_data->textures_paths[i]);
+		free(parsed_data->textures_paths[i]);
 		i++;
 	}
 	if (parsed_data->door_flag == 1)
+	{
 		texture_init(data->mlx, &data->wall_textures[i],
 			parsed_data->textures_paths[i]);
+		free(parsed_data->textures_paths[i]);
+	}
 }
 
 void	set_scale(t_data *data, t_ray *ray, float *scale1, float *scale2)
