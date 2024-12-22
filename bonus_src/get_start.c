@@ -6,7 +6,7 @@
 /*   By: alaktari <alaktari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 18:25:45 by alaktari          #+#    #+#             */
-/*   Updated: 2024/12/19 14:39:29 by alaktari         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:30:56 by alaktari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	first_view(t_data *data)
 	data->in_door = false;
 	data->in_h_door = false;
 	data->in_v_door = false;
+	data->use_mouse = true;
 	ray_casting(data);
 	draw_mini_map(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
