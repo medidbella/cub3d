@@ -20,17 +20,21 @@ SRC_BONUS = bonus_src/cub3d.c bonus_src/get_start.c bonus_src/draw_pixels.c bonu
 		bonus_src/sprites.c bonus_src/weapons.c bonus_src/door.c bonus_src/mem_free.c\
 		bonus_src/draw_fov.c bonus_src/wall_utils.c
 CC = cc
-MLX1 = -lmlx_Linux -lXext -lX11 -lm
+X11 = -lXext -lX11 -lm
 LIBFT = libft/libft.a
+MLX = minilibx-linux/libmlx_Linux.a
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 LIBFT_OBJ = $(shell ls libft | grep ft_ | tr "\n" " " | sed 's/\.c/\.o/g' | sed 's/ft_/libft\/ft_/g')
 
-$(NAME): libft $(OBJ) 
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX1) -o $(NAME)
+$(NAME): libmlx libft $(OBJ) 
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(X11) -o $(NAME)
 
-$(BONUS): libft $(OBJ_BONUS)
-	$(CC) $(CFLAGS) $(OBJ_BONUS) $(LIBFT) $(MLX1) -o $(BONUS)
+$(BONUS): libmlx libft $(OBJ_BONUS)
+	$(CC) $(CFLAGS) $(OBJ_BONUS) $(LIBFT) $(MLX) $(X11) -o $(BONUS)
+
+libmlx:
+	ls | grep libmlx_Linux.a || make -C minilibx-linux/
 
 libft: $(LIBFT_OBJ)
 		make bonus -C libft/
@@ -43,7 +47,7 @@ bonus: $(BONUS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(OBJ_BONUS) && make clean -C libft
+	rm -f $(OBJ) $(OBJ_BONUS) && make clean -C libft && make clean -C minilibx-linux
 
 fclean: clean
 	rm -f $(NAME) $(BONUS) && make fclean -C libft
