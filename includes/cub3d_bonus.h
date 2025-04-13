@@ -15,7 +15,7 @@
 
 # include "parsing_bonus.h"
 # include "../libft/libft.h"
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include "graphics.h"
 # include <unistd.h>
 # include <string.h>

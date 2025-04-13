@@ -15,7 +15,7 @@
 
 # include "parsing.h"
 # include "../libft/libft.h"
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include <unistd.h>
 # include <string.h>
 # include <stdio.h>
